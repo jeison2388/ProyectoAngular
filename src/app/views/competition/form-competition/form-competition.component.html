@@ -1,0 +1,265 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12 ">
+      <div class="card ">
+        <div class="card-header bg-primary">
+          <strong>{{titleForm}}</strong>
+        </div>
+        <div class="card-body">
+          <form  [formGroup]="fieldsForm" (ngSubmit)="onSubmit()" #f="ngForm">
+            <h3 class="title text-center"><strong>{{titleForm}}</strong></h3>
+            <p class="text-muted text-center">{{subtitleForm}}</p>
+
+            <div class="row">
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="(fieldsForm.controls.nameCompetition.errors?.maxlength || fieldsForm.controls.nameCompetition.errors?.minlength) && fieldsForm.controls.nameCompetition.touched">
+                  Mínimo caracteres 3 máximo 50
+                </i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="fieldsForm.controls.nameCompetition.errors?.required && fieldsForm.controls.nameCompetition.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-trophy"></i> <h6 class="colorAsterisco">*</h6><small>&nbsp;Nombre</small></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="* Nombre competencia" formControlName="nameCompetition">
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-child"></i><small>&nbsp;Deporte</small></span>
+                  </div>
+                  <select type="text" class="form-control" #deport>
+                    <option [ngValue]="deporte" *ngFor="let deporte of deportes">{{deporte}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-id-card-o"></i><small>&nbsp;Categoria</small></span>
+                  </div>
+                  <select type="text" class="form-control" #category>
+                    <option [ngValue]="categoria" *ngFor="let categoria of categorias">{{categoria}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-grav"></i><small>&nbsp;Modalidad</small></span>
+                  </div>
+                  <select type="text" class="form-control" #modality>
+                    <option [ngValue]="modality" *ngFor="let modality of modalities">{{modality}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="fieldsForm.controls.dateStartCompetition.errors?.required && fieldsForm.controls.dateStartCompetition.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar-check-o"></i> <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha
+                        Inicio</small></span>
+                  </div>
+                  <input type="date" class="form-control" placeholder="* " formControlName="dateStartCompetition" min="{{min_date}}"
+                  (change) ="handleDate($event)">
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="showErrorDateFinish ">
+                  {{msjErrorDateFinish}}
+                </i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="fieldsForm.controls.dateEndCompetition.errors?.required && fieldsForm.controls.dateEndCompetition.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar-check-o"></i> <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha Fin</small></span>
+                  </div>
+                  <input type="date" class="form-control" placeholder="* " formControlName="dateEndCompetition" min="{{min_date}}"
+                  (change) ="handleDate($event)"/>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-clock-o"></i><small>&nbsp;Duración del
+                        partido</small></span>
+                  </div>
+                  <select type="text" class="form-control" #duration>
+                    <option [ngValue]="duration" *ngFor="let duration of match_duration">{{duration}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-list"></i><small>&nbsp;Tipo
+                        Competición</small></span>
+                  </div>
+                  <select type="text" class="form-control" #typeCompetition>
+                    <option [ngValue]="competition" *ngFor="let competition of type_competition">{{competition}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-sort-numeric-desc"></i><small>&nbsp;Tipo
+                        Eliminatorias</small></span>
+                  </div>
+                  <select type="text" class="form-control" #numberQualifiers>
+                    <option [ngValue]="quealifier" *ngFor="let quealifier of number_qualifiers">{{quealifier}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-venus-mars"></i><small>&nbsp;Género
+                        Competencia</small></span>
+                  </div>
+                  <select type="text" class="form-control" #genderC>
+                    <option [ngValue]="gende" *ngFor="let gende of gender">{{gende}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-users"></i><small>&nbsp;Mínimo de
+                        Equipos</small></span>
+                  </div>
+                  <select type="text" class="form-control" #numberTeams>
+                    <option [ngValue]="number_t" *ngFor="let number_t of number_of_teams">{{number_t}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="fieldsForm.controls.minnumberOfParticipants.errors?.required && fieldsForm.controls.minnumberOfParticipants.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <i class="fa fa-exclamation-circle uncheck" *ngIf="fieldsForm.controls.minnumberOfParticipants.errors?.maxlength || fieldsForm.controls.minnumberOfParticipants.errors?.pattern">
+                  Solo permite maximo 4 numeros
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+
+                    <span class="input-group-text"><i class="fa fa-calendar-minus-o"></i> <h6 class="colorAsterisco">*</h6><small>&nbsp;Mínimo de
+                        Inscritos</small></span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="* Minimo personas para participar" formControlName="minnumberOfParticipants"
+                  formControlName="minnumberOfParticipants">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="formGroup col-12 col-md-12 col-lg-4">
+                <div class="custom-control custom-checkbox mr-sm-2">
+                  <input type="checkbox" class="custom-control-input" id="customControlAutosizing" (change)="handleOptionThirdAndFourth($event)">
+                  <label class="custom-control-label" for="customControlAutosizing">Tercero y Cuarto Puesto</label>
+                </div>
+              </div>
+            </div>&nbsp;
+
+            <div class="row">
+              <div class="formGroup col-12 col-md-12 col-lg-6">
+                <div class="card">
+                  <div class="card-header bg-info">
+                    Reglas - Items desempate
+                    <br/><i class="fa fa-exclamation-circle uncheck" *ngIf="showErrorItem">
+                      <strong> seleccionar almenos un item de desempate</strong>
+                    </i>
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-group">
+                      <li class="list-group-item d-flex justify-content-between align-items-center"
+                        *ngFor="let rule of rules">
+                        <strong style="color: darkslategrey; font-size: 11px;">{{rule.descripcion}}</strong>
+                        <div>
+                          <span class="badge badge-pill badge-primary" *ngIf="rule.habilitado">aplica de
+                            :{{rule.prioridad}}</span>
+                          <button type="button" class="btn btn-outline-success btn-sm" *ngIf="!rule.habilitado"
+                            (click)='assignPriorities(rule,true)'>Activar</button>
+                          <button type="button" class="btn btn-outline-danger btn-sm" *ngIf="rule.habilitado"
+                            (click)='assignPriorities(rule,false)'>Desactivar</button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="formGroup col-12 col-md-12 col-lg-6">
+                <div class="card">
+                  <div class="card-header bg-info">
+                    Anexos
+                  </div>
+                  <div class="card-body">
+                    <div class=" btn btn-secondary btn-block personalizarDivInputFile">
+                      <p class="texto_input personalizarTextoInputFile">Adjuntar</p>
+                      <input class=" personalizarInputFile " type="file" name="adjunto" accept=".pdf" multiple
+                        (change)='uploadFiles($event)'/>
+                    </div>
+                    <i class="fa fa-exclamation-circle uncheck" *ngIf="thereIsError">
+                      {{msjErrorCharginFile}}
+                    </i>
+                    <table class="table  table-responsive-sm table-bordered">
+                      <thead>
+                        <tr class="bg-dark alingContentCenterTD">
+                          <td>Nombre del archivo</td>
+                          <td>Ver</td>
+                          <td>Eliminar</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let file of fileToCompetition" class="table-success">
+                          <td>{{file.name}}</td>
+                          <td class="alingContentCenterTD"><span (click) = "showPdf(file.name)"><i class="fa fa-eye mousehand" aria-hidden="true"></i></span></td>
+                          <td class="alingContentCenterTD"><span (click) = "deleteFiles(file.name)"><i class="fa fa-trash-o mousehand" aria-hidden="true"></i></span></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align:right">
+              <button type="submit" class="btn btn-outline-secondary">Cancelar</button>
+
+              <button title="asdfsadf" type="submit" class="btn  btn-primary" [disabled]="fieldsForm.invalid || showErrorDateFinish || showErrorDateStart"
+              data-toggle="tooltip" data-placement="top" >{{buttonAction}} </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

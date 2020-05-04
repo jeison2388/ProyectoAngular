@@ -1,0 +1,799 @@
+<form [formGroup]="fieldsForm" (ngSubmit)="onSubmit()" #f="ngForm">
+  <div class="animated fadeIn">
+    <div class="row">
+
+      <div class="col-sm-3 p-0">
+        <app-tarjetaInfoAfiliado></app-tarjetaInfoAfiliado>
+      </div>
+
+      <div class="col-sm-9 pt-0 pb-0 pr-0 pl-1">
+        <div class="card border border-primary rounded-0">
+          <div class="card-header bg-primary text-center rounded-0">
+            <h5>FICHA DE INSCRIPCIÓN PROGRAMA ESCUELAS DE FORMACIÓN
+              DEPORTIVA</h5>
+          </div>
+          <div class="row card-body">
+
+
+            <div class=" col-12 col-sm-12 col-md-2 col-lg-2 two-col" style="text-align: center;">
+              <i class="fa fa-exclamation-circle uncheck" *ngIf="thereIsErrorPhoto"> {{msjErrorCharginFile}} </i>
+              <div class="media">
+                <img src="{{srcPhotoView}}" class=" rounded col-lg-12" alt="Foto afiliado">
+              </div>
+              <div class=" btn btn-secondary btn-block personalizarDivInputFile">
+                <p class="texto_input personalizarTextoInputFile">Adjuntar</p>
+                <input class=" personalizarInputFile " type="file" name="adjunto" accept="image/*"
+                  (change)='uploadPhoto($event)' />
+              </div>
+            </div>
+
+
+            <div class="col-sm-12 col-md-12 col-lg-10">
+              <div class="row">
+                <div class="formGroup col-12 col-md-12 col-lg-6">
+                  <span class="text-justify ">Nombres y apellidos del
+                    afiliado</span> <br /> <span
+                    class="text-justify text-uppercase font-weight-bold text-break p-3">SALOMÉ
+                    FERNÁNDEZ LEÓN</span>
+                </div>
+
+                <div class="formGroup col-12 col-md-12 col-lg-6">
+                  <span class="text-justify ">Estado de afiliación</span> <br />
+                  <span class="text-justify text-uppercase font-weight-bold text-break p-3">ACTIVO</span>
+                </div>
+                <div class="formGroup col-12 col-md-12 col-lg-6">
+                  <span class="text-justify ">Categoría</span> <br /> <span
+                    class="text-justify text-uppercase font-weight-bold text-break p-3">B</span>
+                </div>
+                <div class="formGroup col-12 col-md-12 col-lg-6">
+                  <span class="text-justify ">Edad</span> <br /> <span
+                    class="text-justify text-uppercase font-weight-bold text-break p-3">6
+                    años</span>
+                </div>
+                <div class="formGroup col-12 col-md-12 col-lg-6">
+                  <span class="text-justify ">Tipo de identificación</span> <br />
+                  <span class="text-justify text-uppercase font-weight-bold text-break p-3">Registro
+                    civíl</span>
+                </div>
+
+                <div class="formGroup col-12 col-md-12 col-lg-6">
+                  <span class="text-justify ">No. de identificación</span> <br />
+                  <span class="text-justify text-uppercase font-weight-bold text-break p-3">1085151555</span>
+                </div>
+                <div class="formGroup col-12 col-md-12 col-lg-6">
+                  <span class="text-justify ">Fecha de nacimiento</span> <br />
+                  <span class="text-justify text-uppercase font-weight-bold text-break p-3">3/07/2013</span>
+                </div>
+                <div class="formGroup col-12 col-md-12 col-lg-6">
+                  <span class="text-justify ">Tipo de sangre</span> <br /> <span
+                    class="text-justify text-uppercase font-weight-bold text-break p-3">o+</span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="formGroup col-12 col-md-12 col-lg-12 m-3"></div>
+
+
+            <div class="formGroup col-12 col-md-6 col-lg-6 ">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> <i class="fa fa-align-justify"></i> <small>&nbsp;Centro educativo
+                      donde estudia</small>
+                  </span>
+                </div>
+                <input type="text" class="form-control" formControlName="centroEducativo">
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-6">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> <i class="fa fa-align-justify"></i> <small>&nbsp;Nombre
+                      de la madre</small>
+                  </span>
+                </div>
+                <input type="text" class="form-control" formControlName="nombres">
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-6">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> <i class="fa fa-align-justify"></i> <small>&nbsp;Dirección
+                      del trabajo</small>
+                  </span>
+                </div>
+                <input type="text" class="form-control" formControlName="direccion">
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-6">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"> <i class="fa fa-align-justify"></i> <small>&nbsp;Correo
+                      electrónico</small>
+                  </span>
+                </div>
+                <input type="text" class="form-control" formControlName="Correo">
+              </div>
+            </div>
+          </div>
+
+
+          <br>
+
+
+          <div class="row">
+            <div class="col-lg-12 ">
+              <div class="row card-body">
+                <div class="formGroup col-12 col-md-12 col-lg-12">
+                  <div class="card">
+
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="text-left text-primary font-weight-bold">1.1
+                          Antecedentes y Recomendaciones del deportista</div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              A. Enfermedades de la infancia (marque las casillas correspondientes):
+                            </div>
+
+                            <div class="input-group">
+
+                              <span *ngFor="let check of array">
+                                <div class="custom-control custom-switch mr-3 ml-4">
+                                  <input type="checkbox" class="custom-control-input"
+                                    id="chk_enfermedadesInfancia_{{check.id}}"> <label
+                                    class="text-justfy custom-control-label"
+                                    for="chk_enfermedadesInfancia_{{check.id}}">{{check.name}}</label>
+                                </div>
+                              </span>
+
+
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                  <small>&nbsp;Cuales:</small>
+                                </span>
+                              </div>
+                              <textarea id="txt_enfermedadesInfancia" class="form-control" aria-label="With textarea"
+                                required formControlName="txt_enfermedadesInfancia"></textarea>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              B. Enfermedades cronicas (marque las casillas correspondientes):
+                            </div>
+
+                            <div class="input-group">
+
+                              <span *ngFor="let check of array">
+                                <div class="custom-control custom-switch mr-3 ml-4">
+                                  <input type="checkbox" class="custom-control-input"
+                                    id="chk_enfermedadesCronicas_{{check.id}}"> <label
+                                    class="text-justfy custom-control-label"
+                                    for="chk_enfermedadesCronicas_{{check.id}}">{{check.name}}</label>
+                                </div>
+                              </span>
+
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                  <small>&nbsp;Cuales:</small>
+                                </span>
+                              </div>
+                              <textarea id="txt_enfermedadesaCronicas" class="form-control" aria-label="With textarea"
+                                required formControlName="txt_enfermedadesaCronicas"></textarea>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              C. Enfermedades del corazón (marque las casillas correspondientes):
+                            </div>
+
+                            <div class="input-group">
+
+                              <span *ngFor="let check of array">
+                                <div class="custom-control custom-switch mr-3 ml-4">
+                                  <input type="checkbox" class="custom-control-input"
+                                    id="chk_enfermedadesCorazon_{{check.id}}"> <label
+                                    class="text-justfy custom-control-label"
+                                    for="chk_enfermedadesCorazon_{{check.id}}">{{check.name}}</label>
+                                </div>
+                              </span>
+
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                  <small>&nbsp;Cuales:</small>
+                                </span>
+                              </div>
+                              <textarea id="txt_enfermedadesCorazon" class="form-control" aria-label="With textarea"
+                                required formControlName="txt_enfermedadesCorazon"></textarea>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              D. Enfermedades de los huesos, musculos y articulaciones (marque las casillas correspondientes):
+                            </div>
+
+                            <div class="input-group">
+
+                              <span *ngFor="let check of array">
+                                <div class="custom-control custom-switch mr-3 ml-4">
+                                  <input type="checkbox" class="custom-control-input"
+                                    id="chk_enfermedadesHuesos_{{check.id}}"> <label
+                                    class="text-justfy custom-control-label"
+                                    for="chk_enfermedadesHuesos_{{check.id}}">{{check.name}}</label>
+                                </div>
+                              </span>
+
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                  <small>&nbsp;Cuales:</small>
+                                </span>
+                              </div>
+                              <textarea id="txt_enfermedadesHuesos" class="form-control" aria-label="With textarea"
+                                required formControlName="txt_enfermedadesHuesos"></textarea>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <p class="text-left font-weight-bold">Si marcó alguna de las casillas del ítem anterior
+                            especificar: </p>
+                        </div>
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                <small>&nbsp;Localización</small>
+                              </span>
+                            </div>
+                            <input type="text" class="form-control" formControlName="localizacion">
+                          </div>
+                        </div>
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                <small>&nbsp;Recomendaciones
+                                  del padre de familia en cuanto a la salud del niño</small>
+                              </span>
+                            </div>
+                            <textarea id="tiempoInactividad" class="form-control" aria-label="With textarea" required
+                              formControlName="tiempoInactividad"></textarea>
+                          </div>
+                        </div>
+
+
+
+
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                <small>&nbsp;E. Cirugías (Tipo/Localización)</small>
+                              </span>
+                            </div>
+                            <textarea id="cirujia" class="form-control" aria-label="With textarea" required
+                              formControlName="cirujia"></textarea>
+                          </div>
+                        </div>
+
+
+
+
+                        <div class="formGroup col-12 col-md-4 col-lg-5 mt-2">
+                          <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="tomarMedicamento"
+                              formControlName="checkboxMedicamentos"> <label class="text-justfy"
+                              class="custom-control-label" for="tomarMedicamento">F. El deportista debe tomar
+                              medicamentos</label>
+                          </div>
+                        </div>
+
+                        <div class="formGroup col-12 col-md-8 col-lg-7 mt-2">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                <small>&nbsp;Cuáles</small>
+                              </span>
+                            </div>
+                            <textarea id="cualesMedicamnetos" class="form-control" aria-label="With textarea" required
+                              formControlName="cualesMedicamnetos"></textarea>
+                          </div>
+                        </div>
+
+
+
+
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                <small>&nbsp;Recomendaciones
+                                  del padre de familia en cuanto a la salud del niño</small>
+                              </span>
+                            </div>
+                            <textarea id="recomendaciones" class="form-control" aria-label="With textarea" required
+                              formControlName="recomendaciones"></textarea>
+                          </div>
+                        </div>
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="row">
+            <div class="col-lg-12 ">
+
+              <div class="row card-body">
+                <div class="formGroup col-12 col-md-12 col-lg-12">
+                  <div class="card">
+
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="text-left text-primary font-weight-bold">1.2
+                          Condición especial fisica o cognitiva</div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="checkboxFisica"> <label
+                                class="text-justfy font-weight-bold text-uppercase custom-control-label"
+                                for="checkboxFisica">1.
+                                FÍSICA
+                              </label>
+                            </div>
+
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                  <small>&nbsp;Cuál:</small>
+                                </span>
+                              </div>
+                              <textarea id="fisicaCual" class="form-control" aria-label="With textarea" required
+                                formControlName="fisicaCual"></textarea>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="checkboxSensorial"> <label
+                                class="text-justfy font-weight-bold text-uppercase custom-control-label"
+                                for="checkboxSensorial">2.
+                                SENSORIAL
+                              </label>
+                            </div>
+                            <div class="input-group">
+
+                              <span *ngFor="let check of array">
+                                <div class="custom-control custom-switch mr-3 ml-4">
+                                  <input type="checkbox" class="custom-control-input"
+                                    id="checkboxSensorial_{{check.id}}"> <label class="text-justfy custom-control-label"
+                                    for="checkboxSensorial_{{check.id}}">{{check.name}}</label>
+                                </div>
+                              </span>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="checkboxIntelectual"> <label
+                                class="text-justfy custom-control-label" for="checkboxIntelectual">
+                                <span class=" font-weight-bold text-uppercase">3. INTELECTUAL</span> (Situado
+                                significativamente por
+                                debajo del promedio causando limitaciones para llevar a cabo las actividades normales de
+                                la vida diaria)
+                              </label>
+                            </div>
+
+                            <div class="input-group">
+
+                              <span *ngFor="let check of array">
+                                <div class="custom-control custom-switch mr-3 ml-4">
+                                  <input type="checkbox" class="custom-control-input"
+                                    id="checkboxIntelectual_{{check.id}}"> <label
+                                    class="text-justfy custom-control-label"
+                                    for="checkboxIntelectual_{{check.id}}">{{check.name}}</label>
+                                </div>
+                              </span>
+
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="checkboxVisceral"> <label
+                                class="text-justfy font-weight-bold text-uppercase" class="custom-control-label"
+                                for="checkboxVisceral">
+                                <span class=" font-weight-bold">4. VISCERAL</span> (Deficiencia en la función de órganos
+                                internos, por ejemplo, el cardíaco o el
+                                diabético, impidiendo el desarrollo cotidiano en plenitud)
+                              </label>
+                            </div>
+
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                  <small>&nbsp;Cuál:</small>
+                                </span>
+                              </div>
+                              <textarea id="visceralCual" class="form-control" aria-label="With textarea" required
+                                formControlName="visceralCual"></textarea>
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div class="formGroup col-12 col-md-12 col-lg-12 mt-2">
+                          <div class="input-group mt-2">
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="checkboxMultiple"> <label
+                                class="text-justfy font-weight-bold text-uppercase" class="custom-control-label"
+                                for="checkboxMultiple">
+                                <span class=" font-weight-bold">5. MULTIPLE</span> (Presencia de distintas
+                                discapacidades
+                                en diferentes grados y combinaciones)
+                              </label>
+                            </div>
+
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"> <i class="fa fa-align-justify"></i>
+                                  <small>&nbsp;Cuál:</small>
+                                </span>
+                              </div>
+                              <textarea id="multipleCual" class="form-control" aria-label="With textarea" required
+                                formControlName="multipleCual"></textarea>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-lg-12 ">
+
+              <div class="row card-body">
+                <div class="formGroup col-12 col-md-12 col-lg-12">
+                  <div class="card">
+
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="text-left text-primary font-weight-bold">1.3
+                          Información del programa</div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+
+                        <div class="formGroup col-12 col-md-6 col-lg-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-id-card-o"></i>
+                                <h6 class="colorAsterisco">*</h6> <small>&nbsp;Disciplina</small>
+                              </span>
+                            </div>
+                            <select type="text" class="form-control" #disciplina>
+                              <option [ngValue]="disciplina" *ngFor="let disciplina of disciplinas">{{disciplina}}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="formGroup col-12 col-md-6 col-lg-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-id-card-o"></i>
+                                <h6 class="colorAsterisco">*</h6> <small>&nbsp;Unidad</small>
+                              </span>
+                            </div>
+                            <select type="text" class="form-control" #unidad>
+                              <option [ngValue]="unidad" *ngFor="let unidad of unidades">{{unidad}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="formGroup col-12 col-md-6 col-lg-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-id-card-o"></i>
+                                <h6 class="colorAsterisco">*</h6> <small>&nbsp;Programa</small>
+                              </span>
+                            </div>
+                            <select type="text" class="form-control" #programa>
+                              <option [ngValue]="programa" *ngFor="let programa of programas">{{programa}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="formGroup col-12 col-md-6 col-lg-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-id-card-o"></i>
+                                <h6 class="colorAsterisco">*</h6> <small>&nbsp;Jornada</small>
+                              </span>
+                            </div>
+                            <select type="text" class="form-control" jornada>
+                              <option [ngValue]="jornada" *ngFor="let jornada of jornadas">{{jornada}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="formGroup col-12 col-md-6 col-lg-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-id-card-o"></i>
+                                <h6 class="colorAsterisco">*</h6> <small>&nbsp;Horario</small>
+                              </span>
+                            </div>
+                            <select type="text" class="form-control" #horario>
+                              <option [ngValue]="horario" *ngFor="let horario of horarios">{{horario}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="formGroup col-12 col-md-6 col-lg-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-calendar"></i> <small>&nbsp;Fecha
+                                  inicio</small> </span>
+                            </div>
+                            <input type="date" readonly class="form-control">
+                          </div>
+                        </div>
+                        <div class="formGroup col-12 col-md-6 col-lg-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-calendar"></i> <small>&nbsp;Fecha
+                                  finalización</small> </span>
+                            </div>
+                            <input type="date" readonly class="form-control">
+                          </div>
+                        </div>
+                        <div class="formGroup col-12 col-md-6 col-lg-4">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                <small>&nbsp;Instructor</small>
+                              </span>
+                            </div>
+                            <input type="instructor" readonly class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="custom-control m-3">
+                          <p class="text-justify">
+                            <span class="colorAsterisco">*</span> Para la inscripción
+                            al programa ALETAS de la disciplina NATACIÓN, se requiere
+                            de una evaluación previa para validar las competencias
+                            del deportista, al realizar la inscripción se incluira en
+                            el recibo de pago el costo del valor de la evaluación, si
+                            el deportista ha realizado el proceso de aprendizaje
+                            mínimo de los primeros 5 niveles a través de COMFACAUCA
+                            se aprobará automáticamente la inscripción al programa.
+                          </p>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-lg-12 ">
+
+              <div class="row card-body">
+                <div class="formGroup col-12 col-md-12 col-lg-12">
+                  <div class="card">
+
+                    <div class="card-header">
+                      <div class="row">
+                        <div class="formGroup col-12 col-md-12 col-lg-12">
+                          <div class="text-left text-primary font-weight-bold">1.4
+                            Documentos anexos solicitados</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="formGroup col-12 col-md-6 col-lg-6">
+                          <p class="text-justify text-uppercase font-weight-bold">COMO
+                            ADJUNTAR DOCUMENTOS</p>
+
+                          <span class="text-left text-primary font-weight-bold">Documento Individual
+                          </span> <br /> <span class="text-justify">Selecciona un
+                            documento para adjuntar el archivo de forma individual. </span>
+                          <br /> <br /> <span class="text-left text-primary font-weight-bold mt-3">Archivo
+                            con varios documentos </span> <br /> <span class="text-justify">
+                            Selecciona dos o más documentos si deseas adjuntar un
+                            archivo que contenga más de un documento relacionado. </span>
+                        </div>
+                        <div class="formGroup col-12 col-md-6 col-lg-6 border-left border-primary">
+
+
+                          <p>
+                            <b>Debe adjuntar los siguientes documentos:</b><br />
+
+                            Adjunta imagen con formato pdf, jpg, jpeg, png
+                          </p>
+
+                          <ul>
+                            <li>Certificado Salud</li>
+                            <li>Documento de identidad</li>
+                            <li>certificado médico</li>
+                          </ul>
+                          <p class="text-justify">
+                            (Anexar con las recomendaciones médicas para la practica
+                            deportiva, en caso de haber registrado el ítem <span
+                              class="text-primary font-weight-bold">1.2</span>) </p>
+                        </div>
+                        <div class="formGroup col-12 col-md-12 col-lg-12">
+                          <div class="card">
+                            <div class="card-body p-0">
+                              <div class=" btn btn-secondary btn-block personalizarDivInputFile">
+                                <p class="texto_input personalizarTextoInputFile">Adjuntar</p>
+                                <input class=" personalizarInputFile " type="file" name="adjunto" accept=".pdf" multiple
+                                  (change)='uploadFiles($event)' />
+                              </div>
+                              <i class="fa fa-exclamation-circle uncheck" *ngIf="thereIsError">
+                                {{msjErrorCharginFile}}
+                              </i>
+                              <table class="table  table-responsive-sm table-bordered">
+                                <thead>
+                                  <tr class="bg-dark alingContentCenterTD">
+                                    <td>Nombre del archivo</td>
+                                    <td>Ver</td>
+                                    <td>Eliminar</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let file of fileToCompetition" class="table-success">
+                                    <td>{{file.name}}</td>
+                                    <td class="alingContentCenterTD"><span (click)="showPdf(file.name)"><i
+                                          class="fa fa-eye mousehand" aria-hidden="true"></i></span></td>
+                                    <td class="alingContentCenterTD"><span (click)="deleteFiles(file.name)"><i
+                                          class="fa fa-trash-o mousehand" aria-hidden="true"></i></span></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+
+
+
+
+                        </div>
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <div class="row card-body">
+            <div class="col-md-12">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkbox1"
+                  formControlName="chkPoliticaTratamiento"> <label class="custom-control-label" for="checkbox1"> He
+                  leído, comprendo y acepto la <a href="#">Pólítica de
+                    tratamiento de datos personales</a>
+                </label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkbox2" formControlName="chkPolicitaCesion">
+                <label class="custom-control-label" for="checkbox2">He
+                  leído, comprendo y acepto la <a href="#">Pólítica de
+                    cesión de derechos de imagen para personas menores de edad</a>
+                </label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="checkbox3" formControlName="chkInfo"> <label
+                  class="text-justfy" class="custom-control-label" for="checkbox3">Informo
+                  a <b>COMFACAUCA</b> que conozco y acepto el reglamento y
+                  manual de convivencia del programa ESFODER, el horario de las
+                  actividades e instructor (es) asignado (s) al programa al cual
+                  nos vinculamos, que el traslado del deportista al sitio donde
+                  se reúnen o desarrollan las actividades es de mi
+                  responsabilidad como padre o acudiente, así como el cuidado
+                  del deportista una vez terminada la jornada.
+                </label>
+              </div>
+              <div class="custom-control m-3">
+                <p class="text-justify">
+                  <b>Nota:</b> De registrar información en el ítem <span class="text-primary">1.2</span>, personal
+                  profesional de
+                  COMFACAUCA en cada disciplina deportiva evaluara la
+                  información y determinará si las actividades a desarrollar se
+                  manejan de forma personalizada con los costos establecidos o
+                  grupales. <b>COMFACAUCA NO SE HACE RESPONSABLE POR
+                    ACCIDENTES O PERDIDAS QUE SUFRA EL NIÑO (A) DURANTE EL
+                    TRASCURSO DEL PROGRAMA (SI NO SE OBEDECEN Y ACATAN LAS NORMAS
+                    DE SEGURIDAD QUE LE HAN SIDO INDICADAS)</b>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer text-right rounded-0">
+            <div class="form-group col-sm-12">
+              <button type="submit" class="btn btn-lg btn-success" [disabled]="fieldsForm.invalid">
+                <i class="fa fa-save"></i> Guardar
+              </button>
+              <button type="button" class="btn btn-lg btn-secondary" [routerLink]="['../autoGestionAfiliados']">
+                <i class="fa fa-ban"></i> Cancelar
+              </button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,194 @@
+.personalizarInputFile {
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  opacity: 0;
+  position: absolute;
+}
+
+.personalizarDivInputFile {
+  position: relative;
+  padding: 10px;
+  height: 35px;
+}
+
+.personalizarTextoInputFile {
+  color: white;
+}
+
+.check {
+  color: #42a948
+}
+
+.uncheck {
+  color: #a94442;
+}
+
+.mousehand:hover {
+  cursor: pointer;
+  cursor: hand;
+}
+
+.alingContentCenterTD {
+  text-align: center;
+}
+
+input.ng-invalid.ng-touched {
+  border-left: 8px solid #a94442;
+}
+
+input.ng-valid.ng-dirty {
+  border-left: 8px solid #42a948
+}
+
+.colorAsterisco {
+  color: red;
+  line-height: 0.9 !important;
+}
+
+.rightDiv {
+  float: right;
+}
+
+.leftDiv {
+  float: left;
+}
+
+.centerDiv {
+  float: center;
+}
+
+.centerH {
+  align: center !important;
+}
+
+.iconColorPrincipal {
+  color: $link-color !important;
+  cursor: pointer;
+}
+
+.iconColorPrincipal:hover {
+  color: $link-hover-color !important;
+  cursor: pointer;
+}
+
+#myDiagramDiv {
+  height: 500px;
+  border: 1px solid black;
+  background-color: #696969;
+}
+
+.headerTable th {
+  background-color: #f0f3f5 !important;
+  border-bottom: 2px solid $link-hover-color !important;
+  border-top: 1px solid $link-hover-color !important;
+  padding: 0.4em !important;
+}
+
+.linkTarjeta {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.linkTarjeta:hover {
+  cursor: pointer;
+  text-decoration: none;
+  background-color: #EFF5FB;
+}
+
+.e-input-group,
+.e-input-group.e-control-wrapper {
+  position: relative !important;
+  width: 65% !important;
+}
+
+input.e-input,
+input.e-input,
+.e-input-group input.e-input,
+.e-input-group input,
+.e-input-group.e-control-wrapper input.e-input,
+.e-input-group.e-control-wrapper input {
+  padding: 5px 0px 0px 10px !important;
+  text-indent: 0;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+}
+
+.itemInputTable80 {
+    padding: 0.05rem 0.1rem !important;
+    // height: calc(1em + 0.75rem + 1px) !important;
+    width: 80px !important;
+}
+
+.itemInputTable60 {
+  padding: 0.05rem 0.1rem !important;
+  // height: calc(1em + 0.75rem + 1px) !important;
+  width: 60px !important;
+}
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.tree-esfoder-eval {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.mat-tree-node {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 20px !important;
+  max-height: 40px !important;
+  flex: 1 !important;
+  overflow: hidden !important;
+  word-wrap: break-word !important;
+}
+
+.mat-tree-node-child {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 20px !important;
+  max-height: 25px !important;
+  flex: 1 !important;
+  overflow: hidden !important;
+  word-wrap: break-word !important;
+}
+
+.chk-esfoder-eval label {
+  margin: 0px !important;
+}
+
+.chk-esfoder-eval label span {
+  white-space: normal !important;
+  line-break: auto !important;
+  line-height: 12px !important;
+}
+
+.chk-esfoder-eval-children label {
+  font-size: 12px !important;
+  margin: 0px !important;
+}
+
+.chk-esfoder-eval-children label span {
+  white-space: normal !important;
+  line-break: auto !important;
+  line-height: normal !important;
+  margin-top: 2px !important;
+}
+
+.chk-icon-display {
+  line-height: inherit !important;
+  cursor: pointer !important;
+}

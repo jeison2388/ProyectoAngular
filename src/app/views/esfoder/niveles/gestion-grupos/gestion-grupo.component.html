@@ -1,0 +1,388 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12 ">
+      <form [formGroup]="fieldsForm" #f="ngForm">
+        <div class="row">
+          <div class="formGroup col-12 col-md-12 col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="text-left">
+                      <a (click)="mostrarAgregarGrupo()"
+                        class="iconColorPrincipal fa fa-plus-circle fa-2x align-middle">
+                      </a>
+                      Agregar grupo
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body" *ngIf="! agregarGrupo">
+                <div class="row">
+                  <div class="table-responsive">
+                    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                      class="table table-striped row-border hover">
+                      <thead class="headerTable">
+                        <tr>
+                          <th>Código</th>
+                          <th>Hora inicio</th>
+                          <th>Hora fin</th>
+                          <th>Días entrenos</th>
+                          <th>Instructor</th>
+                          <th>Edad desde</th>
+                          <th>Edad hasta</th>
+                          <th>Cupos</th>
+                          <th>Mínimo participante</th>
+                          <th>Acción</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of listaGrupos let i=index">
+                          <td>{{item.codigo}}</td>
+                          <td>{{item.reserva.horaInicio}}</td>
+                          <td>{{item.reserva.horaFin}}</td>
+                          <td>{{item}}</td>
+                          <td>{{item.instructor}}</td>
+                          <td>{{item.edadDesde}}</td>
+                          <td>{{item.edadHasta}}</td>
+                          <td>{{item.cantidadCupos}}</td>
+                          <td>{{item.minParticipante}}</td>
+                          <td>
+                            <a (click)="verGrupo(item.idGrupo)">
+                              <span class="fa fa-eye fa-2x" aria-hidden="true"></span>
+                            </a>
+                            <a (click)="eliminarGrupo(item.idGrupo)">
+                              <span class="fa fa-trash fa-2x" aria-hidden="true"></span>
+                            </a>
+
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody *ngIf="listaGrupos?.length == 0">
+                        <tr>
+                          <td colspan="3" class="no-data-available">No data!</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="card-body" *ngIf="agregarGrupo">
+                <div class="row">
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="(fieldsForm.controls.codigoGrupo.errors?.maxlength || fieldsForm.controls.codigoGrupo.errors?.minlength) && fieldsForm.controls.codigoGrupo.touched">
+                      Mínimo caracteres 3 máximo 50
+                    </i>
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.codigoGrupo.errors?.required && fieldsForm.controls.codigoGrupo.touched">
+                      Este campo no puede estar vacio
+                    </i>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-key"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Código</small>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Código" formControlName="codigoGrupo">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="(fieldsForm.controls.descripcionGrupo.errors?.maxlength || fieldsForm.controls.descripcionGrupo.errors?.minlength) && fieldsForm.controls.descripcionGrupo.touched">
+                      Mínimo caracteres 3 máximo 50
+                    </i>
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.descripcionGrupo.errors?.required && fieldsForm.controls.descripcionGrupo.touched">
+                      Este campo no puede estar vacio
+                    </i>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-align-justify"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Descripción</small>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Descripción"
+                        formControlName="descripcionGrupo">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.escenarioDeportivoGrupo.errors?.required && fieldsForm.controls.escenarioDeportivoGrupo.touched">
+                      Relacione el escenario deportivo
+                    </i>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-map-marker"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Escenario
+                            deportivo</small>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Escenario deportivo"
+                        formControlName="escenarioDeportivoGrupo">
+                      <a style="cursor: pointer;" class="iconColorPrincipal fa fa-calendar fa-2x ml-1"
+                        (click)="mostrarVentanaModalEscenario()"></a>
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-thumb-tack"></i><small>&nbsp;Escenario
+                            principal</small></span>
+                      </div>
+                      <input type="text" readonly class="form-control" placeholder=" Escenario principal">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i
+                            class="fa fa-building"></i><small>&nbsp;Infraestructura</small></span>
+                      </div>
+                      <input type="text" readonly class="form-control" placeholder="Infraestructura">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i
+                            class="fa fa-building-o"></i><small>&nbsp;Unidad</small></span>
+                      </div>
+                      <input type="text" readonly class="form-control" placeholder="Unidad">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-clock-o"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Hora
+                            inicio</small>
+                        </span>
+                      </div>
+                      <input type="text" readonly class="form-control" placeholder="Hora inicio">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-clock-o"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Hora
+                            fin</small>
+                        </span>
+                      </div>
+                      <input type="text" readonly class="form-control" placeholder="Hora fin">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha
+                            inicio</small>
+                        </span>
+                      </div>
+                      <input type="date" readonly class="form-control" placeholder="Fecha de inicio">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha
+                            finalización</small>
+                        </span>
+                      </div>
+                      <input type="date" readonly class="form-control" placeholder="Fecha de finalización">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.edadDesdeGrupo.errors?.required && fieldsForm.controls.edadDesdeGrupo.touched">
+                      Este campo no puede estar vacio
+                    </i>
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.edadDesdeGrupo.errors?.maxlength || fieldsForm.controls.edadDesdeGrupo.errors?.pattern">
+                      Solo permite maximo 2 números
+                    </i>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-level-up"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Edad
+                            desde</small>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Edad desde" formControlName="edadDesdeGrupo">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.edadHastaGrupo.errors?.required && fieldsForm.controls.edadHastaGrupo.touched">
+                      Este campo no puede estar vacio
+                    </i>
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.edadHastaGrupo.errors?.maxlength || fieldsForm.controls.edadHastaGrupo.errors?.pattern">
+                      Solo permite maximo 2 números
+                    </i>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-level-down"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Edad
+                            hasta</small>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Edad hasta" formControlName="edadHastaGrupo">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-user"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Instructor</small>
+                        </span>
+                      </div>
+                      <select type="text" class="form-control" #instructor>
+                        <option [ngValue]="instructor" *ngFor="let instructor of instructores">{{instructor}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.minParticipantesGrupo.errors?.required && fieldsForm.controls.minParticipantesGrupo.touched">
+                      Este campo no puede estar vacio
+                    </i>
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.minParticipantesGrupo.errors?.maxlength || fieldsForm.controls.minParticipantesGrupo.errors?.pattern">
+                      Solo permite maximo 3 números
+                    </i>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-caret-square-o-up"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Mínimo
+                            participantes</small>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Mínimo participantes"
+                        formControlName="minParticipantesGrupo">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.numeroUsosGrupo.errors?.required && fieldsForm.controls.numeroUsosGrupo.touched">
+                      Este campo no puede estar vacio
+                    </i>
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.numeroUsosGrupo.errors?.maxlength || fieldsForm.controls.numeroUsosGrupo.errors?.pattern">
+                      Solo permite maximo 3 números
+                    </i>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-caret-square-o-down"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Número de
+                            usos</small>
+                        </span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Número de usos"
+                        formControlName="numeroUsosGrupo">
+                    </div>
+                  </div>
+
+                  <div class="formGroup col-12 col-md-6 col-lg-4">
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.cantidadCuposGrupo.errors?.required && fieldsForm.controls.cantidadCuposGrupo.touched">
+                      Este campo no puede estar vacio
+                    </i>
+                    <i class="fa fa-exclamation-circle uncheck"
+                      *ngIf="fieldsForm.controls.cantidadCuposGrupo.errors?.maxlength || fieldsForm.controls.cantidadCuposGrupo.errors?.pattern">
+                      Solo permite maximo 3 números
+                    </i>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-users"></i>
+                          <h6 class="colorAsterisco">*</h6><small>&nbsp;Cantidad de
+                            cupos</small>
+                        </span>
+                      </div>
+                      <input type="text" minlength="1" class="form-control" placeholder="Cantidad de cupos"
+                        formControlName="cantidadCuposGrupo">
+                    </div>
+                  </div>
+
+                </div>
+                <!-- ************************************** -->
+                <!--INICIO TABLA FECHAS DE CLASE-->
+                <div class="table-responsive">
+                  <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                    class="table table-striped row-border hover">
+                    <thead class="headerTable">
+                      <tr>
+                        <th colspan="5" class="text-center">
+                          Fechas de clases
+                        </th>
+                      </tr>
+                      <tr>
+                        <th>Sesión</th>
+                        <th>Fecha</th>
+                        <th>Hora inicio</th>
+                        <th>Hora final</th>
+                        <th>Plan clase
+                          <a class="fa fa-address-card fa-2x iconColorPrincipal"
+                            (click)="mostrarVentanaModalPlanClase()"></a>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf="listaFechas?.length != 0">
+                      <tr *ngFor="let item of listaFechas let i=index">
+                        <td>{{i}}</td>
+                        <td>{{item.fecha}}</td>
+                        <td>{{item.horaInicio}}</td>
+                        <td>{{item.horaFin}}</td>
+                        <td>
+                          <a class="fa fa-address-card fa-2x iconColorPrincipal" (click)="mostrarVentanaModalPlanClase()"></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tbody *ngIf="listaFechas?.length == 0">
+                      <tr>
+                        <td colspan="3" class="no-data-available">No data!</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="row">
+                  <div class="formGroup col-12 col-md-12 col-lg-12">
+                    <div class="text-right">
+                      <button type="button" class="btn  btn-primary" (click)="aceptarGrupo()"><i
+                          class="fa fa-ban"></i>&nbsp;Aceptar </button>
+                    </div>
+                  </div>
+                </div>
+                <!--FIN TABLA FECHAS DE CLASE-->
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

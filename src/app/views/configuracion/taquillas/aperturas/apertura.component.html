@@ -1,0 +1,166 @@
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Servicio</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            
+                                <!--INICIO DEL FORMULARIO-->
+                                
+                                    <div class="form-group col-sm-3">
+                                        <label for="codigo">Código<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="codigo" type="text"
+                                            class="form-control border-info" id="codigo" placeholder="Código"
+                                            [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-9">
+                                        <label for="descripcion">Descripción<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="descripcion" type="text"
+                                            class="form-control border-info" id="descripcion" placeholder="Descripción"
+                                            [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"
+                                            autocomplete="nop">
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 256 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-1">
+                                            <label for="codbus"><i class="fa fa-search"></i>&nbsp;Código<span class="text-danger">*</span></label>
+                                            <select name="" id="codbus" #codbus class="form-control border-info">
+                                                <option value="codigo">Código</option>
+                                                <option value="descripcion">Descripción</option>
+                                            </select>
+                                        </div>
+                                                   
+                                    <div class="form-group col-sm-2">                                            
+                                        <label for="servicio">&nbsp;</label>                                       
+                                        <ng-select                                            
+                                            [items]="servicios"                                            
+                                            [closeOnSelect]="true"
+                                            [searchable]="true"
+                                            [addTag]="false"
+                                            bindLabel="label"
+                                            class="border-info"
+                                            placeholder="Select people"
+                                            (change)="seleccionarServicio($event)"                                          
+                                            formControlName="servicio"
+                                            [ngClass]="{ 'is-invalid': submitted && f.servicio.errors }"
+                                            >                                            
+                                        </ng-select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-9">
+                                        <label for="servicio_descripcion">Descripción servicio<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="servicio_descripcion" type="text"
+                                            class="form-control border-info" id="servicio_descripcion" placeholder="Descripción"                                            
+                                            autocomplete="nop"  [ngClass]="{ 'is-invalid': submitted && f.servicio_descripcion.errors }">
+                                            <div class="invalid-feedback">
+                                                Campo requerido Min 4 y Max 256 caracteres
+                                            </div>
+                                    </div>
+
+
+                                    <div class="form-group col-sm-3">
+                                        <label for="ciudad">Ciudad<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="ciudad" type="text"
+                                            class="form-control border-info" id="ciudad" placeholder="Ciudad"                                            
+                                            autocomplete="nop">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="infraestructura">Infraestructura<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="infraestructura" type="text"
+                                            class="form-control border-info" id="infraestructura" placeholder="Infraestructura"                                            
+                                            autocomplete="nop">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="grupo">Grupo<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="grupo" type="text"
+                                            class="form-control border-info" id="grupo" placeholder="Grupo"                                            
+                                            autocomplete="nop">
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="subgrupo">subgrupo<span class="text-danger">*</span></label>
+                                        <select class="form-control placeholder" formControlName="subgrupo" id="subgrupo"
+                                            class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.subgrupo.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let subgrupo of subgrupos" value={{subgrupo.id}}>
+                                                {{subgrupo.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-3">
+                                        <label for="centro_costo">Centro de costo<span class="text-danger">*</span></label>
+                                        <select class="form-control placeholder" formControlName="centro_costo" id="centro_costo"
+                                            class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.centro_costo.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let centro_costo of centros_costo" value={{centro_costo.id}}>
+                                                {{centro_costo.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-9">
+                                        <label for="puntos_venta">Puntos de venta habilitados<span class="text-danger">*</span></label>                                       
+                                        <ng-select                                           
+                                            [items]="puntos_venta"
+                                            [multiple]="true"
+                                            [closeOnSelect]="false"
+                                            [searchable]="true"
+                                            bindLabel="label"
+                                            (remove)='remove($event)'
+                                            placeholder="Select people"
+                                            formControlName="punto_venta">
+                                        </ng-select>
+                                    </div>
+                                    <pre>
+                                            {{form.value|json}}
+                                      </pre>
+
+                                  <!-- {{form.get('aplica_escenario').value}}
+                                  <pre>
+                                        {{form.value|json}}
+                                  </pre>                                  
+                                  <pre>
+                                    {{form.valid}}
+                                  </pre>-->                                                
+                        </div>
+
+
+                        <div class="row text-right">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                    (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                    Guardar</button>
+                                <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                        class="fa fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </form>
+</div>
+<notifier-container></notifier-container>

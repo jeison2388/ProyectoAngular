@@ -1,0 +1,402 @@
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Servicio</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            
+                                <!--INICIO DEL FORMULARIO-->
+                                
+                                    <div class="form-group col-sm-2">
+                                        <label for="codigo">Código<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="codigo" type="text"
+                                            class="form-control border-info" id="codigo" placeholder="Código"
+                                            [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-8">
+                                        <label for="descripcion">Descripción<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="descripcion" type="text"
+                                            class="form-control border-info" id="descripcion" placeholder="Descripción"
+                                            [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"
+                                            autocomplete="nop">
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 256 caracteres
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="tipo_servicio">Tipo servicio<span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-control placeholder" formControlName="tipo_servicio"
+                                            id="tipo_servicio" 
+                                            class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.tipo_servicio.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let tipo_servicio of tipos_servicio"
+                                                value={{tipo_servicio.id}}>
+                                                {{tipo_servicio.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="programa">Programa<span class="text-danger">*</span></label>
+                                        <select class="form-control placeholder" formControlName="programa"
+                                            id="programa"
+                                            class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.programa.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let programa of programas" value={{programa.id}}>
+                                                {{programa.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="grupo">Grupo<span class="text-danger">*</span></label>
+                                        <select class="form-control placeholder" formControlName="grupo" id="grupo"
+                                            class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.grupo.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let grupo of grupos" value={{grupo.id}}>
+                                                {{grupo.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="cuenta_contable">Cuenta contable<span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-control placeholder" formControlName="cuenta_contable"
+                                            id="cuenta_contable" 
+                                            class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.cuenta_contable.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let cuenta_contable of cuentas_contables"
+                                                value={{cuenta_contable.id}}>
+                                                {{cuenta_contable.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="iva">Iva<span class="text-danger">*</span></label>
+                                        <select class="form-control placeholder" formControlName="iva" id="iva"
+                                         class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.iva.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let iva of ivas" value={{iva.id}}>
+                                                {{iva.valor}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="estado">Estado<span class="text-danger">*</span></label>
+                                        <select class="form-control placeholder" formControlName="estado" id="estado"
+                                             class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.estado.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let estado of estados_servicio" value={{estado.id}}>
+                                                {{estado.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="valor_costo">Valor costo<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="valor_costo" type="text"
+                                            class="form-control border-info" id="valor_costo" placeholder="valor_costo"
+                                            [ngClass]="{ 'is-invalid': submitted && f.valor_costo.errors }" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="requiere_definir_personas">Requiere definir personas</label>
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input"
+                                                    formControlName="requiere_definir_personas">
+                                                <span class="switch-slider" data-checked="&#x2713;"
+                                                    data-unchecked="&#x2715;"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="numero_personas">Número personas aplica<span
+                                                class="text-danger">*</span></label>
+                                        <input appUpper formControlName="numero_personas" type="text"
+                                            class="form-control border-info" id="numero_personas"
+                                            placeholder="numero_personas" [ngClass]="{ 'is-invalid': submitted && f.numero_personas
+                                                                    .errors }" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="requiere_definir_horas">Requier definir horas</label>
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input"
+                                                    formControlName="requiere_definir_horas">
+                                                <span class="switch-slider" data-checked="&#x2713;"
+                                                    data-unchecked="&#x2715;"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="numero_horas">Número horas<span class="text-danger">*</span></label>
+                                        <input formControlName="numero_horas" type="text"
+                                            class="form-control border-info" id="numero_horas"
+                                            placeholder="numero_horas"
+                                            [ngClass]="{ 'is-invalid': submitted && f.numero_horas.errors }" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="aplica_restriccion_meta">Aplica restricción meta</label>
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input"
+                                                    formControlName="aplica_restriccion_meta">
+                                                <span class="switch-slider" data-checked="&#x2713;"
+                                                    data-unchecked="&#x2715;"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="meta">Meta<span class="text-danger">*</span></label>
+                                        <input formControlName="meta" type="text" class="form-control border-info"
+                                            id="meta" placeholder="meta"
+                                            [ngClass]="{ 'is-invalid': submitted && f.meta.errors }" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="control_usos">Control usos</label>
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input"
+                                                    formControlName="control_usos">
+                                                <span class="switch-slider" data-checked="&#x2713;"
+                                                    data-unchecked="&#x2715;"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="aplica_escenario">Aplica reserva escenario</label>
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input"
+                                                    formControlName="aplica_escenario">
+                                                <span class="switch-slider" data-checked="&#x2713;"
+                                                    data-unchecked="&#x2715;"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <label for="aplica_paquete">Aplica paquete de servicios</label>
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input"
+                                                    formControlName="aplica_paquete">
+                                                <span class="switch-slider" data-checked="&#x2713;"
+                                                    data-unchecked="&#x2715;"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                  <!-- {{form.get('aplica_escenario').value}}
+                                  <pre>
+                                        {{form.value|json}}
+                                  </pre>                                  
+                                  <pre>
+                                    {{form.valid}}
+                                  </pre>-->
+
+                                    <div class="col-sm-12" *ngIf="form.get('aplica_escenario').value">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Escenario
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+
+<!--
+                                                    <div class="form-group col-sm-2">
+                                                        <label for="escenario">Código escenario</label>
+                                                        <ng-select
+                                                            [options]="escenariosCod" 
+                                                            [allowClear]="true"
+                                                            id="escenario" 
+                                                            class="border-info"                              
+                                                            filterPlaceholder="Digite para buscar..."
+                                                            placeholder="codigo"
+                                                            (selected)="seleccionarEscenario($event)"
+                                                            (filterInputChanged)="buscarEscenariosCodigo($event)"
+                                                            [(ngModel)]="descripcionE" [ngModelOptions]="{standalone: true}"
+                                                        ></ng-select>
+                                                    </div>
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="descripcionE">Descripción </label>
+                                                        <ng-select                                                        
+                                                            [options]="escenarios" 
+                                                            [allowClear]="true"
+                                                            id="descripcionE"                                                             
+                                                            class="border-info"                                    
+                                                            filterPlaceholder="Digite para buscar..."
+                                                            placeholder="Descripción"
+                                                            (selected)="seleccionarEscenario($event)"
+                                                            (filterInputChanged)="buscarEscenarios($event)"
+                                                            [(ngModel)]="codigoE" [ngModelOptions]="{standalone: true}" 
+                                                        ></ng-select>
+                                                    </div>  
+                                                -->  
+                                                    
+                                                    
+                                                    <div class="form-group col-sm-2">
+                                                        <label for="infraestructuraE">Infraestructura</label>
+                                                        <input type="text" class="form-control border-info" id="infraestructuraE"
+                                                            placeholder="Infraestructura" [(ngModel)]="infraestructuraE" [ngModelOptions]="{standalone: true}" />
+                                                    </div>
+                                                    <div class="form-group col-sm-2">
+                                                        <label for="unidadE">Unidad</label>
+                                                        <input type="text" class="form-control border-info" id="unidadE" 
+                                                        placeholder="Unidad"  [(ngModel)]="unidadE" [ngModelOptions]="{standalone: true}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                                      
+                           <!--Controlar el paquete con check y pk del servicio-->
+                            <div class="col-sm-12" *ngIf="pk>0 && form.value.aplica_paquete">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Paquetes de servicio
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+
+                                                
+                                            <!--
+                                                    <div class="form-group col-sm-2">
+                                                        <label for="codigoS">Código servicio</label>
+                                                        <ng-select
+                                                            [options]="servicios" 
+                                                            [allowClear]="true"
+                                                            id="servicioS" 
+                                                            class="border-info"                                    
+                                                            filterPlaceholder="Type to search..."
+                                                            placeholder="Seleccione un servicio"
+                                                            (filterInputChanged)="buscarServicios($event)"
+                                                            (selected)="seleccionarServicio($event)"
+                                                        ></ng-select>
+                                                    </div>
+                                                -->
+                                                    
+
+
+                                                    <div class="form-group col-sm-6">
+                                                        <label for="descripcionS">Descripción </label>
+                                                        <input type="text" class="form-control border-info" id="descripcionS" 
+                                                        placeholder="Descripción" 
+                                                        [(ngModel)]="descripcionS" [ngModelOptions]="{standalone: true}" />
+                                                    </div>
+                                                    <div class="form-group col-sm-2">
+                                                        <label for="tipo_servicioS">Tipo servicio</label>
+                                                        <input type="text" class="form-control border-info" id="tipo_servicioS" placeholder="Tipo servicio" 
+                                                        [(ngModel)]="tipo_servicioS" [ngModelOptions]="{standalone: true}" />
+                                                    </div>
+                                                    <div class="form-group col-sm-2">
+                                                        <label for="valor_costoS">Valor costo</label>
+                                                        <input type="text" class="form-control border-info" id="valor_costoS" placeholder="Valor costo" 
+                                                        [(ngModel)]="valor_costoS" [ngModelOptions]="{standalone: true}" />
+                                                    </div>                                                
+
+                                            <div class="form-group col-sm-12">
+                                           
+                                                <div class="row justify-content-md-center form-group">
+                                                    <button type="button" class="btn btn-lg btn-primary"
+                                                        (click)="agregarServicioAgregado()"><i class="fa fa-arrow-down"></i>
+                                                        Agregar</button>&nbsp;
+                                                    <button class="btn btn-lg btn-light" (click)="clearFormUnidad()"><i
+                                                            class="fa fa-eraser"></i> Limpiar</button>
+                                                </div>
+                                                <div class="row">
+                                                    <table class="table table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Código</th>
+                                                                <th>Descripción</th>
+                                                                <th>Tipo servicio</th>
+                                                                <th>Valor Costo</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of servicios_agregados ">
+                                                                <td>{{item.idServicioAgregado.codigo}}</td>
+                                                                <td>{{item.idServicioAgregado.descripcion}}</td>
+                                                                <td>{{item.idServicioAgregado.valorCosto}}</td>
+                                                                <td>{{item.idServicioAgregado.idTipoServicio.descripcion}}</td>
+                                                                <td>
+                                                                    <button type="button" (click)=editar(item.id)
+                                                                        class="btn btn-sm btn-primary">Editar</button>&nbsp;
+                                                                    <button type="button" (click)=eliminar(item.id)
+                                                                        class="btn btn-sm btn-danger">Eliminar</button>&nbsp;
+                                                                </td>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row text-right">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                    (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                    Guardar</button>
+                                <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                        class="fa fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </form>
+</div>
+<notifier-container></notifier-container>

@@ -1,0 +1,181 @@
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Servicio</strong>
+                        </div>
+                        <div class="card-body">
+    
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <label  for="codigo">Código<span class="text-danger">*</span></label>
+                                    <input appUpper formControlName="codigo" type="text" class="form-control border-info" id="codigo" placeholder="Código"  
+                                    [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                </div>
+                                <div class="form-group col-sm-8">
+                                    <label for="descripcion">Descripción<span class="text-danger">*</span></label>
+                                    <input appUpper formControlName="descripcion" type="text" class="form-control border-info" id="descripcion" placeholder="Descripción"
+                                    [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" >
+                                    <div class="invalid-feedback">
+                                        Campo requerido Min 4 y Max 256 caracteres
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="area">Area<span class="text-danger">*</span></label>
+                                    <select  class="form-control placeholder" formControlName="area" id="area" class="form-control border-info" [ngClass]="{ 'is-invalid': submitted && f.area.errors }" >
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let area of areas" value={{area.id}}>
+                                            {{area.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                                </div>                            
+                            </div>
+    
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <label for="grupo">Grupo<span class="text-danger">*</span></label>
+                                    <select formControlName="grupo" id="grupo" class="form-control border-info" [ngClass]="{ 'is-invalid': submitted && f.grupo.errors }">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let grupo of grupos" value={{grupo.id}}>
+                                            {{grupo.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="programa">Programa<span class="text-danger">*</span></label>
+                                    <select formControlName="programa" id="programa" class="form-control border-info" [ngClass]="{ 'is-invalid': submitted && f.programa.errors }">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let programa of programas" value={{programa.id}}>
+                                            {{programa.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="tipo_servicio">Tipo servicio<span class="text-danger">*</span></label>
+                                    <select formControlName="tipo_servicio" id="tipo_servicio" class="form-control border-info" [ngClass]="{ 'is-invalid': submitted && f.tipo_servicio.errors }">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let tipo_servicio of tipos_servicios" value={{tipo_servicio.id}}>
+                                            {{tipo_servicio.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="iva">IVA<span class="text-danger">*</span></label>
+                                    <select formControlName="iva" id="iva" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let iva of ivas" value={{iva.id}}>
+                                            {{iva.valor}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="cuenta_contable">Cuenta contable<span class="text-danger">*</span></label>
+                                    <select formControlName="cuenta_contable" id="cuenta_contable" class="form-control border-info" [ngClass]="{ 'is-invalid': submitted && f.cuenta_contable.errors }">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let cuenta_contable of cuentas_contables" value={{cuenta_contable.id}}>
+                                            {{cuenta_contable.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="estado_servicio">Estado Servicio<span class="text-danger">*</span></label>
+                                    <select formControlName="estado_servicio" id="estado_servicio" class="form-control border-info" [ngClass]="{ 'is-invalid': submitted && f.estado_servicio.errors }">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let estado_servicio of estados_servicios" value={{estado_servicio.id}}>
+                                            {{estado_servicio.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-2">
+                                    <label for="control_usos">Controla usos</label>
+                                    <div class="text-center">
+                                        <label class="switch switch-label switch-pill switch-primary">
+                                            <input type="checkbox" formControlName="control_usos" class="switch-input">
+                                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="control_usos">Aplica venta paquete</label>
+                                    <div class="text-center">
+                                        <label class="switch switch-label switch-pill switch-primary">
+                                            <input type="checkbox" class="switch-input" formControlName="aplica_paquete">
+                                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="control_usos">Aplica vr cero empleados</label>
+                                    <div class="text-center">
+                                        <label class="switch switch-label switch-pill switch-primary">
+                                            <input type="checkbox" class="switch-input" formControlName="aplica_cero_empleados">
+                                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="control_usos">Requiere definir horas</label>
+                                    <div class="text-center">
+                                        <label class="switch switch-label switch-pill switch-primary">
+                                            <input type="checkbox" class="switch-input" formControlName="requiere_definir_horas">
+                                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-2">
+                                    <label for="control_usos">Requiere definir personas</label>
+                                    <div class="text-center">
+                                        <label class="switch switch-label switch-pill switch-primary">
+                                            <input type="checkbox" class="switch-input" formControlName="requiere_definir_personas">
+                                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row text-right">
+                                <div class="form-group col-sm-12">
+                                    <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"  (click)="clearForm()" ><i class="fa fa-eraser"></i> Limpiar</button>
+                                    <button type="submit" class="btn btn-lg btn-success" ><i class="fa fa-save"></i> Guardar</button>                                    
+                                    <button type="button" class="btn btn-lg btn-secondary"  (click)="cancelar()" ><i class="fa fa-ban"></i> Cancelar</button>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+    </form>
+</div>
+<notifier-container></notifier-container>

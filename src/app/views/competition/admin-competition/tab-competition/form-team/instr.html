@@ -1,0 +1,173 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12 ">
+      <div class="card ">
+        <div class="card-header bg-primary">
+          <h5><i class="fa fa-align-justify"></i> {{titlePanel}}</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="fieldsForm" (ngSubmit)="onSubmit()" #f="ngForm">
+            <h3 class="title text-center"><strong>{{titleForm}}</strong></h3>
+            <p class="text-muted text-center">{{subtitleForm}}</p>
+
+            <div class="row">
+
+              <div class="formGroup col-12 col-md-6 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="(fieldsForm.controls.nombres.errors?.maxlength || fieldsForm.controls.nombres.errors?.minlength) && fieldsForm.controls.nombres.touched">
+                  Mínimo caracteres 3 máximo 50
+                </i>
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="fieldsForm.controls.nombres.errors?.required && fieldsForm.controls.nombres.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-align-justify"></i>
+                      <h6 class="colorAsterisco">*</h6><small>&nbsp;Nombres y apellidos</small>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Nombres" formControlName="nombres">
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-6 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="(fieldsForm.controls.identificacion.errors?.maxlength || fieldsForm.controls.identificacion.errors?.minlength) && fieldsForm.controls.identificacion.touched">
+                  Mínimo caracteres 3 máximo 50
+                </i>
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="fieldsForm.controls.identificacion.errors?.required && fieldsForm.controls.identificacion.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-key"></i>
+                      <h6 class="colorAsterisco">*</h6><small>&nbsp;Identificación</small>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Identificación" formControlName="identificacion">
+                </div>
+              </div>
+              <div class="formGroup col-12 col-md-6 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-calendar"></i>
+                      <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha de
+                        nacimiento</small>
+                    </span>
+                  </div>
+                  <input type="date" class="form-control" placeholder="Fecha de nacimiento">
+                </div>
+              </div>
+              <div class="formGroup col-12 col-md-6 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-align-justify"></i>
+                      <small>&nbsp;Edad</small>
+                    </span>
+                  </div>
+                  <input type="text" readonly class="form-control" formControlName="Edad">
+                </div>
+              </div>
+              <div class="formGroup col-12 col-md-6 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="(fieldsForm.controls.direccion.errors?.maxlength || fieldsForm.controls.direccion.errors?.minlength) && fieldsForm.controls.direccion.touched">
+                  Mínimo caracteres 3 máximo 50
+                </i>
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="fieldsForm.controls.direccion.errors?.required && fieldsForm.controls.direccion.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-map-marker"></i>
+                      <h6 class="colorAsterisco">*</h6><small>&nbsp;Dirección residencia</small>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Dirección residencia"
+                    formControlName="direccion">
+                </div>
+              </div>
+
+              <div class="formGroup col-12 col-md-6 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="(fieldsForm.controls.celular.errors?.maxlength || fieldsForm.controls.celular.errors?.minlength) && fieldsForm.controls.celular.touched">
+                  Mínimo caracteres 3 máximo 50
+                </i>
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="fieldsForm.controls.celular.errors?.required && fieldsForm.controls.celular.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-mobile"></i>
+                      <h6 class="colorAsterisco">*</h6><small>&nbsp;Célular</small>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Célular" formControlName="celular">
+                </div>
+              </div>
+              <div class="formGroup col-12 col-md-6 col-lg-4">
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="(fieldsForm.controls.email.errors?.maxlength || fieldsForm.controls.email.errors?.minlength) && fieldsForm.controls.email.touched">
+                  Mínimo caracteres 3 máximo 50
+                </i>
+                <i class="fa fa-exclamation-circle uncheck"
+                  *ngIf="fieldsForm.controls.email.errors?.required && fieldsForm.controls.email.touched">
+                  Este campo no puede estar vacio
+                </i>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-envelope"></i>
+                      <h6 class="colorAsterisco">*</h6><small>&nbsp;Correo electrónico</small>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Correo electrónico" formControlName="email">
+                </div>
+              </div>
+              <div class="formGroup col-12 col-md-6 col-lg-4">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-id-card-o"></i>
+                      <h6 class="colorAsterisco">*</h6><small>&nbsp;Programa</small>
+                    </span>
+                  </div>
+                  <select type="text" class="form-control" #programa>
+                    <option [ngValue]="programa" *ngFor="let programa of programas">{{programa}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="formGroup col-12 col-md-12 col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row text-right">
+              <div class="form-group col-sm-12">
+                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light" (click)="clearForm()"><i
+                    class="fa fa-eraser"></i> Limpiar</button>
+                <button type="submit" class="btn btn-lg btn-success"
+                  [disabled]="fieldsForm.invalid || showErrorDateFinish || showErrorDateStart"><i
+                    class="fa fa-save"></i>
+                  {{buttonAction}}</button>
+                <button type="button" class="btn btn-lg btn-secondary" [routerLink]="['/esfoder/instructores']"><i
+                    class="fa fa-ban"></i> Cancelar</button>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

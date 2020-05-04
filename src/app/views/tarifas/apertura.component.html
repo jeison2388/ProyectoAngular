@@ -1,0 +1,393 @@
+<style>
+.form-control.ng-select {
+    border: none;
+    padding: 0;
+}
+</style>
+
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Apertura</strong>
+                    </div>
+                    <div class="card-body">
+<!--
+                        <div class="row">
+
+
+                            <div class="form-group col-sm-6">
+                                <label for="descripcion">Descripción<span class="text-danger">*</span></label>
+                                <input formControlName="descripcion" type="text" class="form-control border-info" id="descripcion" placeholder="Descripción"
+                                    [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }" />
+                                <div class="invalid-feedback">
+                                    Campo requerido
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <label for="puntos_venta">Puntos de venta habilitados<span class="text-danger">*</span></label>
+                                <ng-select
+                                    [options]="puntos_venta" 
+                                    [allowClear]="true"
+                                    [multiple]="true" 
+                                    id="puntos_venta" 
+                                    class="border-info"
+                                    formControlName="puntos_venta"
+                                    filterPlaceholder="Type to search..."
+                                    placeholder="Seleccione un servicio"
+                                    (filterInputChanged)="buscarPuntosVenta($event)"
+                                >
+                                </ng-select>
+                            </div>
+
+
+                            <div class="form-group col-sm-4">
+                                <label for="servicio">Servicio<span class="text-danger">*</span></label>
+                                <ng-select
+                                    [options]="servicios" 
+                                    [allowClear]="true"
+                                    id="servicio" 
+                                    class="border-info"
+                                    formControlName="servicio"
+                                    filterPlaceholder="Type to search..."
+                                    placeholder="Seleccione un servicio"
+                                    (filterInputChanged)="buscarServicios($event)"
+                                >
+                                </ng-select>
+                            </div>
+                            
+                            <div class="form-group col-sm-2">
+                                <label for="grupo">Grupo<span class="text-danger">*</span></label>
+                                <select formControlName="grupo" id="grupo" class="form-control border-info">
+                                    <option selected value="">.::Seleccione::.</option>
+                                    <option *ngFor="let grupo of grupos" value={{grupo.id}}>
+                                        {{grupo.descripcion}}
+                                    </option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Campo requerido
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="subgrupo">Subgrupo<span class="text-danger">*</span></label>
+                                    <select formControlName="subgrupo" id="subgrupo" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let grupo of subgrupos" value={{subgrupo.id}}>
+                                            {{subgrupo.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="escenario">Escenario<span class="text-danger">*</span></label>
+                                    <select formControlName="escenario" id="escenario" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let escenario of escenarios" value={{escenario.id}}>
+                                            {{escenario.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-sm-2">
+                                    <label for="uis">Uis<span class="text-danger">*</span></label>
+                                    <select formControlName="uis" id="uis" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let uis of uiss" value={{uis.id}}>
+                                            {{uis.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="ciudad">Ciudad<span class="text-danger">*</span></label>
+                                    <select  id="ciudad" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let ciudad of ciudads" value={{ciudad.id}}>
+                                            {{ciudad.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="centro_costo">Centro de costo<span class="text-danger">*</span></label>
+                                    <select formControlName="centro_costo" id="centro_costo" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let centro_costo of centro_costos" value={{centro_costo.id}}>
+                                            {{centro_costo.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="numero_horas">Número horas<span class="text-danger">*</span></label>
+                                <input formControlName="numero_horas" type="text" class="form-control border-info" id="numero_horas" placeholder="Numero de horas"
+                                    [ngClass]="{ 'is-invalid': submitted && f.numero_horas.errors }" />
+                                <div class="invalid-feedback">
+                                    Campo requerido - númerico
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="numero_personas">Número personas<span class="text-danger">*</span></label>
+                                <input formControlName="numero_personas" type="text" class="form-control border-info" id="numero_personas" placeholder="Numero de personas que aplica"
+                                    [ngClass]="{ 'is-invalid': submitted && f.numero_personas.errors }" />
+                                <div class="invalid-feedback">
+                                    Campo requerido - númerico
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="meta">Meta<span class="text-danger">*</span></label>
+                                <input formControlName="meta" type="text" class="form-control border-info" id="meta" placeholder="Meta"
+                                    [ngClass]="{ 'is-invalid': submitted && f.meta.errors }" />
+                                <div class="invalid-feedback">
+                                    Campo requerido - númerico
+                                </div>
+                            </div>
+                            
+                            <div class="form-group col-sm-2">
+                                    <label for="categoria">Categoria<span class="text-danger">*</span></label>
+                                    <select formControlName="categoria" id="categoria" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let categoria of categorias" value={{categoria.id}}>
+                                            {{categoria.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="rango_edad">Rango edad<span class="text-danger">*</span></label>
+                                    <select formControlName="rango_edad" id="rango_edad" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let rango_edad of rango_edads" value={{rango_edad.id}}>
+                                            {{rango_edad.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="tipo_servicio">Tipo servicio<span class="text-danger">*</span></label>
+                                    <select formControlName="tipo_servicio" id="tipo_servicio" class="form-control border-info" [ngClass]="{ 'is-invalid': submitted && f.tipo_servicio.errors }">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let tipo_servicio of tipos_servicios" value={{tipo_servicio.id}}>
+                                            {{tipo_servicio.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="nivel">Nivel<span class="text-danger">*</span></label>
+                                    <select formControlName="nivel" id="nivel" class="form-control border-info" [ngClass]="{ 'is-invalid': submitted && f.nivel.errors }">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let nivel of nivels" value={{nivel.id}}>
+                                            {{nivel.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="fecha_limite_inscripcion">Fecha limite inscripción<span class="text-danger">*</span></label>
+                                    <input (click)="d.toggle()" formControlName="fecha_limite_inscripcion" type="text" class="form-control border-info" id="fecha_limite_inscripcion" placeholder="aaaa-mm-dd"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fecha_limite_inscripcion.errors }" name="dp" ngbDatepicker #d="ngbDatepicker" />       
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="forma_pago">Forma pago<span class="text-danger">*</span></label>
+                                    <select formControlName="forma_pago" id="forma_pago" class="form-control border-info">
+                                        <option value="">.::Seleccione::.</option>
+                                        <option *ngFor="let forma_pago of forma_pagos" value={{forma_pago.id}}>
+                                            {{forma_pago.descripcion}}
+                                        </option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="numero_dias_pago">Número días pago<span class="text-danger">*</span></label>
+                                    <input formControlName="numero_dias_pago" type="text" class="form-control border-info" id="numero_dias_pago" placeholder="Número días pago"
+                                        [ngClass]="{ 'is-invalid': submitted && f.numero_dias_pago.errors }" />
+                                    <div class="invalid-feedback">
+                                        Campo requerido - númerico
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="fecha_vigencia_inicio">Fecha vigencia desde<span class="text-danger">*</span></label>
+                                    <input (click)="fecha_vigencia_inicio.toggle()" formControlName="fecha_vigencia_inicio" type="text" class="form-control border-info" id="fecha_vigencia_inicio" placeholder="aaaa-mm-dd"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fecha_vigencia_inicio.errors }" name="dp" ngbDatepicker #fecha_vigencia_inicio="ngbDatepicker" />       
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="fecha_vigencia_fin">Fecha vigencia hasta<span class="text-danger">*</span></label>
+                                    <input (click)="fecha_vigencia_fin.toggle()" formControlName="fecha_vigencia_fin" type="text" class="form-control border-info" id="fecha_vigencia_fin" placeholder="aaaa-mm-dd"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fecha_vigencia_fin.errors }" name="dp1" ngbDatepicker #fecha_vigencia_fin="ngbDatepicker" />       
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="fecha_inicio">Fecha incio<span class="text-danger">*</span></label>
+                                    <input (click)="fecha_inicio.toggle()" formControlName="fecha_inicio" type="text" class="form-control border-info" id="fecha_inicio" placeholder="aaaa-mm-dd"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fecha_inicio.errors }" name="dp1" ngbDatepicker #fecha_inicio="ngbDatepicker" />       
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="fecha_fin">Fecha fin<span class="text-danger">*</span></label>
+                                    <input (click)="fecha_fin.toggle()" formControlName="fecha_fin" type="text" class="form-control border-info" id="fecha_vigencia_fin" placeholder="aaaa-mm-dd"
+                                        [ngClass]="{ 'is-invalid': submitted && f.fecha_fin.errors }" name="dp1" ngbDatepicker #fecha_fin="ngbDatepicker" />       
+                                    <div class="invalid-feedback">
+                                        Campo requerido
+                                    </div>
+                            </div>
+
+
+                            <div class="form-group col-sm-2">
+                                    <label for="valor_tarifa">Valor tarifa<span class="text-danger">*</span></label>
+                                    <input formControlName="valor_tarifa" type="text" class="form-control border-info" id="valor_tarifa" placeholder="Valor tarifa"
+                                        [ngClass]="{ 'is-invalid': submitted && f.valor_tarifa.errors }" />
+                                    <div class="invalid-feedback">
+                                        Campo requerido - númerico
+                                    </div>
+                            </div>
+
+                            <div class="form-group col-sm-2">
+                                    <label for="valor_costo">Valor costo<span class="text-danger">*</span></label>
+                                    <input formControlName="valor_costo" type="text" class="form-control border-info" id="valor_costo" placeholder="Valor costo"
+                                        [ngClass]="{ 'is-invalid': submitted && f.valor_costo.errors }" />
+                                    <div class="invalid-feedback">
+                                        Campo requerido - númerico
+                                    </div>
+                            </div>
+
+
+                            <div class="form-group col-sm-4">
+                                <label for="instructores">Instructores<span class="text-danger">*</span></label>
+                                <ng-select [options]="cities" id="instructores" class="border-info" bindLabel="name" formControlName="instructores"
+                                    bindValue="id" labelForId="state" [multiple]="true" placeholder="Seleccione instructores" clearAllText="Clear">
+                                </ng-select>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="participantes">Participantes<span class="text-danger">*</span></label>
+                                <input formControlName="participantes" type="text" class="form-control border-info" id="participantes" placeholder="participantes"
+                                    [ngClass]="{ 'is-invalid': submitted && f.participantes.errors }" />
+                                <div class="invalid-feedback">
+                                    Campo requerido - númerico
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="ediad_inicio">Edad inicio<span class="text-danger">*</span></label>
+                                <input formControlName="edad_inicio" type="text" class="form-control border-info" id="ediad_inicio" placeholder="Edad inicio"
+                                    [ngClass]="{ 'is-invalid': submitted && f.ediad_inicio.errors }" />
+                                <div class="invalid-feedback">
+                                    Campo requerido - númerico
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="edad_fin">Edad fin<span class="text-danger">*</span></label>
+                                <input formControlName="edad_fin" type="text" class="form-control border-info" id="edad_fin" placeholder="Edad fin"
+                                    [ngClass]="{ 'is-invalid': submitted && f.edad_fin.errors }" />
+                                <div class="invalid-feedback">
+                                    Campo requerido - númerico
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="dias">Aplica para los días<span class="text-danger">*</span></label>
+                                    <ng-select [options]="cities" id="instructores" class="border-info" bindLabel="name" formControlName="dias"
+                                        bindValue="id" labelForId="state" [multiple]="true" placeholder="Seleccione dias" clearAllText="Clear">
+                                    </ng-select>
+                                </div>
+
+
+                            <div class="form-group col-sm-2">
+                                <label for="aplica_paquete">Aplica venta paquete(ro)</label>
+                                <div class="text-center">
+                                    <label class="switch switch-label switch-pill switch-primary">
+                                        <input type="checkbox" class="switch-input" formControlName="aplica_paquete" id="aplica_paquete">
+                                        <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="aplica_restriccion_meta">Aplica restricción meta</label>
+                                <div class="text-center">
+                                    <label class="switch switch-label switch-pill switch-primary">
+                                        <input type="checkbox" formControlName="aplica_restriccion_meta" id="aplica_restriccion_meta" class="switch-input">
+                                        <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                <label for="aplica_condicion_discapacidad">Aplica condición discapacidad</label>
+                                <div class="text-center">
+                                    <label class="switch switch-label switch-pill switch-primary">
+                                        <input type="checkbox" class="switch-input" id="aplica_condicion_discapacidad" formControlName="aplica_condicion_discapacidad">
+                                        <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                    </label>
+                                </div>
+                            </div>                            
+                            <div class="form-group col-sm-2">
+                                <label for="permite_ventas_futuro">Permite ventas a futuro</label>
+                                <div class="text-center">
+                                    <label class="switch switch-label switch-pill switch-primary">
+                                        <input type="checkbox" class="switch-input" id="permite_ventas_futuro" formControlName="permite_ventas_futuro">
+                                        <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group col-sm-2">
+                                    <label for="aplica_temporada">Aplica temporada</label>
+                                    <div class="text-center">
+                                        <label class="switch switch-label switch-pill switch-primary">
+                                            <input type="checkbox" class="switch-input" id="aplica_temporada" formControlName="aplica_temporada">
+                                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+                                        </label>
+                                    </div>
+                            </div>
+                            
+                            
+                            </div>
+
+                        -->
+                        <div class="row text-center">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-dot-circle-o"></i>
+                                    Guardar</button>
+                                <button type="button" class="btn btn-lg btn-secondary" ><i class="fa fa-ban"></i>
+                                    Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </form>
+
+</div>

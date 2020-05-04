@@ -1,0 +1,304 @@
+<form [formGroup]="fieldsForm" (ngSubmit)="onSubmit()" #f="ngForm">
+  <div class="animated fadeIn">
+    <div class="row">
+      <div class="col-lg-12 ">
+        <div class="card ">
+          <div class="card-header bg-primary">
+            <h5>
+              <i class="fa fa-align-justify"></i> {{titlePanel}}
+            </h5>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="fieldsForm" (ngSubmit)="onSubmit()" #f="ngForm">
+              <h3 class="title text-center">
+                <strong>{{titleForm}}</strong>
+              </h3>
+              <p class="text-muted text-center">{{subtitleForm}}</p>
+
+              <div class="row">
+
+                <div class="formGroup col-12 col-md-6 col-lg-4">
+                  <i class="fa fa-exclamation-circle uncheck"
+                    *ngIf="(fieldsForm.controls.codigo.errors?.maxlength || fieldsForm.controls.codigo.errors?.minlength) && fieldsForm.controls.codigo.touched">
+                    Mínimo caracteres 3 máximo 50 </i> <i class="fa fa-exclamation-circle uncheck"
+                    *ngIf="fieldsForm.controls.codigo.errors?.required && fieldsForm.controls.codigo.touched">
+                    Este campo no puede estar vacio </i>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-key"></i>
+                        <h6 class="colorAsterisco">*</h6> <small>&nbsp;Código</small>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Código" formControlName="codigo">
+                  </div>
+                </div>
+
+                <div class="formGroup col-12 col-md-6 col-lg-4">
+                  <i class="fa fa-exclamation-circle uncheck"
+                    *ngIf="(fieldsForm.controls.descripcion.errors?.maxlength || fieldsForm.controls.descripcion.errors?.minlength) && fieldsForm.controls.descripcion.touched">
+                    Mínimo caracteres 3 máximo 50 </i> <i class="fa fa-exclamation-circle uncheck"
+                    *ngIf="fieldsForm.controls.descripcion.errors?.required && fieldsForm.controls.descripcion.touched">
+                    Este campo no puede estar vacio </i>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-align-justify"></i>
+                        <h6 class="colorAsterisco">*</h6> <small>&nbsp;Descripción</small>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Descripción" formControlName="descripcion">
+                  </div>
+                </div>
+
+                <div class="formGroup col-12 col-md-6 col-lg-4">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-id-card-o"></i>
+                        <h6 class="colorAsterisco">*</h6> <small>&nbsp;Programa</small>
+                      </span>
+                    </div>
+                    <select type="text" class="form-control" #programas>
+                      <option [ngValue]="programa" *ngFor="let programa of programas">{{programa}}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="formGroup col-12 col-md-6 col-lg-4">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fa fa-list-ol"></i>
+                        <h6 class="colorAsterisco">*</h6> <small>&nbsp;Nivel</small>
+                      </span>
+                    </div>
+                    <select type="text" class="form-control" #niveles>
+                      <option [ngValue]="nivel" *ngFor="let nivel of niveles">{{nivel}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="row">
+                <div class="formGroup col-12 col-md-12 col-lg-12">
+                  <div class="card">
+                    <div class="card-header">
+                      <span class="text-primary font-weight-bold">
+                        Evaluación del rendimiento deportivo de un deportista
+                      </span>
+                    </div>
+                    <div class="card-body">
+
+                      <div class="row">
+                        <div class="col-sm-6 p-0">
+
+                          <div class="table-responsive-xl pl-3 pr-3 pt-2 pb-2">
+                            <table class="table table-sm table-hover">
+
+                              <thead class="headerTable">
+                                <tr>
+                                  <th style="width:10px"></th>
+                                  <th class="th-lg font-weight-bold text-center">Descripción
+                                    del componente</th>
+                                  <th style="width:90px" class="th-lg font-weight-bold text-center">Valor
+                                    %</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of listaComponentes let i=index">
+                                  <td class="text-center align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                      <input type="checkbox" class="custom-control-input" id="chkX_{{i}}"
+                                        [checked]="isChecked(item.selected)" (change)="changeStatus(item.id,$event)">
+                                      <label class="custom-control-label" for="chkX_{{i}}"></label>
+                                    </div>
+                                  </td>
+                                  <td class="text-center align-middle">
+                                    {{item.descripcion}}</td>
+                                  <td class="text-center">
+                                    <kendo-numerictextbox class="itemInputTable80"  id="txtComponent{{item.id}}"
+                                      (valueChange)="onChangePorcentajeComponentes(item.id, $event)"
+                                      [rangeValidation]="rangeValidation" [format]="format" [autoCorrect]="autoCorrect"
+                                      [spinners]="false" [decimals]="decimals" [disabled]="isDisabled(item.selected)"
+                                      [value]=" item.porcentaje" [min]="min" [max]="max" [autoCorrect]="autoCorrect">
+                                    </kendo-numerictextbox>
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <tfoot class="headerTable">
+                                <tr>
+                                  <th scope="col" colspan="2" class=" th-lg text-center align-middle">Total</th>
+                                  <th scope="col" class=" th-lg text-center align-middle"
+                                    [ngStyle]="setColorValidacion()">{{total}}
+                                    %
+                                    <i *ngIf="showErrorPorcentajeCom"
+                                      class="text-warning fa fa-exclamation-triangle fa-lg" placement="right"
+                                      ngbTooltip="{{errorPorcentaje}}" aria-hidden="true"></i></th>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>
+
+                        </div>
+                        <div class="col-sm-6 p-0">
+
+                          <div class="table-responsive-xl  pl-3 pr-3 pt-2 pb-2">
+                            <table class="table table-sm table-hover">
+
+                              <thead class="headerTable">
+                                <tr>
+                                  <th scope="col" style="width:20px" class="font-weight-bold text-center">ID</th>
+                                  <th scope="col" class=" th-lg font-weight-bold text-center">Evaluación</th>
+                                  <th scope="col" style="width:105px" class=" th-lg font-weight-bold text-center">
+                                    Porcentaje
+                                    %</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let item of listaEscalaValorativa let i=index">
+                                  <td class="text-center align-middle">{{item.codigo}}</td>
+                                  <td class="text-center align-middle">
+                                    {{item.descripcion}}</td>
+                                  <td class="text-center align-middle">
+                                    <div style="display: flex; line-height: 2;">
+                                      <kendo-numerictextbox class="itemInputTable60" id="txtEscalaFrom{{item.id}}"
+                                        (valueChange)="onChangePorcentajeEvaluacion(item.id, $event, desde)"
+                                        [rangeValidation]="rangeValidation" [autoCorrect]="autoCorrect"
+                                        [format]="formatEvaluacion" [spinners]="false" [decimals]="decimalsEvaluacion"
+                                        [value]=" item.porcentaje_desde" [min]="min" [max]="max-1"
+                                        [autoCorrect]="autoCorrect">
+                                      </kendo-numerictextbox>
+                                      -
+                                      <kendo-numerictextbox class="itemInputTable60" id="txtEscalaTo{{item.id}}"
+                                        (valueChange)="onChangePorcentajeEvaluacion(item.id, $event, hasta)"
+                                        [rangeValidation]="rangeValidation" [autoCorrect]="autoCorrect"
+                                        [format]="formatEvaluacion" [spinners]="false" [decimals]="decimalsEvaluacion"
+                                        [value]=" item.porcentaje_hasta" [min]="item.porcentaje_desde+1" [max]="max"
+                                        [autoCorrect]="autoCorrect">
+                                      </kendo-numerictextbox>
+                                      %
+                                      <i *ngIf="validarTraslape(item.id)"
+                                          style="line-height: inherit;"
+                                          class="text-warning fa fa-exclamation-triangle fa-lg" placement="top"
+                                          ngbTooltip="{{errorPorcentajeTraslape}}" aria-hidden="true"></i>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                              <tfoot class="headerTable">
+                                <tr>
+                                  <th scope="col" colspan="2" class=" th-lg font-weight-bold text-center align-middle">
+                                    <span>Porcentaje
+                                      mínimo para aprobación del nivel
+                                      <span class="colorAsterisco">*</span></span>
+                                  </th>
+                                  <th scope="col" class=" th-lg text-center align-middle">
+                                    <div style="display: inline-block"><input type="text"
+                                        class="form-control input-sm itemInputTable80" formControlName="porcMinimo">
+                                    </div>
+                                  </th>
+                                </tr>
+                              </tfoot>
+                            </table>
+                          </div>
+
+                        </div>
+                      </div>
+
+
+                      <div class="row" *ngIf="TREE_DATA?.length > 0">
+                        <div class="card w-100">
+                          <div class="card-header bg-primary p-1">
+                            <p class="text-left m-0 p-0">
+                              Detalle del componente</p>
+                          </div>
+                          <div class="row card-body">
+
+                            <div class="formGroup col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 p-0">
+
+                              <!--INIT TREE *************************************** -->
+
+                              <div id="materialTree">
+                                <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl"
+                                  class="tree-esfoder-eval example-tree">
+                                  <!-- This is the tree node template for leaf nodes -->
+                                  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+                                    <li class="mat-tree-node-child">
+                                      <!-- use a disabled button to provide padding for tree leaf -->
+                                      <!-- Se oculata el botón debido a que el árbol solo tendrá un nivel -->
+                                      <!-- <button mat-icon-button disabled></button> -->
+                                      <mat-checkbox class="checklist-leaf-node" class="chk-esfoder-eval-children"
+                                        color="warn" (change)="todoItemSelectionToggle($event.checked,node)"
+                                        [checked]="node.selected">
+                                        {{node.name}}</mat-checkbox>
+
+
+                                    </li>
+                                  </mat-tree-node>
+                                  <!-- This is the tree node template for expandable nodes -->
+                                  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild"
+                                    class="col-xl-4 col-lg-6 col-md-6 col-sm-12 p-0">
+                                    <li style="margin: 1px 1px 10px 1px; display: block;">
+                                      <div class="mat-tree-node  bg-light">
+                                        <span matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+                                          <mat-icon class="mat-icon-rtl-mirror chk-icon-display">
+                                            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                          </mat-icon>
+                                        </span>
+                                        <mat-checkbox [checked]="node.selected" class="chk-esfoder-eval"
+                                          [indeterminate]="node.indeterminate && !node.selected"
+                                          (change)="todoItemSelectionToggle($event.checked,node)">{{node.name}}
+                                        </mat-checkbox>
+                                      </div>
+                                      <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                                        <ng-container matTreeNodeOutlet></ng-container>
+                                      </ul>
+                                    </li>
+                                  </mat-nested-tree-node>
+                                </mat-tree>
+                                <button class="btn-primary mt-5" mat-button (click)="submit()">submit</button>
+                              </div>
+
+                              <!--END TREE ****************************************-->
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+              <div class="row text-right">
+                <div class="form-group col-sm-12 mt-4">
+                  <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light" (click)="clearForm()">
+                    <i class="fa fa-eraser"></i> Limpiar
+                  </button>
+                  <button type="submit" class="btn btn-lg btn-success" [disabled]="fieldsForm.invalid">
+                    <i class="fa fa-save"></i> {{buttonAction}}
+                  </button>
+                  <button type="button" class="btn btn-lg btn-secondary"
+                    [routerLink]="['/esfoder/evaluacion-rendimiento']">
+                    <i class="fa fa-ban"></i> Cancelar
+                  </button>
+                </div>
+              </div>
+
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+<notifier-container></notifier-container>

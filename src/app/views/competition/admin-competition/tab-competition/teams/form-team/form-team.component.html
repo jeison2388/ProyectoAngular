@@ -1,0 +1,159 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12 ">
+      <div class="card ">
+        <div class="card-header bg-primary">
+          <strong>{{titleForm}}</strong>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="fieldsForm" (ngSubmit)="onSubmit()" #f="ngForm">
+            <h3 class="title text-center"><strong>{{titleForm}}</strong></h3>
+            <p class="text-muted text-center">{{subtitleForm}}</p>
+            <div class="card ">
+              <div class="card-body">
+                <div class="row">
+                  <div class="formGroup col-12 col-md-12 col-lg-12">
+                    <strong>Nombre Competición : </strong>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="formGroup col-12 col-md-12 col-lg-4">
+                    <strong>Deporte : </strong>
+                  </div>
+                  <div class="formGroup col-12 col-md-12 col-lg-4">
+                    <strong>Categoria : </strong>
+                  </div>
+                  <div class="formGroup col-12 col-md-12 col-lg-4">
+                    <strong>Modalidad : </strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card ">
+              <div class="card-body">
+                <h6 class="title text-center"><strong>Datos del Equipo</strong></h6>
+
+                <div class="row">
+
+                  <div class=" col- 12 col-sm-12 col-md-2 col-lg-2" style="text-align:center;">
+                    <i class="fa fa-exclamation-circle uncheck" *ngIf="thereIsErrorPhoto">
+                      {{msjErrorCharginFile}}
+                    </i>
+                    <div class="media">
+                      <img src="{{srcPhotoView}}" class=" rounded col-lg-12" alt="foto equipo">
+                    </div>
+                    <div class=" btn btn-secondary btn-block personalizarDivInputFile">
+                      <p class="texto_input personalizarTextoInputFile">Adjuntar</p>
+                      <input class=" personalizarInputFile " type="file" name="adjunto" accept="image/*"
+                        (change)='uploadPhoto($event)' />
+                    </div>
+                  </div>
+
+
+                  <div class="col-sm-12 col-md-12 col-lg-10">
+                    <div class="row">
+
+                      <div class="col-sm-12 col-md-12 col-lg-6">
+                        <i class="fa fa-exclamation-circle uncheck"
+                          *ngIf="(fieldsForm.controls.nameTeam.errors?.maxlength || fieldsForm.controls.nameTeam.errors?.minlength) && fieldsForm.controls.nameTeam.touched">
+                          Mínimo caracteres 3 máximo 50
+                        </i>
+                        <i class="fa fa-exclamation-circle uncheck"
+                          *ngIf="fieldsForm.controls.nameTeam.errors?.required && fieldsForm.controls.nameTeam.touched">
+                          Este campo no puede estar vacio
+                        </i>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-trophy"></i>
+                              <h6 class="colorAsterisco">*</h6><small>&nbsp;Nombre</small>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="* Nombre Equipo"
+                            formControlName="nameTeam">
+                        </div>
+                      </div>
+
+                      <div class=" col-12 col-sm-12 col-md-12 col-lg-6">
+                        <i class="fa fa-exclamation-circle uncheck"
+                          *ngIf="(fieldsForm.controls.nameDelegate.errors?.maxlength || fieldsForm.controls.nameDelegate.errors?.minlength) && fieldsForm.controls.nameDelegate.touched">
+                          Mínimo caracteres 3 máximo 50
+                        </i>
+                        <i class="fa fa-exclamation-circle uncheck"
+                          *ngIf="fieldsForm.controls.nameDelegate.errors?.required && fieldsForm.controls.nameDelegate.touched">
+                          Este campo no puede estar vacio
+                        </i>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-trophy"></i>
+                              <h6 class="colorAsterisco">*</h6><small>&nbsp;Delegado</small>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="* Nombre" formControlName="nameDelegate">
+                        </div>
+                      </div>
+
+                      <div class=" col-12 col-sm-12 col-md-12 col-lg-6">
+                        <i class="fa fa-exclamation-circle uncheck"
+                          *ngIf="fieldsForm.controls.idDelegate.errors?.required && fieldsForm.controls.idDelegate.touched">
+                          Este campo no puede estar vacio
+                        </i>
+                        <i class="fa fa-exclamation-circle uncheck"
+                          *ngIf="fieldsForm.controls.idDelegate.errors?.maxlength || fieldsForm.controls.idDelegate.errors?.pattern">
+                          Solo permite maximo 12 numeros
+                        </i>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-trophy"></i>
+                              <h6 class="colorAsterisco">*</h6><small>&nbsp;CC</small>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="* # identificación"
+                            formControlName="idDelegate">
+                        </div>
+                      </div>
+
+                      <div class=" col-12 col-sm-12 col-md-12 col-lg-6">
+                        <i class="fa fa-exclamation-circle uncheck"
+                          *ngIf="fieldsForm.controls.phoneDelegate.errors?.required && fieldsForm.controls.phoneDelegate.touched">
+                          Este campo no puede estar vacio
+                        </i>
+                        <i class="fa fa-exclamation-circle uncheck"
+                          *ngIf="fieldsForm.controls.phoneDelegate.errors?.maxlength || fieldsForm.controls.phoneDelegate.errors?.pattern">
+                          Solo permite maximo 12 numeros
+                        </i>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-trophy"></i>
+                              <h6 class="colorAsterisco">*</h6><small>&nbsp;tel</small>
+                            </span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="* Telefono"
+                            formControlName="phoneDelegate">
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+
+                </div>
+
+
+                  <app-add-info-players></app-add-info-players>
+
+
+              </div>
+            </div>
+
+
+
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

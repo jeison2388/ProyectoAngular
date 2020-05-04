@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-12 col-md-12 col-lg-12">
+    <form action="">
+    <h6 class="title text-center"><strong>Datos de los Jugadores</strong></h6>
+
+    <div class="rightDiv">
+    <button type="submit" class="btn btn-primary" (click)="mostrarVentanaModalAddPlayer()">Agregar
+      Jugador</button>
+    </div>
+  </form>
+  </div>
+</div>
+
+<app-add-modal-player *ngIf="mostrarModalAddPlayer" [onchangeModal]="onchangeModal"></app-add-modal-player>
+
+<!--/.col-->

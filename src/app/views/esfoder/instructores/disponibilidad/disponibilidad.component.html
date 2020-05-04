@@ -1,0 +1,56 @@
+<form [formGroup]="fieldsForm" (ngSubmit)="addDisponibilidad()" #f="ngForm">
+  <div class="modal-header bg-primary">
+    <h5 class="modal-title" id="modal-basic-title">HORARIO DISPONIBLE</h5>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm-12 text-left text-uppercase font-weight-bold">{{unidad.unidad}}</div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="table-responsive-xl">
+        <table class="table  table-hover">
+
+          <thead class="headerTable">
+            <tr>
+              <th scope="col" class="font-weight-bold">DÍAS</th>
+              <th scope="col" colspan="2" class=" th-lg text-center">HORARIO 1</th>
+              <th scope="col" colspan="2" class=" th-lg text-center">HORARIO 2</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listaDias let i=index">
+              <th scope="row">{{item.descripcion_dia_semana}}</th>
+              <td class="text-right" style="min-width: 170px;">De: <ejs-timepicker class="e-input"
+                  [format]='formatString' [step]='interval' [value]='item.horario_1_i'  >
+                </ejs-timepicker>
+              </td>
+              <td class="text-center" style="min-width: 170px;">A: <ejs-timepicker class="e-input"
+                  [format]='formatString' [step]='interval'  [value]='item.horario_1_f'>
+                </ejs-timepicker>
+              </td>
+              <td class="text-right" style="min-width: 170px;">De: <ejs-timepicker class="e-input"
+                  [format]='formatString' [step]='interval'  [value]='item.horario_2_i'>
+                </ejs-timepicker>
+              </td>
+              <td class="text-center" style="min-width: 170px;">A: <ejs-timepicker class="e-input"
+                  [format]='formatString' [step]='interval'  [value]='item.horario_2_f'>
+                </ejs-timepicker>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <a class="btn btn-secondary" (click)="close()"><i
+        class="fa fa-ban"></i>
+      Cancelar</a>
+    <button type="button" class="btn bg-primary" (click)="addDisponibilidad()"><i class="fa fa-save"></i>
+      Aceptar</button>
+  </div>
+</form>

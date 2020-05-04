@@ -1,0 +1,351 @@
+<form [formGroup]="fieldsForm" (ngSubmit)="onSubmit()" #f="ngForm">
+  <div class="animated fadeIn">
+    <div class="row">
+
+      <div class="col-sm-3 p-0">
+        <app-tarjetaGrupos></app-tarjetaGrupos>
+      </div>
+
+      <div class="col-sm-9 pt-0 pb-0 pr-0 pl-1">
+        <div class="card border border-primary rounded-0">
+          <div class="card-header bg-primary text-center rounded-0">
+            <h5>
+              FICHA DE INSCRIPCIÓN PROGRAMA ESCUELAS DE FORMACIÓN DEPORTIVA
+            </h5>
+          </div>
+          <div class="row card-body">
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">Nombres y apellidos del afiliado</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">SALOMÉ FERNÁNDEZ LEÓN</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">Estado de afiliación</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">ACTIVO</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">Categoría</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">B</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">Edad</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">6 años</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">Tipo de identificación</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">Registro civíl</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">No. de identificación</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">1085151555</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">Fecha de nacimiento</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">3/07/2013</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">Tipo de sangre</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">o+</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <span class="text-justify ">Programa</span> <br />
+              <span class="text-justify text-uppercase font-weight-bold text-break p-3">Vacaciones recreativas</span>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-calendar"></i>
+                    <small>&nbsp;Fecha inicio</small>
+                  </span>
+                </div>
+                <input type="date" readonly class="form-control">
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fa fa-calendar"></i>
+                    <small>&nbsp;Fecha finalización</small>
+                  </span>
+                </div>
+                <input type="date" readonly class="form-control">
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-user"></i>
+                    <h6 class="colorAsterisco">*</h6>
+                    <small>&nbsp;Días que desea inscribir</small>
+                  </span>
+                </div>
+                <select type="text" class="form-control" #diasInscripcion>
+                  <option [ngValue]="diasInscripcion" *ngFor="let dias of diasInscripcion">{{diasInscripcion}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <i class="fa fa-exclamation-circle uncheck"
+                *ngIf="(fieldsForm.controls.nombreMadre.errors?.maxlength || fieldsForm.controls.nombreMadre.errors?.minlength) && fieldsForm.controls.nombreMadre.touched">
+                Mínimo caracteres 3 máximo 50
+              </i>
+              <i class="fa fa-exclamation-circle uncheck"
+                *ngIf="fieldsForm.controls.nombreMadre.errors?.required && fieldsForm.controls.nombreMadre.touched">
+                Este campo no puede estar vacio
+              </i>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-align-justify"></i>
+                    <h6 class="colorAsterisco">*</h6>
+                    <small>&nbsp;Nombre de la madre</small>
+                  </span>
+                </div>
+                <input type="text" class="form-control" formControlName="nombreMadre">
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <i class="fa fa-exclamation-circle uncheck"
+                *ngIf="(fieldsForm.controls.direccion.errors?.maxlength || fieldsForm.controls.direccion.errors?.minlength) && fieldsForm.controls.direccion.touched">
+                Mínimo caracteres 3 máximo 50
+              </i>
+              <i class="fa fa-exclamation-circle uncheck"
+                *ngIf="fieldsForm.controls.direccion.errors?.required && fieldsForm.controls.direccion.touched">
+                Este campo no puede estar vacio
+              </i>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-align-justify"></i>
+                    <h6 class="colorAsterisco">*</h6>
+                    <small>&nbsp;Dirección del trabajo</small>
+                  </span>
+                </div>
+                <input type="text" class="form-control" formControlName="direccion">
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <i class="fa fa-exclamation-circle uncheck"
+                *ngIf="(fieldsForm.controls.celular.errors?.maxlength || fieldsForm.controls.celular.errors?.minlength) && fieldsForm.controls.celular.touched">
+                Mínimo caracteres 3 máximo 50
+              </i>
+              <i class="fa fa-exclamation-circle uncheck"
+                *ngIf="fieldsForm.controls.celular.errors?.required && fieldsForm.controls.celular.touched">
+                Este campo no puede estar vacio
+              </i>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-align-justify"></i>
+                    <h6 class="colorAsterisco">*</h6>
+                    <small>&nbsp;Célular</small>
+                  </span>
+                </div>
+                <input type="text" class="form-control" formControlName="celular">
+              </div>
+            </div>
+            <div class="formGroup col-12 col-md-6 col-lg-4">
+              <i class="fa fa-exclamation-circle uncheck"
+                *ngIf="(fieldsForm.controls.Correo.errors?.maxlength || fieldsForm.controls.Correo.errors?.minlength) && fieldsForm.controls.Correo.touched">
+                Mínimo caracteres 3 máximo 50
+              </i>
+              <i class="fa fa-exclamation-circle uncheck"
+                *ngIf="fieldsForm.controls.Correo.errors?.required && fieldsForm.controls.Correo.touched">
+                Este campo no puede estar vacio
+              </i>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="fa fa-align-justify"></i>
+                    <h6 class="colorAsterisco">*</h6>
+                    <small>&nbsp;Correo electrónico</small>
+                  </span>
+                </div>
+                <input type="text" class="form-control" formControlName="Correo">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 ">
+              <form [formGroup]="fieldsForm" #f="ngForm">
+                <div class="row card-body">
+                  <div class="formGroup col-12 col-md-12 col-lg-12">
+                    <div class="card">
+
+                      <div class="card-header">
+                        <div class="row">
+                          <div class="formGroup col-12 col-md-6 col-lg-4">
+                            <div class="text-left">
+                              Persona responsable autorizada para recoger al niño
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="formGroup col-12 col-md-6 col-lg-4">
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="(fieldsForm.controls.nombresResponsable.errors?.maxlength || fieldsForm.controls.nombresResponsable.errors?.minlength) && fieldsForm.controls.nombresResponsable.touched">
+                              Mínimo caracteres 3 máximo 50
+                            </i>
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="fieldsForm.controls.nombresResponsable.errors?.required && fieldsForm.controls.nombresResponsable.touched">
+                              Este campo no puede estar vacio
+                            </i>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fa fa-key"></i>
+                                  <h6 class="colorAsterisco">*</h6>
+                                  <small>&nbsp;Nombres y Apellidos</small>
+                                </span>
+                              </div>
+                              <input type="text" class="form-control" formControlName="nombresResponsable">
+                            </div>
+                          </div>
+                          <div class="formGroup col-12 col-md-6 col-lg-4">
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="(fieldsForm.controls.identificacionResponsable.errors?.maxlength || fieldsForm.controls.identificacionResponsable.errors?.minlength) && fieldsForm.controls.identificacionResponsable.touched">
+                              Mínimo caracteres 3 máximo 50
+                            </i>
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="fieldsForm.controls.identificacionResponsable.errors?.required && fieldsForm.controls.identificacionResponsable.touched">
+                              Este campo no puede estar vacio
+                            </i>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fa fa-align-justify"></i>
+                                  <h6 class="colorAsterisco">*</h6>
+                                  <small>&nbsp;Identificación</small>
+                                </span>
+                              </div>
+                              <input type="text" class="form-control" formControlName="identificacionResponsable">
+                            </div>
+                          </div>
+                          <div class="formGroup col-12 col-md-6 col-lg-4">
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="(fieldsForm.controls.celularResponsable.errors?.maxlength || fieldsForm.controls.celularResponsable.errors?.minlength) && fieldsForm.controls.celularResponsable.touched">
+                              Mínimo caracteres 3 máximo 50
+                            </i>
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="fieldsForm.controls.celularResponsable.errors?.required && fieldsForm.controls.celularResponsable.touched">
+                              Este campo no puede estar vacio
+                            </i>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fa fa-align-justify"></i>
+                                  <h6 class="colorAsterisco">*</h6>
+                                  <small>&nbsp;Celular</small>
+                                </span>
+                              </div>
+                              <input type="text" class="form-control" formControlName="celularResponsable">
+                            </div>
+                          </div>
+                          <div class="formGroup col-12 col-md-6 col-lg-4">
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="(fieldsForm.controls.direccionResponsable.errors?.maxlength || fieldsForm.controls.direccionResponsable.errors?.minlength) && fieldsForm.controls.direccionResponsable.touched">
+                              Mínimo caracteres 3 máximo 50
+                            </i>
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="fieldsForm.controls.direccionResponsable.errors?.required && fieldsForm.controls.direccionResponsable.touched">
+                              Este campo no puede estar vacio
+                            </i>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fa fa-align-justify"></i>
+                                  <h6 class="colorAsterisco">*</h6>
+                                  <small>&nbsp;Dirección</small>
+                                </span>
+                              </div>
+                              <input type="text" class="form-control" formControlName="direccionResponsable">
+                            </div>
+                          </div>
+                          <div class="formGroup col-12 col-md-6 col-lg-4">
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="(fieldsForm.controls.telefonoResponsable.errors?.maxlength || fieldsForm.controls.telefonoResponsable.errors?.minlength) && fieldsForm.controls.telefonoResponsable.touched">
+                              Mínimo caracteres 3 máximo 50
+                            </i>
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="fieldsForm.controls.telefonoResponsable.errors?.required && fieldsForm.controls.telefonoResponsable.touched">
+                              Este campo no puede estar vacio
+                            </i>
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fa fa-align-justify"></i>
+                                  <h6 class="colorAsterisco">*</h6>
+                                  <small>&nbsp;Teléfono</small>
+                                </span>
+                              </div>
+                              <input type="text" class="form-control" formControlName="telefonoResponsable">
+                            </div>
+                          </div>
+                          <div class="formGroup col-12 col-md-6 col-lg-4">
+                          </div>
+                          <div class="formGroup col-12 col-md-12 col-lg-12">
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="(fieldsForm.controls.recomendaciones.errors?.maxlength || fieldsForm.controls.recomendaciones.errors?.minlength) && fieldsForm.controls.recomendaciones.touched">
+                              Mínimo caracteres 3 máximo 50
+                            </i>
+                            <i class="fa fa-exclamation-circle uncheck"
+                              *ngIf="fieldsForm.controls.recomendaciones.errors?.required && fieldsForm.controls.recomendaciones.touched">
+                              Este campo no puede estar vacio
+                            </i>
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="fa fa-align-justify"></i>
+                                  <h6 class="colorAsterisco">*</h6>
+                                  <small>&nbsp;Recomendaciones del padre de familia en cuanto a la salud del
+                                    niño</small>
+                                </span>
+                              </div>
+                              <textarea id="recomendaciones" class="form-control" aria-label="With textarea" required
+                                formControlName="recomendaciones"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+     <div class="row card-body">
+            <div class="col-md-12">
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                <label class="custom-control-label" for="customSwitch1"> He leído, comprendo y acepto la <a
+                    href="#">Pólítica de tratamiento de datos personales</a></label>
+              </div>
+              <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                <label class="custom-control-label" for="customSwitch2">He leído, comprendo y acepto la <a
+                    href="#">Pólítica
+                    de cesión de derechos de imagen para personas menores de edad</a></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer text-right rounded-0">
+            <div class="form-group col-sm-12">
+              <button type="submit" class="btn btn-lg btn-success" [disabled]="fieldsForm.invalid"><i
+                  class="fa fa-save"></i>
+                Guardar</button>
+              <button type="button" class="btn btn-lg btn-secondary" [routerLink]="['../autoGestionInstructores']"><i
+                  class="fa fa-ban"></i> Cancelar</button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

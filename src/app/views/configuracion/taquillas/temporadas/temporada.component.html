@@ -1,0 +1,57 @@
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Rango temporada</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!--INICIO DEL FORMULARIO-->
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label for="desde">Fecha desde<span class="text-danger">*</span></label>
+                                        <input (click)="desde.toggle()" formControlName="desde" type="text" class="form-control border-info" id="desde" placeholder="aaaa-mm-dd"
+                                            [ngClass]="{ 'is-invalid': submitted && f.desde.errors }" name="dp" ngbDatepicker #desde="ngbDatepicker" autocomplete="nope" />       
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                        <label for="hasta">Fecha  hasta<span class="text-danger">*</span></label>
+                                        <input (click)="hasta.toggle()" formControlName="hasta" type="text" class="form-control border-info" id="hasta" placeholder="aaaa-mm-dd"
+                                            [ngClass]="{ 'is-invalid': submitted && f.hasta.errors }" name="dp1" ngbDatepicker #hasta="ngbDatepicker" autocomplete="nope" />       
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                </div>
+                                </div>
+                                
+                            </div>
+                            <!--FIN DEL FORMULARIO-->
+
+                        </div>
+
+
+                        <div class="row text-right">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                    (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                    Guardar</button>
+                                <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                        class="fa fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </form>
+</div>
+<notifier-container></notifier-container>
