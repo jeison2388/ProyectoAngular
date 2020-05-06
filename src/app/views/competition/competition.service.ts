@@ -10,14 +10,17 @@ const httpOptions = {
   {providedIn: 'root'}
 )
 export class CompetitionService {
-  private ruta:String;
+  private ruta:string;
   constructor(private httpClient:HttpClient)
   {
-    this.ruta="http://pruebasweb.comfacauca.com:8080/"
+    this.ruta="http://pruebasweb.comfacauca.com:8080/";
   }
   addCompetition(competition: Object, fileToCompetition: any[])
   {
-
+    let json= JSON.stringify(competition);
+    //encabezado "Content Type" y en formato "FormData" 
+    let headers = new HttpHeaders().set('Content-Type','application/json');
+    return this.httpClient.post(this.ruta,json,{headers:headers});
   }
   cargarDeportes():Observable<any>
   {

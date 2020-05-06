@@ -32,6 +32,7 @@
                     <span class="input-group-text"><i class="fa fa-child"></i><small>&nbsp;Deporte</small></span>
                   </div>
                   <select type="text" class="form-control" #deport>
+                    <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="deporte" *ngFor="let deporte of sports">{{deporte.descripcion}}</option>
                   </select>
                 </div>
@@ -43,6 +44,7 @@
                     <span class="input-group-text"><i class="fa fa-id-card-o"></i><small>&nbsp;Categoria</small></span>
                   </div>
                   <select type="text" class="form-control" #category>
+                    <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="categoria" *ngFor="let categoria of categories">{{  categoria.descripcion}}</option>
                   </select>
                 </div>
@@ -56,6 +58,7 @@
                     <span class="input-group-text"><i class="fa fa-grav"></i><small>&nbsp;Modalidad</small></span>
                   </div>
                   <select type="text" class="form-control" #modality>
+                    <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="modality" *ngFor="let modality of modalities">{{modality.descripcion}}</option>
                   </select>
                 </div>
@@ -103,6 +106,7 @@
                         partido</small></span>
                   </div>
                   <select type="text" class="form-control" #duration>
+                    <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="duration" *ngFor="let duration of match_duration">{{duration.descripcion}}</option>
                   </select>
                 </div>
@@ -115,6 +119,7 @@
                         Competición</small></span>
                   </div>
                   <select type="text" class="form-control" #typeCompetition>
+                    <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="competition" *ngFor="let competition of type_competition">{{competition.descripcion}}
                     </option>
                   </select>
@@ -127,7 +132,8 @@
                     <span class="input-group-text"><i class="fa fa-sort-numeric-desc"></i><small>&nbsp;Tipo
                         Eliminatorias</small></span>
                   </div>
-                  <select type="text" class="form-control" #numberQualifiers>
+                  <select type="text" class="form-control" #numberQualifiers>                    
+                    <option disabled selected >Seleccionar...</option>
                     <option [ngValue]="quealifier" *ngFor="let quealifier of number_qualifiers">{{quealifier.descripcion}}</option>
                   </select>
                 </div>
@@ -142,6 +148,7 @@
                         Competencia</small></span>
                   </div>
                   <select type="text" class="form-control" #genderC>
+                    <option class="marcaDeAgua" disabled selected >Seleccionar...</option>
                     <option [ngValue]="gende" *ngFor="let gende of gender">{{gende.descripcion}}</option>
                   </select>
                 </div>
@@ -154,6 +161,8 @@
                         Equipos</small></span>
                   </div>
                   <select type="text" class="form-control" #numberTeams>
+                    
+                    <option disabled selected >Seleccionar...</option>
                     <option [ngValue]="number_t" *ngFor="let number_t of number_of_teams">{{number_t.descripcion}}</option>
                   </select>
                 </div>
