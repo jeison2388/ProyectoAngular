@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FechaUtilidades } from '../../../model/FechaUtilidades';
 import {UtilCompetition} from '../UtilCompetition';
+import { CompetitionService } from '../competition.service';
 
 @Component({
   selector: 'app-form-competition',
@@ -10,14 +11,14 @@ import {UtilCompetition} from '../UtilCompetition';
 export class FormCompetitionComponent implements OnInit {
 
   /************************VARIABLES TEMPORALES************* */
-  deportes: string[] = ['Futbol', 'baloncesto', 'voleibol'];
-  categorias: string[] = ['infantil', 'senior', 'juvenil'];
-  modalities: string[] = ['individual', 'futbol 5', 'futbol 7', 'futbol 11'];
-  type_competition: string[] = ['liga', 'campeonato', 'liga y playofs(partido único)', 'copa'];
-  number_qualifiers: string[] = ['final', 'semifinal', 'cuartos'];
-  match_duration: string[] = ['15 minutos', '30 minutos', '40 minutos'];
-  gender: string[] = ['Masculino', 'Femenino', 'Mixto'];
-  number_of_teams: string[] = ['8', '12', '16', '24'];
+  sports: any;
+  categories: any;
+  modalities: any;
+  type_competition: any;
+  number_qualifiers: any; //final, semifinal,cuartos
+  match_duration: any;
+  gender: any;
+  number_of_teams: any;
   /****************************VARIABLE GLOBALE********** */
   private TAM_MAX_FILE: number = 4960;
   private REMOVE_ERROR: boolean = false;
@@ -86,7 +87,27 @@ export class FormCompetitionComponent implements OnInit {
   thirdAndFourth: boolean;
   showErrorItem: boolean;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private competitionService:CompetitionService) {
+    this.competitionService.cargarDeportes().subscribe(resultado=>{this.sports=resultado;},
+       error=>{ console.log(JSON.stringify(error));});
+    this.competitionService.cargarCategorias().subscribe(resultado=>{this.categories=resultado;},
+        error=>{console.log(JSON.stringify(error));});
+    this.competitionService.cargarModalidades().subscribe(resultado=>{this.modalities=resultado;},
+        error=>{console.log(JSON.stringify(error));});
+    
+    this.competitionService.cargarDuracionPartido().subscribe(resultado=>{this.match_duration=resultado;},
+        error=>{console.log(JSON.stringify(error));});
+    this.competitionService.cargarTiposCompeticion().subscribe(resultado=>{this.type_competition=resultado;},
+        error=>{console.log(JSON.stringify(error));});
+    this.competitionService.cargarTiposEliminatoria().subscribe(resultado=>{this.number_qualifiers=resultado;},
+        error=>{console.log(JSON.stringify(error));});
+    this.competitionService.cargarGeneros().subscribe(resultado=>{this.gender=resultado;},
+        error=>{console.log(JSON.stringify(error));});
+    this.competitionService.cargarMinimoEquipos().subscribe(resultado=>{this.number_of_teams=resultado;},
+        error=>{console.log(JSON.stringify(error));});
+
+      
+
     this.fechaUtilidades = new FechaUtilidades();
     this.utilCompetition = new UtilCompetition();
     this.countRules = 1;
@@ -108,7 +129,7 @@ export class FormCompetitionComponent implements OnInit {
                               Validators.minLength(3)]
                          ],
         dateStartCompetition:  ['', [Validators.required]],
-        dateEndCompetition: ['', [Validators.required]],
+        dateEndCompetition:  ['', [Validators.required]],
         minnumberOfParticipants: ['', [Validators.required,  Validators.pattern('^([0-9])*$'), Validators.maxLength(4)]]
       });
   }

@@ -32,7 +32,7 @@
                     <span class="input-group-text"><i class="fa fa-child"></i><small>&nbsp;Deporte</small></span>
                   </div>
                   <select type="text" class="form-control" #deport>
-                    <option [ngValue]="deporte" *ngFor="let deporte of deportes">{{deporte}}</option>
+                    <option [ngValue]="deporte" *ngFor="let deporte of sports">{{deporte.descripcion}}</option>
                   </select>
                 </div>
               </div>
@@ -43,7 +43,7 @@
                     <span class="input-group-text"><i class="fa fa-id-card-o"></i><small>&nbsp;Categoria</small></span>
                   </div>
                   <select type="text" class="form-control" #category>
-                    <option [ngValue]="categoria" *ngFor="let categoria of categorias">{{categoria}}</option>
+                    <option [ngValue]="categoria" *ngFor="let categoria of categories">{{  categoria.descripcion}}</option>
                   </select>
                 </div>
               </div>
@@ -56,7 +56,7 @@
                     <span class="input-group-text"><i class="fa fa-grav"></i><small>&nbsp;Modalidad</small></span>
                   </div>
                   <select type="text" class="form-control" #modality>
-                    <option [ngValue]="modality" *ngFor="let modality of modalities">{{modality}}</option>
+                    <option [ngValue]="modality" *ngFor="let modality of modalities">{{modality.descripcion}}</option>
                   </select>
                 </div>
               </div>
@@ -103,7 +103,7 @@
                         partido</small></span>
                   </div>
                   <select type="text" class="form-control" #duration>
-                    <option [ngValue]="duration" *ngFor="let duration of match_duration">{{duration}}</option>
+                    <option [ngValue]="duration" *ngFor="let duration of match_duration">{{duration.descripcion}}</option>
                   </select>
                 </div>
               </div>
@@ -115,7 +115,7 @@
                         Competición</small></span>
                   </div>
                   <select type="text" class="form-control" #typeCompetition>
-                    <option [ngValue]="competition" *ngFor="let competition of type_competition">{{competition}}
+                    <option [ngValue]="competition" *ngFor="let competition of type_competition">{{competition.descripcion}}
                     </option>
                   </select>
                 </div>
@@ -128,7 +128,7 @@
                         Eliminatorias</small></span>
                   </div>
                   <select type="text" class="form-control" #numberQualifiers>
-                    <option [ngValue]="quealifier" *ngFor="let quealifier of number_qualifiers">{{quealifier}}</option>
+                    <option [ngValue]="quealifier" *ngFor="let quealifier of number_qualifiers">{{quealifier.descripcion}}</option>
                   </select>
                 </div>
               </div>
@@ -142,7 +142,7 @@
                         Competencia</small></span>
                   </div>
                   <select type="text" class="form-control" #genderC>
-                    <option [ngValue]="gende" *ngFor="let gende of gender">{{gende}}</option>
+                    <option [ngValue]="gende" *ngFor="let gende of gender">{{gende.descripcion}}</option>
                   </select>
                 </div>
               </div>
@@ -154,7 +154,7 @@
                         Equipos</small></span>
                   </div>
                   <select type="text" class="form-control" #numberTeams>
-                    <option [ngValue]="number_t" *ngFor="let number_t of number_of_teams">{{number_t}}</option>
+                    <option [ngValue]="number_t" *ngFor="let number_t of number_of_teams">{{number_t.descripcion}}</option>
                   </select>
                 </div>
               </div>
