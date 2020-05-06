@@ -108,7 +108,7 @@ export class FormCompetitionComponent implements OnInit {
                               Validators.minLength(3)]
                          ],
         dateStartCompetition:  ['', [Validators.required]],
-        dateEndCompetition:  ['', [Validators.required]],
+        dateEndCompetition: ['', [Validators.required]],
         minnumberOfParticipants: ['', [Validators.required,  Validators.pattern('^([0-9])*$'), Validators.maxLength(4)]]
       });
   }
