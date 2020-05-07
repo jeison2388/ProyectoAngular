@@ -209,7 +209,7 @@
                     <ul class="list-group">
                       <li class="list-group-item d-flex justify-content-between align-items-center"
                         *ngFor="let rule of rules">
-                        <strong style="color: darkslategrey; font-size: 11px;">{{rule.descripcion}}</strong>
+                        <strong style="color: darkslategrey; font-size: 11px;">Descripción:  {{rule.descripcion}} Activo: {{rules.activo}}</strong>
                         <div>
                           <span class="badge badge-pill badge-primary" *ngIf="rule.habilitado">aplica de
                             :{{rule.prioridad}}</span>

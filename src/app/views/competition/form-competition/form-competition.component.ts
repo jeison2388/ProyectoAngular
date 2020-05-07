@@ -25,7 +25,8 @@ export class FormCompetitionComponent implements OnInit {
   private SHOW_ERROR: boolean = true;
 
   /*array que se va a crear cuando me devulevan la informacion*/
-  rules = [
+ rules:any;
+ /* rules = [
     {
       habilitado: false,
       prioridad: 0,
@@ -55,7 +56,7 @@ export class FormCompetitionComponent implements OnInit {
       prioridad: 0,
       id: 5,
       descripcion: 'Equipo con mejor fair play'
-    }];
+    }]; */
 
   /***********************VARIABLES LOCALES**************** */
   @Input() titleForm: { titleForm: string };
@@ -93,8 +94,7 @@ export class FormCompetitionComponent implements OnInit {
     this.competitionService.cargarCategorias().subscribe(resultado=>{this.categories=resultado;},
         error=>{console.log(JSON.stringify(error));});
     this.competitionService.cargarModalidades().subscribe(resultado=>{this.modalities=resultado;},
-        error=>{console.log(JSON.stringify(error));});
-    
+        error=>{console.log(JSON.stringify(error));});    
     this.competitionService.cargarDuracionPartido().subscribe(resultado=>{this.match_duration=resultado;},
         error=>{console.log(JSON.stringify(error));});
     this.competitionService.cargarTiposCompeticion().subscribe(resultado=>{this.type_competition=resultado;},
@@ -105,6 +105,12 @@ export class FormCompetitionComponent implements OnInit {
         error=>{console.log(JSON.stringify(error));});
     this.competitionService.cargarMinimoEquipos().subscribe(resultado=>{this.number_of_teams=resultado;},
         error=>{console.log(JSON.stringify(error));});
+    this.competitionService.obtenerItemsDesempate().subscribe(resultado=>{this.rules=resultado;},
+        error=>{console.log(JSON.stringify(error));});
+           
+        
+        
+
 
       
 
@@ -136,17 +142,19 @@ export class FormCompetitionComponent implements OnInit {
 
   assignPriorities(rule: any, activar: boolean) {
     for (let i = 0; i < this.rules.length; i++) {
-      const updateFormElement = { ...this.rules[i] };
+      const updateFormElement = this.rules[i] ;
       if (updateFormElement.id === rule.id) {
         if (activar) {
           updateFormElement.habilitado = activar;
           updateFormElement.prioridad = this.countRules;
           this.countRules++;
+          console.log("Activando regla:  #"+this.countRules);
         } else {
           updateFormElement.habilitado = activar;
           this.updateRules(updateFormElement.prioridad);
           updateFormElement.prioridad = 0;
-          this.countRules--;
+          this.countRules--;          
+          console.log("Desactivando regla:  #"+this.countRules);
         }
         this.rules[i] = updateFormElement;
         break;

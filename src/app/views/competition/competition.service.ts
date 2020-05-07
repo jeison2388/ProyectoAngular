@@ -68,6 +68,13 @@ export class CompetitionService {
   {
     
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerNumeroMinimoEquiposTorneo");
+    console.log("Elementos equipos minimos JSON: "+respuesta);
     return respuesta;
+  }
+  obtenerItemsDesempate():Observable<any>
+  {
+    let respuesta =this.httpClient.get(this.ruta+"competicion/obtenerItemsDesempate");
+    console.log("Elementos items JSON: "+respuesta);
+   return respuesta;
   }
 }
