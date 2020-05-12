@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FechaUtilidades } from '../../../model/FechaUtilidades';
 import {UtilCompetition} from '../UtilCompetition';
@@ -26,6 +26,7 @@ export class FormCompetitionComponent implements OnInit {
 
   /*array que se va a crear cuando me devulevan la informacion*/
  rules:any;
+ //Agregar prioridad y Habilitado
  /* rules = [
     {
       habilitado: false,
@@ -57,6 +58,9 @@ export class FormCompetitionComponent implements OnInit {
       id: 5,
       descripcion: 'Equipo con mejor fair play'
     }]; */
+
+ 
+
 
   /***********************VARIABLES LOCALES**************** */
   @Input() titleForm: { titleForm: string };
@@ -228,6 +232,10 @@ export class FormCompetitionComponent implements OnInit {
     }
     return false;
   }
+  guardarCompeticion()
+  {
+
+  }
 
   handleDate(event: any) {
     const dateEndEv = this.fieldsForm.get('dateEndCompetition').value;
@@ -260,10 +268,20 @@ export class FormCompetitionComponent implements OnInit {
         newCompetition['fechaInicio'] = this.fieldsForm.get('dateStartCompetition').value;
         newCompetition['fechaFin'] = this.fieldsForm.get('dateEndCompetition').value;
         newCompetition['duracionPartido'] = this.cbx_duration.nativeElement.value;
-        newCompetition['genero'] = this.cbx_gender.nativeElement.value;
+        //newCompetition['genero'] = this.cbx_gender.nativeElement.value;
         newCompetition['numeroEquipos'] = this.cbx_numberTeams.nativeElement.value;
         newCompetition['numeroMinimoInscritos'] = this.fieldsForm.get('minnumberOfParticipants').value;
-
+        this.competitionService.addCompetition(newCompetition,this.fileToCompetition).subscribe(
+          resultado=>
+          {
+              console.log("LO HIZO BIEN, EL POST"+JSON.stringify(resultado));
+          },
+          error =>
+          {
+            console.log("LO HIZO MAL EL POST"+JSON.stringify(error));
+          }
+        );
+     
       }
   }
 
