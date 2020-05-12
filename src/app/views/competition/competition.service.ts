@@ -3,9 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Observer } from '@syncfusion/ej2-base';
 
-const httpOptions = {
-  headers : new HttpHeaders({ 'Content-Type': 'application/json'})
-}
+
 
 @Injectable(
   {providedIn: 'root'}
@@ -18,36 +16,20 @@ export class CompetitionService {
   }
   addCompetition(competition: Object, fileToCompetition: any[]):Observable<any>
   {
-   /*  ### POST /competicion/agregarCompeticion
-    Esta solicitud registra una competicions , usted debe enviar estos datos 
-    sin el encabezado "Content Type" y en formato "FormData" los datos que usted debe proveer son los siguientes:  
-    Nombre de la variable: **datos**, contenido:
-    Nombre de la variable: **indice [ i ]** , por ejemplo **indice1, indice2 ...**, 
-    contenido: archivo del indice del libro en formato PDF.  
-    En caso de error, el servicio devolverá una respuesta como sigue.
-    ```Javascript
-      {   "campo": "código del campo",
-          "error": "código del error"
-      }
-        
-      return this.httpClient.post("http://localhost:4200/persona",json,);
-    
-  */
+    console.log(competition);
     let headers = new HttpHeaders().set('Content-Type','multipart/form-data');
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('datos',JSON.stringify(competition));
     let contador=1;
     if(fileToCompetition.length!=0)
       for(let i of fileToCompetition)
       {
-        formData.append('indice'+contador,i);
+        formData.append('indice'+contador,JSON.stringify(i));
         contador++;      
       }  
-    //console.log(formData.get('datos'));
-    //---------------Post con Headers de FORMDATA  :  Error 415 Media
-    //return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData,{headers:headers});
-  //--------------------POST sin Headers como dice la especificación : 
-    return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData);
+      else
+        formData.append('indice'+contador,JSON.stringify(fileToCompetition));
+    return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData,{reportProgress: true, observe: 'events'});
   }
     
   cargarDeportes():Observable<any>

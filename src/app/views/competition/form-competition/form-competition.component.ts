@@ -26,42 +26,20 @@ export class FormCompetitionComponent implements OnInit {
 
   /*array que se va a crear cuando me devulevan la informacion*/
  rules:any;
- //Agregar prioridad y Habilitado
- /* rules = [
-    {
-      habilitado: false,
-      prioridad: 0,
-      id: 1,
-      descripcion: 'Diferencia de goles Total'
-    },
-    {
-      habilitado: false,
-      prioridad: 0,
-      id: 2,
-      descripcion: 'Equipo con más goles a favor'
-    },
-    {
-      habilitado: false,
-      prioridad: 0,
-      id: 3,
-      descripcion: 'equipo con menos goles en contra'
-    },
-    {
-      habilitado: false,
-      prioridad: 0,
-      id: 4,
-      descripcion: 'Enfrentamiento directo entre los dos equipos'
-    },
-    {
-      habilitado: false,
-      prioridad: 0,
-      id: 5,
-      descripcion: 'Equipo con mejor fair play'
-    }]; */
-
+   completeRule()
+   {
+     for(let rule of this.rules) 
+     {
+        if(rule.prioridad==null || rule.prioridad==0)
+        {
+          rule.prioridad=0;
+          rule.habilitado=false;
+         }  
+        else
+          rule.habilitado=true;
+     }
+    }
  
-
-
   /***********************VARIABLES LOCALES**************** */
   @Input() titleForm: { titleForm: string };
   @Input() subtitleForm: { subtitleForm: string };
@@ -72,7 +50,7 @@ export class FormCompetitionComponent implements OnInit {
   @ViewChild('duration', {static: false}) cbx_duration: any;
   @ViewChild('typeCompetition', {static: false}) cbx_typeCompetition: any;
   @ViewChild('numberQualifiers', {static: false}) cbx_typeQualifier: any;
-  @ViewChild('genderc', {static: false}) cbx_gender: any;
+  @ViewChild('genderC', {static: false}) cbx_gender: any;
   @ViewChild('numberTeams', {static: false}) cbx_numberTeams: any;
 
 
@@ -111,12 +89,6 @@ export class FormCompetitionComponent implements OnInit {
         error=>{console.log(JSON.stringify(error));});
     this.competitionService.obtenerItemsDesempate().subscribe(resultado=>{this.rules=resultado;},
         error=>{console.log(JSON.stringify(error));});
-           
-        
-        
-
-
-      
 
     this.fechaUtilidades = new FechaUtilidades();
     this.utilCompetition = new UtilCompetition();
@@ -165,6 +137,16 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
+  idElement(descripcion:string, elements:Object[]):number
+  {
+    for(let element of elements)
+    {
+      if(element.descripcion==descripcion)
+      {
+        return element.id;
+      }
+    }
+  }
 
   updateRules(priority: number) {
     for (let i = 0; i < this.rules.length; i++) {
@@ -199,7 +181,7 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-
+ 
   deleteFiles(nameFile: string) {
     for (let i = 0; i < this.fileToCompetition.length; i++) {
       if (nameFile === this.fileToCompetition[i]['name']) {
@@ -260,17 +242,22 @@ export class FormCompetitionComponent implements OnInit {
       } else {
         const newCompetition = {};
         newCompetition['nombreCompetencia'] = this.fieldsForm.get('nameCompetition').value;
-        newCompetition['deporte'] = this.cbx_deport.nativeElement.value;
-        newCompetition['categoria'] = this.cbx_category.nativeElement.value;
-        newCompetition['modalidad'] = this.cbx_modality.nativeElement.value;
-        newCompetition['tipoCompeticion'] = this.cbx_typeCompetition.nativeElement.value;
-        newCompetition['numeroEliminatorias'] = this.cbx_typeQualifier.nativeElement.value;
+        newCompetition['deporte'] = this.idElement(this.cbx_deport.nativeElement.value,this.sports);
+        newCompetition['categoria'] = this.idElement(this.cbx_category.nativeElement.value, this.categories);
+        newCompetition['modalidad'] = this.idElement(this.cbx_modality.nativeElement.value, this.modalities);
+        newCompetition['tipoCompeticion'] = this.idElement(this.cbx_typeCompetition.nativeElement.value, this.type_competition)
+        newCompetition['numeroEliminatorias'] =  this.idElement(this.cbx_typeQualifier.nativeElement.value,this.cbx_typeQualifier);
         newCompetition['fechaInicio'] = this.fieldsForm.get('dateStartCompetition').value;
         newCompetition['fechaFin'] = this.fieldsForm.get('dateEndCompetition').value;
-        newCompetition['duracionPartido'] = this.cbx_duration.nativeElement.value;
-        //newCompetition['genero'] = this.cbx_gender.nativeElement.value;
-        newCompetition['numeroEquipos'] = this.cbx_numberTeams.nativeElement.value;
-        newCompetition['numeroMinimoInscritos'] = this.fieldsForm.get('minnumberOfParticipants').value;
+        newCompetition['duracionPartido'] = this.idElement(this.cbx_duration.nativeElement.value,this.match_duration);
+        newCompetition['genero'] = this.idElement(this.cbx_gender.nativeElement.value,this.gender);
+        newCompetition['numeroEquipos'] = this.idElement(this.cbx_numberTeams.nativeElement.value,this.number_of_teams);
+        let minEquipos=this.fieldsForm.get('minnumberOfParticipants').value;
+        console.log("NUMERO MINIMO DE EQUIPOS:  "+minEquipos);
+        newCompetition['numeroMinimoInscritos'] = this.idElement(minEquipos, this.number_of_teams);
+        newCompetition['itemsDesempate']=this.rules;
+        newCompetition['tercerYCuarto']=this.thirdAndFourth.valueOf();
+        this.completeRule();
         this.competitionService.addCompetition(newCompetition,this.fileToCompetition).subscribe(
           resultado=>
           {

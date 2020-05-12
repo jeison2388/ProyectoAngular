@@ -263,7 +263,7 @@
             <div style="text-align:right">
               <button type="submit" class="btn btn-outline-secondary">Cancelar</button>
 
-              <button title="asdfsadf" type="submit" class="btn  btn-primary" [disabled]="fieldsForm.invalid || showErrorDateFinish || showErrorDateStart"
+              <button  title="asdfsadf" type="submit" class="btn  btn-primary" (click)="guardarCompeticion()" [disabled]="fieldsForm.invalid || showErrorDateFinish || showErrorDateStart"
               data-toggle="tooltip" data-placement="top" >{{buttonAction}} </button>
             </div>
           </form>
