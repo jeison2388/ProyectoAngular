@@ -139,137 +139,92 @@ export class FormCompetitionComponent implements OnInit {
   }
   idSports(descripcion:string):Object
   {
-    var d = {
-    id:0,
-    deporte:""
-   };
+    
     for(let sport of this.sports)
     {
       if(sport.descripcion == descripcion)
       {
-        d.id=sport.id;
-        d.deporte=sport.descripcion;
-        console.log("deporte devolver: " + d.deporte );
-        return d;
+        
+        return sport.id;
       }
     }
   }
   idCategorias(descripcion:string):Object
   {
-    var obj = {
-    id:0,
-    categoria:""
-   };
+    
     for(let cat of this.categories)
     {
       if(cat.descripcion == descripcion)
       {
-        obj.id=cat.id;
-        obj.categoria=cat.descripcion;
-        console.log("categoria devolver: " +  obj.categoria);
-        return obj;
+       return cat.id;
       }
     }
   }
   idModalidad(descripcion:string):Object
   {
-    var obj = {
-    id:0,
-    modalidad:""
-   };
+   
     for(let mod of this.modalities)
     {
       if(mod.descripcion == descripcion)
       {
-        obj.id= mod.id;
-        obj.modalidad= mod.descripcion;
-        console.log("modalidad devolver: " +  obj.modalidad);
-        return obj;
+       return mod.id;
       }
     }
   }
   idTipoCompeticion(descripcion:string):Object
   {
-    var obj = {
-    id:0,
-    tipoCompeticion:""
-   };
-    for(let type of this.type_competition)
+   for(let type of this.type_competition)
     {
       if(type.descripcion == descripcion)
       {
-        obj.id = type.id;
-        obj.tipoCompeticion = type.descripcion;
-        console.log("typo de competicion devolver: " +  obj.tipoCompeticion);
-        return obj;
+        
+        return type.id;
       }
     }
   }
   idNumeroEliminatoria(descripcion:string):Object
   {
-    var obj = {
-    id:0,
-    numeroEliminatorias:""
-   };
+   
     for(let numero of this.number_qualifiers)
     {
       if(numero.descripcion == descripcion)
       {
-        obj.id = numero.id;
-        obj.numeroEliminatorias = numero.descripcion;
-        console.log("numero de eliminatoria devolver: " +  obj.numeroEliminatorias);
-        return obj;
+       
+        return numero.id;
       }
     }
   }
   idDuracionPartido(descripcion:string):Object
   {
-    var obj = {
-    id:0,
-    duracionPartido:""
-   };
+   
     for(let durac of this.match_duration)
     {
       if(durac.descripcion == descripcion)
       {
-        obj.id = durac.id;
-        obj.duracionPartido = durac.descripcion;
-        console.log("duracion partido devolver: " +  obj.duracionPartido);
-        return obj;
+        
+        return durac.id;
       }
     }
   }
   idGenero(descripcion:string):Object
   {
-    var obj = {
-    id:0,
-    genero:""
-   };
+    
     for(let gene of this.gender)
     {
       if(gene.descripcion == descripcion)
       {
-        obj.id = gene.id;
-        obj.genero = gene.descripcion;
-        console.log("genero devolver: " +  obj.genero);
-        return obj;
+        
+        return gene.id;
       }
     }
   }
   idNumeroMinimoEquipos(descripcion:string):Object
   {
-    var obj = {
-    id:0,
-    numero:""
-   };
-    for(let numer of this.number_of_teams)
+   for(let numer of this.number_of_teams)
     {
       if(numer.descripcion == descripcion)
       {
-        obj.id = numer.id;
-        obj.numero = numer.descripcion;
-        console.log("numero minimo de equipos devolver: " +  obj.numero);
-        return obj;
+        return numer.id;
       }
     }
   }
