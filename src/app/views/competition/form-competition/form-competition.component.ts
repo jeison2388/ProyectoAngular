@@ -28,18 +28,18 @@ export class FormCompetitionComponent implements OnInit {
  rules:any;
    completeRule()
    {
-     for(let rule of this.rules) 
+     for(let rule of this.rules)
      {
         if(rule.prioridad==null || rule.prioridad==0)
         {
           rule.prioridad=0;
           rule.habilitado=false;
-         }  
+         }
         else
           rule.habilitado=true;
      }
     }
- 
+
   /***********************VARIABLES LOCALES**************** */
   @Input() titleForm: { titleForm: string };
   @Input() subtitleForm: { subtitleForm: string };
@@ -76,7 +76,7 @@ export class FormCompetitionComponent implements OnInit {
     this.competitionService.cargarCategorias().subscribe(resultado=>{this.categories=resultado;},
         error=>{console.log(JSON.stringify(error));});
     this.competitionService.cargarModalidades().subscribe(resultado=>{this.modalities=resultado;},
-        error=>{console.log(JSON.stringify(error));});    
+        error=>{console.log(JSON.stringify(error));});
     this.competitionService.cargarDuracionPartido().subscribe(resultado=>{this.match_duration=resultado;},
         error=>{console.log(JSON.stringify(error));});
     this.competitionService.cargarTiposCompeticion().subscribe(resultado=>{this.type_competition=resultado;},
@@ -129,7 +129,7 @@ export class FormCompetitionComponent implements OnInit {
           updateFormElement.habilitado = activar;
           this.updateRules(updateFormElement.prioridad);
           updateFormElement.prioridad = 0;
-          this.countRules--;          
+          this.countRules--;
           console.log("Desactivando regla:  #"+this.countRules);
         }
         this.rules[i] = updateFormElement;
@@ -137,16 +137,143 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-  idElement(descripcion:string, elements:Object[]):number
+  idSports(descripcion:string):Object
   {
-    for(let element of elements)
+    var d = {
+    id:0,
+    deporte:""
+   };
+    for(let sport of this.sports)
     {
-      if(element.descripcion==descripcion)
+      if(sport.descripcion == descripcion)
       {
-        return element.id;
+        d.id=sport.id;
+        d.deporte=sport.descripcion;
+        console.log("deporte devolver: " + d.deporte );
+        return d;
       }
     }
   }
+  idCategorias(descripcion:string):Object
+  {
+    var obj = {
+    id:0,
+    categoria:""
+   };
+    for(let cat of this.categories)
+    {
+      if(cat.descripcion == descripcion)
+      {
+        obj.id=cat.id;
+        obj.categoria=cat.descripcion;
+        console.log("categoria devolver: " +  obj.categoria);
+        return obj;
+      }
+    }
+  }
+  idModalidad(descripcion:string):Object
+  {
+    var obj = {
+    id:0,
+    modalidad:""
+   };
+    for(let mod of this.modalities)
+    {
+      if(mod.descripcion == descripcion)
+      {
+        obj.id= mod.id;
+        obj.modalidad= mod.descripcion;
+        console.log("modalidad devolver: " +  obj.modalidad);
+        return obj;
+      }
+    }
+  }
+  idTipoCompeticion(descripcion:string):Object
+  {
+    var obj = {
+    id:0,
+    tipoCompeticion:""
+   };
+    for(let type of this.type_competition)
+    {
+      if(type.descripcion == descripcion)
+      {
+        obj.id = type.id;
+        obj.tipoCompeticion = type.descripcion;
+        console.log("typo de competicion devolver: " +  obj.tipoCompeticion);
+        return obj;
+      }
+    }
+  }
+  idNumeroEliminatoria(descripcion:string):Object
+  {
+    var obj = {
+    id:0,
+    numeroEliminatorias:""
+   };
+    for(let numero of this.number_qualifiers)
+    {
+      if(numero.descripcion == descripcion)
+      {
+        obj.id = numero.id;
+        obj.numeroEliminatorias = numero.descripcion;
+        console.log("numero de eliminatoria devolver: " +  obj.numeroEliminatorias);
+        return obj;
+      }
+    }
+  }
+  idDuracionPartido(descripcion:string):Object
+  {
+    var obj = {
+    id:0,
+    duracionPartido:""
+   };
+    for(let durac of this.match_duration)
+    {
+      if(durac.descripcion == descripcion)
+      {
+        obj.id = durac.id;
+        obj.duracionPartido = durac.descripcion;
+        console.log("duracion partido devolver: " +  obj.duracionPartido);
+        return obj;
+      }
+    }
+  }
+  idGenero(descripcion:string):Object
+  {
+    var obj = {
+    id:0,
+    genero:""
+   };
+    for(let gene of this.gender)
+    {
+      if(gene.descripcion == descripcion)
+      {
+        obj.id = gene.id;
+        obj.genero = gene.descripcion;
+        console.log("genero devolver: " +  obj.genero);
+        return obj;
+      }
+    }
+  }
+  idNumeroMinimoEquipos(descripcion:string):Object
+  {
+    var obj = {
+    id:0,
+    numero:""
+   };
+    for(let numer of this.number_of_teams)
+    {
+      if(numer.descripcion == descripcion)
+      {
+        obj.id = numer.id;
+        obj.numero = numer.descripcion;
+        console.log("numero minimo de equipos devolver: " +  obj.numero);
+        return obj;
+      }
+    }
+  }
+
 
   updateRules(priority: number) {
     for (let i = 0; i < this.rules.length; i++) {
@@ -181,7 +308,7 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
- 
+
   deleteFiles(nameFile: string) {
     for (let i = 0; i < this.fileToCompetition.length; i++) {
       if (nameFile === this.fileToCompetition[i]['name']) {
@@ -242,21 +369,19 @@ export class FormCompetitionComponent implements OnInit {
       } else {
         const newCompetition = {};
         newCompetition['nombreCompetencia'] = this.fieldsForm.get('nameCompetition').value;
-        newCompetition['deporte'] = this.idElement(this.cbx_deport.nativeElement.value,this.sports);
-        newCompetition['categoria'] = this.idElement(this.cbx_category.nativeElement.value, this.categories);
-        newCompetition['modalidad'] = this.idElement(this.cbx_modality.nativeElement.value, this.modalities);
-        newCompetition['tipoCompeticion'] = this.idElement(this.cbx_typeCompetition.nativeElement.value, this.type_competition)
-        newCompetition['numeroEliminatorias'] =  this.idElement(this.cbx_typeQualifier.nativeElement.value,this.cbx_typeQualifier);
+        newCompetition['deporte'] = this.idSports(this.cbx_deport.nativeElement.value);
+        newCompetition['categoria'] = this.idCategorias(this.cbx_category.nativeElement.value);
+        newCompetition['modalidad'] = this.idModalidad(this.cbx_modality.nativeElement.value);
+        newCompetition['tipoCompeticion'] = this.idTipoCompeticion(this.cbx_typeCompetition.nativeElement.value);
+        newCompetition['numeroEliminatorias'] =  this.idNumeroEliminatoria(this.cbx_typeQualifier.nativeElement.value);
         newCompetition['fechaInicio'] = this.fieldsForm.get('dateStartCompetition').value;
         newCompetition['fechaFin'] = this.fieldsForm.get('dateEndCompetition').value;
-        newCompetition['duracionPartido'] = this.idElement(this.cbx_duration.nativeElement.value,this.match_duration);
-        newCompetition['genero'] = this.idElement(this.cbx_gender.nativeElement.value,this.gender);
-        newCompetition['numeroEquipos'] = this.idElement(this.cbx_numberTeams.nativeElement.value,this.number_of_teams);
-        let minEquipos=this.fieldsForm.get('minnumberOfParticipants').value;
-        console.log("NUMERO MINIMO DE EQUIPOS:  "+minEquipos);
-        newCompetition['numeroMinimoInscritos'] = this.idElement(minEquipos, this.number_of_teams);
-        newCompetition['itemsDesempate']=this.rules;
-        newCompetition['tercerYCuarto']=this.thirdAndFourth.valueOf();
+        newCompetition['duracionPartido'] = this.idDuracionPartido(this.cbx_duration.nativeElement.value);
+        newCompetition['genero'] = this.idGenero(this.cbx_gender.nativeElement.value);
+        newCompetition['numeroEquipos'] = this.idNumeroMinimoEquipos(this.cbx_numberTeams.nativeElement.value);
+        newCompetition['numeroMinimoInscritos'] = this.fieldsForm.get('minnumberOfParticipants').value;
+        newCompetition['itemsDesempate'] = this.rules;
+        newCompetition['tercerYCuarto'] = this.thirdAndFourth.valueOf();
         this.completeRule();
         this.competitionService.addCompetition(newCompetition,this.fileToCompetition).subscribe(
           resultado=>
@@ -268,7 +393,7 @@ export class FormCompetitionComponent implements OnInit {
             console.log("LO HIZO MAL EL POST"+JSON.stringify(error));
           }
         );
-     
+
       }
   }
 
