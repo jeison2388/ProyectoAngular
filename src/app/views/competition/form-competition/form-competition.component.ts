@@ -123,8 +123,7 @@ export class FormCompetitionComponent implements OnInit {
         if (activar) {
           updateFormElement.habilitado = activar;
           updateFormElement.prioridad = this.countRules;
-          this.countRules++;
-          console.log("Activando regla:  #"+this.countRules);
+          this.countRules++;          
         } else {
           updateFormElement.habilitado = activar;
           this.updateRules(updateFormElement.prioridad);
@@ -137,7 +136,7 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-  idSports(descripcion:string):Object
+  idSports(descripcion:string):number
   {
     
     for(let sport of this.sports)
@@ -149,7 +148,7 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-  idCategorias(descripcion:string):Object
+  idCategorias(descripcion:string):number
   {
     
     for(let cat of this.categories)
@@ -160,7 +159,7 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-  idModalidad(descripcion:string):Object
+  idModalidad(descripcion:string):number
   {
    
     for(let mod of this.modalities)
@@ -171,18 +170,17 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-  idTipoCompeticion(descripcion:string):Object
+  idTipoCompeticion(descripcion:string):number
   {
    for(let type of this.type_competition)
     {
       if(type.descripcion == descripcion)
-      {
-        
+      {        
         return type.id;
       }
     }
   }
-  idNumeroEliminatoria(descripcion:string):Object
+  idNumeroEliminatoria(descripcion:string):number
   {
    
     for(let numero of this.number_qualifiers)
@@ -194,7 +192,7 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-  idDuracionPartido(descripcion:string):Object
+  idDuracionPartido(descripcion:string):number
   {
    
     for(let durac of this.match_duration)
@@ -206,7 +204,7 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-  idGenero(descripcion:string):Object
+  idGenero(descripcion:string):number
   {
     
     for(let gene of this.gender)
@@ -218,7 +216,7 @@ export class FormCompetitionComponent implements OnInit {
       }
     }
   }
-  idNumeroMinimoEquipos(descripcion:string):Object
+  idNumeroMinimoEquipos(descripcion:string):number
   {
    for(let numer of this.number_of_teams)
     {
@@ -227,6 +225,21 @@ export class FormCompetitionComponent implements OnInit {
         return numer.id;
       }
     }
+  }
+  idItems(): Object[] 
+  {
+    var itemsDesempate=[];
+    for(let rule of this.rules)    
+      if(rule.prioridad>0)
+        {
+          let item =
+          {
+            id:rule.id,
+            prioridad: rule.prioridad
+          };
+          itemsDesempate.push(item);
+        }       
+    return itemsDesempate;
   }
 
 
@@ -335,7 +348,7 @@ export class FormCompetitionComponent implements OnInit {
         newCompetition['genero'] = this.idGenero(this.cbx_gender.nativeElement.value);
         newCompetition['numeroEquipos'] = this.idNumeroMinimoEquipos(this.cbx_numberTeams.nativeElement.value);
         newCompetition['numeroMinimoInscritos'] = this.fieldsForm.get('minnumberOfParticipants').value;
-        newCompetition['itemsDesempate'] = this.rules;
+        newCompetition['itemsDesempate'] = this.idItems();
         newCompetition['tercerYCuarto'] = this.thirdAndFourth.valueOf();
         this.completeRule();
         this.competitionService.addCompetition(newCompetition,this.fileToCompetition).subscribe(
@@ -351,5 +364,6 @@ export class FormCompetitionComponent implements OnInit {
 
       }
   }
+  
 
 }

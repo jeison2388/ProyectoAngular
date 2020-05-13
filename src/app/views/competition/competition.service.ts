@@ -16,7 +16,7 @@ export class CompetitionService {
   }
   addCompetition(competition: Object, fileToCompetition: any[]):Observable<any>
   {
-    console.log(competition);
+    
     let headers = new HttpHeaders().set('Content-Type','multipart/form-data');
     const formData = new FormData();
     formData.append('datos',JSON.stringify(competition));
@@ -78,13 +78,11 @@ export class CompetitionService {
   {
     
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerNumeroMinimoEquiposTorneo");
-    console.log("Elementos equipos minimos JSON: "+respuesta);
     return respuesta;
   }
   obtenerItemsDesempate():Observable<any>
   {
     let respuesta =this.httpClient.get(this.ruta+"competicion/obtenerItemsDesempate");
-    console.log("Elementos items JSON: "+respuesta);
    return respuesta;
   }
 }
