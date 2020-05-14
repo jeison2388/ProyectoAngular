@@ -12,12 +12,11 @@ export class CompetitionService {
   private ruta:string;
   constructor(private httpClient:HttpClient)
   {
-    this.ruta="http://pruebasweb.comfacauca.com:8080/";
+    this.ruta="http://c417867e.ngrok.io/";
   }
   addCompetition(competition: Object, fileToCompetition: any[]):Observable<any>
   {
-    
-    let headers = new HttpHeaders().set('Content-Type','multipart/form-data');
+    console.log("COMPETENCIA A ENVIAR:   "+JSON.stringify(competition));
     const formData = new FormData();
     formData.append('datos',JSON.stringify(competition));
     let contador=1;
@@ -25,10 +24,12 @@ export class CompetitionService {
       for(let i of fileToCompetition)
       {
         formData.append('indice'+contador,JSON.stringify(i));
+        console.log("ARCHIVO:  "+i.file);
         contador++;      
       }  
       else
         formData.append('indice'+contador,JSON.stringify(fileToCompetition));
+        
     return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData,{reportProgress: true, observe: 'events'});
   }
     

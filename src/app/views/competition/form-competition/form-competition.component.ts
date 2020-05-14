@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, Pipe } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FechaUtilidades } from '../../../model/FechaUtilidades';
 import {UtilCompetition} from '../UtilCompetition';
@@ -234,8 +234,8 @@ export class FormCompetitionComponent implements OnInit {
         {
           let item =
           {
-            id:rule.id,
-            prioridad: rule.prioridad
+            itemDesempate:rule.id,
+            orden: rule.prioridad
           };
           itemsDesempate.push(item);
         }       
@@ -354,11 +354,12 @@ export class FormCompetitionComponent implements OnInit {
         this.competitionService.addCompetition(newCompetition,this.fileToCompetition).subscribe(
           resultado=>
           {
-              console.log("LO HIZO BIEN, EL POST"+JSON.stringify(resultado));
+              //Aquí va llamada a modal de Éxito
           },
           error =>
           {
-            console.log("LO HIZO MAL EL POST"+JSON.stringify(error));
+            //Aquí va llamada a modal de Falla
+            console.log("ERROR EN ENVÍO: "+JSON.stringify(error));
           }
         );
 
