@@ -12,7 +12,7 @@ export class CompetitionService {
   private ruta:string;
   constructor(private httpClient:HttpClient)
   {
-    this.ruta="http://c417867e.ngrok.io/";
+    this.ruta="http://pruebasweb.comfacauca.com:8080/";
   }
   addCompetition(competition: Object, fileToCompetition: any[]):Observable<any>
   {

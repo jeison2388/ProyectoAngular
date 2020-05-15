@@ -69,6 +69,8 @@ export class FormCompetitionComponent implements OnInit {
   msjErrorDateFinish: string;
   thirdAndFourth: boolean;
   showErrorItem: boolean;
+  showModalWindowOk:boolean;
+  showModalWindowFail:boolean;
 
   constructor(private formBuilder: FormBuilder, private competitionService:CompetitionService) {
     this.competitionService.cargarDeportes().subscribe(resultado=>{this.sports=resultado;},
@@ -101,9 +103,12 @@ export class FormCompetitionComponent implements OnInit {
     this.min_date = this.fechaUtilidades.getMaxMinDate();
     this.thirdAndFourth = false;
     this.showErrorItem = false;
+
   }
 
   ngOnInit() {
+    this.showModalWindowOk=false;
+    this.showModalWindowFail=false;
     this.fieldsForm = this.formBuilder.group(
       {
         nameCompetition: ['', [Validators.required,
@@ -355,10 +360,12 @@ export class FormCompetitionComponent implements OnInit {
           resultado=>
           {
               //Aquí va llamada a modal de Éxito
+              this.showModalWindowOk=true;
           },
           error =>
           {
             //Aquí va llamada a modal de Falla
+            this.showModalWindowFail=true;
             console.log("ERROR EN ENVÍO: "+JSON.stringify(error));
           }
         );

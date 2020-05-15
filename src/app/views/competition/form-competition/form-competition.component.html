@@ -272,3 +272,7 @@
     </div>
   </div>
 </div>
+<div>
+  <router-outlet *ngIf="showModalWindowOk" class="app-modal-ok"></router-outlet>
+  <router-outlet *ngIf="showModalWindowFail" class="app-modal-fail"></router-outlet>
+</div>
