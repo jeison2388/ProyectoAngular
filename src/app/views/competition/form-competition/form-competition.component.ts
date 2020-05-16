@@ -26,6 +26,7 @@ export class FormCompetitionComponent implements OnInit {
 
   /*array que se va a crear cuando me devulevan la informacion*/
  rules:any;
+ idSelected=0;
    completeRule()
    {
      for(let rule of this.rules)

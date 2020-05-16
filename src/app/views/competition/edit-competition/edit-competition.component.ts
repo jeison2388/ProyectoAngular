@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompetitionService } from '../competition.service';
 
 @Component({
   selector: 'app-edit-competition',
@@ -10,7 +11,7 @@ export class EditCompetitionComponent implements OnInit {
   subtitleAddCompetition: string;
   nameBtnAddCompetition: string;
 
-  constructor() {
+  constructor(private competitionService:CompetitionService) {
     this.titleAddCompetition = 'Edición de Competencias';
     this.subtitleAddCompetition = 'En este formulario se editaran algunos datos de la competencia, recuerde los campos con * son obligatorios';
     this.nameBtnAddCompetition = 'Guardar';

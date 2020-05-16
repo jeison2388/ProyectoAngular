@@ -12,11 +12,12 @@
         </div>
       </div>
 
-      <div class="nav flex-column nav-pills col-12 col-md-12 col-lg-12" role="tablist" aria-orientation="vertical">
+      <div class="nav flex-column nav-pills col-12 col-md-12 col-lg-12"  role="tablist" aria-orientation="vertical">
         <a *ngFor="let competencia of competencias" class="nav-link "  [className]="'nav-link active '" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-          aria-controls="v-pills-home" aria-selected="true" style="color: white;">
-          <img src="../../../../../assets/img/competicion/{{competencia.deporte}}.png" id="imagen" width="24" height="24" class="d-inline-block align-top" alt="">
-          <strong>{{competencia.nombre_Competencia}}</strong>
+          aria-controls="v-pills-home" aria-selected="true" style="color:blanchedalmond" >
+          <img src="../../../../../assets/img/competicion/{{competencia.subPrograma.descripcion|lowercase}}.png" id="imagen" width="24" height="24" class="d-inline-block align-top" alt="">
+          <strong>{{competencia.nombre}}</strong>
+          <br>
         </a>
           
         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"

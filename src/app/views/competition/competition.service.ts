@@ -10,6 +10,7 @@ import { Observer } from '@syncfusion/ej2-base';
 )
 export class CompetitionService {
   private ruta:string;
+  public idSelected=0;
   constructor(private httpClient:HttpClient)
   {
     this.ruta="http://pruebasweb.comfacauca.com:8080/";
@@ -32,7 +33,11 @@ export class CompetitionService {
         
     return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData,{reportProgress: true, observe: 'events'});
   }
-    
+   cargarCompeticion():Observable<any>
+   {
+    let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerCompetencias");
+    return respuesta;
+   } 
   cargarDeportes():Observable<any>
   {
     
