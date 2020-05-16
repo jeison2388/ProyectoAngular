@@ -31,10 +31,13 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa fa-child"></i><small>&nbsp;Deporte</small></span>
                   </div>
-                  <select type="text" class="form-control" #deport>
+                  <select type="text" class="form-control" *ngIf="idSelected==0" #deport>
                     <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="deporte" *ngFor="let deporte of sports">{{deporte.descripcion}}</option>
                   </select>
+                  <select type="text" class="form-control" *ngIf="idSelected!=0" #deport>
+                    <option value="0" disabled selected >{{competition.subPrograma.descripcion}}</option>
+                    </select>
                 </div>
               </div>
 
@@ -43,10 +46,13 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa fa-id-card-o"></i><small>&nbsp;Categoria</small></span>
                   </div>
-                  <select type="text" class="form-control" #category>
+                  <select type="text" class="form-control" *ngIf="idSelected==0"#category>
                     <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="categoria" *ngFor="let categoria of categories">{{  categoria.descripcion}}</option>
                   </select>
+                  <select type="text" class="form-control" *ngIf="idSelected!=0"#category>
+                    <option value="0" disabled selected >{{competition.categoriaDep.descripcion}}</option>
+                     </select>
                 </div>
               </div>
             </div>
@@ -57,10 +63,13 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa fa-grav"></i><small>&nbsp;Modalidad</small></span>
                   </div>
-                  <select type="text" class="form-control" #modality>
+                  <select type="text" class="form-control" *ngIf="idSelected==0" #modality>
                     <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="modality" *ngFor="let modality of modalities">{{modality.descripcion}}</option>
                   </select>
+                  <select type="text" class="form-control" *ngIf="idSelected!=0" #modality>
+                    <option value="0" disabled selected >{{competition.modalidad.descripcion}}</option>
+                     </select>
                 </div>
               </div>
 
@@ -105,10 +114,13 @@
                     <span class="input-group-text"><i class="fa fa-clock-o"></i><small>&nbsp;Duración del
                         partido</small></span>
                   </div>
-                  <select type="text" class="form-control" #duration>
+                  <select type="text" class="form-control" *ngIf="idSelected==0"#duration>
                     <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="duration" *ngFor="let duration of match_duration">{{duration.descripcion}}</option>
                   </select>
+                  <select type="text" class="form-control" *ngIf="idSelected!=0"#duration>
+                    <option value="0" disabled selected >{{competition.duracion.descripcion}}</option>
+                   </select>
                 </div>
               </div>
 
@@ -118,10 +130,13 @@
                     <span class="input-group-text"><i class="fa fa-list"></i><small>&nbsp;Tipo
                         Competición</small></span>
                   </div>
-                  <select type="text" class="form-control" #typeCompetition>
+                  <select type="text" class="form-control" *ngIf="idSelected==0" #typeCompetition>
                     <option value="0" disabled selected >Seleccionar...</option>
                     <option [ngValue]="competition" *ngFor="let competition of type_competition">{{competition.descripcion}}
                     </option>
+                  </select>
+                  <select type="text" class="form-control" *ngIf="idSelected!=0" #typeCompetition>
+                    <option value="0" disabled selected >{{competition.tipoCompeticion.descripcion}}</option>                    
                   </select>
                 </div>
               </div>
@@ -132,9 +147,12 @@
                     <span class="input-group-text"><i class="fa fa-sort-numeric-desc"></i><small>&nbsp;Tipo
                         Eliminatorias</small></span>
                   </div>
-                  <select type="text" class="form-control" #numberQualifiers>                    
+                  <select type="text" class="form-control" *ngIf="idSelected==0" #numberQualifiers>                    
                     <option disabled selected >Seleccionar...</option>
                     <option [ngValue]="quealifier" *ngFor="let quealifier of number_qualifiers">{{quealifier.descripcion}}</option>
+                  </select>
+                  <select type="text" class="form-control" *ngIf="idSelected!=0" #numberQualifiers>                    
+                    <option disabled selected >{{competition.eliminatoria.descripcion}}</option>
                   </select>
                 </div>
               </div>
@@ -147,10 +165,13 @@
                     <span class="input-group-text"><i class="fa fa-venus-mars"></i><small>&nbsp;Género
                         Competencia</small></span>
                   </div>
-                  <select type="text" class="form-control" #genderC>
-                    <option class="marcaDeAgua" disabled selected >Seleccionar...</option>
+                  <select type="text" class="form-control" *ngIf="idSelected==0"#genderC>
+                    <option  disabled selected >Seleccionar...</option>
                     <option [ngValue]="gende" *ngFor="let gende of gender">{{gende.descripcion}}</option>
                   </select>
+                  <select type="text" class="form-control" *ngIf="idSelected!=0"#genderC>
+                    <option  disabled selected >{{competition.genero.descripcion}}</option>
+                    </select>
                 </div>
               </div>
 
@@ -160,10 +181,12 @@
                     <span class="input-group-text"><i class="fa fa-users"></i><small>&nbsp;Mínimo de
                         Equipos</small></span>
                   </div>
-                  <select type="text" class="form-control" #numberTeams>
-                    
+                  <select type="text" class="form-control" *ngIf="idSelected==0" #numberTeams>                    
                     <option disabled selected >Seleccionar...</option>
                     <option [ngValue]="number_t" *ngFor="let number_t of number_of_teams">{{number_t.descripcion}}</option>
+                  </select>
+                  <select type="text" class="form-control" *ngIf="idSelected!=0" #numberTeams>                    
+                    <option disabled selected >{{competition.numeroEquipo.descripcion}}</option>
                   </select>
                 </div>
               </div>

@@ -78,14 +78,10 @@ competencias: any;
     this.competitionService.cargarCompeticion().subscribe(resultado=>{this.competencias=resultado; this.competitionService.competitions=resultado},
       error=>{ console.log(JSON.stringify(error));});
   }
-  cargarSeleccionado(id:number)
+  asignarIdSeleccionado(id:number)
   {
-    for(let competencia of this.competencias)
-    if(competencia.id==id)
-    { this.competitionService.idSelected=id;
-      console.log("Competencia Seleccionada:   ");
-    }
-     
+    this.competitionService.idSelected=id;
+    console.log("Elemento seleccionado:    Id:  "+id);
   }
 
 }

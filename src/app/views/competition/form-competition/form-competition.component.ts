@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild, ElementRef, Pipe } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, Pipe, OnChanges, DoCheck } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FechaUtilidades } from '../../../model/FechaUtilidades';
 import {UtilCompetition} from '../UtilCompetition';
@@ -8,7 +8,7 @@ import { CompetitionService } from '../competition.service';
   selector: 'app-form-competition',
   templateUrl: './form-competition.component.html'
 })
-export class FormCompetitionComponent implements OnInit {
+export class FormCompetitionComponent implements OnInit, DoCheck {
 
   /************************VARIABLES TEMPORALES************* */
   sports: any;
@@ -26,7 +26,21 @@ export class FormCompetitionComponent implements OnInit {
 
   /*array que se va a crear cuando me devulevan la informacion*/
  rules:any;
+  selected:false;
+ //Elementos Seleccionados
  idSelected=0;
+ sportSelected:String;
+ categorieSelected:string;
+ modalitieSelected:string;
+ startDateSelected:Date;
+ endDateSelected:Date;
+ durationMatchSelected:string;
+ typeCompetitionSelected:string;
+ typeEliminatoriesSelected:string;
+ genderSelected:string;
+ minnumberOfParticipantsSelected:number;
+ numberTeamsSelected:string;
+ competition:any;
    completeRule()
    {
      for(let rule of this.rules)
@@ -106,6 +120,7 @@ export class FormCompetitionComponent implements OnInit {
     this.showErrorItem = false;
 
   }
+ 
 
   ngOnInit() {
     this.showModalWindowOk=false;
@@ -119,9 +134,28 @@ export class FormCompetitionComponent implements OnInit {
         dateStartCompetition:  ['', [Validators.required]],
         dateEndCompetition:  ['', [Validators.required]],
         minnumberOfParticipants: ['', [Validators.required,  Validators.pattern('^([0-9])*$'), Validators.maxLength(4)]]
-      });
+      });     
   }
-
+  ngDoCheck(): void {
+    //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
+    //Add 'implements DoCheck' to the class.
+    if(this.competitionService.idSelected!=0)
+    {
+     this.competition=this.competitionService.competenciaSeleccionada();
+     this.idSelected=this.competition.id;
+     this.fieldsForm.controls['nameCompetition'].setValue(this.competition.nombre);
+     this.fieldsForm.controls['dateStartCompetition'].setValue(this.competition.fechaFinaliza);
+     this.fieldsForm.controls['dateEndCompetition'].setValue(this.competition.fechaInicio);
+     this.fieldsForm.controls['minnumberOfParticipants'].setValue(this.competition.numeroMinimo);/* 
+     newCompetition['deporte'] = this.idSports(this.cbx_deport.nativeElement.value);
+     newCompetition['categoria'] = this.idCategorias(this.cbx_category.nativeElement.value);
+     newCompetition['modalidad'] = this.idModalidad(this.cbx_modality.nativeElement.value);
+     newCompetition['tipoCompeticion'] = this.idTipoCompeticion(this.cbx_typeCompetition.nativeElement.value);
+     newCompetition['numeroEliminatorias'] =  this.idNumeroEliminatoria(this.cbx_typeQualifier.nativeElement.value); */
+    
+    }
+  }
+ 
   assignPriorities(rule: any, activar: boolean) {
     for (let i = 0; i < this.rules.length; i++) {
       const updateFormElement = this.rules[i] ;
@@ -360,6 +394,7 @@ export class FormCompetitionComponent implements OnInit {
         this.competitionService.addCompetition(newCompetition,this.fileToCompetition).subscribe(
           resultado=>
           {
+            
               //Aquí va llamada a modal de Éxito
               this.showModalWindowOk=true;
           },

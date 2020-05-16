@@ -13,7 +13,7 @@
       </div>
 
       <div class="nav flex-column nav-pills col-12 col-md-12 col-lg-12"  role="tablist" aria-orientation="vertical">
-        <a *ngFor="let competencia of competencias" class="nav-link "  [className]="'nav-link active '" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+        <a *ngFor="let competencia of competencias" (click)=asignarIdSeleccionado(competencia.id) class="nav-link "  [className]="'nav-link active '" id="v-pills-home-tab" data-toggle="pill"  role="tab"
           aria-controls="v-pills-home" aria-selected="true" style="color:blanchedalmond" >
           <img src="../../../../../assets/img/competicion/{{competencia.subPrograma.descripcion|lowercase}}.png" id="imagen" width="24" height="24" class="d-inline-block align-top" alt="">
           <strong>{{competencia.nombre}}</strong>
