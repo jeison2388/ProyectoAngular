@@ -29,18 +29,9 @@ export class FormCompetitionComponent implements OnInit, DoCheck {
   selected:false;
  //Elementos Seleccionados
  idSelected=0;
- sportSelected:String;
- categorieSelected:string;
- modalitieSelected:string;
- startDateSelected:Date;
- endDateSelected:Date;
- durationMatchSelected:string;
- typeCompetitionSelected:string;
- typeEliminatoriesSelected:string;
- genderSelected:string;
- minnumberOfParticipantsSelected:number;
- numberTeamsSelected:string;
  competition:any;
+ mensajeOk:"Se ha guardado con éxito la competición";
+ mensajeFail="No se pudieron cargar los siguientes elementos:  ";
    completeRule()
    {
      for(let rule of this.rules)
@@ -89,23 +80,23 @@ export class FormCompetitionComponent implements OnInit, DoCheck {
 
   constructor(private formBuilder: FormBuilder, private competitionService:CompetitionService) {
     this.competitionService.cargarDeportes().subscribe(resultado=>{this.sports=resultado;},
-       error=>{ console.log(JSON.stringify(error));});
+       error=>{ console.log(JSON.stringify(error));this.showModalWindowFail=true; this.mensajeFail+=" Deportes,"});
     this.competitionService.cargarCategorias().subscribe(resultado=>{this.categories=resultado;},
-        error=>{console.log(JSON.stringify(error));});
+        error=>{console.log(JSON.stringify(error));this.showModalWindowFail=true;  this.mensajeFail+=" Categorías,"});
     this.competitionService.cargarModalidades().subscribe(resultado=>{this.modalities=resultado;},
-        error=>{console.log(JSON.stringify(error));});
+        error=>{console.log(JSON.stringify(error));this.showModalWindowFail=true;  this.mensajeFail+=" Modalidades,"});
     this.competitionService.cargarDuracionPartido().subscribe(resultado=>{this.match_duration=resultado;},
-        error=>{console.log(JSON.stringify(error));});
+        error=>{console.log(JSON.stringify(error));this.showModalWindowFail=true;  this.mensajeFail+=" Duración de Partido,"});
     this.competitionService.cargarTiposCompeticion().subscribe(resultado=>{this.type_competition=resultado;},
-        error=>{console.log(JSON.stringify(error));});
+        error=>{console.log(JSON.stringify(error));this.showModalWindowFail=true;  this.mensajeFail+=" Tipo Competición,"});
     this.competitionService.cargarTiposEliminatoria().subscribe(resultado=>{this.number_qualifiers=resultado;},
-        error=>{console.log(JSON.stringify(error));});
+        error=>{console.log(JSON.stringify(error));this.showModalWindowFail=true;  this.mensajeFail+=" Eliminatorias,"});
     this.competitionService.cargarGeneros().subscribe(resultado=>{this.gender=resultado;},
-        error=>{console.log(JSON.stringify(error));});
+        error=>{console.log(JSON.stringify(error));this.showModalWindowFail=true;  this.mensajeFail+=" Género,"});
     this.competitionService.cargarMinimoEquipos().subscribe(resultado=>{this.number_of_teams=resultado;},
-        error=>{console.log(JSON.stringify(error));});
+        error=>{console.log(JSON.stringify(error));this.showModalWindowFail=true;  this.mensajeFail+=" Numero de equipos,"});
     this.competitionService.obtenerItemsDesempate().subscribe(resultado=>{this.rules=resultado;},
-        error=>{console.log(JSON.stringify(error));});
+        error=>{console.log(JSON.stringify(error));this.showModalWindowFail=true;  this.mensajeFail+=" Reglas,"});
 
     this.fechaUtilidades = new FechaUtilidades();
     this.utilCompetition = new UtilCompetition();
@@ -351,7 +342,7 @@ export class FormCompetitionComponent implements OnInit, DoCheck {
   }
   guardarCompeticion()
   {
-
+this.showModalWindowOk=true;
   }
 
   handleDate(event: any) {
@@ -401,7 +392,9 @@ export class FormCompetitionComponent implements OnInit, DoCheck {
           error =>
           {
             //Aquí va llamada a modal de Falla
+            this.mensajeFail="Error al Guardar"
             this.showModalWindowFail=true;
+            this.showModalWindowOk=false;
             console.log("ERROR EN ENVÍO: "+JSON.stringify(error));
           }
         );

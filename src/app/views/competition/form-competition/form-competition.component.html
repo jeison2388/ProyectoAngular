@@ -296,6 +296,9 @@
   </div>
 </div>
 <div>
-  <router-outlet *ngIf="showModalWindowOk" class="app-modal-ok"></router-outlet>
-  <router-outlet *ngIf="showModalWindowFail" class="app-modal-fail"></router-outlet>
+  
+  <app-modal-ok *ngIf="showModalWindowOk" 
+  [msjOk]=mensajeOk></app-modal-ok>
+  <app-modal-fail  *ngIf="showModalWindowFail"
+  [msjFail]=mensajeFail></app-modal-fail>
 </div>
