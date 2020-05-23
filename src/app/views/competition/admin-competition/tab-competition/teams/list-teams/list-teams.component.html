@@ -1,4 +1,4 @@
-
+<input type="text" class="form-control" name="filterPost" placeholder="Buscar" [(ngModel)]="filterPost">
 <table class="table table-bordered ">
   <thead class="table-primary">
     <tr>
@@ -12,40 +12,16 @@
     </tr>
   </thead>
   <tbody>
-    <!-- <tr *ngFor="let team of teams"> -->
-    <tr>
-      <th scope="col">1</th>
-      <td>sd</td>
-      <td>sd</td>
-      <td>ghdh</td>
-      <td>fgfgddfgd</td>
-      <td>dfdgdg</td>
-      <td>dfgdgdg</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <!-- <tr *ngFor="let team of teams"> -->
-    <tr>
-      <th scope="col">2</th>
-      <td>sd</td>
-      <td>sd</td>
-      <td>ghdh</td>
-      <td>fgfgddfgd</td>
-      <td>dfdgdg</td>
-      <td>dfgdgdg</td>
-    </tr>
-  </tbody>
-  <tbody>
-    <!-- <tr *ngFor="let team of teams"> -->
-    <tr>
-      <th scope="col">3</th>
-      <td>sd</td>
-      <td>sd</td>
-      <td>ghdh</td>
-      <td>fgfgddfgd</td>
-      <td>dfdgdg</td>
-      <td>dfgdgdg</td>
-    </tr>
+  <tr *ngFor="let team of teams | filter: filterPost">   
+    <td>{{team.numero}}</td>
+    <td><img style=" width: 50px; height: 50px;" src="../../../../../../../assets/img/{{team.Logo}}.png" alt=""></td>
+    <td>{{team.NombreEquipo}}</td>
+    <td>{{team.Delegado}}</td>
+    <td>{{team.identificacion}}</td>
+    <td>{{team.telefono}}</td>
+    <td>{{team.estado}}</td>    
+  </tr>
+    
   </tbody>
 </table>
 

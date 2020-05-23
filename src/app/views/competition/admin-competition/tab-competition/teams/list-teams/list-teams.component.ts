@@ -8,7 +8,7 @@ export class ListTeamsComponent implements OnInit {
 
   /****************************************VARIABLES DE SALIDA DEL COMPONENTE*********************** */
   @Output() showAddTeam = new EventEmitter<{showAddTeam: boolean}>();
-  equipos: [
+  teams= [
     {
       numero: 1,
       Logo: "u496",
@@ -28,6 +28,7 @@ export class ListTeamsComponent implements OnInit {
       estado:"Pendiente realizado"
     }
   ];
+  filterPost='';
   constructor() { }
 
   
