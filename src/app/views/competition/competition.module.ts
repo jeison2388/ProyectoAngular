@@ -25,6 +25,7 @@ import { EquipmentDistributionComponent } from './admin-competition/tab-competit
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { CompetitionTypeChampioshipComponent } from './admin-competition/tab-competition/clasification/competition-type-champioship/competition-type-champioship.component';
 import { FilterPipe } from './admin-competition/pipes/filter.pipe';
+import { ListPlayersComponent } from './admin-competition/tab-competition/teams/list-players/list-players.component';
 
 
 
@@ -55,6 +56,7 @@ import { FilterPipe } from './admin-competition/pipes/filter.pipe';
                 EquipmentDistributionComponent,
                 CompetitionTypeChampioshipComponent,
                 FilterPipe,
+                ListPlayersComponent,
                 ],
   providers: [CompetitionService]
 })

@@ -93,7 +93,7 @@
           <button type="button" class="btn btn-outline-dark" (click)="modal.close()"><i
               class="fa fa-plus-square"></i>
             Cancelar</button>
-          <button type="button" class="btn bg-primary"   [disabled]="fieldsForm.invalid">Agregar Jugador</button>
+          <button type="button" class="btn bg-primary"   [disabled]="fieldsForm.invalid" (click)="onSubmit();modal.close();">Agregar Jugador</button>
           </div>
 
         </form>
