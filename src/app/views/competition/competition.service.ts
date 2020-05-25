@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Observer } from '@syncfusion/ej2-base';
+import{player} from '../../model/player.model';
+import { team } from '../../model/team.model'
 
 
 
@@ -12,27 +14,60 @@ export class CompetitionService {
   private ruta:string;
   public idSelected=0;
   public competitions:any;
-  players= [
-    {
-      cedula: "10344242",
-      nombres: "Pedro Felipe",
-      apellidos:"Robledo Samboní",
-      celular:"24353423244",
-      categoria:"A",
-      valor:7900
-    }/* ,
-    {
-      cedula: "1061567093",
-      nombres: "Manuel Santiago",
-      apellidos:"Martinez Vasquez",
-      celular:"23345255656",
-      categoria:"B",
-      valor:9700
-    } */
-  ];
+  players: player[]=[];
+  teams:team[]=[];
+
   constructor(private httpClient:HttpClient)
   {
     this.ruta="http://pruebasweb.comfacauca.com:8080/";
+  }
+  cargarJugadores():player[]
+  {
+      let jugadores:player[]=
+      [
+        {
+          cedula: "10344242",
+          nombres: "Pedro Felipe",
+          apellidos:"Robledo Samboní",
+          celular:"24353423244",
+          categoria:"A",
+          valor:7900
+        } ,
+        {
+          cedula: "1061567093",
+          nombres: "Manuel Santiago",
+          apellidos:"Martinez Vasquez",
+          celular:"23345255656",
+          categoria:"B",
+          valor:9700
+        } 
+      ];
+      return jugadores;
+  }
+  cargarEquipos(idCompetencia:number):team[]
+  {
+        let equipos: team[]=[
+        {
+          numero: 1,
+          Logo: "u496",
+          NombreEquipo:"HOTEL ACHALAY",
+          Delegado:"ANDRES FELIPE RESTREPO",
+          identificacion:1232353453,
+          telefono:23453456567,
+          estado:"Pendiente de pago"
+        },
+        {
+          numero: 1,
+          Logo: "u497",
+          NombreEquipo:"DIAGNOSTIMOTOS",
+          Delegado:"IGNACIO VIVEROS",
+          identificacion:1232353453,
+          telefono:23453456567,
+          estado:"Pendiente realizado"
+        }
+      ]; 
+      //return  this.httpClient.get<team>(this.ruta+"competicion/obtenerEquipos");
+      return equipos;
   }
   addCompetition(competition: Object, fileToCompetition: any[]):Observable<any>
   {
