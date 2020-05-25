@@ -15,7 +15,10 @@
             <div class="card-body">
               <div cdkDropList [cdkDropListData]="teamsCompetition" class="classification-list"
                 cdkDropListSortingDisabled (cdkDropListDropped)="drop($event)">
-                <div class="classification-box" *ngFor="let team of teamsCompetition" cdkDrag>{{team['nameTeam']}}</div>
+                <div class="classification-box" *ngFor="let team of teamsCompetition" cdkDrag>
+                  <img src="../../../../../../../assets/img/{{team.Logo}}.png" width="60"> {{team.NombreEquipo}}
+                  
+                </div>
               </div>
             </div>
           </div>
@@ -40,7 +43,9 @@
 
               <div cdkDropList [cdkDropListData]="group.teams" class="classification-list"
                 (cdkDropListDropped)="drop($event)">
-                <div class="classification-box" *ngFor="let team of group.teams" cdkDrag>{{team.nameTeam}}</div>
+                <div class="classification-box" *ngFor="let team of group.teams" cdkDrag>
+                  <img src="../../../../../../../assets/img/{{team.Logo}}.png" width="60"> {{team.NombreEquipo}}
+                </div>
               </div>
             </div>
           </div>

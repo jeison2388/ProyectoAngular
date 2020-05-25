@@ -12,7 +12,7 @@ export class ListPlayersComponent implements OnInit {
   players:player[]=[];
   constructor(private competitionService:CompetitionService) 
   { 
-    this.players=competitionService.players;
+    this.players=competitionService.cargarJugadores();
   }
 
   ngOnInit() {

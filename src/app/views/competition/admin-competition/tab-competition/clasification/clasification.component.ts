@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as go from 'gojs';
+import { CompetitionService } from '../../../competition.service';
+import { team } from '../../../../../model/team.model';
 
 @Component({
   selector: 'app-clasification',
@@ -7,26 +9,13 @@ import * as go from 'gojs';
 })
 export class ClasificationComponent implements OnInit {
 
-  constructor() { }
+  
 
 
   /*****************VARIABLES TEMPORALES************* */
 
-  teamsCompetition = [
-    {id: 1, nameTeam: 'milan'},
-    {id: 2, nameTeam: 'inter'},
-    {id: 3, nameTeam: 'cali'},
-    {id: 4, nameTeam: 'america'},
-    {id: 5, nameTeam: 'junior'},
-    {id: 6, nameTeam: 'gremio'},
-    {id: 7, nameTeam: 'nacional'},
-    {id: 8, nameTeam: 'boca'},
-    {id: 9, nameTeam: 'river'},
-    {id: 10, nameTeam: 'dormund'},
-    {id: 11, nameTeam: 'bayer'},
-    {id: 12, nameTeam: 'pereira'}
-  ];
-
+  teamsCompetition:team[]=[];
+constructor(private competitionservice:CompetitionService) { }
   /*public model: go.TreeModel = new go.TreeModel(
     [
       { 'key': 1, 'name': 'Stella Payne Diaz', 'title': 'CEO' },
@@ -49,6 +38,8 @@ export class ClasificationComponent implements OnInit {
   ); */
 
   ngOnInit() {
+    //Se debe pasar el id de la competencia
+    this.teamsCompetition=this.competitionservice.cargarEquipos(1);
   }
 
 }

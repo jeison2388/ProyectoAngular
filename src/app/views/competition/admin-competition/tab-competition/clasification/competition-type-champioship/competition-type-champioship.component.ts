@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { team } from '../../../../../../model/team.model';
 
 @Component({
   selector: 'app-competition-type-champioship',
@@ -8,7 +9,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class CompetitionTypeChampioshipComponent implements OnInit {
 
-  @Input() teamsCompetition: Array<JSON>;
+  @Input() teamsCompetition: Array<team>;
 
   cantGroup: number ;
 
@@ -35,6 +36,10 @@ export class CompetitionTypeChampioshipComponent implements OnInit {
   }
 
   ngOnInit() {
+    for(let i of this.teamsCompetition)
+    {
+      console.log("Equipo:   "+i.NombreEquipo);
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
