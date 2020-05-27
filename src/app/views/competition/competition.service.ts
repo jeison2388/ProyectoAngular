@@ -64,6 +64,42 @@ export class CompetitionService {
           identificacion:1232353453,
           telefono:23453456567,
           estado:"Pendiente realizado"
+        },
+        {
+          numero: 1,
+          Logo: "u497",
+          NombreEquipo:"DIAGNOSTIMOTOS",
+          Delegado:"IGNACIO VIVEROS",
+          identificacion:1232353453,
+          telefono:23453456567,
+          estado:"Pendiente realizado"
+        },
+        {
+          numero: 1,
+          Logo: "u497",
+          NombreEquipo:"DIAGNOSTIMOTOS",
+          Delegado:"IGNACIO VIVEROS",
+          identificacion:1232353453,
+          telefono:23453456567,
+          estado:"Pendiente realizado"
+        },
+        {
+          numero: 1,
+          Logo: "u497",
+          NombreEquipo:"DIAGNOSTIMOTOS",
+          Delegado:"IGNACIO VIVEROS",
+          identificacion:1232353453,
+          telefono:23453456567,
+          estado:"Pendiente realizado"
+        },
+        {
+          numero: 1,
+          Logo: "u497",
+          NombreEquipo:"DIAGNOSTIMOTOS",
+          Delegado:"IGNACIO VIVEROS",
+          identificacion:1232353453,
+          telefono:23453456567,
+          estado:"Pendiente realizado"
         }
       ]; 
       //return  this.httpClient.get<team>(this.ruta+"competicion/obtenerEquipos");

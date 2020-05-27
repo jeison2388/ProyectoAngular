@@ -1,7 +1,6 @@
 <div style="text-align:right">
-  <button type="submit" class="btn btn-success" (click)="addGroups()">Nuevo Grupo</button>
+  <button type="submit" *ngIf="nuevoGrupo==true" class="btn btn-success" (click)="addGroups()">Nuevo Grupo</button>
 </div>
-
 <div cdkDropListGroup>
   <div class="row">
     <div class="col-12 col-md-6 col-lg-6">
@@ -9,15 +8,19 @@
         <div class="animated fadeIn">
 
           <div class="card ">
-            <div class="card-header bg-info">
-              <h6>Equipos</h6>
-            </div>
+            <section>
+               <div class="card-header bg-info">
+                  <h6>Equipos</h6>
+                </div>           
+            </section>
+              
+           
             <div class="card-body">
               <div cdkDropList [cdkDropListData]="teamsCompetition" class="classification-list"
                 cdkDropListSortingDisabled (cdkDropListDropped)="drop($event)">
-                <div class="classification-box" *ngFor="let team of teamsCompetition" cdkDrag>
-                  <img src="../../../../../../../assets/img/{{team.Logo}}.png" width="60"> {{team.NombreEquipo}}
-                  
+                <div class="classification-box" *ngFor="let team of teamsCompetition"  cdkDrag>
+                  <img src="../../../../../../../assets/img/{{team.Logo}}.png" width="60" > {{team.NombreEquipo}}
+                   
                 </div>
               </div>
             </div>

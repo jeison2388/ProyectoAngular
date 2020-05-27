@@ -9,15 +9,18 @@ import { team } from '../../../../../../model/team.model';
 })
 export class CompetitionTypeChampioshipComponent implements OnInit {
 
-  @Input() teamsCompetition: Array<team>;
+  @Input() teamsCompetition:team[];
+  
 
   cantGroup: number ;
-
+  numeroGrupos=0;
   groupCompetition: Array<any>;
-
-
+  teams:Array<team>;
+  nuevoGrupo=true;
 
   constructor() {
+   
+    
     this.cantGroup = 1;
     this.groupCompetition = new Array();
     this.addGroups();
@@ -25,21 +28,48 @@ export class CompetitionTypeChampioshipComponent implements OnInit {
 
   addGroups() {
     const newGroup = {};
-    newGroup['id'] = this.cantGroup;
-    newGroup['teams'] = [];
-    this.groupCompetition.push(newGroup);
-    this.cantGroup ++;
+    if(this.cantGroup<this.calcularMaximoGrupos())
+    {
+      
+        this.nuevoGrupo=true;
+      
+        
+      newGroup['id'] = this.cantGroup;
+      newGroup['teams'] = [];
+      this.groupCompetition.push(newGroup);
+      this.cantGroup ++;      
+    }
+    else
+    {
+      if(this.teamsCompetition!=null)
+      {
+        console.log("TEAMS NO ES NULO:   "+this.teamsCompetition.length);
+        this.nuevoGrupo=false;
+      }
+    }
+    
   }
-
+  
+  calcularMaximoGrupos()
+  {
+    let tam=0;
+    if(this.teamsCompetition!=null)  
+       tam= this.teamsCompetition.length;
+    console.log("Calculando el maximo de grupos:   "+tam);
+    return tam/2;
+  }
   deleteGroup() {
 
   }
 
   ngOnInit() {
-    for(let i of this.teamsCompetition)
-    {
-      console.log("Equipo:   "+i.NombreEquipo);
-    }
+  
+  }
+  ngOnChanges() 
+  {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    
   }
 
   drop(event: CdkDragDrop<string[]>) {
