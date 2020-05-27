@@ -7,11 +7,8 @@ import { team } from '../../../../../../model/team.model';
   templateUrl: './competition-type-champioship.component.html',
   styleUrls: ['./competition-type-champioship.component.scss']
 })
-export class CompetitionTypeChampioshipComponent implements OnInit {
-
+export class CompetitionTypeChampioshipComponent {
   @Input() teamsCompetition:team[];
-  
-
   cantGroup: number ;
   numeroGrupos=0;
   groupCompetition: Array<any>;
@@ -30,24 +27,15 @@ export class CompetitionTypeChampioshipComponent implements OnInit {
     const newGroup = {};
     if(this.cantGroup<this.calcularMaximoGrupos())
     {
-      
-        this.nuevoGrupo=true;
-      
-        
+      this.nuevoGrupo=true;
       newGroup['id'] = this.cantGroup;
       newGroup['teams'] = [];
       this.groupCompetition.push(newGroup);
-      this.cantGroup ++;      
+      this.cantGroup ++ ;      
     }
-    else
-    {
-      if(this.teamsCompetition!=null)
-      {
+    else    
+      if(this.teamsCompetition!=null)      
         console.log("TEAMS NO ES NULO:   "+this.teamsCompetition.length);
-        this.nuevoGrupo=false;
-      }
-    }
-    
   }
   
   calcularMaximoGrupos()
@@ -62,15 +50,7 @@ export class CompetitionTypeChampioshipComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-  
-  }
-  ngOnChanges() 
-  {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    
-  }
+
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
