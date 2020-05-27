@@ -1,0 +1,23 @@
+<table class="table table-bordered" >
+  <thead>
+    <tr class="table-primary">
+      <th scope="col" colspan="100%" style="text-align: center;">VALOR INSCRIPCIÓN</th>
+    </tr>
+    <tr class="table-primary">
+      <th scope="col">Categoria</th>
+      <th scope="col">Cantidad afiliados</th>
+      <th scope="col">Valor unitario</th>
+      <th scope="col">Valor total</th>
+      <th scope="col">Subsidio a la demanda</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of players">
+      <td>{{player.categoria}}</td>
+      <td></td>
+      <td>{{player.valor}}</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
