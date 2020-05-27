@@ -40,7 +40,7 @@ export class CompetitionService {
           celular:"23345255656",
           categoria:"B",
           valor:9700
-        } 
+        }
       ];
       return jugadores;
   }
@@ -101,7 +101,7 @@ export class CompetitionService {
           telefono:23453456567,
           estado:"Pendiente realizado"
         }
-      ]; 
+      ];
       //return  this.httpClient.get<team>(this.ruta+"competicion/obtenerEquipos");
       return equipos;
   }
@@ -114,20 +114,20 @@ export class CompetitionService {
     if(fileToCompetition.length!=0)
       for(let i of fileToCompetition)
       {
-        formData.append('indice'+contador,JSON.stringify(i));
+        formData.append('indice',i.file);
         console.log("ARCHIVO:  "+i.file);
-        contador++;      
-      }  
-      else
-        formData.append('indice'+contador,JSON.stringify(fileToCompetition));
-        
+        //contador++;
+      }
+      //else
+        //formData.append('indice'+contador,JSON.stringify(fileToCompetition));
+
     return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData,{reportProgress: true, observe: 'events'});
   }
   competenciaSeleccionada():any
-  {    
+  {
     for(let competition of this.competitions ){
-        if(competition.id==this.idSelected)         
-          return competition;          
+        if(competition.id==this.idSelected)
+          return competition;
     }
   }
    cargarCompeticion():Observable<any>
@@ -135,52 +135,52 @@ export class CompetitionService {
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerCompetencias");
     this.competitions=respuesta;
     return respuesta;
-   } 
+   }
   cargarDeportes():Observable<any>
   {
-    
+
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerDeportes");
     return respuesta;
   }
   cargarCategorias():Observable<any>
   {
-    
+
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerCategorias");
     return respuesta;
   }
   cargarModalidades():Observable<any>
   {
-    
+
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerModalidades");
     return respuesta;
   }
   cargarDuracionPartido():Observable<any>
   {
-    
+
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerDuracionesPartidos");
     return respuesta;
   }
   cargarTiposCompeticion():Observable<any>
   {
-    
+
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerTiposCompeticion");
     return respuesta;
   }
   cargarTiposEliminatoria():Observable<any>
   {
-    
+
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerNumeroEliminatorias");
     return respuesta;
   }
   cargarGeneros():Observable<any>
   {
-    
+
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerGeneros");
     return respuesta;
   }
   cargarMinimoEquipos():Observable<any>
   {
-    
+
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerNumeroMinimoEquiposTorneo");
     return respuesta;
   }
