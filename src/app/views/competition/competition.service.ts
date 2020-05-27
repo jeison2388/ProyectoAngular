@@ -115,11 +115,11 @@ export class CompetitionService {
       for(let i of fileToCompetition)
       {
         formData.append('indice',i.file);
-        console.log("ARCHIVO:  "+i.file);
+        console.log("ARCHIVO:  "+JSON.stringify(i.file));
         //contador++;
       }
       //else
-        //formData.append('indice'+contador,JSON.stringify(fileToCompetition));
+        //formData.append('indice'+contador,(fileToCompetition));
 
     return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData,{reportProgress: true, observe: 'events'});
   }
