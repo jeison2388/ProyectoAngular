@@ -12,12 +12,17 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let player of players">
-      <td>{{player.categoria}}</td>
-      <td></td>
-      <td>{{player.valor}}</td>
-      <td></td>
-      <td></td>
+    <tr *ngFor="let con of contadores">
+      <td>{{con.categoria}}</td>
+      <td>{{con.contador}}</td>
+      <td>{{con.valor}}</td>
+      <td>{{con.contador*con.valor}}</td>
+      <td>{{(valorParticular-con.valor)*con.contador}}</td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: center;"><strong>Total</strong></td>
+      <td>{{valorTotal}}</td>
+      <td>{{subsidioTotal}}</td>
     </tr>
   </tbody>
 </table>

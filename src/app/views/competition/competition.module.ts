@@ -9,6 +9,7 @@ import { ModalWindowsModule } from '../modal-windows/modal-windows.module';
 import { FormCompetitionComponent } from './form-competition/form-competition.component';
 import { AddCompetitionComponent } from './add-competition/add-competition.component';
 import { ListCompetitionNavComponent } from './admin-competition/list-competition-nav/list-competition-nav.component';
+import {ListRegistrationValueTeamComponent} from './admin-competition/tab-competition/teams/list-registration-value-team/list-registration-value-team.component';
 import { TabCompetitionComponent } from './admin-competition/tab-competition/tab-competition.component';
 import { AdminCompetitionComponent } from './admin-competition/admin-competition.component';
 // Tabs Component
@@ -44,6 +45,7 @@ import { ListPlayersComponent } from './admin-competition/tab-competition/teams/
   declarations: [FormCompetitionComponent,
                 AddCompetitionComponent,
                 ListCompetitionNavComponent,
+                ListRegistrationValueTeamComponent,
                 TabCompetitionComponent,
                 AdminCompetitionComponent,
                 ListTeamsComponent,

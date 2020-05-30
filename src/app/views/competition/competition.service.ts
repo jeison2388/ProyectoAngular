@@ -32,7 +32,7 @@ export class CompetitionService {
           celular:"24353423244",
           categoria:"A",
           valor:7900
-        } ,
+        },
         {
           cedula: "1061567093",
           nombres: "Manuel Santiago",
@@ -40,6 +40,14 @@ export class CompetitionService {
           celular:"23345255656",
           categoria:"B",
           valor:9700
+        },
+        {
+          cedula: "10344242",
+          nombres: "Pedro Felipe",
+          apellidos:"Robledo Samboní",
+          celular:"24353423244",
+          categoria:"A",
+          valor:7900
         }
       ];
       return jugadores;
@@ -147,6 +155,29 @@ export class CompetitionService {
 
     let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerCategorias");
     return respuesta;
+  }
+  cargarCategorias1():any[]
+  {
+    let categorias = [
+        {
+          categoria: 'A',
+          valor: 7900
+        },
+        {
+          categoria: 'B',
+          valor: 9700
+        },
+        {
+          categoria: 'C',
+          valor: 12800
+        },
+        {
+          categoria: 'PARTICULAR',
+          valor: 13000
+        }];
+    /*let respuesta = this.httpClient.get(this.ruta+"competicion/obtenerCategorias");
+    return respuesta;*/
+        return categorias;
   }
   cargarModalidades():Observable<any>
   {
