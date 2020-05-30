@@ -1,0 +1,43 @@
+
+              
+  <app-form-competition *ngIf="change" [titleForm]="titleAddCompetition" [subtitleForm]="subtitleAddCompetition" [buttonAction]="nameBtnAddCompetition"></app-form-competition>
+  <div class="animated-fadeIn" *ngIf="!change">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-header bg-primary">
+                    <strong>Competencias</strong>
+                  </div>
+                  <div class="card-body">
+                    <h3 class="title" style="color: cadetblue;">
+                        <strong>CONFIGURACIÓN DE COMPETICIONES</strong>
+                    </h3>
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-primary" style="position: relative; left: 30cm;" (click)="cambiar()"> Agregar Competicion</button>    
+                    </div>
+                    <table class="table table-bordered round_table ">
+                        <thead class="table-primary">
+                          <tr>
+                            <th scope="col">Nombre de Competicion</th>
+                            <th scope="col">Deporte</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Modalidad</th>
+                            <th scope="col">Género</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- <tr *ngFor="let team of teams"> -->
+                          <tr *ngFor="let competition of competitions">
+                            <td>{{competition.nombre}}</td>
+                            <td>{{competition.subPrograma.descripcion}}</td>
+                            <td>{{competition.tipoCompeticion.descripcion}}</td>
+                            <td>{{competition.modalidad.descripcion}}</td>
+                            <td>{{competition.genero.descripcion}}</td>        
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

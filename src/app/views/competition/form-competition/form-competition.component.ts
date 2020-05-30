@@ -32,6 +32,7 @@ export class FormCompetitionComponent implements OnInit, DoCheck {
  competition:any;
  mensajeOk:"Se ha guardado con éxito la competición";
  mensajeFail="No se pudieron cargar los siguientes elementos:  ";
+ change=true;
    completeRule()
    {
      for(let rule of this.rules)
@@ -44,6 +45,13 @@ export class FormCompetitionComponent implements OnInit, DoCheck {
         else
           rule.habilitado=true;
      }
+    }
+    cambiar()
+    {
+      if(this.change)
+        this.change=false;
+      else
+        this.change=true;
     }
 
   /***********************VARIABLES LOCALES**************** */
