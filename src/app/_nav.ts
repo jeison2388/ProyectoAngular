@@ -127,8 +127,8 @@ export const navItems: NavData[] = [
            icon: 'icon-drop',
            children: [
              {
-               name: 'AgregarCompetencia',
-               url: '/competencias/addCompetition',
+               name: 'Listar Competencias',
+               url: '/competencias/listCompetition',
                icon: 'icon-puzzle'
              },
              {

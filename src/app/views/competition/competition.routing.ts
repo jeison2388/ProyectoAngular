@@ -11,11 +11,11 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'addCompetition',
+        path: 'listCompetition',
         component: AddCompetitionComponent,
         data:
         {
-          title: 'Agregar Competencia'
+          title: 'Listar Competencia'
         }
       },
       {

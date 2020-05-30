@@ -7,6 +7,7 @@ import { CompetitionService } from '../../competition.service';
   styleUrls: ['./list-competition-window.component.scss']
 })
 export class ListCompetitionWindowComponent implements OnInit {
+
   competitions: any;
   change=false;
   titleAddCompetition: string;
