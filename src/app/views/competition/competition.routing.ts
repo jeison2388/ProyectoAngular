@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddCompetitionComponent } from './add-competition/add-competition.component';
 import { AdminCompetitionComponent} from './admin-competition/admin-competition.component';
+import { ListCompetitionComponent } from './admin-competition/list-competition/list-competition.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       {
         path: 'listCompetition',
-        component: AddCompetitionComponent,
+        component: ListCompetitionComponent,
         data:
         {
           title: 'Listar Competencia'

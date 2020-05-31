@@ -12,6 +12,7 @@ import { ListCompetitionNavComponent } from './admin-competition/list-competitio
 import {ListRegistrationValueTeamComponent} from './admin-competition/tab-competition/teams/list-registration-value-team/list-registration-value-team.component';
 import { TabCompetitionComponent } from './admin-competition/tab-competition/tab-competition.component';
 import { AdminCompetitionComponent } from './admin-competition/admin-competition.component';
+
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ListTeamsComponent } from './admin-competition/tab-competition/teams/list-teams/list-teams.component';
@@ -27,7 +28,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { CompetitionTypeChampioshipComponent } from './admin-competition/tab-competition/clasification/competition-type-champioship/competition-type-champioship.component';
 import { FilterPipe } from './admin-competition/pipes/filter.pipe';
 import { ListPlayersComponent } from './admin-competition/tab-competition/teams/list-players/list-players.component';
-import { ListCompetitionWindowComponent } from './admin-competition/list-competition-window/list-competition-window.component';
+import { ListCompetitionComponent } from './admin-competition/list-competition/list-competition.component';
 
 
 
@@ -60,7 +61,7 @@ import { ListCompetitionWindowComponent } from './admin-competition/list-competi
                 CompetitionTypeChampioshipComponent,
                 FilterPipe,
                 ListPlayersComponent,
-                ListCompetitionWindowComponent,
+                ListCompetitionComponent,
                 ],
   providers: [CompetitionService]
 })

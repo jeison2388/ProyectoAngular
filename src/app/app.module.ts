@@ -72,7 +72,7 @@ import { ModalWindowsModule } from './views/modal-windows/modal-windows.module';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    DummyComponent
+    DummyComponent,
   ],
   providers: [{
     provide: LocationStrategy,
