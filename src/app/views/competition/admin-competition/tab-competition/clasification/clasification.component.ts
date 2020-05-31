@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import * as go from 'gojs';
 import { CompetitionService } from '../../../competition.service';
 import { team } from '../../../../../model/team.model';
@@ -16,26 +16,24 @@ export class ClasificationComponent implements OnInit {
 
   teamsCompetition:team[]=[];
 constructor(private competitionservice:CompetitionService) { }
-  /*public model: go.TreeModel = new go.TreeModel(
-    [
-      { 'key': 1, 'name': 'Stella Payne Diaz', 'title': 'CEO' },
-      { 'key': 2, 'name': 'Luke Warm', 'title': 'VP Marketing/Sales', 'parent': 1 },
-      { 'key': 3, 'name': 'Meg Meehan Hoffa', 'title': 'Sales', 'parent': 2 },
-      { 'key': 4, 'name': 'Peggy Flaming', 'title': 'VP Engineering', 'parent': 1 },
-      { 'key': 5, 'name': 'Saul Wellingood', 'title': 'Manufacturing', 'parent': 4 },
-      { 'key': 6, 'name': 'Al Ligori', 'title': 'Marketing', 'parent': 2 },
-      { 'key': 7, 'name': 'Dot Stubadd', 'title': 'Sales Rep', 'parent': 3 },
-      { 'key': 8, 'name': 'Les Ismore', 'title': 'Project Mgr', 'parent': 5 },
-      { 'key': 9, 'name': 'April Lynn Parris', 'title': 'Events Mgr', 'parent': 6 },
-      { 'key': 10, 'name': 'Xavier Breath', 'title': 'Engineering', 'parent': 4 },
-      { 'key': 11, 'name': 'Anita Hammer', 'title': 'Process', 'parent': 5 },
-      { 'key': 12, 'name': 'Billy Aiken', 'title': 'Software', 'parent': 10 },
-      { 'key': 13, 'name': 'Stan Wellback', 'title': 'Testing', 'parent': 10 },
-      { 'key': 14, 'name': 'Marge Innovera', 'title': 'Hardware', 'parent': 10 },
-      { 'key': 15, 'name': 'Evan Elpus', 'title': 'Quality', 'parent': 5 },
-      { 'key': 16, 'name': 'Lotta B. Essen', 'title': 'Sales Rep', 'parent': 3 }
-    ]
-  ); */
+  @Output() array= [
+    { key: 1, parent: 13, name: "HOTEL ACHALAY", gender: "Cuartos", birthYear: "1926", reign: "1952-" },
+    { key: 2, parent: 1, name: "DIAGNOSTIMOTOS", gender: "Octavos", birthYear: "1948" },
+    { key: 3, parent: 1, name: "HOTEL ACHALAY", gender: "Octavos", birthYear: "1982" },
+    { key: 4, parent: 13, name: "JUMBO", gender: "Cuartos", birthYear: "1984" },
+    { key: 5, parent: 4, name: "JUMBO", gender: "Octavos", birthYear: "1984" },
+    { key: 6, parent: 4, name: "COMFACAUCA", gender: "Octavos", birthYear: "1950" },
+    { key: 7, parent: 14, name: "CASA RENAULT", gender: "Cuartos", birthYear: "1977" },
+    { key: 8, parent: 7, name: "CASA RENAULT", gender: "Octavos", birthYear: "1977" },
+    { key: 9, parent: 7, name: "PELOS Y PATAS", gender: "Octavos", birthYear: "2010" },
+    { key: 10, parent: 14, name: "APLANCHADOS DOÑA CHEPA", gender: "Cuartos", birthYear: "1981" },
+    { key: 11, parent: 10, name: "APLANCHADOS DOÑA CHEPA", gender: "Octavos", birthYear: "1981" },
+    { key: 12, parent: 10, name: "SENIOR MASTER", gender: "Octavos", birthYear: "1960" },
+    { key: 13, parent: 15, name: "HOTEL ACHALAY", gender: "Semifinal", birthYear: "1926", reign: "1952-" },
+    { key: 14, parent: 15, name: "APLANCHADOS DOÑA CHEPA", gender: "Semifinal", birthYear: "1981" },
+    { key: 15, parent: 30, name: "APLANCHADOS DOÑA CHEPA", gender: "Final", birthYear: "1981" },  
+  ];
+  
 
   ngOnInit() {
     //Se debe pasar el id de la competencia
