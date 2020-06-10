@@ -37,7 +37,7 @@ constructor(private competitionservice:CompetitionService) { }
 
   ngOnInit() {
     //Se debe pasar el id de la competencia
-    this.teamsCompetition=this.competitionservice.cargarEquipos(1);
+    this.teamsCompetition=this.competitionservice.players;
   }
 
 }

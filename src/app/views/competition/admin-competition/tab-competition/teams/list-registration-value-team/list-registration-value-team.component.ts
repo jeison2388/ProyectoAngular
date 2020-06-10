@@ -20,7 +20,7 @@ export class ListRegistrationValueTeamComponent implements OnInit {
   mensajeOk:"Se ha guardado con éxito la competición";
   mensajeFail="No se pudieron cargar los siguientes elementos:  ";
   constructor(private competitionService: CompetitionService) {
-    this.players = competitionService.cargarJugadores();
+    this.players = competitionService.players;
     this.categorias = competitionService.cargarCategorias1();
     this.inicializarContador();
     this.conteoDeCategorias();

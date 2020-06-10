@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CompetitionService } from '../../../../competition.service';
 
 @Component({
@@ -9,6 +9,7 @@ export class ListTeamsComponent implements OnInit {
 
   /****************************************VARIABLES DE SALIDA DEL COMPONENTE*********************** */
   @Output() showAddTeam = new EventEmitter<{showAddTeam: boolean}>();
+  public cancel=true;
   public competition:any;
   teams: any[];
   /* [
@@ -35,14 +36,24 @@ export class ListTeamsComponent implements OnInit {
   filterPost='';
   mensaje: string='';
   constructor(private competitionService:CompetitionService) {
-
+    
    }
 
   
   ngOnInit() {
     this.teams=this.competitionService.teams;
   }
-
+ngOnDestroy(): void {
+  this.cancel=false;
+  
+}
+  onCancel()
+  {
+    if(this.cancel)
+    this.cancel=false;
+    else
+    this.cancel=true;
+  }
   sendEventAddTeam() {
     this.showAddTeam.emit({showAddTeam: true});
   }

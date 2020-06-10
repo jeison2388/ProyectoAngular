@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {UtilCompetition} from '../../../../UtilCompetition';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,6 +14,9 @@ export class FormTeamComponent implements OnInit {
   @Input() titleForm: { titleForm: string };
   @Input() subtitleForm: { subtitleForm: string };
   @Input() buttonAction: { buttonAction: string };
+  @Input() public cancel=false;
+  @Output()
+  valCancel = new EventEmitter<boolean>();
 
   filePhoto: File;
   srcPhotoView: any;
@@ -30,6 +33,7 @@ export class FormTeamComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.cancel=false;
     this.fieldsForm = this.formBuilder.group(
       {
         nameTeam: ['', [Validators.required,
@@ -43,6 +47,15 @@ export class FormTeamComponent implements OnInit {
         phoneDelegate: ['', [Validators.required,  Validators.pattern('^([0-9])*$'), Validators.maxLength(12)]]
       });
   }
+onSubmit()
+{
+  console.log("GUARDADO desde form-team");
+}
+onCancel()
+{
+  this.cancel=true;
+  this.valCancel.emit(true);
+}
 
   uploadPhoto(event: any) {
     const tam_file = event.target.files[0].size / 1024;

@@ -8,9 +8,8 @@
     <tab>
       <ng-template *ngIf="tam!=0" tabHeading><i class="fa fa-users"></i> Equipos &nbsp;<span class="badge badge-pill badge-danger">{{tam}}</span></ng-template>
       <ng-template *ngIf="tam==0" tabHeading><i class="fa fa-users"></i> Equipos &nbsp;<span class="badge badge-pill badge-danger"></span></ng-template>
-      <app-list-teams *ngIf="!showTeam" (showAddTeam)="showAddTeam($event)"> </app-list-teams>
-      <app-add-team *ngIf="showTeam"></app-add-team>
-    </tab>
+      <app-list-teams ></app-list-teams>
+      </tab>
     <tab>
       <ng-template tabHeading><i class="fa fa-cubes "></i> Clasificación</ng-template>
       <app-clasification></app-clasification>

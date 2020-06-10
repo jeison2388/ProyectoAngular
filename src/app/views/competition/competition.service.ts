@@ -14,7 +14,7 @@ export class CompetitionService {
   private ruta:string;
   public idSelected=0;
   public competitions:any;
-  players: player[]=[];
+  players: any[]=[];
   teams:any[]=[];
   tamTeam=0;
 
@@ -22,26 +22,16 @@ export class CompetitionService {
   {
     this.ruta="http://pruebasweb.comfacauca.com:8080/";
   }
-  cargarJugadores():player[]
+  cargarJugadores():Observable<any>
   {
-      let jugadores:player[]=
+      let jugadores:any;
+      //RUTA QUEMADA !!!!!
+      console.log("RUTA DE CARGAR JUGADORES ESTÁ QUEMADA, FALTA AGREGAR EL ID DEL JUGADOR EN LA URL");
+      jugadores= this.httpClient.get(this.ruta+"competicion/equipos/obtenerJugadores/2");
+       console.log("TAMAÑO DE ARRAY JUGADORES:   "+this.players.length);
+
+      /* :player[]=
       [
-        {
-          cedula: "10344242",
-          nombres: "Pedro Felipe",
-          apellidos:"Robledo Samboní",
-          celular:"24353423244",
-          categoria:"A",
-          valor:7900
-        },
-        {
-          cedula: "1061567093",
-          nombres: "Manuel Santiago",
-          apellidos:"Martinez Vasquez",
-          celular:"23345255656",
-          categoria:"B",
-          valor:9700
-        },
         {
           cedula: "10344242",
           nombres: "Pedro Felipe",
@@ -51,7 +41,18 @@ export class CompetitionService {
           valor:7900
         }
       ];
+       */
       return jugadores;
+  }
+  onPlayers()
+  {
+    this.cargarJugadores().subscribe(resultado=>{
+      for(let i of resultado){
+        this.players.push(i);
+        console.log("AÑADIENDO ELEMENTO:  "+i.afiliado.persona.primerNombre);  
+      }
+    },
+      error=>{ console.log(JSON.stringify(error));});     
   }
   onTeams()
   {

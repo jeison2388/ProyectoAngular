@@ -15,9 +15,9 @@
       <tr *ngFor="let player of players">
         <td>#</td>
         <td>{{player.cedula}}</td>
-        <td>{{player.nombres}}</td>
-        <td>{{player.apellidos}}</td>
-        <td>{{player.celular}}</td>
+        <td>{{player.afiliado.persona.primerNombre}}</td>
+        <td>{{player.afiliado.persona.primerApellido}}</td>
+        <td>{{player.telefono}}</td>
         <td>{{player.categoria}}</td>
         <td>{{player.valor}}</td>
         

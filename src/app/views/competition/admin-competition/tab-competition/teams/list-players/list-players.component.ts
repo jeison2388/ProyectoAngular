@@ -9,10 +9,10 @@ import {player} from '../../../../../../model/player.model';
 export class ListPlayersComponent implements OnInit {
 
   filterPost='';
-  players:player[]=[];
+  players:any[]=[];
   constructor(private competitionService:CompetitionService) 
   { 
-    this.players=competitionService.cargarJugadores();
+    this.players=this.competitionService.players;
   }
 
   ngOnInit() {

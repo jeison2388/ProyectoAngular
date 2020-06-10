@@ -20,6 +20,7 @@ competencias: any;
   {
     this.competitionService.idSelected=id;
     this.competitionService.onTeams();
+    this.competitionService.onPlayers();
     console.log("Elemento seleccionado:    Id:  "+id);
   }
 
