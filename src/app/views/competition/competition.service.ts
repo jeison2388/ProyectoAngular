@@ -15,7 +15,8 @@ export class CompetitionService {
   public idSelected=0;
   public competitions:any;
   players: player[]=[];
-  teams:team[]=[];
+  teams:any[]=[];
+  tamTeam=0;
 
   constructor(private httpClient:HttpClient)
   {
@@ -52,9 +53,22 @@ export class CompetitionService {
       ];
       return jugadores;
   }
-  cargarEquipos(idCompetencia:number):team[]
+  onTeams()
   {
-        let equipos: team[]=[
+    this.cargarEquipos().subscribe(resultado=>{
+      for(let i of resultado)
+        this.teams.push(i);
+    },
+      error=>{ console.log(JSON.stringify(error));});
+      this.tamTeam=this.teams.length;
+      
+  }
+  cargarEquipos():Observable<any>
+  {
+        let equipos: any;
+        equipos= this.httpClient.get(this.ruta+"competicion/obtenerEquipos/"+this.idSelected);
+       
+        /* [
         {
           numero: 1,
           Logo: "u496",
@@ -63,53 +77,9 @@ export class CompetitionService {
           identificacion:1232353453,
           telefono:23453456567,
           estado:"Pendiente de pago"
-        },
-        {
-          numero: 1,
-          Logo: "u497",
-          NombreEquipo:"DIAGNOSTIMOTOS",
-          Delegado:"IGNACIO VIVEROS",
-          identificacion:1232353453,
-          telefono:23453456567,
-          estado:"Pendiente realizado"
-        },
-        {
-          numero: 1,
-          Logo: "u497",
-          NombreEquipo:"DIAGNOSTIMOTOS",
-          Delegado:"IGNACIO VIVEROS",
-          identificacion:1232353453,
-          telefono:23453456567,
-          estado:"Pendiente realizado"
-        },
-        {
-          numero: 1,
-          Logo: "u497",
-          NombreEquipo:"DIAGNOSTIMOTOS",
-          Delegado:"IGNACIO VIVEROS",
-          identificacion:1232353453,
-          telefono:23453456567,
-          estado:"Pendiente realizado"
-        },
-        {
-          numero: 1,
-          Logo: "u497",
-          NombreEquipo:"DIAGNOSTIMOTOS",
-          Delegado:"IGNACIO VIVEROS",
-          identificacion:1232353453,
-          telefono:23453456567,
-          estado:"Pendiente realizado"
-        },
-        {
-          numero: 1,
-          Logo: "u497",
-          NombreEquipo:"DIAGNOSTIMOTOS",
-          Delegado:"IGNACIO VIVEROS",
-          identificacion:1232353453,
-          telefono:23453456567,
-          estado:"Pendiente realizado"
         }
-      ];
+       
+      ]; */
       //return  this.httpClient.get<team>(this.ruta+"competicion/obtenerEquipos");
       return equipos;
   }

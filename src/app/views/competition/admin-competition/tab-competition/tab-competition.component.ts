@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompetitionService } from '../../competition.service';
 
 @Component({
   selector: 'app-tab-competition',
@@ -8,9 +9,10 @@ export class TabCompetitionComponent implements OnInit {
 
   /******************************VARIABLES LOCALES********************** */
   public showTeam: boolean;
-
-  constructor() {
+  tam:number;
+  constructor(private competitionService:CompetitionService) {
     this.showTeam = false;
+    this.tam=this.competitionService.tamTeam;
    }
 
   ngOnInit() {

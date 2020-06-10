@@ -6,7 +6,8 @@
       <app-edit-competition ></app-edit-competition>
     </tab>
     <tab>
-      <ng-template tabHeading><i class="fa fa-users"></i> Equipos &nbsp;<span class="badge badge-pill badge-danger">29</span></ng-template>
+      <ng-template *ngIf="tam!=0" tabHeading><i class="fa fa-users"></i> Equipos &nbsp;<span class="badge badge-pill badge-danger">{{tam}}</span></ng-template>
+      <ng-template *ngIf="tam==0" tabHeading><i class="fa fa-users"></i> Equipos &nbsp;<span class="badge badge-pill badge-danger"></span></ng-template>
       <app-list-teams *ngIf="!showTeam" (showAddTeam)="showAddTeam($event)"> </app-list-teams>
       <app-add-team *ngIf="showTeam"></app-add-team>
     </tab>

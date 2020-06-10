@@ -19,6 +19,7 @@ competencias: any;
   asignarIdSeleccionado(id:number)
   {
     this.competitionService.idSelected=id;
+    this.competitionService.onTeams();
     console.log("Elemento seleccionado:    Id:  "+id);
   }
 

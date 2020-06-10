@@ -12,7 +12,7 @@
   <thead class="table-primary">
     <tr>
       <th scope="col">No.</th>
-      <th scope="col">Logo</th>
+      <!-- <th scope="col">Logo</th> -->
       <th scope="col">Nombre del equipo</th>
       <th scope="col">Delegado</th>
       <th scope="col">Identificacion</th>
@@ -21,14 +21,15 @@
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let team of teams | filter: filterPost">   
-    <td>{{team.numero}}</td>
-    <td><img style=" width: 50px; height: 50px;" src="../../../../../../../assets/img/{{team.Logo}}.png" alt=""></td>
-    <td>{{team.NombreEquipo}}</td>
-    <td>{{team.Delegado}}</td>
+  <tr *ngFor="let team of teams | filter: filterPost;index as i">   
+   <td>{{i+1}}</td>
+   <!--  <td><img style=" width: 50px; height: 50px;" src="../../../../../../../assets/img/{{team.Logo}}.png" alt=""></td>
+     -->
+    <td>{{team.nombre}}</td>
+    <td>{{team.delegado}}</td>
     <td>{{team.identificacion}}</td>
     <td>{{team.telefono}}</td>
-    <td>{{team.estado}}</td>    
+    <td><!-- {{team.estado}} -->Pendiente de Pago</td>    
   </tr>
     
   </tbody>

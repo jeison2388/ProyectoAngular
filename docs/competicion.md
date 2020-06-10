@@ -234,3 +234,90 @@ Si no se encuentran items Desempate que devolver.
 |`200`|Exitoso|
 |`500`|Error interno del servidor|
 
+
+### GET /competicion/obtenerEquipos/{idCompeticion}
+Esta solicitud consulta los equipos asociados a una competicion.Se debe pasar el id de la competicion como parametro url  
+El sistema debe responder con un array de objetos JSON de la siguiente manera
+```Javascript
+[
+   {
+    "id": 1,
+    "nombre_equipo": "Bayer",
+    "Delegado": "juanito",
+    "identificaion_delegago": 1061737494,
+    "tel_delegado": 3153245789,
+    "estado_equipo": "pendiente de pago"
+    "id_estado_equipo" : 3
+
+    } ...
+]
+```
+Si no se encuentran equipos devolver.
+```Javascript
+[]
+```
+
+#### Códigos de estado
+|Código de estado|Descripcion|
+|---|---|
+|`200`|Exitoso|
+|`500`|Error interno del servidor|
+
+### GET /competicion/equipos/obtenerJugadores/{idEquipo}
+Esta solicitud consulta los jugadores asociados a una equipo.Se debe pasar el id del equipo como parametro url  
+El sistema debe responder con un array de objetos JSON de la siguiente manera
+```Javascript
+[
+   {
+    "id": 1,
+    "cedula": 10614574,
+    "nombres": "juanito",
+    "apellidos": "vianqui",
+    "celular": 3153245789,
+    "categoria": "A"
+    "valor" : 6500
+
+    } ...
+]
+```
+Si no se encuentran jugadores devolver.
+```Javascript
+[]
+```
+#### Códigos de estado
+|Código de estado|Descripcion|
+|---|---|
+|`200`|Exitoso|
+|`500`|Error interno del servidor|
+
+### GET /competicion/jugador/obtenerJugadore/{idJugador}
+Esta solicitud consulta la informacion de un jugador.Se debe pasar el id del equipo como parametro url 
+Tener en cuenta que se debe consultar al servicio de comfacauca para devolvernos la informacion, 
+El sistema debe responder con un objeto JSON de la siguiente manera
+```Javascript
+   {
+    "particular": false
+    "id": 1,
+    "cedula": 10614574,
+    "nombres": "juanito",
+    "apellidos": "vianqui",
+    "celular": 3153245789,
+    "categoria": "A"
+    "valor" : 6500
+    }
+```
+Si no se encuentran informacion del jugador en comfacuaca devolver.
+```Javascript
+   {
+    "particular": true
+    "categoria": "Particular"
+    "valor" : 6500
+    }
+```
+#### Códigos de estado
+|Código de estado|Descripcion|
+|---|---|
+|`200`|Exitoso|
+|`500`|Error interno del servidor|
+
+

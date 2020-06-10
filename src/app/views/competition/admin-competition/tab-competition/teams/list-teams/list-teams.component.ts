@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { CompetitionService } from '../../../../competition.service';
 
 @Component({
   selector: 'app-list-teams',
@@ -8,7 +9,9 @@ export class ListTeamsComponent implements OnInit {
 
   /****************************************VARIABLES DE SALIDA DEL COMPONENTE*********************** */
   @Output() showAddTeam = new EventEmitter<{showAddTeam: boolean}>();
-  teams= [
+  public competition:any;
+  teams: any[];
+  /* [
     {
       numero: 1,
       Logo: "u496",
@@ -28,15 +31,19 @@ export class ListTeamsComponent implements OnInit {
       estado:"Pendiente realizado"
     }
   ];
+   */
   filterPost='';
-  constructor() { }
+  mensaje: string='';
+  constructor(private competitionService:CompetitionService) {
+
+   }
 
   
   ngOnInit() {
+    this.teams=this.competitionService.teams;
   }
 
   sendEventAddTeam() {
     this.showAddTeam.emit({showAddTeam: true});
   }
-
 }

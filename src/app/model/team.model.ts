@@ -1,10 +1,14 @@
 export interface team
 {
-    numero: number,
-    Logo: string,
-    NombreEquipo:string,
-    Delegado:string,
-    identificacion:number,
-    telefono:number,
-    estado:string
+    id:number,
+    activo:boolean,
+    delegado:string,
+    fechaCreacionRegistro:String,
+    identificacion:string,
+    nombre:string,
+    telefono:string,
+    archivo:any,
+    competicion:any,
+    estadoPago:any,
+    grupoCompeticion:any    
 }
