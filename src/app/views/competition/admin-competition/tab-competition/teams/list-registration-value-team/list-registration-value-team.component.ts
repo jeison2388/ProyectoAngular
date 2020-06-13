@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {CompetitionService} from '../../../../competition.service';
 import { player } from '../../../../../../model/player.model';
 import { anyChanged } from '@progress/kendo-angular-common';
@@ -10,28 +10,34 @@ import { Contador } from '../../../../../../model/contador.model';
   styleUrls: ['./list-registration-value-team.component.css']
 })
 export class ListRegistrationValueTeamComponent implements OnInit {
-  players: player[];
+  players: player[]=[];
   categorias: any[];
   contadores: Contador[] = [];
   showModalWindowFail: boolean;
   valorTotal: number = 0;
   subsidioTotal: number = 0;
   valorParticular: number = 13000;
-  mensajeOk:"Se ha guardado con éxito la competición";
-  mensajeFail="No se pudieron cargar los siguientes elementos:  ";
-  constructor(private competitionService: CompetitionService) {
-    this.players = competitionService.players;
-    this.categorias = competitionService.cargarCategorias1();
-    this.inicializarContador();
-    this.conteoDeCategorias();
-    this.valorTotal = this.contadores.reduce((acc, obj, ) => acc + (obj.valor * obj.contador), 0);
-    this.subsidioTotal = this.contadores.reduce((acc, obj, ) => acc + ((this.valorParticular - obj.valor) * obj.contador), 0);
-    /*this.competitionService.cargarCategorias().subscribe(resultado=>{this.categorias=resultado;},
-        error=>{ console.log(JSON.stringify(error));this.showModalWindowFail=true; this.mensajeFail+=" Deportes,"});*/
-  }
+  @Input() team:any;
+  constructor(private competitionService: CompetitionService) {   }
 
-  ngOnInit() {}
-  conteoDeCategorias() {
+  ngOnInit() {    
+    if(this.team!=null)
+    {
+      this.competitionService.cargarJugadores(this.team.id).subscribe(resultado=>{
+        for(let i of resultado){
+          this.players.push(i); 
+        }  
+        this.categorias = this.competitionService.cargarCategorias1();
+        this.inicializarContador();
+        this.conteoDeCategorias();
+        this.valorTotal = this.contadores.reduce((acc, obj, ) => acc + (obj.valor * obj.contador), 0);
+        this.subsidioTotal = this.contadores.reduce((acc, obj, ) => acc + ((this.valorParticular - obj.valor) * obj.contador), 0);
+      },
+      error=>{ console.log(JSON.stringify(error));}); 
+    }     
+  }
+ 
+  conteoDeCategorias() {   
     for (let player of this.players) {
       this.aumentarContador(player.categoria);
     }

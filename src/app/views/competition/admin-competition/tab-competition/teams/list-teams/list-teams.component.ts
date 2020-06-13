@@ -12,7 +12,7 @@ export class ListTeamsComponent implements OnInit {
 
   /****************************************VARIABLES DE SALIDA DEL COMPONENTE*********************** */
   @Output() showAddTeam = new EventEmitter<{showAddTeam: boolean}>();
-  public cancel=true;
+  public cancel:number=0;
   public editar = false;
   public competition:any;
   public t: any;
@@ -49,16 +49,10 @@ export class ListTeamsComponent implements OnInit {
   ngOnInit() {
     this.teams=this.competitionService.teams;
   }
-ngOnDestroy(): void {
-  this.cancel=false;
 
-}
-  onCancel()
-  {
-    if(this.cancel)
-    this.cancel=false;
-    else
-    this.cancel=true;
+  onCancel(n:number)
+  {   
+    this.cancel=n;
   }
   sendEventAddTeam() {
     this.showAddTeam.emit({showAddTeam: true});
@@ -72,5 +66,7 @@ ngOnDestroy(): void {
       this.editar = true;
     }
     this.t = equipo;
+    this.cancel=2;
+
   }
 }

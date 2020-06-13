@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { team } from '../../../../../../model/team.model';
 
 @Component({
@@ -8,10 +8,10 @@ import { team } from '../../../../../../model/team.model';
 export class EditTeamComponent implements OnInit {
   @Input()edit: boolean;
   @Input()team: any;
-  @Input()idCompetencia: number;
   constructor() { }
 
   ngOnInit() {
   }
+
 
 }

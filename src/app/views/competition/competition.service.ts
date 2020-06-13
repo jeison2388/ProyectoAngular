@@ -22,36 +22,25 @@ export class CompetitionService {
   {
     this.ruta="http://pruebasweb.comfacauca.com:8080/";
   }
-  cargarJugadores():Observable<any>
+  cargarJugadores(id:number):Observable<any>
   {
       let jugadores:any;
-      //RUTA QUEMADA !!!!!
-      console.log("RUTA DE CARGAR JUGADORES ESTÁ QUEMADA, FALTA AGREGAR EL ID DEL JUGADOR EN LA URL");
-      jugadores= this.httpClient.get(this.ruta+"competicion/equipos/obtenerJugadores/2");
-       console.log("TAMAÑO DE ARRAY JUGADORES:   "+this.players.length);
-      
-      /* :player[]=
-      [
-        {
-          cedula: "10344242",
-          nombres: "Pedro Felipe",
-          apellidos:"Robledo Samboní",
-          celular:"24353423244",
-          categoria:"A",
-          valor:7900
-        }
-      ];
-       */
+      let rutaJugadores=this.ruta+"competicion/equipos/obtenerJugadores/" +id;
+      jugadores= this.httpClient.get( rutaJugadores);
+      console.log("RUTA:   "+rutaJugadores);    
       return jugadores;
   }
-  onPlayers()
+  onPlayers(id:number)
   {
     this.players.length=0;
-    this.cargarJugadores().subscribe(resultado=>{
-      for(let i of resultado)
-        this.players.push(i);        
+    this.cargarJugadores(id).subscribe(resultado=>{
+      for(let i of resultado){
+        this.players.push(i); 
+      }
+               
     },
-      error=>{ console.log(JSON.stringify(error));});     
+      error=>{ console.log(JSON.stringify(error));});        
+      console.log("TAMAÑO DE ARRAY ( id:   "+id+")JUGADORES:   "+this.players.length);     
     }
   onTeams()
   {
@@ -65,23 +54,10 @@ export class CompetitionService {
   }
   cargarEquipos():Observable<any>
   {
-        let equipos: any;
-        let rutaEquipos=this.ruta+"competicion/obtenerEquipos/"+this.idSelected;
-        equipos= this.httpClient.get(this.ruta+"competicion/obtenerEquipos/"+this.idSelected);
-       /* [
-        {
-          numero: 1,
-          Logo: "u496",
-          NombreEquipo:"HOTEL ACHALAY",
-          Delegado:"ANDRES FELIPE RESTREPO",
-          identificacion:1232353453,
-          telefono:23453456567,
-          estado:"Pendiente de pago"
-        }
-       
-      ]; */
-      //return  this.httpClient.get<team>(this.ruta+"competicion/obtenerEquipos");
-      return equipos;
+    let equipos: any;
+    let rutaEquipos=this.ruta+"competicion/obtenerEquipos/"+this.idSelected;
+    equipos= this.httpClient.get(this.ruta+"competicion/obtenerEquipos/"+this.idSelected);      
+    return equipos;
   }
   addCompetition(competition: Object, fileToCompetition: any[]):Observable<any>
   {
@@ -95,10 +71,7 @@ export class CompetitionService {
         formData.append('indice',i.file);
         console.log("ARCHIVO:  "+JSON.stringify(i.file));
         //contador++;
-      }
-      //else
-        //formData.append('indice'+contador,(fileToCompetition));
-
+      }      
     return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData,{reportProgress: true, observe: 'events'});
   }
   competenciaSeleccionada():any

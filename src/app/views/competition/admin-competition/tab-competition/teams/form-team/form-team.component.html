@@ -7,7 +7,7 @@
         </div>
         <div class="card-body">
           <form [formGroup]="fieldsForm" (ngSubmit)="onSubmit()" #f="ngForm">
-            <h3 class="title text-center"><strong> {{titleForm}}</strong></h3>
+            <h3 class="title text-center"><strong>FORMULARIO EQUIPOS</strong></h3>
             <p class="text-muted text-center"> {{subtitleForm}}</p>
             <div class="card ">
               <div class="card-body">
@@ -48,8 +48,8 @@
                               <h6 class="colorAsterisco">*</h6><small>&nbsp;Nombre</small>
                             </span>
                           </div>
-                          <input type="text" *ngIf="edit" class="form-control" placeholder="* Nombre Equipo"
-                            formControlName="nameTeam" [value]="team.nombre">
+                          <input type="text" *ngIf="edit" disabled="true" class="form-control" placeholder="* Nombre Equipo"
+                            formControlName="nameTeam" value="{{team.nombre}}">
                             <input type="text" *ngIf="!edit" class="form-control" placeholder="* Nombre Equipo"
                             formControlName="nameTeam">
                         </div>
@@ -70,7 +70,7 @@
                               <h6 class="colorAsterisco">*</h6><small>&nbsp;Delegado</small>
                             </span>
                           </div>
-                          <input type="text" *ngIf="edit" [value]="team.delegado" class="form-control" placeholder="* Nombre" formControlName="nameDelegate">
+                          <input type="text" *ngIf="edit" disabled="true" value="{{team.delegado}}" class="form-control" placeholder="* Nombre" formControlName="nameDelegate">
                           <input type="text" *ngIf="!edit" class="form-control" placeholder="* Nombre" formControlName="nameDelegate">
                         </div>
                       </div>
@@ -90,7 +90,7 @@
                               <h6 class="colorAsterisco">*</h6><small>&nbsp;CC</small>
                             </span>
                           </div>
-                          <input type="text" *ngIf="edit" [value]="team.identificacion" class="form-control" placeholder="* # identificación"
+                          <input type="text" *ngIf="edit" disabled="true" value="{{team.identificacion}}" class="form-control" placeholder="* # identificación"
                             formControlName="idDelegate">
                             <input type="text" *ngIf="!edit" class="form-control" placeholder="* # identificación"
                             formControlName="idDelegate">
@@ -112,9 +112,9 @@
                               <h6 class="colorAsterisco">*</h6><small>&nbsp;tel</small>
                             </span>
                           </div>
-                          <input type="text" *ngIf="edit" [value]="team.telefono" class="form-control" placeholder="* Telefono"
+                          <input type="text" *ngIf="edit" disabled="true" value="{{team.telefono}}" class="form-control" placeholder="* Telefono"
                             formControlName="phoneDelegate">
-                            <input type="text" *ngIf="!edit"  class="form-control" placeholder="* Telefono"
+                            <input type="text" *ngIf="!edit"   class="form-control" placeholder="* Telefono"
                             formControlName="phoneDelegate">
                         </div>
                       </div>
@@ -128,9 +128,9 @@
 
 
                   <app-add-info-players></app-add-info-players>
-                  <app-list-players></app-list-players>
+                  <app-list-players [team]="team"></app-list-players>
                 <!-- Agregar componente Nuevo aqui -->
-                  <app-list-registration-value-team></app-list-registration-value-team>
+                  <app-list-registration-value-team [team]="team"></app-list-registration-value-team>
                   <button (click)="onCancel()"> cancelar</button>
                   </div>
             </div>

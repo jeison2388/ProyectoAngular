@@ -20,7 +20,7 @@ export class FormTeamComponent implements OnInit {
   @Output()  valCancel = new EventEmitter<boolean>();
   @Input() team:any;
   @Input() edit:boolean;
-  @Input() competitionId:number;
+  public idTeam:number=0;
 
 
   filePhoto: File;
@@ -52,9 +52,17 @@ export class FormTeamComponent implements OnInit {
         phoneDelegate: ['', [Validators.required,  Validators.pattern('^([0-9])*$'), Validators.maxLength(12)]]
       });
   }
+  ngOnChanges() {
+    if(this.team!=null)
+      this.idTeam=this.team.id;
+    
+  }
 onSubmit()
 {
   console.log("GUARDADO desde form-team");
+  //GUARDO Y CAMBIO DE VISTA
+  this.valCancel.emit(true);
+  
 }
 onCancel()
 {
