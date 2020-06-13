@@ -1,42 +1,46 @@
-<div class="" *ngIf="cancel">
-  <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <input type="text" class="form-control" name="filterPost" placeholder="Buscar" [(ngModel)]="filterPost">
-      <button class="btn btn-block btn-ghost-primary active col-3 col-md-3 col-lg-3" type="submit">
-        <i class="fa fa-search">
-          
-        </i>
-      </button>
+<div *ngIf="!editar">
+  <div class="" *ngIf="cancel">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <input type="text" class="form-control" name="filterPost" placeholder="Buscar" [(ngModel)]="filterPost">
+        <button class="btn btn-block btn-ghost-primary active col-3 col-md-3 col-lg-3" type="submit">
+          <i class="fa fa-search">
+
+          </i>
+        </button>
+      </div>
     </div>
-  </div>
-  <table class="table table-bordered ">
-    <thead class="table-primary">
-      <tr>
-        <th scope="col">No.</th>
-        <!-- <th scope="col">Logo</th> -->
-        <th scope="col">Nombre del equipo</th>
-        <th scope="col">Delegado</th>
-        <th scope="col">Identificacion</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Estado</th>
+    <table class="table table-bordered ">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">No.</th>
+          <!-- <th scope="col">Logo</th> -->
+          <th scope="col">Nombre del equipo</th>
+          <th scope="col">Delegado</th>
+          <th scope="col">Identificacion</th>
+          <th scope="col">Telefono</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let team of teams | filter: filterPost;index as i" (click)="editTeam(team)">
+      <td>{{i+1}}</td>
+      <!--  <td><img style=" width: 50px; height: 50px;" src="../../../../../../../assets/img/{{team.Logo}}.png" alt=""></td>
+        -->
+        <td>{{team.nombre}}</td>
+        <td>{{team.delegado}}</td>
+        <td>{{team.identificacion}}</td>
+        <td>{{team.telefono}}</td>
+        <td><!-- {{team.estado}} -->Pendiente de Pago</td>
       </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let team of teams | filter: filterPost;index as i">   
-     <td>{{i+1}}</td>
-     <!--  <td><img style=" width: 50px; height: 50px;" src="../../../../../../../assets/img/{{team.Logo}}.png" alt=""></td>
-       -->
-      <td>{{team.nombre}}</td>
-      <td>{{team.delegado}}</td>
-      <td>{{team.identificacion}}</td>
-      <td>{{team.telefono}}</td>
-      <td><!-- {{team.estado}} -->Pendiente de Pago</td>    
-    </tr>
-      
-    </tbody>
-  </table>
-  
-  <button class="btn  btn-primary" (click)="onCancel()">crear equipo</button>
+
+      </tbody>
+    </table>
+
+    <button class="btn  btn-primary" (click)="onCancel()">crear equipo</button>
+  </div>
+  <app-form-team *ngIf="!cancel" (valCancel)="onCancel()"></app-form-team>
 </div>
-<app-form-team *ngIf="!cancel" (valCancel)="onCancel()"></app-form-team>
-     
+<div *ngIf="editar">
+  <app-edit-team [edit]=true [team]="t" [idCompetencia]="idCompetencia"></app-edit-team>
+</div>
