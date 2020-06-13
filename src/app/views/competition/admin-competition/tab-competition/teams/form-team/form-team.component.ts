@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {UtilCompetition} from '../../../../UtilCompetition';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { team } from '../../../../../../model/team.model';
+import { CompetitionService } from '../../../../competition.service';
 
 @Component({
   selector: 'app-form-team',
@@ -15,8 +17,11 @@ export class FormTeamComponent implements OnInit {
   @Input() subtitleForm: { subtitleForm: string };
   @Input() buttonAction: { buttonAction: string };
   @Input() public cancel=false;
-  @Output()
-  valCancel = new EventEmitter<boolean>();
+  @Output()  valCancel = new EventEmitter<boolean>();
+  @Input() team:any;
+  @Input() edit:boolean;
+  @Input() competitionId:number;
+
 
   filePhoto: File;
   srcPhotoView: any;
@@ -26,7 +31,7 @@ export class FormTeamComponent implements OnInit {
 
   fieldsForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private competitionService:CompetitionService) {
     this.utilCompetition = new UtilCompetition();
     this.srcPhotoView = '../../../../../../assets/img/competicion/addPhoto.png';
     this.thereIsErrorPhoto = false;

@@ -12,8 +12,8 @@
     </thead>
     <tbody>
       <!-- <tr *ngFor="let team of teams"> -->
-      <tr *ngFor="let player of players">
-        <td>#</td>
+      <tr *ngFor="let player of players; index as i">
+        <td>{{i+1}}</td>
         <td>{{player.cedula}}</td>
         <td>{{player.afiliado.persona.primerNombre}}</td>
         <td>{{player.afiliado.persona.primerApellido}}</td>

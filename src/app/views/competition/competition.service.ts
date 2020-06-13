@@ -29,7 +29,7 @@ export class CompetitionService {
       console.log("RUTA DE CARGAR JUGADORES ESTÁ QUEMADA, FALTA AGREGAR EL ID DEL JUGADOR EN LA URL");
       jugadores= this.httpClient.get(this.ruta+"competicion/equipos/obtenerJugadores/2");
        console.log("TAMAÑO DE ARRAY JUGADORES:   "+this.players.length);
-
+      
       /* :player[]=
       [
         {
@@ -46,30 +46,29 @@ export class CompetitionService {
   }
   onPlayers()
   {
+    this.players.length=0;
     this.cargarJugadores().subscribe(resultado=>{
-      for(let i of resultado){
-        this.players.push(i);
-        console.log("AÑADIENDO ELEMENTO:  "+i.afiliado.persona.primerNombre);  
-      }
+      for(let i of resultado)
+        this.players.push(i);        
     },
       error=>{ console.log(JSON.stringify(error));});     
-  }
+    }
   onTeams()
   {
+    this.teams.length=0;
     this.cargarEquipos().subscribe(resultado=>{
       for(let i of resultado)
-        this.teams.push(i);
+        this.teams.push(i);        
     },
       error=>{ console.log(JSON.stringify(error));});
-      this.tamTeam=this.teams.length;
-      
+      this.tamTeam=this.teams.length;      
   }
   cargarEquipos():Observable<any>
   {
         let equipos: any;
+        let rutaEquipos=this.ruta+"competicion/obtenerEquipos/"+this.idSelected;
         equipos= this.httpClient.get(this.ruta+"competicion/obtenerEquipos/"+this.idSelected);
-       
-        /* [
+       /* [
         {
           numero: 1,
           Logo: "u496",
