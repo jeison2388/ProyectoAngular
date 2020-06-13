@@ -1,5 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { CompetitionService } from '../../../../competition.service';
+import { team } from '../../../../../../model/team.model';
+import { map } from 'rxjs/operators';
+import {from} from 'rxjs';
 
 @Component({
   selector: 'app-list-teams',
@@ -10,7 +13,10 @@ export class ListTeamsComponent implements OnInit {
   /****************************************VARIABLES DE SALIDA DEL COMPONENTE*********************** */
   @Output() showAddTeam = new EventEmitter<{showAddTeam: boolean}>();
   public cancel=true;
+  public editar = false;
   public competition:any;
+  public t: any;
+  public idCompetencia :number;
   teams: any[];
   /* [
     {
@@ -35,17 +41,17 @@ export class ListTeamsComponent implements OnInit {
    */
   filterPost='';
   mensaje: string='';
-  constructor(private competitionService:CompetitionService) {
-    
+  constructor(private competitionService:CompetitionService ) {
+      this.idCompetencia = this.competitionService.idSelected;
    }
 
-  
+
   ngOnInit() {
     this.teams=this.competitionService.teams;
   }
 ngOnDestroy(): void {
   this.cancel=false;
-  
+
 }
   onCancel()
   {
@@ -56,5 +62,15 @@ ngOnDestroy(): void {
   }
   sendEventAddTeam() {
     this.showAddTeam.emit({showAddTeam: true});
+  }
+
+  editTeam(equipo: any) {
+    console.log('entor al editar');
+    if (this.editar) {
+      this.editar = false;
+    }else {
+      this.editar = true;
+    }
+    this.t = equipo;
   }
 }
