@@ -3,6 +3,7 @@ import {UtilCompetition} from '../../../../UtilCompetition';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { team } from '../../../../../../model/team.model';
 import { CompetitionService } from '../../../../competition.service';
+import { player } from '../../../../../../model/player.model';
 
 @Component({
   selector: 'app-form-team',
@@ -16,11 +17,17 @@ export class FormTeamComponent implements OnInit {
   @Input() titleForm: { titleForm: string };
   @Input() subtitleForm: { subtitleForm: string };
   @Input() buttonAction: { buttonAction: string };
-  @Input() public cancel=false;
-  @Output()  valCancel = new EventEmitter<boolean>();
+  @Input() public cancel;
+  @Output() valCancel = new EventEmitter<number>();
+  @Output() teamOutput= new EventEmitter<any>();
+  @Output() playerOutput= new EventEmitter<any>();  
+  @Output() agregadoOutput= new EventEmitter<boolean>();
   @Input() team:any;
   @Input() edit:boolean;
   public idTeam:number=0;
+  mostrarModalAddPlayer=false;
+  newPlayer:player;
+  onchangeModal="";
 
 
   filePhoto: File;
@@ -57,17 +64,36 @@ export class FormTeamComponent implements OnInit {
       this.idTeam=this.team.id;
     
   }
+  mostrarVentanaModalAddPlayer() {
+    this.onchangeModal = this.onchangeModal + ' ';
+    this.mostrarModalAddPlayer = true;
+  }
 onSubmit()
 {
   console.log("GUARDADO desde form-team");
-  //GUARDO Y CAMBIO DE VISTA
-  this.valCancel.emit(true);
-  
+    this.team= 
+      {
+        nombre: this.fieldsForm.get('nameTeam').value,
+        delegado:this.fieldsForm.get('nameDelegate').value,
+        identificacion: this.fieldsForm.get('idDelegate').value,
+        telefono: this.fieldsForm.get('phoneDelegate').value   
+      };
+      this.teamOutput.emit(this.team);
+      this.valCancel.emit(0);
+      console.log("GUARDANDO EQUIPO!!");
 }
 onCancel()
 {
   this.cancel=true;
-  this.valCancel.emit(true);
+  this.valCancel.emit(0);
+}
+onPlayer(event)
+{
+  this.playerOutput.emit(event);
+}
+onAgregado(event)
+{
+  this.agregadoOutput.emit(event);
 }
 
   uploadPhoto(event: any) {

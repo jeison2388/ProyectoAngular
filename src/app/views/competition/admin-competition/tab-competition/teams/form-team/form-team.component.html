@@ -1,3 +1,4 @@
+Editar:  {{edit}}
 <div class="animated fadeIn">
   <div class="row">
     <div class="col-lg-12 ">
@@ -118,22 +119,29 @@
                             formControlName="phoneDelegate">
                         </div>
                       </div>
-
                     </div>
-
                   </div>
-
-
                 </div>
 
-
-                  <app-add-info-players></app-add-info-players>
-                  <app-list-players [team]="team"></app-list-players>
-                <!-- Agregar componente Nuevo aqui -->
-                  <app-list-registration-value-team [team]="team"></app-list-registration-value-team>
-                  <button (click)="onCancel()"> cancelar</button>
+                <div class="">
+                  <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                      <form action="">
+                      <h6 class="title text-center"><strong>Datos de los Jugadores</strong></h6>
+                  
+                      <div class="rightDiv">
+                      <button type="submit" class="btn btn-primary" (click)="mostrarVentanaModalAddPlayer()">
+                        Agregar Jugador
+                      </button>
+                      </div>
+                    </form>
+                    </div>
+                  </div>               
+                  <app-add-modal-player *ngIf="mostrarModalAddPlayer" (agregado)="onAgregado($event)" (player)="onPlayer($event)" [onchangeModal]="onchangeModal"></app-add-modal-player>
+                  </div>
                   </div>
             </div>
+            <button type="submit">Guardar</button>
           </form>
         </div>
       </div>

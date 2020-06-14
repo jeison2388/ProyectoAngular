@@ -17,7 +17,9 @@ export class ListTeamsComponent implements OnInit {
   public competition:any;
   public t: any;
   public idCompetencia :number;
-  teams: any[];
+  teams: any[]=[];
+  newPlayer:any;
+  agregado:boolean;
   /* [
     {
       numero: 1,
@@ -49,11 +51,33 @@ export class ListTeamsComponent implements OnInit {
   ngOnInit() {
     this.teams=this.competitionService.teams;
   }
-
+  setCancel(e)
+  {
+    this.cancel=e;
+    console.log("Evento recibido.valor=  "+e);
+  }
+  onTeam(event)
+  {
+    console.log("#############IMPRIMIENDO DESDE ONTEAM:  "+event.nombre);
+    this.teams.push(event);
+    this.t=event;
+  }
   onCancel(n:number)
   {   
     this.cancel=n;
   }
+  onPlayer(event)
+  {
+    this.newPlayer=event;
+  }
+  onAgregado(event)
+  {
+    this.agregado=event;
+  }
+onSave(n:number)
+{
+  this.cancel=n;
+}
   sendEventAddTeam() {
     this.showAddTeam.emit({showAddTeam: true});
   }

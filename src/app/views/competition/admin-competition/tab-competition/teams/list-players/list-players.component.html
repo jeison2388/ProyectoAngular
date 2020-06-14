@@ -1,4 +1,3 @@
-Lista de jugadores del Equipo:  {{team.nombre}}
 <table class="table table-bordered ">
     <thead class="table-primary">
       <tr>
@@ -20,8 +19,16 @@ Lista de jugadores del Equipo:  {{team.nombre}}
         <td>{{player.afiliado.persona.primerApellido}}</td>
         <td>{{player.telefono}}</td>
         <td>{{player.categoria}}</td>
-        <td>{{player.valor}}</td>
-        
+        <td>{{player.valor}}</td>        
+      </tr>
+      <tr *ngIf="Agregado">
+        <td>#</td>
+        <td>{{newPlayer.nombres}}</td>
+        <td>{{newPlayer.cedula}}</td>
+        <td>{{newPlayer.apellidos}}</td>
+        <td>{{newPlayer.celular}}</td>
+        <td>{{newPlayer.categoria}}</td>        
+        <td>{{newPlayer.valor}}</td>
       </tr>
     </tbody>
   </table>

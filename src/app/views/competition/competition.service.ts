@@ -13,6 +13,7 @@ import { team } from '../../model/team.model'
 export class CompetitionService {
   private ruta:string;
   public idSelected=0;
+  public idFinal=0;
   public competitions:any;
   players: any[]=[];
   teams:any[]=[];
@@ -41,13 +42,21 @@ export class CompetitionService {
     },
       error=>{ console.log(JSON.stringify(error));});        
       console.log("TAMAÑO DE ARRAY ( id:   "+id+")JUGADORES:   "+this.players.length);     
-    }
+    }   
+    
+    
   onTeams()
   {
+    this.idFinal=0;
     this.teams.length=0;
     this.cargarEquipos().subscribe(resultado=>{
       for(let i of resultado)
-        this.teams.push(i);        
+      {
+        this.teams.push(i);  
+        if(i.id>this.idFinal)
+          this.idFinal=i.id;
+      }
+              
     },
       error=>{ console.log(JSON.stringify(error));});
       this.tamTeam=this.teams.length;      

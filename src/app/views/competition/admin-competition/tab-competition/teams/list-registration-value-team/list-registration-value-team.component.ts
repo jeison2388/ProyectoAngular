@@ -34,7 +34,10 @@ export class ListRegistrationValueTeamComponent implements OnInit {
         this.subsidioTotal = this.contadores.reduce((acc, obj, ) => acc + ((this.valorParticular - obj.valor) * obj.contador), 0);
       },
       error=>{ console.log(JSON.stringify(error));}); 
-    }     
+    } 
+    else    
+      this.team=[];
+       
   }
  
   conteoDeCategorias() {   

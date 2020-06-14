@@ -1,7 +1,8 @@
-import { Component, ViewChild, OnChanges,Input, OnInit } from '@angular/core';
+import { Component, ViewChild, OnChanges,Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CompetitionService } from '../../../../../../competition.service';
+import { player } from '../../../../../../../../model/player.model';
 
 @Component({
   selector: 'app-add-modal-player',
@@ -12,7 +13,9 @@ export class AddModalPlayerComponent implements OnChanges, OnInit {
   /************************VARIABLES LOCALES******************* */
   @Input() onchangeModal: { titulo: string };
   @ViewChild('modalAddPlayer', { static: true }) modalAddPlayer: any;
-
+  
+  @Output() player= new EventEmitter<player>();
+  @Output() agregado = new EventEmitter<boolean>();
   modalOptions: NgbModalOptions;
   fieldsForm: FormGroup;
 
@@ -44,21 +47,17 @@ export class AddModalPlayerComponent implements OnChanges, OnInit {
   }
 
   onSubmit() {
-    const newPlayer = {};
-    newPlayer['nombres'] = this.fieldsForm.get('namesPlayer').value;
-    newPlayer['apellidos'] = this.fieldsForm.get('surnamesPlayer').value;
-    newPlayer['telefono'] = this.fieldsForm.get('phonePlayer').value;
-    newPlayer['cedula'] = this.fieldsForm.get('idPlayer').value;
-    let jugador={
-      nombres:<string> this.fieldsForm.get('namesPlayer').value,
-      apellidos:<string>this.fieldsForm.get('surnamesPlayer').value,
-      cedula:<string>this.fieldsForm.get('idPlayer').value,
-      celular:<string>this.fieldsForm.get('phonePlayer').value,      
-      categoria:"A",
-      valor:7900
-      }
-    this.competitionservice.players.push(jugador);
-
-    console.log("GUARDANDO JUGADORRR!!");
+    let newPlayer=
+      {
+        nombres: this.fieldsForm.get('namesPlayer').value,
+        apellidos:this.fieldsForm.get('surnamesPlayer').value,
+        celular: this.fieldsForm.get('phonePlayer').value,
+        cedula: this.fieldsForm.get('idPlayer').value  ,
+        valor: 7900,
+        categoria: "A"
+      };   
+    this.player.emit(newPlayer);
+    this.agregado.emit(true);
+    console.log("GUARDANDO JUGADORRR!!",newPlayer);
   }
 }
