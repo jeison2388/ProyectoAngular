@@ -45,7 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { DummyComponent } from './shared/dummy.component';
 import { ModalWindowsModule } from './views/modal-windows/modal-windows.module';
-
+import  {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   imports: [
     BrowserModule,
@@ -63,8 +63,9 @@ import { ModalWindowsModule } from './views/modal-windows/modal-windows.module';
     HttpClientModule,
     DataTablesModule,
     ModalWindowsModule,
-    FormsModule
-  ],
+    FormsModule,
+    NgxPaginationModule
+    ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,

@@ -10,6 +10,7 @@ export class FilterPipe implements PipeTransform {
     const resultPost=[];
     for(const post of value)
     {
+      if(post.NombreEquipo!="" )
       if((post.NombreEquipo.toLowerCase().indexOf(arg.toLowerCase())>-1)||(post.Delegado.toLowerCase().indexOf(arg.toLowerCase())>-1))
       {
         resultPost.push(post);

@@ -7,13 +7,17 @@ import { CompetitionService } from '../../competition.service';
 })
 export class ListCompetitionNavComponent implements OnInit {
 competencias: any;
-
+pageActual:number=1;
  
   constructor(private competitionService:CompetitionService) { }
 
   ngOnInit() 
   {
-    this.competitionService.cargarCompeticion().subscribe(resultado=>{this.competencias=resultado; this.competitionService.competitions=resultado},
+    this.competitionService.cargarCompeticion().subscribe(resultado=>{
+      this.competencias=resultado; 
+      this.competitionService.competitions=resultado
+      this.competencias.slice(1,5);
+    },
       error=>{ console.log(JSON.stringify(error));});
   }
   asignarIdSeleccionado(id:number)

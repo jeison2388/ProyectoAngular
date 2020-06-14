@@ -30,7 +30,7 @@ import { FilterPipe } from './admin-competition/pipes/filter.pipe';
 import { ListPlayersComponent } from './admin-competition/tab-competition/teams/list-players/list-players.component';
 import { ListCompetitionComponent } from './admin-competition/list-competition/list-competition.component';
 import { EditTeamComponent } from './admin-competition/tab-competition/teams/edit-team/edit-team.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -43,7 +43,8 @@ import { EditTeamComponent } from './admin-competition/tab-competition/teams/edi
     ModalWindowsModule,
     TabsModule,
     NgbModule,
-    DragDropModule
+    DragDropModule,
+    NgxPaginationModule
   ],
   declarations: [FormCompetitionComponent,
                 AddCompetitionComponent,
