@@ -13,6 +13,8 @@ export class ListCompetitionComponent implements OnInit {
   titleAddCompetition: string;
   subtitleAddCompetition: string;
   nameBtnAddCompetition: string;
+  filterPost='';  
+  pageActual:number=1;
   constructor(private competitionService:CompetitionService) 
   {
     this.titleAddCompetition = 'Competencias';

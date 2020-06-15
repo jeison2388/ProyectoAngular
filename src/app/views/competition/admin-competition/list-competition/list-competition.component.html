@@ -12,8 +12,16 @@
                     <h3 class="title" style="color: cadetblue;">
                         <strong>CONFIGURACIÓN DE COMPETICIONES</strong>
                     </h3>
-                    <div class="col-md-8">
-                        <button type="button" class="btn btn-primary" style="position: relative; left: 30cm;" (click)="cambiar()"> Agregar Competicion</button>    
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <input class="form-control col-8 col-md-9 col-lg-9" type="search"  name="filterPost" placeholder="Buscar" [(ngModel)]="filterPost" aria-label="Buscar">
+                        <button class="btn btn-block btn-ghost-primary active col-3 col-md-3 col-lg-3" type="submit" ><i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" style="position: relative; left: 80%;" (click)="cambiar()"> Agregar Competicion</button>    
                     </div>
                     <table class="table table-bordered round_table ">
                         <thead class="table-primary">
@@ -25,9 +33,13 @@
                             <th scope="col">Género</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <!-- <tr *ngFor="let team of teams"> -->
-                          <tr *ngFor="let competition of competitions">
+                        <tbody>                          
+                        <!--   <button (click)=asignarIdSeleccionado(competencia.id) class="nav-link "  [className]="'nav-link active '" *ngFor="let competencia of competencias | pipeCompetition: filterPost | paginate: { itemsPerPage: 15, currentPage: pageActual } "> 
+                            <img src="../../../../../assets/img/competicion/{{competencia.subPrograma.descripcion|lowercase}}.png" id="imagen" width="24" height="24" class="d-inline-block align-top" alt="">
+                            <strong>{{competencia.nombre}}</strong> 
+                          </button> -->
+                       
+                          <tr *ngFor="let competition of competitions | pipeCompetition: filterPost | paginate: { itemsPerPage: 15, currentPage: pageActual } ">
                             <td>{{competition.nombre}}</td>
                             <td>{{competition.subPrograma.descripcion}}</td>
                             <td>{{competition.tipoCompeticion.descripcion}}</td>
@@ -36,6 +48,8 @@
                           </tr>
                         </tbody>
                       </table>
+                      <pagination-controls previousLabel="Anterior"
+                      nextLabel="Siguiente" (pageChange)="pageActual = $event"></pagination-controls>
                   </div>
               </div>
           </div>
