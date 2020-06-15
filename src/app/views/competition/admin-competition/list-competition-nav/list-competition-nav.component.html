@@ -5,7 +5,7 @@
       <div >
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <input class="form-control col-8 col-md-9 col-lg-9" type="search" placeholder="Buscar" aria-label="Buscar">
+            <input class="form-control col-8 col-md-9 col-lg-9" type="search"  name="filterPost" placeholder="Buscar" [(ngModel)]="filterPost" aria-label="Buscar">
             <button class="btn btn-block btn-ghost-primary active col-3 col-md-3 col-lg-3" type="submit" ><i class="fa fa-search"></i>
             </button>
           </div>
@@ -14,7 +14,7 @@
 
       <div class="nav flex-column nav-pills col-12 col-md-12 col-lg-12"  role="tablist" aria-orientation="vertical"> 
         
-          <button (click)=asignarIdSeleccionado(competencia.id) class="nav-link "  [className]="'nav-link active '" *ngFor="let competencia of competencias | paginate: { itemsPerPage: 15, currentPage: pageActual }"> 
+          <button (click)=asignarIdSeleccionado(competencia.id) class="nav-link "  [className]="'nav-link active '" *ngFor="let competencia of competencias | pipeCompetition: filterPost | paginate: { itemsPerPage: 15, currentPage: pageActual } "> 
             <img src="../../../../../assets/img/competicion/{{competencia.subPrograma.descripcion|lowercase}}.png" id="imagen" width="24" height="24" class="d-inline-block align-top" alt="">
             <strong>{{competencia.nombre}}</strong> </button>
         

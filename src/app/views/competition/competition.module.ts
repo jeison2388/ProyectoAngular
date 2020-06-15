@@ -31,6 +31,7 @@ import { ListPlayersComponent } from './admin-competition/tab-competition/teams/
 import { ListCompetitionComponent } from './admin-competition/list-competition/list-competition.component';
 import { EditTeamComponent } from './admin-competition/tab-competition/teams/edit-team/edit-team.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { PipeCompetitionPipe } from './pipes/pipe-competition.pipe';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
                 ListPlayersComponent,
                 ListCompetitionComponent,
                 EditTeamComponent,
+                PipeCompetitionPipe,
                 ],
   providers: [CompetitionService]
 })

@@ -8,6 +8,8 @@ import { CompetitionService } from '../../competition.service';
 export class ListCompetitionNavComponent implements OnInit {
 competencias: any;
 pageActual:number=1;
+filterPost='';
+mensaje: string='';
  
   constructor(private competitionService:CompetitionService) { }
 

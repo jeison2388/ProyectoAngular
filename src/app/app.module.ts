@@ -73,7 +73,7 @@ import  {NgxPaginationModule} from 'ngx-pagination';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    DummyComponent,
+    DummyComponent
   ],
   providers: [{
     provide: LocationStrategy,
