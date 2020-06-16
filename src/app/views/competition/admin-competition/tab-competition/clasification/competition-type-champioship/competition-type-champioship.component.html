@@ -13,14 +13,11 @@
                   <h6>Equipos</h6>
                 </div>           
             </section>
-              
-           
             <div class="card-body">
               <div cdkDropList [cdkDropListData]="teamsCompetition" class="classification-list"
                 cdkDropListSortingDisabled (cdkDropListDropped)="drop($event)">
                 <div class="classification-box" *ngFor="let team of teamsCompetition"  cdkDrag>
-                  <img src="../../../../../../../assets/img/{{team.Logo}}.png" width="60" > {{team.NombreEquipo}}
-                   
+                  <img src="../../../../../../../assets/img/{{team.Logo}}.png" width="60" > {{team.NombreEquipo}}  
                 </div>
               </div>
             </div>
