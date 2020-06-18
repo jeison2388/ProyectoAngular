@@ -14,6 +14,7 @@ import { NestedTreeControl } from '@angular/cdk/tree';
 import { Componente } from '../../models/Componente';
 import { FormsModule } from '@angular/forms';
 import { EscalaValorativa } from '../../models/EscalaValorativa';
+import { EvaluacionService } from '../evaluaciones.service';
 enableRipple(true);
 
 /**
@@ -37,6 +38,16 @@ interface Node {
 })
 export class FormEvaluacionComponent implements OnInit {
 
+  // Catálogos iniciales
+  programas: any;
+  niveles: any;
+
+  TREE_DATA: Node[];
+
+  listaComponentes: Componente[];
+  listaEscalaValorativa: EscalaValorativa[];
+  listaSubComponentes: SubComponente[];
+
   // Variables para majejar Inputs  Porcentaje
   public disabled: boolean = false;
   public rangeValidation: boolean = true;
@@ -57,8 +68,22 @@ export class FormEvaluacionComponent implements OnInit {
     public dataService: DataService,
     public notifierService: NotifierService,
     public router: Router,
-    public _location: Location
+    public _location: Location,
+    private evaluacionService: EvaluacionService
   ) {
+    this.evaluacionService.cargarProgramas().subscribe(resultado => {this.programas = resultado; },
+      error => { console.log(JSON.stringify(error)); });
+    this.evaluacionService.cargarNiveles().subscribe(resultado => {this.niveles = resultado; },
+      error => { console.log(JSON.stringify(error)); });
+
+    this.evaluacionService.cargarComponentes().subscribe(resultado => {this.listaComponentes = resultado; },
+      error => { console.log(JSON.stringify(error)); });
+    this.evaluacionService.cargarSubComponentes().subscribe(resultado => {this.listaSubComponentes = resultado; },
+      error => { console.log(JSON.stringify(error)); });
+    this.evaluacionService.cargarEscalaValorativa().subscribe(resultado => {this.listaEscalaValorativa = resultado; },
+      error => { console.log(JSON.stringify(error)); });
+
+
     this.notifier = notifierService;
 
     this.utilEvaluacion = new UtilEvaluacion();
@@ -76,10 +101,6 @@ export class FormEvaluacionComponent implements OnInit {
 
   treeControl = new NestedTreeControl<Node>(node => node.children);
   dataSource = new MatTreeNestedDataSource<Node>();
-
-  /************************VARIABLES TEMPORALES************* */
-  programas: string[] = ['Natación', 'Fútbol', 'Baloncesto', 'Squash'];
-  niveles: string[] = ['Nivel I', 'Nivel II', 'Nivel III', 'Nivel IV'];
 
   /***********************VARIABLES LOCALES**************** */
   @Input() titlePanel: { titlePanel: string };
@@ -101,10 +122,6 @@ export class FormEvaluacionComponent implements OnInit {
   errorPorcentajeTraslape: string;
   errorPorcentajeEval: string;
 
-  TREE_DATA: Node[];
-  listaComponentes: Componente[];
-  listaEscalaValorativa: EscalaValorativa[];
-  listaSubComponentes: SubComponente[];
   total: number;
   maxTotal: number = 100;
   pk = 0;
@@ -124,10 +141,9 @@ export class FormEvaluacionComponent implements OnInit {
       porcMinimo: ['']
     });
 
-    const listaTempEV =  this.utilEvaluacion.getEscalaValorativa();
-    this.listaEscalaValorativa = listaTempEV.sort((a, b) => (a.orden > b.orden) ? 1 : -1);
-    this.listaComponentes = this.utilEvaluacion.getComponentes();
-    this.listaSubComponentes = this.utilEvaluacion.getSubComponentes();
+    // this.listaEscalaValorativa = this.listaEscalaValorativa.sort((a, b) => (a.orden > b.orden) ? 1 : -1);
+    // this.listaComponentes = this.utilEvaluacion.getComponentes();
+    // this.listaSubComponentes = this.utilEvaluacion.getSubComponentes();
     this.cargarPreseleccion();
     // console.log(this.listaComponentes);
     // console.log(this.listaSubComponentes);

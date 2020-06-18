@@ -57,7 +57,7 @@
                       </span>
                     </div>
                     <select type="text" class="form-control" #programas>
-                      <option [ngValue]="programa" *ngFor="let programa of programas">{{programa}}</option>
+                      <option [ngValue]="prg" *ngFor="let prg of programas">{{prg.programa}}</option>
                     </select>
                   </div>
                 </div>
@@ -70,7 +70,7 @@
                       </span>
                     </div>
                     <select type="text" class="form-control" #niveles>
-                      <option [ngValue]="nivel" *ngFor="let nivel of niveles">{{nivel}}</option>
+                      <option [ngValue]="nvl" *ngFor="let nvl of niveles">{{nvl.nivel}}</option>
                     </select>
                   </div>
                 </div>

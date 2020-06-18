@@ -60,7 +60,7 @@
                     <small>&nbsp;Fecha inicio</small>
                   </span>
                 </div>
-                <input type="date" readonly class="form-control">
+                <input type="date" class="form-control">
               </div>
             </div>
             <div class="formGroup col-12 col-md-6 col-lg-4">
@@ -70,7 +70,7 @@
                     <small>&nbsp;Fecha finalización</small>
                   </span>
                 </div>
-                <input type="date" readonly class="form-control">
+                <input type="date" class="form-control">
               </div>
             </div>
             <div class="formGroup col-12 col-md-6 col-lg-4">
@@ -207,6 +207,18 @@
                               <input type="text" class="form-control" formControlName="nombresResponsable">
                             </div>
                           </div>
+
+                          <div class="formGroup col-12 col-md-6 col-lg-4">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-id-card-o"></i><small>&nbsp;Tupo Identificación</small></span>
+                              </div>
+                              <select type="text" class="form-control" #tipo>
+                                <option [ngValue]="tipo" *ngFor="let tipo of tipos">{{tipo}}</option>
+                              </select>
+                            </div>
+                          </div>
+
                           <div class="formGroup col-12 col-md-6 col-lg-4">
                             <i class="fa fa-exclamation-circle uncheck"
                               *ngIf="(fieldsForm.controls.identificacionResponsable.errors?.maxlength || fieldsForm.controls.identificacionResponsable.errors?.minlength) && fieldsForm.controls.identificacionResponsable.touched">

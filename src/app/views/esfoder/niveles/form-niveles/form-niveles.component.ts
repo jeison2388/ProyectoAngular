@@ -15,14 +15,8 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { UtilNivel } from '../UtilNivel';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { ModalBuscadorServicioComponent } from '../modal-buscador-servicio/buscador-servicio.component';
-
-class DataTablesResponse {
-  data: any[];
-  draw: number;
-  recordsFiltered: number;
-  recordsTotal: number;
-}
+import { NivelService } from '../niveles.service';
+import { ModalBuscadorServicioComponent } from '../../modal-buscador-servicio/buscador-servicio.component';
 
 @Component({
   selector: 'app-form-niveles',
@@ -31,10 +25,10 @@ class DataTablesResponse {
 export class FormNivelesComponent implements OnInit {
   // MODALS
   modalOptions: NgbModalOptions;
-  /************************VARIABLES TEMPORALES************* */
-  programas: string[] = ['Natación', 'Fútbol', 'Baloncesto', 'Squash'];
-  categorias: string[] = ['2010', '2011', '2012', '2013'];
-  servicioPrograma: string[] = ['Deportes'];
+  /************************ Variables ************* */
+  programas: any;
+  categorias: any;
+  servicioPrograma: any;
 
   /*array que se va a crear cuando me devulevan la informacion*/
   rules = [
@@ -95,8 +89,15 @@ export class FormNivelesComponent implements OnInit {
     sanitizer: DomSanitizer,
     public router: Router,
     public _location: Location,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private nivelService: NivelService
   ) {
+    this.nivelService.cargarSubProgramas().subscribe(resultado => {this.programas = resultado; },
+      error => { console.log(JSON.stringify(error)); });
+
+    this.nivelService.cargarCategoriasNivel().subscribe(resultado => {this.categorias = resultado; },
+      error => { console.log(JSON.stringify(error)); });
+
     this.notifier = notifierService;
     this.html = sanitizer.sanitize(SecurityContext.HTML, this.html);
 
@@ -154,7 +155,11 @@ export class FormNivelesComponent implements OnInit {
     modalRef.componentInstance.subPrograma = subPrograma;
     modalRef.result.then ((result) => {
       if (result) {
-        console.log (result);
+        console.log('Servicio seleccionado ::: ' + result);
+        // Servicio consultado cuando se obtienen los datos del dialogo
+        // parámetros a enviar son el servicio y el sub programa
+        this.nivelService.cargarProgramaServicio().subscribe(resultado => {this.categorias = resultado; },
+          error => { console.log(JSON.stringify(error)); });
       }
     });
   }

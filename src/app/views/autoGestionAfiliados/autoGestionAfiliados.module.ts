@@ -17,6 +17,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalWindowsModule } from '../modal-windows/modal-windows.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { InscripcionVacRecreativas } from './inscripcionVacacionesRec/inscripcionVacacionesRec.service';
+import { TarjetaAfiliado } from './tarjetaInfoAfiliado/tarjetaInfoAfiliado.service';
+import { InscripcionEsfoder } from './inscripcionEsfoder/inscripcionEsfoder.service';
 
 /**
  * Custom angular notifier options
@@ -42,7 +45,7 @@ const customNotifierOptions: NotifierOptions = {};
     ModalWindowsModule,
     ModalModule.forRoot()
   ],
-  providers: [DataService, UtilService, { provide: Location }],
+  providers: [DataService, UtilService, InscripcionVacRecreativas, TarjetaAfiliado, InscripcionEsfoder, { provide: Location }],
   entryComponents: []
 })
 export class AutoGestionAfiliadosModule {}
