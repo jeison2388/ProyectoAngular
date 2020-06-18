@@ -6,7 +6,6 @@ import { EvaluacionesComponent } from './evaluacion-rendimiento/evaluaciones.com
 import { AddNivelesComponent } from './niveles/add-niveles/add-niveles.component';
 import { EditNivelesComponent } from './niveles/edit-niveles/edit-niveles.component';
 import { FormNivelesComponent } from './niveles/form-niveles/form-niveles.component';
-import { ModalBuscadorServicioComponent } from './niveles/modal-buscador-servicio/buscador-servicio.component';
 import { PlanClaseComponent } from './niveles/gestion-grupos/plan-clase/plan-clase.component';
 import { EscenarioDeportivoComponent } from './niveles/gestion-grupos/escenario-deportivo/escenario-deportivo.component';
 import { GestionGrupoComponent } from './niveles/gestion-grupos/gestion-grupo.component';
@@ -36,6 +35,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NumericTextBoxModule } from '@progress/kendo-angular-inputs';
+import { NivelService } from './niveles/niveles.service';
+import { EvaluacionService } from './evaluacion-rendimiento/evaluaciones.service';
+import { InstructorService } from './instructores/instructores.service';
+import { ModalBuscadorServicioComponent } from './modal-buscador-servicio/buscador-servicio.component';
 
 /**
  * Custom angular notifier options
@@ -78,7 +81,7 @@ const customNotifierOptions: NotifierOptions = {};
     MatIconModule,
     NumericTextBoxModule,
   ],
-  providers: [DataService, UtilService, { provide: Location }],
+  providers: [DataService, UtilService, NivelService, EvaluacionService, InstructorService, { provide: Location }],
   entryComponents: [
     PlanClaseComponent,
     ModalBuscadorServicioComponent,

@@ -12,8 +12,8 @@ import { PlanClaseComponent } from './plan-clase/plan-clase.component';
 import { Nivel } from '../../models/Nivel';
 import { Grupo } from '../../models/Grupo';
 import { Reserva } from '../../models/Reserva';
-import { ModalBuscadorServicioComponent } from '../modal-buscador-servicio/buscador-servicio.component';
-import { ClaseGrupo } from '../../models/ClaseGrupo';
+import { ReservaEscenario } from '../../models/reserva_escenario';
+import { ModalBuscadorServicioComponent } from '../../modal-buscador-servicio/buscador-servicio.component';
 
 @Component({
   selector: 'app-gestion-grupo',
@@ -30,7 +30,7 @@ export class GestionGrupoComponent implements OnChanges, OnInit {
   reservaSeleccionada: Reserva;
   listaGrupos: Array<Grupo>;
   grupo: Grupo;
-  listaFechas: Array<ClaseGrupo>;
+  listaFechas: Array<ReservaEscenario>;
   cantidad = 0;
   // Declara objetos de configuración del datatable
   dtOptions: DataTables.Settings = {};
