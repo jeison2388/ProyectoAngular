@@ -16,10 +16,7 @@ export class ClasificationComponent implements OnInit {
 
   teamsCompetition:team[]=[];
 constructor(private competitionservice:CompetitionService) { }
-  @Output() array= [
-    { key: 1, parent: 13, name: "HOTEL ACHALAY", gender: "Cuartos", birthYear: "1926", reign: "1952-" },
-    { key: 2, parent: 1, name: "DIAGNOSTIMOTOS", gender: "Octavos", birthYear: "1948" },
-    { key: 3, parent: 1, name: "HOTEL ACHALAY", gender: "Octavos", birthYear: "1982" },
+   array= [
     { key: 4, parent: 13, name: "JUMBO", gender: "Cuartos", birthYear: "1984" },
     { key: 5, parent: 4, name: "JUMBO", gender: "Octavos", birthYear: "1984" },
     { key: 6, parent: 4, name: "COMFACAUCA", gender: "Octavos", birthYear: "1950" },
@@ -31,7 +28,7 @@ constructor(private competitionservice:CompetitionService) { }
     { key: 12, parent: 10, name: "SENIOR MASTER", gender: "Octavos", birthYear: "1960" },
     { key: 13, parent: 15, name: "HOTEL ACHALAY", gender: "Semifinal", birthYear: "1926", reign: "1952-" },
     { key: 14, parent: 15, name: "APLANCHADOS DOÑA CHEPA", gender: "Semifinal", birthYear: "1981" },
-    { key: 15, parent: 30, name: "APLANCHADOS DOÑA CHEPA", gender: "Final", birthYear: "1981" },  
+    { key: 15, parent: 30, name: ".                          .", gender: "Final", birthYear: "1981" },  
   ];
   
 

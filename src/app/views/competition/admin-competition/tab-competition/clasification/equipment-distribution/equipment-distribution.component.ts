@@ -8,7 +8,7 @@ import * as go from 'gojs';
   selector: 'app-equipment-distribution',
   templateUrl: './equipment-distribution.component.html'
 })
-export class EquipmentDistributionComponent implements OnInit, AfterViewInit {
+export class EquipmentDistributionComponent implements OnInit {
   public diagram: go.Diagram = null;
   bluegrad = '#90CAF9';
   pinkgrad = '#F48FB1';
@@ -29,7 +29,7 @@ export class EquipmentDistributionComponent implements OnInit, AfterViewInit {
             treeStyle: go.TreeLayout.StyleLastParents,
             arrangement: go.TreeLayout.ArrangementHorizontal,
             // properties for most of the tree:
-            angle: 90,
+            angle: 180,
             layerSpacing: 35,
             layerStyle:go.TreeLayout.LayerUniform,
             // properties for the "last parents":
@@ -44,30 +44,28 @@ export class EquipmentDistributionComponent implements OnInit, AfterViewInit {
   this.diagram.add(
     $(go.Part, "Table",
       { position: new go.Point(300, 10), selectable: false },
-      $(go.TextBlock, "Key",
-        { row: 0, font: "700 14px Droid Serif, sans-serif" }),  // end row 0
-      $(go.Panel, "Horizontal",
-        { row: 1, alignment: go.Spot.Left },
+     $(go.Panel, "Vertical",
+        { row: 100, alignment: go.Spot.Left },
         $(go.Shape, "Rectangle",
           { desiredSize: new go.Size(30, 30), fill: this.bluegrad, margin: 5 }),
         $(go.TextBlock, "Cuartos",
           { font: "700 13px Droid Serif, sans-serif" })
       ),  // end row 1
-      $(go.Panel, "Horizontal",
+      $(go.Panel, "Vertical",
         { row: 2, alignment: go.Spot.Left },
         $(go.Shape, "Rectangle",
           { desiredSize: new go.Size(30, 30), fill: this.pinkgrad, margin: 5 }),
         $(go.TextBlock, "Octavos",
           { font: "700 13px Droid Serif, sans-serif" })
       ) , // end row 2,
-      $(go.Panel, "Horizontal",
+      $(go.Panel, "Vertical",
       { row: 2, alignment: go.Spot.Left },
       $(go.Shape, "Rectangle",
         { desiredSize: new go.Size(30, 30), fill: this.pinkgrad, margin: 5 }),
       $(go.TextBlock, "Semifinal",
         { font: "700 13px Droid Serif, sans-serif" })
     ),  // end row 2 
-    $(go.Panel, "Horizontal",
+    $(go.Panel, "Vertical",
     { row: 2, alignment: go.Spot.Left },
     $(go.Shape, "Rectangle",
       { desiredSize: new go.Size(30, 30), fill: this.pinkgrad, margin: 5 }),
@@ -122,12 +120,6 @@ export class EquipmentDistributionComponent implements OnInit, AfterViewInit {
 
   }
   
-
-  ngAfterViewInit() {
-   
-  }
-
-
   //FUNCIONES DE LA LIBRERIA
   tooltipTextConverter(person):string {
     let str = "";

@@ -32,6 +32,10 @@ import { ListCompetitionComponent } from './admin-competition/list-competition/l
 import { EditTeamComponent } from './admin-competition/tab-competition/teams/edit-team/edit-team.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { PipeCompetitionPipe } from './pipes/pipe-competition.pipe';
+import { ProgrammingComponent } from './admin-competition/tab-competition/programming/programming.component';
+import { FormProgrammingComponent } from './admin-competition/tab-competition/programming/form-programming/form-programming.component';
+import { SelectScenariosComponent } from './admin-competition/tab-competition/programming/select-scenarios/select-scenarios.component';
+import { ListProgrammingComponent } from './admin-competition/tab-competition/programming/list-programming/list-programming.component';
 
 
 @NgModule({
@@ -67,6 +71,10 @@ import { PipeCompetitionPipe } from './pipes/pipe-competition.pipe';
                 ListCompetitionComponent,
                 EditTeamComponent,
                 PipeCompetitionPipe,
+                ProgrammingComponent,
+                FormProgrammingComponent,
+                SelectScenariosComponent,
+                ListProgrammingComponent,
                 ],
   providers: [CompetitionService]
 })
