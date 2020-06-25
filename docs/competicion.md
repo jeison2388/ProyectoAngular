@@ -321,3 +321,120 @@ Si no se encuentran informacion del jugador en comfacuaca devolver.
 |`500`|Error interno del servidor|
 
 
+### POST /competicion/agregarJugador
+Esta solicitud registra un jugador en un equipo , usted debe enviar estos datos en el body de la peticion:  
+
+```Javascript
+{
+    "idCompetencia": 55678,
+    "cedula": 123456789,
+    "nombres": "juanito",
+    "apellido": "nuñz",
+    "telefono": 3152654789,   
+}
+```
+
+En caso de error, el servicio devolverá una respuesta como sigue.
+```Javascript
+{
+    "campo": "código del campo",
+    "error": "código del error"
+}
+```
+#### Códigos de estado
+|Código de estado|Descripcion|
+|---|---|
+|`200`|Exitoso|
+|`500`|Error interno del servidor|
+
+
+### POST /competicion/agregarEquipo
+Esta solicitud registra un equipo en una competencia, usted debe enviar estos datos en el body de la peticion:  
+
+```Javascript
+{
+    "idCompetencia": 25487,
+    "nombreEquipo": "BAYER",
+    "Nombre delegado": "brayan",
+    "identificacionDelegado": 1065477894,
+    "telefono": 3152654789,   
+}
+```
+
+En caso de error, el servicio devolverá una respuesta como sigue.
+```Javascript
+{
+    "campo": "código del campo",
+    "error": "código del error"
+}
+```
+#### Códigos de estado
+|Código de estado|Descripcion|
+|---|---|
+|`200`|Exitoso|
+|`500`|Error interno del servidor|
+
+### GET /competicion/escenarios/{idCompeticion}
+Esta solicitud devuelve un listado de escenarios disponibles para una competicion especifica, usted debe enviar en la url el id de la competicion
+para que el back devuelva solo los escenarios disponibles para ese tipo de competicion con sus respectivos datso como se muestra a continuacion:  
+Tener en cuenta que los horarios disponibles es un array que contiene todos los dias de la semana con sus respectivos horarios disponibles en el momento de la peticion
+```Javascript
+{
+    "idEscenario" : 1234
+    "nombre": "Cancha futbol",
+    "horarios disponibles": [
+        lunes : [
+            { 
+                horaInicio : "8:00"
+                franjaHorariaInicio : "AM"
+                horaFIn    : "9:00"
+                franjaHorariaFin : "AM"
+            },
+             { 
+                horaInicio :"11:30"
+                franjaHorariaInicio : "AM"
+                horaFIn    : "12:30"
+                franjaHorariaFin : "AM"
+            },
+
+        ],
+        martes : [
+            { 
+                horaInicio : "8:00"
+                franjaHorariaInicio : "AM"
+                horaFIn    : "9:00"
+                franjaHorariaFin : "AM"
+            },
+             { 
+                horaInicio :"11:30"
+                franjaHorariaInicio : "AM"
+                horaFIn    : "12:30"
+                franjaHorariaFin : "AM"
+            },
+        ]
+    ],
+    "Nombre delegado": "brayan",
+    "identificacionDelegado": 1065477894,
+    "telefono": 3152654789,   
+}
+```
+
+Si no se encuentran escenarios devolver.
+```Javascript
+[]
+```
+
+En caso de error, el servicio devolverá una respuesta como sigue.
+```Javascript
+{
+    "campo": "código del campo",
+    "error": "código del error"
+}
+```
+#### Códigos de estado
+|Código de estado|Descripcion|
+|---|---|
+|`200`|Exitoso|
+|`500`|Error interno del servidor|
+
+
