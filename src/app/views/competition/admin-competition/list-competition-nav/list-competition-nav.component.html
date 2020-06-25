@@ -11,16 +11,15 @@
           </div>
         </div>
       </div>
-
+      <!--  -->
       <div class="nav flex-column nav-pills col-12 col-md-12 col-lg-12"  role="tablist" aria-orientation="vertical"> 
-        
-          <button (click)=asignarIdSeleccionado(competencia.id) class="nav-link "  [className]="'nav-link active '" *ngFor="let competencia of competencias | pipeCompetition: filterPost | paginate: { itemsPerPage: 15, currentPage: pageActual } "> 
-            <img src="../../../../../assets/img/competicion/{{competencia.subPrograma.descripcion|lowercase}}.png" id="imagen" width="24" height="24" class="d-inline-block align-top" alt="">
-            <strong>{{competencia.nombre}}</strong> 
-          </button>
-        
-
-        
+        <img src="../../../../../assets/loading.gif" alt="" *ngIf="loading">          
+          <div *ngIf="!loading">
+            <button  (click)=asignarIdSeleccionado(competencia) class="nav-link "  [className]="'nav-link active '" *ngFor="let competencia of competencias | pipeCompetition: filterPost | paginate: { itemsPerPage: 15, currentPage: pageActual } "> 
+              <img src="../../../../../assets/img/competicion/{{competencia.subPrograma.descripcion|lowercase}}.png" id="imagen" width="24" height="24" class="d-inline-block align-top" alt="">
+              <strong>{{competencia.nombre}}</strong> 
+            </button>
+          </div>
         <pagination-controls previousLabel="Anterior"
         nextLabel="Siguiente" (pageChange)="pageActual = $event"></pagination-controls>
           

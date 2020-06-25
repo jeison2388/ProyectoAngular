@@ -15,15 +15,20 @@ export class ListCompetitionComponent implements OnInit {
   nameBtnAddCompetition: string;
   filterPost='';  
   pageActual:number=1;
+  loading:boolean;
   constructor(private competitionService:CompetitionService) 
   {
     this.titleAddCompetition = 'Competencias';
     this.subtitleAddCompetition = 'En este formulario se ingresan los datos para crear una competencia, recuerde los campos con * son obligatorios';
     this.nameBtnAddCompetition = 'Guardar';
+    this.loading=true;
   }
 
   ngOnInit() {
-    this.competitionService.cargarCompeticion().subscribe(resultado=>{this.competitions=resultado; this.competitionService.competitions=resultado},
+    this.competitionService.cargarCompeticion().subscribe(
+      resultado=>{this.competitions=resultado; 
+        this.competitionService.competitions=resultado;
+      this.loading=false;},
       error=>{ console.log(JSON.stringify(error));});
   }
   cambiar()

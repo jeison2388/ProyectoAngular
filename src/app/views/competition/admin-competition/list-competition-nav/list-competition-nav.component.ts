@@ -10,8 +10,12 @@ competencias: any;
 pageActual:number=1;
 filterPost='';
 mensaje: string='';
+competition:any;
+loading:boolean;
  
-  constructor(private competitionService:CompetitionService) { }
+  constructor(private competitionService:CompetitionService) { 
+    this.loading=true;
+  }
 
   ngOnInit() 
   {
@@ -19,14 +23,16 @@ mensaje: string='';
       this.competencias=resultado; 
       this.competitionService.competitions=resultado
       this.competencias.slice(1,5);
+      this.loading=false;
     },
       error=>{ console.log(JSON.stringify(error));});
   }
-  asignarIdSeleccionado(id:number)
+  asignarIdSeleccionado(c:any)
   {
-    this.competitionService.idSelected=id;
+    this.competitionService.idSelected=c.id;
     this.competitionService.onTeams();
-    console.log("Elemento seleccionado:    Id:  "+id);
+    this.competition=c;
+    console.log("Elemento seleccionado:    Id:  "+c.id);
   }
 
 }

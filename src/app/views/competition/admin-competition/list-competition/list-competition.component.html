@@ -23,7 +23,9 @@
                     <div class="col-md-12">
                         <button type="button" class="btn btn-primary" style="position: relative; left: 80%;" (click)="cambiar()"> Agregar Competicion</button>    
                     </div>
-                    <table class="table table-bordered round_table ">
+                    <img src="../../../../../assets/loading.gif" alt="" *ngIf="loading" style="position: relative; left: 35%;">
+                        
+                    <table *ngIf="!loading" class="table table-bordered round_table ">
                         <thead class="table-primary">
                           <tr>
                             <th scope="col">Nombre de Competicion</th>

@@ -1,4 +1,10 @@
-<app-form-programming></app-form-programming>
-<app-select-scenarios></app-select-scenarios>
-
-<app-list-programming></app-list-programming>
+<div class="card">
+    <div class="card-header bg-primary">
+        <strong>PROGRAMACIÓN DE CALENDARIO </strong>
+      </div>
+      <div class="card-body">        
+        <app-form-programming [tipoCompeticion]="tipoCompeticion" [fechaInicio]="fechaInicio" ></app-form-programming>
+        <app-select-scenarios></app-select-scenarios> <!-- https://medium.com/@asfo/desarrollando-un-filtro-de-búsqueda-para-angular-4-5-146dc9efdfcb
+         --><app-list-programming></app-list-programming>
+      </div>
+</div>
