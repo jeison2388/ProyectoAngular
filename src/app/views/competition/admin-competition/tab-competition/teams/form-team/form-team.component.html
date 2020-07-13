@@ -124,9 +124,9 @@
                   <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">
                       <form action="">
-                      <h6 class="title text-center"><strong>Datos de los Jugadores</strong></h6>
+                      <h6 class="title text-center" *ngIf="!edit"><strong>Datos de los Jugadores</strong></h6>
                   
-                      <div class="rightDiv">
+                      <div class="rightDiv" *ngIf="edit">
                       <button type="submit" class="btn btn-primary" (click)="mostrarVentanaModalAddPlayer()">
                         Agregar Jugador
                       </button>
@@ -134,11 +134,12 @@
                     </form>
                     </div>
                   </div>               
-                  <app-add-modal-player *ngIf="mostrarModalAddPlayer" (agregado)="onAgregado($event)" (player)="onPlayer($event)" [onchangeModal]="onchangeModal"></app-add-modal-player>
+                  <app-add-modal-player *ngIf="mostrarModalAddPlayer" [onchangeModal]="onchangeModal"></app-add-modal-player>
                   </div>
                   </div>
             </div>
-            <button type="submit">Guardar</button>
+            <button *ngIf="!edit" type="submit">Guardar</button>            
+            <button *ngIf="!edit" type="button" (click)="onCancel()">Cancelar</button>
           </form>
         </div>
       </div>

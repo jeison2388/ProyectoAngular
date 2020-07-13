@@ -20,8 +20,6 @@ export class FormTeamComponent implements OnInit {
   @Input() public cancel;
   @Output() valCancel = new EventEmitter<number>();
   @Output() teamOutput= new EventEmitter<any>();
-  @Output() playerOutput= new EventEmitter<any>();  
-  @Output() agregadoOutput= new EventEmitter<boolean>();
   @Input() team:any;
   @Input() edit:boolean;
   public idTeam:number=0;
@@ -73,12 +71,13 @@ onSubmit()
   console.log("GUARDADO desde form-team");
     this.team= 
       {
-        nombre: this.fieldsForm.get('nameTeam').value,
-        delegado:this.fieldsForm.get('nameDelegate').value,
-        identificacion: this.fieldsForm.get('idDelegate').value,
+        idCompetencia: this.competitionService.idSelected,
+        nombreEquipo: this.fieldsForm.get('nameTeam').value,
+        'Nombre delegado':this.fieldsForm.get('nameDelegate').value,
+        identificacionDelegado: this.fieldsForm.get('idDelegate').value,
         telefono: this.fieldsForm.get('phoneDelegate').value   
       };
-      this.teamOutput.emit(this.team);
+      this.teamOutput.emit(this.team);      
       this.valCancel.emit(0);
       console.log("GUARDANDO EQUIPO!!");
 }
@@ -87,14 +86,7 @@ onCancel()
   this.cancel=true;
   this.valCancel.emit(0);
 }
-onPlayer(event)
-{
-  this.playerOutput.emit(event);
-}
-onAgregado(event)
-{
-  this.agregadoOutput.emit(event);
-}
+
 
   uploadPhoto(event: any) {
     const tam_file = event.target.files[0].size / 1024;

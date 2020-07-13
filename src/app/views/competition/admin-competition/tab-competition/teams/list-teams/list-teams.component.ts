@@ -17,6 +17,7 @@ export class ListTeamsComponent implements OnInit {
   public competition:any;
   public t: any;
   public idCompetencia :number;
+  public creado:boolean;
   teams: any[]=[];
   newPlayer:any;
   agregado:boolean;
@@ -45,6 +46,7 @@ export class ListTeamsComponent implements OnInit {
   mensaje: string='';
   constructor(private competitionService:CompetitionService ) {
       this.idCompetencia = this.competitionService.idSelected;
+      this.creado=false;
    }
 
 
@@ -59,8 +61,9 @@ export class ListTeamsComponent implements OnInit {
   onTeam(event)
   {
     console.log("#############IMPRIMIENDO DESDE ONTEAM:  "+event.nombre);
-    this.teams.push(event);
     this.t=event;
+    this.cancel=2;  
+    this.ngOnInit();
   }
   onCancel(n:number)
   {   

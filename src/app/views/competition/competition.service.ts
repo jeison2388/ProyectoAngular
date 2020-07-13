@@ -84,7 +84,11 @@ export class CompetitionService {
   }
   addPlayer(player:Object):Observable<any>
   {
-    return this.httpClient.post(this.ruta+"competicion/agregarJugador",player);
+    return this.httpClient.post(this.ruta+"competicion/agregarJugador",player,{reportProgress: true, observe: 'events'});
+  }
+  addTeam(team:Object):Observable<any>
+  {
+    return this.httpClient.post(this.ruta+"competicion/agregarEquipo",team,{reportProgress: true, observe: 'events'});
   }
   competenciaSeleccionada():any
   {

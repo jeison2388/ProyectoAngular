@@ -7,7 +7,7 @@
         </button>
       </div>
     </div>
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover" id="tablaEquipos">
       <thead class="table-primary">
         <tr>
           <th scope="col">No.</th>
@@ -27,8 +27,10 @@
         <td>{{team.nombre}}</td>
         <td>{{team.delegado}}</td>
         <td>{{team.identificacion}}</td>
-        <td>{{team.telefono}}</td>
-        <td><!-- {{team.estado}} -->Pendiente de Pago</td>
+        <td *ngIf="team && team.telefono; else telefono">{{team.telefono}}</td>
+        <ng-template #telefono><td></td></ng-template>
+        <td *ngIf="team && team.estado; else estado">{{team.estado}}</td>
+        <ng-template #estado><td> </td></ng-template>
       </tr>
       </tbody>
     </table>
@@ -37,11 +39,6 @@
   </div>
   <div *ngIf="cancel==1">    
     <app-form-team (valCancel)="setCancel($event)" (teamOutput)="onTeam($event)" (agregadoOutput)="onAgregado($event)" (playerOutput)="onPlayer($event)"*ngIf="cancel==1" [edit]="false" ></app-form-team>
-    <app-list-players [create]="true" [Agregado]="agregado" [newPlayer]="newPlayer"></app-list-players>
-    <app-list-registration-value-team [team]="t"></app-list-registration-value-team>
-    <!-- Hace falta agregar el formulario a el team -->
-    <button class="btn btn-primary" (click)="onSave(0)">Registrar</button>
-    <button class="btn btn-secondary" (click)="onCancel(0)">Salir</button>
-  </div>
-  <app-edit-team (cancel)="setCancel($event)" *ngIf="cancel==2" [edit]="false" [team]="t" ></app-edit-team>
+   </div>
+  <app-edit-team (cancel)="setCancel($event)" *ngIf="cancel==2" [edit]="true" [team]="t" ></app-edit-team>
 
