@@ -18,7 +18,7 @@ export class CompetitionService {
   players: any[]=[];
   teams:any[]=[];
   tamTeam=0;
-
+  
   constructor(private httpClient:HttpClient)
   {
     this.ruta="http://pruebasweb.comfacauca.com:8080/";
@@ -37,8 +37,7 @@ export class CompetitionService {
     this.cargarJugadores(id).subscribe(resultado=>{
       for(let i of resultado){
         this.players.push(i); 
-      }
-               
+      }               
     },
       error=>{ console.log(JSON.stringify(error));});        
       console.log("TAMAÑO DE ARRAY ( id:   "+id+")JUGADORES:   "+this.players.length);     
@@ -82,6 +81,10 @@ export class CompetitionService {
         //contador++;
       }      
     return this.httpClient.post(this.ruta+"competicion/agregarCompeticion", formData,{reportProgress: true, observe: 'events'});
+  }
+  addPlayer(player:Object):Observable<any>
+  {
+    return this.httpClient.post(this.ruta+"competicion/agregarJugador",player);
   }
   competenciaSeleccionada():any
   {

@@ -14,21 +14,18 @@
       <!-- <tr *ngFor="let team of teams"> -->
       <tr *ngFor="let player of players; index as i">
         <td>{{i+1}}</td>
-        <td>{{player.cedula}}</td>
-        <td>{{player.afiliado.persona.primerNombre}}</td>
-        <td>{{player.afiliado.persona.primerApellido}}</td>
-        <td>{{player.telefono}}</td>
-        <td>{{player.categoria}}</td>
-        <td>{{player.valor}}</td>        
-      </tr>
-      <tr *ngIf="Agregado">
-        <td>#</td>
-        <td>{{newPlayer.nombres}}</td>
-        <td>{{newPlayer.cedula}}</td>
-        <td>{{newPlayer.apellidos}}</td>
-        <td>{{newPlayer.celular}}</td>
-        <td>{{newPlayer.categoria}}</td>        
-        <td>{{newPlayer.valor}}</td>
-      </tr>
+        <td *ngIf="player && player.cedula; else cedula">{{player.cedula}}</td>
+        <ng-template #cedula><td></td></ng-template>
+        <td *ngIf="player && player.afiliado&&player.afiliado.persona&&player.afiliado.persona.primerNombre; else primerNombre">{{player.afiliado.persona.primerNombre}}</td>
+        <ng-template #primerNombre><td></td></ng-template>
+        <td *ngIf="player && player.afiliado&&player.afiliado.persona&&player.afiliado.persona.primerApellido; else primerApellido">{{player.afiliado.persona.primerApellido}}</td>
+        <ng-template #primerApellido><td></td></ng-template>
+        <td *ngIf="player&& player.telefono; else telefono">{{player.telefono}}</td>
+        <ng-template #telefono><td>{{player.telefono}}</td></ng-template>
+        <td *ngIf="player&& player.categoria; else categoria">{{player.categoria}}</td>
+        <ng-template #categoria><td>{{player.categoria}}</td></ng-template>
+        <td *ngIf="player&& player.valor; else valor">{{player.valor}}</td>
+        <ng-template #valor><td>{{player.valor}}</td></ng-template>
+      </tr>     
     </tbody>
   </table>

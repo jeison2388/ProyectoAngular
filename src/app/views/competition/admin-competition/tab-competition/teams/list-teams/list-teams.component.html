@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let team of teams | filter: filterPost;index as i" (click)="editTeam(team)">
+      <tr *ngFor="let team of teams | filter: filterPost;index as i" style="cursor: pointer;" (click)="editTeam(team)">
       <td>{{i+1}}</td>
       <!--  <td><img style=" width: 50px; height: 50px;" src="../../../../../../../assets/img/{{team.Logo}}.png" alt=""></td>
         -->
