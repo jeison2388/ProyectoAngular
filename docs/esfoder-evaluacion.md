@@ -224,8 +224,7 @@ los atributos [ id ] para las tablas:
 de acuerdo a su dependencia una de otra, se deberá asignar el ID que se vaya registrando.
 
 ```Javascript
-[
-    {
+{
         "id_evaluacion": 111,
         "codigo": "ECI-001",
         "descripcion": "Evaluación I Nivel ESFODER Natación 4-5 años",
@@ -294,5 +293,5 @@ de acuerdo a su dependencia una de otra, se deberá asignar el ID que se vaya re
             }...
         ]
     }
-]
+
 ```
