@@ -327,6 +327,7 @@ Esta solicitud registra un jugador en un equipo , usted debe enviar estos datos 
 ```Javascript
 {
     "idCompetencia": 55678,
+    "idEquipo": 223,/*  Queda haciendo falta este campo */
     "cedula": 123456789,
     "nombres": "juanito",
     "apellido": "nuñz",
@@ -355,7 +356,7 @@ Esta solicitud registra un equipo en una competencia, usted debe enviar estos da
 {
     "idCompetencia": 25487,
     "nombreEquipo": "BAYER",
-    "Nombre delegado": "brayan",
+    "nombreDelegado": "brayan",
     "identificacionDelegado": 1065477894,
     "telefono": 3152654789,   
 }
