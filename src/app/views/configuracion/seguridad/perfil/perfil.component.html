@@ -1,0 +1,60 @@
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()" (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <strong>Perfil</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!--INICIO DEL FORMULARIO-->
+                                <div class="row">
+                                    <div class="form-group col-sm-2">
+                                        <label for="codigo">Código<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="codigo" type="text"
+                                            class="form-control border-info UP" id="codigo" placeholder="Código"
+                                            [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-10">
+                                        <label for="descripcion">Descripción<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="descripcion" type="text"
+                                            class="form-control border-info UP" id="descripcion" placeholder="Descripción"
+                                            [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"
+                                            autocomplete="nop">
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 256 caracteres
+                                        </div>
+                                    </div>                                               
+                                </div>
+                               
+                            </div>
+                            <!--FIN DEL FORMULARIO-->
+                        </div>
+
+
+                        <div class="row text-right">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                    (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                    Guardar</button>
+                                <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                        class="fa fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </form>
+</div>
+<notifier-container></notifier-container>

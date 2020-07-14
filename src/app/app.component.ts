@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { AuthService } from './servicios/auth.service';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 @Component({
   // tslint:disable-next-line
@@ -7,14 +9,28 @@ import { Router, NavigationEnd } from '@angular/router';
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) { }
+  constructor(private router: Router, private bnIdle: BnNgIdleService, public authService: AuthService ) {
+    this.bnIdle.startWatching(3000).subscribe((res) => {
+      if(res) {
+          console.log("session expired");
+          this.logout();
+      }
+    })
+   }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;
       }
+      
       window.scrollTo(0, 0);
     });
   }
+
+  logout() {  
+    console.log('logout');  
+    this.authService.logout();  
+    this.router.navigate(['/login']);  
+  } 
 }

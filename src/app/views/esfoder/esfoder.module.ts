@@ -39,11 +39,24 @@ import { NivelService } from './niveles/niveles.service';
 import { EvaluacionService } from './evaluacion-rendimiento/evaluaciones.service';
 import { InstructorService } from './instructores/instructores.service';
 import { ModalBuscadorServicioComponent } from './modal-buscador-servicio/buscador-servicio.component';
+import { EditEvaluacionesComponent } from './evaluacion-rendimiento/edit-evaluaciones/edit-evaluaciones.component';
 
 /**
  * Custom angular notifier options
  */
-const customNotifierOptions: NotifierOptions = {};
+const customNotifierOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'right',
+      distance: 12,
+    },
+    vertical: {
+      position: 'top',
+      distance: 12,
+      gap: 10,
+    },
+  },
+};
 
 @NgModule({
   declarations: [
@@ -57,6 +70,7 @@ const customNotifierOptions: NotifierOptions = {};
     FormInstructorComponent,
     DisponibilidadComponent,
     AddEvaluacionesComponent,
+    EditEvaluacionesComponent,
     FormEvaluacionComponent,
     PlanClaseComponent,
     GestionGrupoComponent,
@@ -84,10 +98,10 @@ const customNotifierOptions: NotifierOptions = {};
   providers: [DataService, UtilService, NivelService, EvaluacionService, InstructorService, { provide: Location }],
   entryComponents: [
     PlanClaseComponent,
-    ModalBuscadorServicioComponent,
     EscenarioDeportivoComponent,
     GestionGrupoComponent,
     DisponibilidadComponent,
+    ModalBuscadorServicioComponent,
   ],
 })
 export class EsfoderModule {}

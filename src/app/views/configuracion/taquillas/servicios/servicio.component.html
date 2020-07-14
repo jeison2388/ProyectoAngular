@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <strong>Servicio</strong>
                     </div>
                     <div class="card-body">
@@ -11,47 +11,66 @@
                             
                                 <!--INICIO DEL FORMULARIO-->
                                 
-                                    <div class="form-group col-sm-2">
-                                        <label for="codigo">Código<span class="text-danger">*</span></label>
-                                        <input appUpper formControlName="codigo" type="text"
-                                            class="form-control border-info" id="codigo" placeholder="Código"
-                                            [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }"
-                                            autocomplete="nop" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.codigo.errors?.maxlength || f.codigo.errors?.minlength) && f.codigo.touched">
+                                            Mínimo caracteres 4 máximo 16
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.codigo.errors?.required && f.codigo.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-barcode"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Código</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Código" formControlName="codigo">
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-8">
-                                        <label for="descripcion">Descripción<span class="text-danger">*</span></label>
-                                        <input appUpper formControlName="descripcion" type="text"
-                                            class="form-control border-info" id="descripcion" placeholder="Descripción"
-                                            [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"
-                                            autocomplete="nop">
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 256 caracteres
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.descripcion.errors?.maxlength || f.descripcion.errors?.minlength) && f.descripcion.touched">
+                                            Mínimo caracteres 4 máximo 256
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.descripcion.errors?.required && f.descripcion.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-font"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Descripción</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Descripción"
+                                                formControlName="descripcion">
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="tipo_servicio">Tipo servicio<span
-                                                class="text-danger">*</span></label>
-                                        <select class="form-control placeholder" formControlName="tipo_servicio"
-                                            id="tipo_servicio" 
+                                  
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-crosshairs"></i><small>&nbsp;Tipo servicio</small></span>
+                                            </div>
+                                        <select class="form-control placeholder" formControlName="tipo_servicio" id="tipo_servicio"
                                             class="form-control border-info"
                                             [ngClass]="{ 'is-invalid': submitted && f.tipo_servicio.errors }">
                                             <option value="">.::Seleccione::.</option>
-                                            <option *ngFor="let tipo_servicio of tipos_servicio"
-                                                value={{tipo_servicio.id}}>
+                                            <option *ngFor="let tipo_servicio of tipos_servicio" value={{tipo_servicio.id}}>
                                                 {{tipo_servicio.descripcion}}
                                             </option>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Campo requerido
-                                        </div>
+                                        </div>                                        
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="programa">Programa<span class="text-danger">*</span></label>
-                                        <select class="form-control placeholder" formControlName="programa"
-                                            id="programa"
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-desktop"></i><small>&nbsp;Programa</small></span>
+                                            </div>
+                                        <select class="form-control placeholder" formControlName="programa" id="programa"
                                             class="form-control border-info"
                                             [ngClass]="{ 'is-invalid': submitted && f.programa.errors }">
                                             <option value="">.::Seleccione::.</option>
@@ -59,174 +78,223 @@
                                                 {{programa.descripcion}}
                                             </option>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Campo requerido
-                                        </div>
+                                        </div>                                        
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="grupo">Grupo<span class="text-danger">*</span></label>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-cubes"></i><small>&nbsp;Grupo</small></span>
+                                            </div>
                                         <select class="form-control placeholder" formControlName="grupo" id="grupo"
                                             class="form-control border-info"
-                                            [ngClass]="{ 'is-invalid': submitted && f.grupo.errors }">
+                                            [ngClass]="{ 'is-invalid': submitted && f.tipo_servicio.errors }">
                                             <option value="">.::Seleccione::.</option>
                                             <option *ngFor="let grupo of grupos" value={{grupo.id}}>
                                                 {{grupo.descripcion}}
                                             </option>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Campo requerido
-                                        </div>
+                                        </div>                                        
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="cuenta_contable">Cuenta contable<span
-                                                class="text-danger">*</span></label>
-                                        <select class="form-control placeholder" formControlName="cuenta_contable"
-                                            id="cuenta_contable" 
+                                   
+
+                                   <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-money"></i><small>&nbsp;Cuenta contable</small></span>
+                                            </div>
+                                        <select class="form-control placeholder" formControlName="cuenta_contable" id="cuenta_contable"
                                             class="form-control border-info"
                                             [ngClass]="{ 'is-invalid': submitted && f.cuenta_contable.errors }">
                                             <option value="">.::Seleccione::.</option>
-                                            <option *ngFor="let cuenta_contable of cuentas_contables"
-                                                value={{cuenta_contable.id}}>
+                                            <option *ngFor="let cuenta_contable of cuentas_contables" value={{cuenta_contable.id}}>
                                                 {{cuenta_contable.descripcion}}
                                             </option>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Campo requerido
-                                        </div>
+                                        </div>                                        
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="iva">Iva<span class="text-danger">*</span></label>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-percent"></i><small>&nbsp;Iva</small></span>
+                                            </div>
                                         <select class="form-control placeholder" formControlName="iva" id="iva"
-                                         class="form-control border-info"
+                                            class="form-control border-info"
                                             [ngClass]="{ 'is-invalid': submitted && f.iva.errors }">
                                             <option value="">.::Seleccione::.</option>
                                             <option *ngFor="let iva of ivas" value={{iva.id}}>
-                                                {{iva.valor}}
+                                                {{iva.valor}}%
                                             </option>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Campo requerido
-                                        </div>
+                                        </div>                                        
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="estado">Estado<span class="text-danger">*</span></label>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-sliders"></i><small>&nbsp;Estado</small></span>
+                                            </div>
                                         <select class="form-control placeholder" formControlName="estado" id="estado"
-                                             class="form-control border-info"
-                                            [ngClass]="{ 'is-invalid': submitted && f.estado.errors }">
+                                            class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.iva.errors }">
                                             <option value="">.::Seleccione::.</option>
                                             <option *ngFor="let estado of estados_servicio" value={{estado.id}}>
                                                 {{estado.descripcion}}
                                             </option>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Campo requerido
+                                        </div>                                        
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.valor_costo.errors?.maxlength || f.valor_costo.errors?.minlength) && f.valor_costo.touched">
+                                            Mínimo caracteres 4 máximo 16
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.valor_costo.errors?.required && f.valor_costo.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-dollar"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Valor costo</small>
+                                                </span>
+                                            </div>
+                                            <input  mask="separator" thousandSeparator="."  prefix="$"  type="text" class="form-control" placeholder="* Valor costo" formControlName="valor_costo">
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="valor_costo">Valor costo<span class="text-danger">*</span></label>
-                                        <input appUpper formControlName="valor_costo" type="text"
-                                            class="form-control border-info" id="valor_costo" placeholder="valor_costo"
-                                            [ngClass]="{ 'is-invalid': submitted && f.valor_costo.errors }" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="requiere_definir_personas">Requiere definir personas</label>
+
+
+
+                                    <div class="form-group col-sm-1">     
                                         <div class="text-center">
                                             <label class="switch switch-label switch-pill switch-primary">
-                                                <input type="checkbox" class="switch-input"
-                                                    formControlName="requiere_definir_personas">
-                                                <span class="switch-slider" data-checked="&#x2713;"
-                                                    data-unchecked="&#x2715;"></span>
+                                                <input type="checkbox" class="switch-input" formControlName="requiere_definir_personas">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="numero_personas">Número personas aplica<span
-                                                class="text-danger">*</span></label>
-                                        <input appUpper formControlName="numero_personas" type="text"
-                                            class="form-control border-info" id="numero_personas"
-                                            placeholder="numero_personas" [ngClass]="{ 'is-invalid': submitted && f.numero_personas
-                                                                    .errors }" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
+                                    <div class="form-group col-sm-3"> 
+                                        Requiere definir personas
+                                    </div>
+
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.numero_personas.errors?.maxlength || f.numero_personas.errors?.minlength) && f.numero_personas.touched">
+                                            Mínimo caracteres 1 máximo 4
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.numero_personas.errors?.required && f.numero_personas.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-users"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Número personas aplica</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Número personas aplica" formControlName="numero_personas">
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="requiere_definir_horas">Requier definir horas</label>
+
+
+                                    <div class="form-group col-sm-1">     
                                         <div class="text-center">
                                             <label class="switch switch-label switch-pill switch-primary">
-                                                <input type="checkbox" class="switch-input"
-                                                    formControlName="requiere_definir_horas">
-                                                <span class="switch-slider" data-checked="&#x2713;"
-                                                    data-unchecked="&#x2715;"></span>
+                                                <input type="checkbox" class="switch-input" formControlName="requiere_definir_horas">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="numero_horas">Número horas<span class="text-danger">*</span></label>
-                                        <input formControlName="numero_horas" type="text"
-                                            class="form-control border-info" id="numero_horas"
-                                            placeholder="numero_horas"
-                                            [ngClass]="{ 'is-invalid': submitted && f.numero_horas.errors }" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
+                                    <div class="form-group col-sm-3"> 
+                                        Requiere definir horas
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.numero_horas.errors?.maxlength || f.numero_horas.errors?.minlength) && f.numero_horas.touched">
+                                            Mínimo caracteres 1 máximo 4
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.numero_horas.errors?.required && f.numero_horas.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-tachometer"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Número horas</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Número horas" formControlName="numero_horas">
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="aplica_restriccion_meta">Aplica restricción meta</label>
+
+                                    <div class="form-group col-sm-1">     
                                         <div class="text-center">
                                             <label class="switch switch-label switch-pill switch-primary">
-                                                <input type="checkbox" class="switch-input"
-                                                    formControlName="aplica_restriccion_meta">
-                                                <span class="switch-slider" data-checked="&#x2713;"
-                                                    data-unchecked="&#x2715;"></span>
+                                                <input type="checkbox" class="switch-input" formControlName="aplica_restriccion_meta">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="meta">Meta<span class="text-danger">*</span></label>
-                                        <input formControlName="meta" type="text" class="form-control border-info"
-                                            id="meta" placeholder="meta"
-                                            [ngClass]="{ 'is-invalid': submitted && f.meta.errors }" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
+                                    <div class="form-group col-sm-3"> 
+                                        Aplica restricción meta
+                                    </div>
+
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.meta.errors?.maxlength || f.meta.errors?.minlength) && f.meta.touched">
+                                            Mínimo caracteres 1 máximo 4
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.meta.errors?.required && f.meta.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-area-chart"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Meta</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Meta" formControlName="meta">
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="control_usos">Control usos</label>
+
+                                    <div class="form-group col-sm-1">     
                                         <div class="text-center">
                                             <label class="switch switch-label switch-pill switch-primary">
-                                                <input type="checkbox" class="switch-input"
-                                                    formControlName="control_usos">
-                                                <span class="switch-slider" data-checked="&#x2713;"
-                                                    data-unchecked="&#x2715;"></span>
+                                                <input type="checkbox" class="switch-input" formControlName="control_usos">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="aplica_escenario">Aplica reserva escenario</label>
+                                    <div class="form-group col-sm-3"> 
+                                        Control usos
+                                    </div>
+
+                                    <div class="form-group col-sm-1">     
                                         <div class="text-center">
                                             <label class="switch switch-label switch-pill switch-primary">
-                                                <input type="checkbox" class="switch-input"
-                                                    formControlName="aplica_escenario">
-                                                <span class="switch-slider" data-checked="&#x2713;"
-                                                    data-unchecked="&#x2715;"></span>
+                                                <input type="checkbox" class="switch-input" formControlName="aplica_escenario">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-2">
-                                        <label for="aplica_paquete">Aplica paquete de servicios</label>
+                                    <div class="form-group col-sm-3"> 
+                                        Aplica reserva escenario
+                                    </div>
+
+                                    <div class="form-group col-sm-1">     
                                         <div class="text-center">
                                             <label class="switch switch-label switch-pill switch-primary">
-                                                <input type="checkbox" class="switch-input"
-                                                    formControlName="aplica_paquete">
-                                                <span class="switch-slider" data-checked="&#x2713;"
-                                                    data-unchecked="&#x2715;"></span>
+                                                <input type="checkbox" class="switch-input" formControlName="aplica_paquete">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
                                             </label>
                                         </div>
                                     </div>
+                                    <div class="form-group col-sm-3"> 
+                                        Aplica paquete de servicios
+                                    </div>
+
 
                                   <!-- {{form.get('aplica_escenario').value}}
                                   <pre>
@@ -236,55 +304,84 @@
                                     {{form.valid}}
                                   </pre>-->
 
+                                  <style>
+                                
+</style>
+                                
+
                                     <div class="col-sm-12" *ngIf="form.get('aplica_escenario').value">
                                         <div class="card">
-                                            <div class="card-header">
+                                            <div class="card-header bg-primary">
                                                 Escenario
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
-
-<!--
-                                                    <div class="form-group col-sm-2">
-                                                        <label for="escenario">Código escenario</label>
+                                                    <div class="form-group col-sm-4">
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                              <span class="input-group-text"><i class="fa fa-search"></i><small>&nbsp;Código escenario</small></span>
+                                                            </div>
+                                                            
                                                         <ng-select
-                                                            [options]="escenariosCod" 
-                                                            [allowClear]="true"
-                                                            id="escenario" 
-                                                            class="border-info"                              
-                                                            filterPlaceholder="Digite para buscar..."
-                                                            placeholder="codigo"
-                                                            (selected)="seleccionarEscenario($event)"
-                                                            (filterInputChanged)="buscarEscenariosCodigo($event)"
-                                                            [(ngModel)]="descripcionE" [ngModelOptions]="{standalone: true}"
+                                                            [items]="escenariosCod$" 
+                                                            [closeOnSelect]="true"
+                                                            id="escenario"                                                                                
+                                                            placeholder="Seleccione codigo escenario"   
+                                                            (search)="buscarEscenariosCodigo($event)"
+                                                            [(ngModel)]="codigoE"
+                                                            [searchable]="true"
+                                                            [addTag]="false"
+                                                            bindLabel="label"       
+                                                            class="form-control border-info"                                                                                       
+                                                            (change)="seleccionarEscenario($event)"
+                                                            [ngModelOptions]="{standalone: true}"                                                           
                                                         ></ng-select>
+                                                       
+                                                        </div>
                                                     </div>
-                                                    <div class="form-group col-sm-6">
-                                                        <label for="descripcionE">Descripción </label>
+
+                                                    <div class="form-group col-sm-4">
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                              <span class="input-group-text"><i class="fa fa-search"></i><small>&nbsp;Descripción</small></span>
+                                                            </div>
                                                         <ng-select                                                        
-                                                            [options]="escenarios" 
-                                                            [allowClear]="true"
+                                                            [items]="escenarios" 
+                                                            [closeOnSelect]="true"
+                                                            [(ngModel)]="descripcionE"
                                                             id="descripcionE"                                                             
-                                                            class="border-info"                                    
-                                                            filterPlaceholder="Digite para buscar..."
+                                                            class="form-control border-info" 
                                                             placeholder="Descripción"
-                                                            (selected)="seleccionarEscenario($event)"
-                                                            (filterInputChanged)="buscarEscenarios($event)"
-                                                            [(ngModel)]="codigoE" [ngModelOptions]="{standalone: true}" 
+                                                            (change)="seleccionarEscenario($event)"
+                                                            (search)="buscarEscenarios($event)"    
+                                                            [ngModelOptions]="{standalone: true}"                                                      
                                                         ></ng-select>
+                                                        </div>
                                                     </div>  
-                                                -->  
+                                                
                                                     
                                                     
-                                                    <div class="form-group col-sm-2">
-                                                        <label for="infraestructuraE">Infraestructura</label>
+                                                    <div class="form-group col-sm-4">                         
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-bank"></i>
+                                                                    <small>&nbsp;Infraestructura</small>
+                                                                </span>
+                                                            </div>
                                                         <input type="text" class="form-control border-info" id="infraestructuraE"
                                                             placeholder="Infraestructura" [(ngModel)]="infraestructuraE" [ngModelOptions]="{standalone: true}" />
-                                                    </div>
-                                                    <div class="form-group col-sm-2">
-                                                        <label for="unidadE">Unidad</label>
+                                                        </div>
+                                                        </div>
+                                                    <div class="form-group col-sm-4">
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-cube"></i>
+                                                                    <small>&nbsp;Unidad</small>
+                                                                </span>
+                                                            </div>
                                                         <input type="text" class="form-control border-info" id="unidadE" 
                                                         placeholder="Unidad"  [(ngModel)]="unidadE" [ngModelOptions]="{standalone: true}"/>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -295,46 +392,61 @@
                            <!--Controlar el paquete con check y pk del servicio-->
                             <div class="col-sm-12" *ngIf="pk>0 && form.value.aplica_paquete">
                                 <div class="card">
-                                    <div class="card-header">
+                                    <div class="card-header bg-primary">
                                         Paquetes de servicio
                                     </div>
                                     <div class="card-body">
-                                        <div class="row">
-
-                                                
-                                            <!--
-                                                    <div class="form-group col-sm-2">
-                                                        <label for="codigoS">Código servicio</label>
-                                                        <ng-select
-                                                            [options]="servicios" 
-                                                            [allowClear]="true"
-                                                            id="servicioS" 
-                                                            class="border-info"                                    
-                                                            filterPlaceholder="Type to search..."
-                                                            placeholder="Seleccione un servicio"
-                                                            (filterInputChanged)="buscarServicios($event)"
-                                                            (selected)="seleccionarServicio($event)"
+                                        <div class="row">  
+                                                    <div class="form-group col-sm-4">
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                              <span class="input-group-text"><i class="fa fa-search"></i><small>&nbsp;Código servicio</small></span>
+                                                            </div>                                       
+                                                        <ng-select                                                        
+                                                            [items]="servicios" 
+                                                            [closeOnSelect]="true"                                                           
+                                                            id="servicioS"                                                             
+                                                            class="border-info" 
+                                                            placeholder="Servicio"
+                                                            (change)="seleccionarServicio($event)"
+                                                            (search)="buscarServicios($event)"     
+                                                            class="form-control border-info"                                                                                                        
                                                         ></ng-select>
-                                                    </div>
-                                                -->
-                                                    
-
-
-                                                    <div class="form-group col-sm-6">
-                                                        <label for="descripcionS">Descripción </label>
+                                                        </div>
+                                                    </div>      
+                                                    <div class="form-group col-sm-4">
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-clone"></i>
+                                                                    <small>&nbsp;Descripción</small>
+                                                                </span>
+                                                            </div>
                                                         <input type="text" class="form-control border-info" id="descripcionS" 
                                                         placeholder="Descripción" 
                                                         [(ngModel)]="descripcionS" [ngModelOptions]="{standalone: true}" />
+                                                            </div>
                                                     </div>
                                                     <div class="form-group col-sm-2">
-                                                        <label for="tipo_servicioS">Tipo servicio</label>
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-crosshairs"></i>
+                                                                    <small>&nbsp;Tipo servicio</small>
+                                                                </span>
+                                                            </div>
                                                         <input type="text" class="form-control border-info" id="tipo_servicioS" placeholder="Tipo servicio" 
                                                         [(ngModel)]="tipo_servicioS" [ngModelOptions]="{standalone: true}" />
+                                                        </div>
                                                     </div>
                                                     <div class="form-group col-sm-2">
-                                                        <label for="valor_costoS">Valor costo</label>
-                                                        <input type="text" class="form-control border-info" id="valor_costoS" placeholder="Valor costo" 
+                                                        <div class="input-group mb-3">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-dollar"></i>
+                                                                    <small>&nbsp;Valor costo</small>
+                                                                </span>
+                                                            </div>
+                                                        <input mask="separator" thousandSeparator="."  prefix="$" type="text" class="form-control border-info" id="valor_costoS" placeholder="Valor costo" 
                                                         [(ngModel)]="valor_costoS" [ngModelOptions]="{standalone: true}" />
+                                                        </div>
                                                     </div>                                                
 
                                             <div class="form-group col-sm-12">
@@ -360,9 +472,9 @@
                                                         <tbody>
                                                             <tr *ngFor="let item of servicios_agregados ">
                                                                 <td>{{item.idServicioAgregado.codigo}}</td>
-                                                                <td>{{item.idServicioAgregado.descripcion}}</td>
-                                                                <td>{{item.idServicioAgregado.valorCosto}}</td>
-                                                                <td>{{item.idServicioAgregado.idTipoServicio.descripcion}}</td>
+                                                                <td>{{item.idServicioAgregado.descripcion}}</td>                                                                
+                                                                <td>{{item.idServicioAgregado.tipoServicio.descripcion}}</td>
+                                                                <td>{{item.costo | currency}}</td>
                                                                 <td>
                                                                     <button type="button" (click)=editar(item.id)
                                                                         class="btn btn-sm btn-primary">Editar</button>&nbsp;
@@ -400,3 +512,85 @@
     </form>
 </div>
 <notifier-container></notifier-container>
+<div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h4 class="modal-title">Escenarios</h4>
+          <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <table style="width: 100%"
+            class="table table-striped row-border hover">
+            <thead>
+                <tr>
+                    <th>Sec</th>
+                    <th>Código</th>
+                    <th>Descripcion</th>
+                    <th>Infraestructura</th>
+                    <th>Acciones</th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input size="1" class="form-control" type="text" placeholder="Sec"
+                                [(ngModel)]="id" />
+                        </div>
+                    </th>
+                    <th>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input size="1" class="form-control" type="text" placeholder="Código"
+                                [(ngModel)]="cod" />
+                        </div>
+                    </th>
+
+                    <th>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input class="form-control" type="text" placeholder="Descripción"
+                                [(ngModel)]="des" />
+                        </div>
+                    </th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="lista?.length != 0">
+                <tr *ngFor="let item of listaEsc ">
+                    <td>{{item.id}}</td>
+                    <td>{{item.codigo}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td>{{item.unidad.infraestructura.descripcion}}</td>
+                    <td>
+                        <button (click)="editar(item.id)" type="button" class="btn btn-primary"><i
+                                class="fa fa-pencil"></i>&nbsp;Editar</button>
+                        <button (click)="eliminar(item.id)" type="button" class="btn btn-danger"><i
+                                class="fa fa-trash"></i>&nbsp;Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="lista?.length == 0">
+                <tr>
+                    <td colspan="5" class="no-data-available">No data!</td>
+                </tr>
+            </tbody>
+        </table>
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="myModal.hide()">Aceptar</button>
+          <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->

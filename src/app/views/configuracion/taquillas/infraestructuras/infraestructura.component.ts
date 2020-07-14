@@ -15,6 +15,26 @@ import { UtilService } from '../../../../servicios/util.service';
 })
 export class InfraestructuraComponent implements OnInit {
 
+  /*******************************
+   * CONSTRUCCIÓN DEL FORMULARIO *
+   *******************************/
+  form: FormGroup = new FormGroup({
+    codigo: new FormControl('', [Validators.required,
+      Validators.maxLength(20),
+      Validators.minLength(3)]),
+    descripcion: new FormControl('', Validators.required),
+    estado: new FormControl('', Validators.required),
+    ciudad: new FormControl('', Validators.required),
+    direccion: new FormControl('', Validators.required),
+    telefono: new FormControl('', Validators.required),
+    latitud: new FormControl('', Validators.required),
+    longitud: new FormControl('', Validators.required),
+    atencion_desde: new FormControl('', Validators.required),
+    atencion_hasta: new FormControl('', Validators.required),
+  });
+
+
+
   /********************************************************************
    * DECLARACIÓN VARIABLES DE TIPO TIME PARA EL SELECTOR DE HORARIOS *
    ********************************************************************/
@@ -97,7 +117,7 @@ export class InfraestructuraComponent implements OnInit {
         if (params['id']) {
           this.traerObjeto(params['id'])
           this.cargarUnidades(params['id']);
-          this.conU = 6;
+        // this.conU = 6;
         } else {
           console.log('Nuevo')
         }
@@ -105,22 +125,7 @@ export class InfraestructuraComponent implements OnInit {
   }
 
 
-  /*******************************
-   * CONSTRUCCIÓN DEL FORMULARIO *
-   *******************************/
-  form: FormGroup = new FormGroup({
-    codigo: new FormControl('', Validators.required),
-    descripcion: new FormControl('', Validators.required),
-    estado: new FormControl('', Validators.required),
-    ciudad: new FormControl('', Validators.required),
-    direccion: new FormControl('', Validators.required),
-    telefono: new FormControl('', Validators.required),
-    latitud: new FormControl('', Validators.required),
-    longitud: new FormControl('', Validators.required),
-    atencion_desde: new FormControl('', Validators.required),
-    atencion_hasta: new FormControl('', Validators.required),
-  });
-
+  
   /****************************************************
    * INICIALIZAR EL FORUMARIO CON VALORES POR DEFECTO *
    ****************************************************/
@@ -190,8 +195,8 @@ export class InfraestructuraComponent implements OnInit {
     }
 
     /* Ajusta el formato de tiempo a 24 horas para horario principal */
-    const desde = moment(this.form.value.atencion_desde.hour + ':' + this.form.value.atencion_desde.minute + ':' + this.form.value.atencion_desde.second, 'HH:mm:ss').format('HH:mm');
-    const hasta = moment(this.form.value.atencion_hasta.hour + ':' + this.form.value.atencion_hasta.minute + ':' + this.form.value.atencion_hasta.second, 'HH:mm:ss').format('HH:mm');
+    const desde = moment(this.form.value.atencion_desde.hour + ':' + this.form.value.atencion_desde.minute + ':' + this.form.value.atencion_desde.second, 'HH:mm:ss').format('HH:mm:ss');
+    const hasta = moment(this.form.value.atencion_hasta.hour + ':' + this.form.value.atencion_hasta.minute + ':' + this.form.value.atencion_hasta.second, 'HH:mm:ss').format('HH:mm:ss');
 
     /* Arma el objeto según la entidad del backend, incluye el campo de validación */
     let obj = {
@@ -208,6 +213,7 @@ export class InfraestructuraComponent implements OnInit {
         longitud: this.form.value.longitud,
         atencionDesde: desde,
         atencionHasta: hasta,
+        activo: true
       }
     }
 
@@ -301,9 +307,9 @@ export class InfraestructuraComponent implements OnInit {
         codigo: this.codigou,
         descripcion: this.descripcionu,
         cantidadPersonas: this.cantidadu,
-        atencionDesde: moment(this.desdeu.hour + ':' + this.desdeu.minute + ':' + this.desdeu.second, 'HH:mm:ss').format('HH:mm'),
-        atencionHasta: moment(this.hastau.hour + ':' + this.hastau.minute + ':' + this.hastau.second, 'HH:mm:ss').format('HH:mm'),
-        idInfraestructura: { id: this.pk }
+        horaApertura: moment(this.desdeu.hour + ':' + this.desdeu.minute + ':' + this.desdeu.second, 'HH:mm:ss').format('HH:mm:ss'),
+        horaCierre: moment(this.hastau.hour + ':' + this.hastau.minute + ':' + this.hastau.second, 'HH:mm:ss').format('HH:mm:ss'),
+        infraestructura: { id: this.pk }
       }
     }
 
@@ -341,8 +347,8 @@ export class InfraestructuraComponent implements OnInit {
       this.codigou = data.codigo;
       this.descripcionu = data.descripcion;
       this.cantidadu = data.cantidadPersonas;
-      const ini = this.utilService.separarCadena(data.atencionDesde, ':');
-      const fin = this.utilService.separarCadena(data.atencionHasta, ':');
+      const ini = this.utilService.separarCadena(data.horaApertura, ':');
+      const fin = this.utilService.separarCadena(data.horaCierre, ':');
       this.timeIni.hour = Number(ini[0]);
       this.timeIni.minute = Number(ini[1]);
       this.timeFin.hour = Number(fin[0]);

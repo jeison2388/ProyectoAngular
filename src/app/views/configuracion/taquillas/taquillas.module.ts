@@ -16,12 +16,18 @@ import { TaquillasRoutingModule } from './taquillas-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-//import { SelectModule } from 'ng-select';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { DataService } from '../../../servicios/data.service';
 import { UtilService } from '../../../servicios/util.service';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
+const maskConfigFunction: () => Partial<IConfig> = () => {
+  return {
+    validation: false,
+  };
+};
 
 /**
  * Custom angular notifier options
@@ -52,7 +58,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     TemporadaComponent, 
     AperturasComponent, 
     AperturaComponent, 
-    TarifasComponent, 
+    TarifasComponent,
     TarifaComponent],
   imports: [
     CommonModule,
@@ -61,8 +67,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     DataTablesModule,
     NgbModule,
-    //SelectModule,
     NgSelectModule,
+    ModalModule.forRoot(),
+    NgxMaskModule.forRoot(maskConfigFunction),
     NotifierModule.withConfig(customNotifierOptions)
   ],
   providers:[

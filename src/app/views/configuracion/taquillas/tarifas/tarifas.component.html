@@ -1,1 +1,106 @@
-<p>tarifas works!</p>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <i class="fa fa-align-justify"></i>Tarifas
+                </div>
+                <div class="card-body">
+                    <div class="row text-right">
+                        <div class="form-group col-sm-12">
+                            <a [routerLink]="['/taquillas/tarifa']" class="btn btn-lg btn-success"><i
+                                    class="fa fa-plus"></i>
+                                Nueva</a>
+                        </div>
+                    </div>
+                    <table style="width: 100%" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                        class="table table-striped row-border hover">
+                        <thead>
+                            <tr>
+                                <th>Sec</th>
+                                <th>Código</th>
+                                <th>Descripcion</th>
+                                <th>Tipo servicio</th>
+                                <th>Grupo</th>
+                                <th>Acciones</th>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input size="1" class="form-control" type="text" placeholder="Sec"
+                                            [(ngModel)]="id" />
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input size="1" class="form-control" type="text" placeholder="Código"
+                                            [(ngModel)]="cod" />
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="Descripción"
+                                            [(ngModel)]="des" />
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="Tipo servicio"
+                                            [(ngModel)]="tip" />
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="Grupo"
+                                            [(ngModel)]="gru" />
+                                    </div>
+                                </th>
+                                
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="lista?.length != 0">
+                            <tr *ngFor="let item of lista ">
+                                <td>{{item.id}}</td>
+                                <td>{{item.codigo}}</td>
+                                <td>{{item.descripcion}}</td>
+                                <td>{{item.tipoServicio}}</td>
+                                <td>{{item.grupoServicio}}</td>
+                                <td style="width: 250px;">
+                                    <button (click)="editar(item.id)" type="button" class="btn btn-primary"><i
+                                            class="fa fa-pencil"></i>&nbsp;Editar</button>
+                                    <button (click)="eliminar(item.id)" type="button" class="btn btn-danger"><i
+                                            class="fa fa-trash"></i>&nbsp;Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                       <!-- <tbody *ngIf="lista?.length == 0">
+                            <tr>
+                                <td colspan="3" class="no-data-available">No data!</td>
+                            </tr>
+                        </tbody>-->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<notifier-container></notifier-container>

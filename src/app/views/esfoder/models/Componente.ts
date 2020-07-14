@@ -1,10 +1,12 @@
-export class Componente {
+import { SubPrograma } from './SubPrograma';
+
+export interface Componente {
   id: number;
+  activo: boolean;
   codigo: string;
   descripcion: string;
-  activo: boolean;
-  id_sub_programa: number;
-  id_usuario: number;
+  idUsuario: number;
+  subPrograma: SubPrograma;
   selected: boolean;
   porcentaje: number;
 }

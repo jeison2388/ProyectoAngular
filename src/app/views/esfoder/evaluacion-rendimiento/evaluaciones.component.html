@@ -16,7 +16,7 @@
             class="table table-striped row-border hover">
             <thead>
               <tr>
-                <th>Código
+                <th>Código</th>
                 <th>Descripción de evaluación</th>
                 <th>Acciones</th>
               </tr>
@@ -37,7 +37,7 @@
                     <input class="form-control" type="text" placeholder="Descripción" [(ngModel)]="des" />
                   </div>
                 </th>
-                <th> </th>
+                <th>&nbsp;</th>
               </tr>
             </thead>
             <tbody *ngIf="lista?.length != 0">
@@ -45,10 +45,10 @@
                 <td>{{item.codigo}}</td>
                 <td>{{item.descripcion}}</td>
                 <td>
-                  <button (click)="editar(item.id)" type="button" class="btn btn-primary"><i
-                      class="fa fa-pencil"></i>&nbsp;Editar</button>
-                  <button (click)="eliminarObjeto(item.id)" type="button" class="btn btn-danger"><i
-                      class="fa fa-trash"></i>&nbsp;Eliminar</button>
+                  <button (click)="editar(item.id)" title="Editar" type="button" class="btn btn-primary"><i
+                      class="fa fa-pencil"></i><span>&nbsp;Editar</span></button>
+                  <button (click)="eliminarObjeto(item.id)" title="Eliminar" type="button" class="btn btn-danger"><i
+                      class="fa fa-trash"></i><span>&nbsp;Eliminar</span></button>
                 </td>
               </tr>
             </tbody>

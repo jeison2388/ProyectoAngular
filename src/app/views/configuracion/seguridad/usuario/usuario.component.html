@@ -1,0 +1,166 @@
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()" (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <strong>Usuario</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!--INICIO DEL FORMULARIO-->
+                                <div class="row">
+                                    <div class="form-group col-sm-4">
+                                        <label for="identificacion">Identificación<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="identificacion" type="text"
+                                            class="form-control border-info UP" id="identificacion" placeholder="Identificación"
+                                            [ngClass]="{ 'is-invalid': submitted && f.identificacion.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 16 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="id_tipo_identificacion">Tipo identificación<span class="text-danger">*</span></label>
+                                        <select  class="form-control placeholder" formControlName="id_tipo_identificacion" id="id_tipo_identificacion" class="form-control border-info UP" 
+                                        [ngClass]="{ 'is-invalid': submitted && f.id_tipo_identificacion.errors }" >
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let id_tipo_identificacion of tipos_identificacion" value={{id_tipo_identificacion.id}}>
+                                                {{id_tipo_identificacion.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div> 
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="nombre1">Primer nombre<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="nombre1" type="text"
+                                            class="form-control border-info UP" id="nombre1" placeholder="Primer nombre"
+                                            [ngClass]="{ 'is-invalid': submitted && f.nombre1.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="nombre2">Segundo nombre<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="nombre2" type="text"
+                                            class="form-control border-info UP" id="nombre2" placeholder="Segundo nombre"
+                                            [ngClass]="{ 'is-invalid': submitted && f.nombre2.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="apellido1">Primer apellido<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="apellido1" type="text"
+                                            class="form-control border-info UP" id="apellido1" placeholder="Primer apellido"
+                                            [ngClass]="{ 'is-invalid': submitted && f.apellido1.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="apellido2">Segundo apellido<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="apellido2" type="text"
+                                            class="form-control border-info UP" id="apellido2" placeholder="Segundo apellido"
+                                            [ngClass]="{ 'is-invalid': submitted && f.apellido2.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>                                                               
+                                    
+                                    <div class="form-group col-sm-4">
+                                        <label for="id_perfil">Perfil<span class="text-danger">*</span></label>
+                                        <select  class="form-control placeholder" formControlName="id_perfil" id="id_perfil" class="form-control border-info UP" 
+                                        [ngClass]="{ 'is-invalid': submitted && f.id_perfil.errors }" >
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let id_perfil of perfiles" value={{id_perfil.id}}>
+                                                {{id_perfil.descripcion}}
+                                            </option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Campo requerido
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="login">Login<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="login" type="text"
+                                            class="form-control border-info UP" id="login" placeholder="Login"
+                                            [ngClass]="{ 'is-invalid': submitted && f.login.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="clave">Clave</label>
+                                        <input #foco appUpper formControlName="clave" type="password"
+                                            class="form-control border-info UP" id="clave" placeholder="Clave"
+                                            [ngClass]="{ 'is-invalid': submitted && f.clave.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="claveCF">Confirmar clave</label>
+                                        <input appUpper formControlName="claveCF" type="password"
+                                            class="form-control border-info UP" id="claveCF" placeholder="Clave"
+                                            [ngClass]="{ 'is-invalid': submitted && f.claveCF.errors }"
+                                            autocomplete="nop" (blur)="confirmarClave($event)" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="correo">Correo<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="correo" type="mail"
+                                            class="form-control border-info UP" id="correo" placeholder="Correo"
+                                            [ngClass]="{ 'is-invalid': submitted && f.correo.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 128 caracteres
+                                        </div>
+                                    </div>
+
+                                </div>                               
+                            </div>
+                            <!--FIN DEL FORMULARIO-->
+                        </div>
+
+
+                        <div class="row text-right">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                    (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                    Guardar</button>
+                                <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                        class="fa fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </form>
+</div>
+<notifier-container></notifier-container>

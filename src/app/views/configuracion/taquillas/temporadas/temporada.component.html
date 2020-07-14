@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <strong>Rango temporada</strong>
                     </div>
                     <div class="card-body">
@@ -12,19 +12,31 @@
                                 <!--INICIO DEL FORMULARIO-->
                                 <div class="row">
                                     <div class="form-group col-sm-6">
-                                        <label for="desde">Fecha desde<span class="text-danger">*</span></label>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    <small>&nbsp;Fecha desde</small>
+                                                </span>
+                                            </div>
                                         <input (click)="desde.toggle()" formControlName="desde" type="text" class="form-control border-info" id="desde" placeholder="aaaa-mm-dd"
                                             [ngClass]="{ 'is-invalid': submitted && f.desde.errors }" name="dp" ngbDatepicker #desde="ngbDatepicker" autocomplete="nope" />       
                                         <div class="invalid-feedback">
                                             Campo requerido
                                         </div>
+                                        </div>
                                 </div>
                                 <div class="form-group col-sm-6">
-                                        <label for="hasta">Fecha  hasta<span class="text-danger">*</span></label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                <small>&nbsp;Fecha hasta</small>
+                                            </span>
+                                        </div>
                                         <input (click)="hasta.toggle()" formControlName="hasta" type="text" class="form-control border-info" id="hasta" placeholder="aaaa-mm-dd"
                                             [ngClass]="{ 'is-invalid': submitted && f.hasta.errors }" name="dp1" ngbDatepicker #hasta="ngbDatepicker" autocomplete="nope" />       
                                         <div class="invalid-feedback">
                                             Campo requerido
+                                        </div>
                                         </div>
                                 </div>
                                 </div>

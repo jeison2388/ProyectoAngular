@@ -10,6 +10,7 @@ import { UtilService } from '../../../../servicios/util.service';
 import { IOption } from 'ng-select';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { TarifasService } from '../../../../servicios/tarifas.service';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class AperturaComponent implements OnInit {
     public dataService: DataService,
     public utilService: UtilService,
     public notifierService: NotifierService,
+    public tarifaService: TarifasService,
     public router: Router,
     private route: ActivatedRoute, ) {
     //incicializa variable de las notificaciones
@@ -162,11 +164,11 @@ export class AperturaComponent implements OnInit {
 
 
   cargarUnidadesApertura(apertura){
-    this.dataService.listaEntidadRelacion('AperturaUnidad', ['idApertura'], ['id'], [apertura])
+    this.dataService.listaEntidadRelacion('AperturaPunto', ['idApertura'], ['id'], [apertura])
       .subscribe((data: any) => { 
         let i = 0;
         data.forEach(element => {
-           this.unidades.push({value: element.idUnidad.id, label: element.idUnidad.descripcion})
+           this.unidades.push({value: element.idPunto.id, label: element.idPunto.descripcion})
           i++;
         });      
       },
@@ -198,14 +200,14 @@ export class AperturaComponent implements OnInit {
       return;
     }
 
-    //Revisar para condinción de edición
-    let servicio = this.form.value.servicio.value
-    if (this.pk > 0){
+    // Revisar para condinción de edición
+    let servicio = this.form.value.servicio.value;
+    if (this.pk > 0) {
       servicio = this.form.value.servicio.value;
     }
-    let puntos = this.form.value.punto_venta;
+    const puntos = this.form.value.punto_venta;
     /* Arma el objeto según la entidad del backend, incluye el campo de validación */
-    let obj = {
+    const obj = {
       campoValidacion: 'codigo',
       valor: this.form.value.codigo,
       entidad: {
@@ -220,10 +222,9 @@ export class AperturaComponent implements OnInit {
 
     /* Controla guardado de edición o inserción, segun el valor del Id (pk) formulario principal*/
     if (this.pk > 0) {
-      console.log('edition mode')
       this.dataService.guardar(obj.entidad, 'Apertura').subscribe((data: any) => {
         this.notifier.notify('success', 'La información se ha actualizado correctamente');
-        if(puntos.length>0){
+        if (puntos.length > 0) {
           this.guardarPuntos(data.id, puntos);
         }
         /* Luego de guardar redirige a modo de edición */
@@ -249,20 +250,26 @@ export class AperturaComponent implements OnInit {
     }
   }
 
-  guardarPuntos(apertura, puntos){
-   puntos.forEach(element => {
-      //console.log("Puntos:", element.value)
-      let obj = {
+  guardarPuntos(apertura, puntos) {
+    puntos.forEach(element => {
+      const obj = {
         idApertura: { id: apertura },
-        idUnidad: { id: element.value },
-      }
-      this.dataService.guardar(obj, 'AperturaUnidad').subscribe((data: any) => {
-        console.log('')
+        idPunto: { id: element.value },
+      };
+
+      this.tarifaService.validarPunto(obj.idApertura, obj.idPunto).subscribe((data: any) => {
+          if (data === null) {
+          this.dataService.guardar(obj, 'AperturaPunto').subscribe((data1: any) => {
+            console.log('');
+          });
+        }
+
       });
+
     });
 
 
-    
+
   }
 
   /*********************************
@@ -284,7 +291,7 @@ export class AperturaComponent implements OnInit {
       this.form.controls['centro_costo'].setValue(data.idCentroCosto.id);
       this.form.controls['subgrupo'].setValue(data.idSubgrupo.id);
       this.seleccionarServicioId(data.idServicio.id);
-      this.cargarUnidadesApertura(id);     
+      this.cargarUnidadesApertura(id);
       this.form.controls['servicio'].setValue({value: data.idServicio.id, label: data.idServicio.codigo});
       setTimeout(() => {
         this.form.get('punto_venta').patchValue(this.unidades);
@@ -293,44 +300,7 @@ export class AperturaComponent implements OnInit {
   }
 
 
-  /**************************************************************************************
-   * FUNCIÓN PARA AGREGAR UNA UNIDAD, AL LISTADO DE UNIDADES DEL FORMULARIO SEGCUNDARIO *
-   **************************************************************************************/
-  agregarServicioAgregado() {
 
-    /* Arma el objeto según la entidad del backend, incluye el campo de validación */
-    let obj = {      
-        id: this.pkU,                
-        objetivo: 'objetivo',
-      }
-    
-
-    /* Controla guardado de edición o inserción, segun el valor del Id (pk) formulario principal*/
-    if (this.pkU > 0) {
-      console.log('edition mode')
-      this.dataService.guardar(obj, 'PaqueteServicio').subscribe((data: any) => {
-        this.notifier.notify('success', 'La información se ha actualizado correctamente');
-        /* Luego de guardar envia actualzia el formulario principal y secundario */
-        setTimeout(() => {
-          this.utilService.editar('/taquillas/apertura', this.pk);
-        }, 1000);
-      });
-    } else {
-      this.dataService.guardar(obj, 'PaqueteServicio').subscribe((data: any) => {
-        this.notifier.notify('success', 'La información se ha almacenado correctamente');
-        /* Luego de guardar envia actualzia el formulario principal y secundario */
-        setTimeout(() => {
-          this.utilService.editar('/taquillas/apertura', this.pk);
-        }, 1000);
-
-      }, error => {
-        /* Genera este mensaje cuando hya un error de codigo repetido en el backend */
-        this.notifier.notify('error', 'El código ingresado ya existe, por favor corrija y guarde nuevamente');
-      });
-    }
-  }
-
- 
   /*******************************************************
    * FUNCIÓN QUE PERMITE ELIMINAR UNA SERVICIO DE LA LISTA PAQUETE*
    *******************************************************/
@@ -382,42 +352,40 @@ private buscarServicios($event, codbus) {
 
 
 seleccionarServicio(option: IOption) {  
-  this.dataService.traerObjetoId('Servicio', option.value).subscribe((data: any) => {       
-    this.descripcionS = data.descripcion;   
-    //this.codigoS = [data.id];    
+  this.dataService.traerObjetoId('Servicio', option.value).subscribe((data: any) => {
+    this.descripcionS = data.descripcion;
     this.form.controls['servicio'].setValue({value: data.id, label: data.codigo});
-
-    this.form.controls['servicio_descripcion'].setValue(data.descripcion)
-    this.form.controls['ciudad'].setValue(data.idEscenario.idUnidad.idInfraestructura.idCiudad.descripcion);
-      this.form.controls['infraestructura'].setValue(data.idEscenario.idUnidad.idInfraestructura.descripcion);
-      this.form.controls['grupo'].setValue(data.idGrupo.descripcion);
-      this.cargarSubgrupos(data.idGrupo.id);
-      this.buscarPuntosVenta('', data.idEscenario.idUnidad.idInfraestructura.id);
+    this.form.controls['servicio_descripcion'].setValue(data.descripcion);
+    this.form.controls['ciudad'].setValue(data.escenario.unidad.infraestructura.idCiudad.descripcion);
+      this.form.controls['infraestructura'].setValue(data.escenario.unidad.infraestructura.descripcion);
+      this.form.controls['grupo'].setValue(data.grupo.descripcion);
+      this.cargarSubgrupos(data.grupo.id);
+      this.buscarPuntosVenta('', data.escenario.unidad.infraestructura.id);
   });
 }
 
-seleccionarServicioId(id) {  
-  this.dataService.traerObjetoId('Servicio', id).subscribe((data: any) => {       
-    this.descripcionS = data.descripcion;   
-    this.codigoS = [data.id];    
-    this.form.controls['servicio_descripcion'].setValue(data.descripcion)
-    this.form.controls['ciudad'].setValue(data.idEscenario.idUnidad.idInfraestructura.idCiudad.descripcion);
-      this.form.controls['infraestructura'].setValue(data.idEscenario.idUnidad.idInfraestructura.descripcion);
-      this.form.controls['grupo'].setValue(data.idGrupo.descripcion);
-      this.cargarSubgrupos(data.idGrupo.id);
-      this.buscarPuntosVenta('', data.idEscenario.idUnidad.idInfraestructura.id);
+seleccionarServicioId(id) {
+  this.dataService.traerObjetoId('Servicio', id).subscribe((data: any) => {
+    this.descripcionS = data.descripcion;
+    this.codigoS = data.codigo;
+   // this.form.controls['servicio_descripcion'].setValue(data.descripcion);
+    this.form.controls['ciudad'].setValue(data.escenario.unidad.infraestructura.idCiudad.descripcion);
+      this.form.controls['infraestructura'].setValue(data.escenario.unidad.infraestructura.descripcion);
+      this.form.controls['grupo'].setValue(data.grupo.descripcion);
+      this.cargarSubgrupos(data.grupo.id);
+      this.buscarPuntosVenta('', data.escenario.unidad.infraestructura.id);
   });
 }
 
 
 buscarPuntosVenta(term, infra){
-  this.dataService.catalogoEntidadBasicaCombo('Unidad', ['descripcion', 'infra'], [term, infra], 1, 100)
+  this.dataService.catalogoEntidadBasicaCombo('Punto', ['descripcion'], [term], 1, 100)
    .subscribe((data: any) => { this.puntos_venta = data; },
    error => {console.log('There was an error while retrieving data !!!' + error); });
 }
 
 buscarPuntosVenta1(term, infra){
-  this.dataService.catalogoEntidadBasicaCombo('Unidad', [], [], 1, 100)
+  this.dataService.catalogoEntidadBasicaCombo('Punto', [], [], 1, 100)
    .subscribe((data: any) => { this.puntos_venta = data; },
    error => {console.log('There was an error while retrieving data !!!' + error); });
 }

@@ -79,7 +79,7 @@ export class NivelesComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     const that = this;
-    this.dataService.contar('Servicio').subscribe((data: any) => {
+    this.dataService.contar('Nivel').subscribe((data: any) => {
       this.cantidad = data;
     });
     this.dtOptions = {
@@ -87,6 +87,7 @@ export class NivelesComponent implements OnInit, AfterViewInit, OnDestroy {
       pageLength: 5,
       serverSide: true,
       processing: true,
+      searching: false,
       language: {
         url: '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json'
       },
@@ -95,7 +96,7 @@ export class NivelesComponent implements OnInit, AfterViewInit, OnDestroy {
         if (offset === 0) {
           offset = 1;
         }
-        that.dataService.entidadBasicaPaginada('Servicio',
+        that.dataService.entidadBasicaPaginada('Nivel',
           [dataTablesParameters.columns[0].data, dataTablesParameters.columns[1].data, dataTablesParameters.columns[2].data],
           [this.id, this.cod, this.des],
           offset,

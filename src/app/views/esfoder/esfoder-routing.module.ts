@@ -7,6 +7,7 @@ import { AddNivelesComponent } from './niveles/add-niveles/add-niveles.component
 import { EditNivelesComponent } from './niveles/edit-niveles/edit-niveles.component';
 import { AddInstructoresComponent } from './instructores/add-instructores/add-instructores.component';
 import { AddEvaluacionesComponent } from './evaluacion-rendimiento/add-evaluaciones/add-evaluaciones.component';
+import { EditEvaluacionesComponent } from './evaluacion-rendimiento/edit-evaluaciones/edit-evaluaciones.component';
 import { from } from 'rxjs';
 
 /********************
@@ -94,8 +95,8 @@ const routes: Routes = [
         }
       },
       {
-        path: 'add-evaluaciones:id',
-        component: AddEvaluacionesComponent,
+        path: 'edit-evaluaciones',
+        component: EditEvaluacionesComponent,
         data: {
           title: 'Evaluaciones de rendimiento'
         }

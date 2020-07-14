@@ -102,7 +102,7 @@ de acuerdo a su dependencia una de otra, se deberá asignar el ID que se vaya re
         "direccion": "CALLE FALSA 123",
         "telefono": "123456",
         "recomendacion": "NA",
-        "vacaciones_red_afiliado": {
+        "vacaciones_rec_afiliado": {
             "id": 10,
             "id_afiliado": 1,
             "id_vacaciones_rec": 88,

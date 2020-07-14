@@ -20,7 +20,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+import { BnNgIdleService } from 'bn-ng-idle';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -45,7 +45,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { DummyComponent } from './shared/dummy.component';
 import { ModalWindowsModule } from './views/modal-windows/modal-windows.module';
-import  {NgxPaginationModule} from 'ngx-pagination';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './views/login/Auth.guard';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -63,22 +65,21 @@ import  {NgxPaginationModule} from 'ngx-pagination';
     HttpClientModule,
     DataTablesModule,
     ModalWindowsModule,
-    FormsModule,
-    NgxPaginationModule
-    ],
+    ReactiveFormsModule,
+  ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent,
     DummyComponent
+
   ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  }, AuthGuard, BnNgIdleService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

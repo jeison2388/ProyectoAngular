@@ -6,38 +6,49 @@
           <div class="card-group">
             <div class="card p-4">
               <div class="card-body">
-                <form>
-                  <h1>Login</h1>
-                  <p class="text-muted">Sign In to your account</p>
-                  <div class="input-group mb-3">
+                 <div  *ngIf="message"  class="alert alert-danger" role="alert">
+                  <strong>Oops!</strong> {{message}}
+                </div>
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
+                  <h3>Ingreso al sistema</h3>
+                  <p class="text-muted">Recreación Comfacauca</p>
+                  <div class="input-group mb-3 clearfix" [ngClass]="{ 'has-error': submitted && f.userid.errors }">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
+                    <input type="text" class="form-control" placeholder="Usuario" formControlName="userid" />
+                      <div *ngIf="submitted && f.userid.errors" class="help-block">    
+                        <div *ngIf="f.userid.errors.required">Userid is required</div>    
+                      </div>    
                   </div>
-                  <div class="input-group mb-4">
+                  <div class="input-group mb-4 clearfix" [ngClass]="{ 'has-error': submitted && f.password.errors }">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" autocomplete="current-password" required>
+                    <input type="password" class="form-control" placeholder="Clave"  formControlName="password" />
+                      <div *ngIf="submitted && f.password.errors" class="help-block">    
+                        <div *ngIf="f.password.errors.required">Password is required</div>    
+                      </div>
                   </div>
                   <div class="row">
                     <div class="col-6">
-                      <button type="button" class="btn btn-primary px-4">Login</button>
+                      <button type="submit" class="btn btn-primary px-4">Ingresar</button>
                     </div>
-                    <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0">Forgot password?</button>
-                    </div>
+                    <!--<div class="col-6 text-right">
+                      <button type="button" class="btn btn-link px-0">Olvido su clave?</button>
+                    </div>-->
                   </div>
                 </form>
               </div>
             </div>
-            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+            <div class="card text-white bg-default py-5 d-md-down-none" style="width:44%">
               <div class="card-body text-center">
                 <div>
-                  <h2>Sign up</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                  <button type="button" class="btn btn-primary active mt-3">Register Now!</button>
+                  
+                  <img src="assets/img/brand/comfa.svg" width="300px" height="80px" />
+                  <!--
+                    <button type="button" class="btn btn-primary active mt-3">Registrese Ahora!</button>
+                  -->
                 </div>
               </div>
             </div>
@@ -47,3 +58,37 @@
     </div>
   </main>
 </div>
+
+
+
+<!--
+<div class="container">    
+  <div class="col-md-6 col-md-offset-3 loginBox">    
+      <h3>Log In</h3>    
+      <p *ngIf="message" class="text-center error">{{message}}</p>    
+    <form [formGroup]="loginForm" (ngSubmit)="login()">    
+        <div class="form-group clearfix" [ngClass]="{ 'has-error': submitted && f.userid.errors }">    
+            <label for="userid" class="col-md-3 col-sm-5 col-xs-12">Userid</label>    
+            <div class="col-md-9 col-sm-7 col-xs-12">    
+                <input type="text" class="form-control" formControlName="userid" />    
+                <div *ngIf="submitted && f.userid.errors" class="help-block">    
+                      <div *ngIf="f.userid.errors.required">Userid is required</div>    
+                </div>    
+            </div>    
+        </div>    
+        <div class="form-group clearfix" [ngClass]="{ 'has-error': submitted && f.password.errors }">    
+          <label for="password" class="col-md-3 col-sm-5 col-xs-12">Password</label>    
+          <div class="col-md-9 col-sm-7 col-xs-12">    
+              <input type="password" class="form-control" formControlName="password"/>    
+              <div *ngIf="submitted && f.password.errors" class="help-block">    
+                      <div *ngIf="f.password.errors.required">Password is required</div>    
+              </div>    
+          </div>    
+        </div>    
+        <div class="col-xs-12 form-group text-right">    
+          <button class="btn btn-success" type="submit">Login</button>    
+        </div>    
+    </form>    
+  </div>    
+</div>   
+-->
