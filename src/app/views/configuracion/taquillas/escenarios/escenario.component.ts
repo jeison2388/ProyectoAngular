@@ -91,7 +91,7 @@ export class EscenarioComponent implements OnInit {
         if (params['id']) {
           this.traerObjeto(params['id'])
           this.cargarEscenariosSecundarios(params['id']);
-          this.conU = 6;
+         // this.conU = 6;
         } else {
           console.log('Nuevo')
         }
@@ -165,7 +165,7 @@ export class EscenarioComponent implements OnInit {
    * CARGA COMBO DEPENDIENTE DE CIUDADES, SEGÚN EL ESTADO SELECCIONADO *
    **********************************************************************/
    cargarUnidades(infraestructura) {
-    this.dataService.listaEntidadRelacion('Unidad', ['idInfraestructura'], ['id'], [infraestructura])
+    this.dataService.listaEntidadRelacion('Unidad', ['infraestructura'], ['id'], [infraestructura])
       .subscribe((data: any) => { this.unidades = data; },
         error => {
           console.log('There was an error while retrieving data !!!' + error);
@@ -184,8 +184,8 @@ export class EscenarioComponent implements OnInit {
     }
 
     /* Ajusta el formato de tiempo a 24 horas para horario principal */
-    const desde = moment(this.form.value.atencion_desde.hour + ':' + this.form.value.atencion_desde.minute + ':' + this.form.value.atencion_desde.second, 'HH:mm:ss').format('HH:mm');
-    const hasta = moment(this.form.value.atencion_hasta.hour + ':' + this.form.value.atencion_hasta.minute + ':' + this.form.value.atencion_hasta.second, 'HH:mm:ss').format('HH:mm');
+    const desde = moment(this.form.value.atencion_desde.hour + ':' + this.form.value.atencion_desde.minute + ':' + this.form.value.atencion_desde.second, 'HH:mm:ss').format('HH:mm:ss');
+    const hasta = moment(this.form.value.atencion_hasta.hour + ':' + this.form.value.atencion_hasta.minute + ':' + this.form.value.atencion_hasta.second, 'HH:mm:ss').format('HH:mm:ss');
 
     /* Arma el objeto según la entidad del backend, incluye el campo de validación */
     let obj = {
@@ -195,13 +195,14 @@ export class EscenarioComponent implements OnInit {
         id: this.pk,
         codigo: this.form.value.codigo,
         descripcion: this.form.value.descripcion,
-        idTipoEscenario: { id: this.form.value.tipo_escenario },
-        idUnidad: { id: this.form.value.unidad },
+        tipoEscenario: { id: this.form.value.tipo_escenario },
+        unidad: { id: this.form.value.unidad },
         aplicaVentaHoras: this.form.value.aplica_venta_horas,
-        atencionDesde: desde,
-        atencionHasta: hasta,
+        horaApertura: desde,
+        horaCierre: hasta,
+        activo: true
       }
-    }
+    };
 
     /* Controla guardado de edición o inserción, segun el valor del Id (pk) formulario principal*/
     if (this.pk > 0) {
@@ -243,12 +244,12 @@ export class EscenarioComponent implements OnInit {
       this.pk = id;
       this.form.controls['codigo'].setValue(data.codigo);
       this.form.controls['descripcion'].setValue(data.descripcion);
-      this.form.controls['unidad'].setValue(data.idUnidad.id);
-      this.form.controls['tipo_escenario'].setValue(data.idTipoEscenario.id);
+      this.form.controls['unidad'].setValue(data.unidad.id);
+      this.form.controls['tipo_escenario'].setValue(data.tipoEscenario.id);
       this.form.controls['aplica_venta_horas'].setValue(data.aplicaVentaHoras);
-      this.form.controls['infraestructura'].setValue(data.idUnidad.idInfraestructura.id);
-      const ini = this.utilService.separarCadena(data.atencionDesde, ':');
-      const fin = this.utilService.separarCadena(data.atencionHasta, ':');
+      this.form.controls['infraestructura'].setValue(data.unidad.infraestructura.id);
+      const ini = this.utilService.separarCadena(data.horaApertura, ':');
+      const fin = this.utilService.separarCadena(data.horaCierre, ':');
       this.timeIni.hour = Number(ini[0]);
       this.timeIni.minute = Number(ini[1]);
       this.timeFin.hour = Number(fin[0]);
@@ -290,8 +291,9 @@ export class EscenarioComponent implements OnInit {
         id: this.pkU,
         codigo: this.codigoS,
         descripcion: this.descripcionS,
-        numeroPersonas: this.cantidadS,
-        idEscenario: { id: this.pk }
+        numeroPersona: this.cantidadS,
+        escenario: { id: this.pk },
+        activo: true
       }
     }
 

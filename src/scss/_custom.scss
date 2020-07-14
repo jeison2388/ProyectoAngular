@@ -192,3 +192,31 @@ input.e-input,
   line-height: inherit !important;
   cursor: pointer !important;
 }
+.minusculas{
+	text-transform:lowercase;
+}
+.mayusculas{
+	text-transform:uppercase;
+}
+
+/*
+   server-side-angular-way.component.css
+*/
+.no-data-available {
+  text-align: center;
+}
+
+/*
+   src/styles.css (i.e. your global style)
+*/
+.dataTables_empty {
+  display: none;
+}
+@media only screen and (min-width: 0px) and (max-width: 679px) {
+
+  .btn span
+  {
+      display: none;
+  }
+
+}

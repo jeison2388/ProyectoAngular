@@ -208,5 +208,33 @@ export class DataService {
       .pipe(map(response => response as Object[]));
   }
 
+  public listaEntidadRelacionPaginado(entidad, entidadesRelacionadas, camposBusqueda, infoCampos, pag, max ) {
+    return this.http.post(url + 'buscar_rel/',
+      JSON.stringify({ nombreEntidad: entidad, entidadesRelacionadas: entidadesRelacionadas, camposBusqueda: camposBusqueda, infoCampos: infoCampos, page: pag, maxResults: max }), httpOptions)
+      .pipe(map((res: Response) => {
+        return res;
+      }));
+  }
+
+
+  public catalogoEntidadBasicaComboDescripcionUsuario(entidad, camposBusqueda, infoCampos, pag, max): Observable<any> {
+    return this.http.post(url + 'buscar/',
+      JSON.stringify({ nombreEntidad: entidad, camposBusqueda: camposBusqueda, infoCampos: infoCampos, page: pag, maxResults: max }), httpOptions).pipe(
+        // Adapt each item in the raw data array
+        map((data: any[]) => {
+          const lista = [];
+          for (let i = 0; i < data.length; i++) {
+            lista.push({ value: data[i].id, label: data[i].nit + ' - ' + data[i].razonSocial });
+          }
+          return lista;
+        }),
+      );
+  }
+
+public validar(obj, entidad): Observable<any> {
+    return this.http.post(url + entidad + '/validarPorCampo', JSON.stringify(obj), httpOptions)
+    .pipe(map(response => response as any));
+  }
+
 }
 

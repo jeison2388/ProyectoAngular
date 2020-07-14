@@ -81,6 +81,33 @@ export const navItems: NavData[] = [
            ]
          },
          {
+          name: 'Seguridad',
+          url: '/seguridad',
+          icon: 'icon-user',
+          children: [
+            {
+              name: 'Roles',
+              url: '/seguridad/roles',
+              icon: 'icon-user'
+            },
+            {
+              name: 'Usuario',
+              url: '/seguridad/usuarios',
+              icon: 'icon-user'
+            },
+            {
+              name: 'Recursos',
+              url: '/seguridad/recursos',
+              icon: 'icon-puzzle'
+            },
+            {
+              name: 'Permisos',
+              url: '/seguridad/permisos',
+              icon: 'icon-puzzle'
+            },
+          ]
+        },
+         {
            name: 'Hotel',
            url: '/hotel',
            icon: 'icon-briefcase',
@@ -170,4 +197,4 @@ export const navItems: NavData[] = [
          url: '/autoGestionInstructores/autoGestionInstructores',
          icon: 'icon-puzzle'
        }
-       ];
+        ];

@@ -74,8 +74,9 @@ export class AperturasComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       ajax: (dataTablesParameters: any, callback) => {
         let offset = Number(dataTablesParameters.start / dataTablesParameters.length) + 1
-        if (offset === 0)
-          offset = 1
+        if (offset === 0) {
+          offset = 1;
+        }
         that.dataService.entidadBasicaPaginada('Apertura',
           [dataTablesParameters.columns[0].data, dataTablesParameters.columns[1].data, dataTablesParameters.columns[2].data],
           [this.id, this.cod, this.des],

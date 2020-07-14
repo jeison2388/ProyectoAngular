@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Observer } from '@syncfusion/ej2-base';
 import { environment } from '../../../../environments/environment';
-
+import { SubComponente } from '../models/SubComponente';
+import { map, take } from 'rxjs/operators';
 
 
 @Injectable(
@@ -15,14 +16,14 @@ export class EvaluacionService {
     this.ruta = environment.baseUrl;
   }
   addEvaluacion(evaluacion: Object): Observable<any> {
-    console.log('Evaluacion a guardar::::   ' + JSON.stringify(evaluacion));
+    console.log('Evaluacion Inicial a guardar::::   ' + JSON.stringify(evaluacion));
     return this.httpClient.post(this.ruta + 'esfoder/guardarEditarEvaluacion', evaluacion, {reportProgress: true, observe: 'events'});
   }
 
   // CATÁLOGOS
-  cargarProgramas(): Observable<any> {
+  cargarSubProgramas(): Observable<any> {
 
-    const respuesta = this.httpClient.get(this.ruta + 'esfoder/obtenerProgramas');
+    const respuesta = this.httpClient.get(this.ruta + 'esfoder/obtenerSubProgramas');
     return respuesta;
   }
   cargarNiveles(): Observable<any> {
@@ -40,11 +41,37 @@ export class EvaluacionService {
     const respuesta = this.httpClient.get(this.ruta + 'esfoder/obtenerComponentes');
     return respuesta;
   }
-  cargarSubComponentes(): Observable<any> {
 
+  cargarSubComponentes(): Observable<any> {
     const respuesta = this.httpClient.get(this.ruta + 'esfoder/obtenerSubComponentes');
     return respuesta;
   }
 
+  obtenerEvaluacion(id): Observable<any> {
+    return this.httpClient.get(this.ruta + 'esfoder/obtenerEvaluacion/' + id)
+      .pipe(map((res: Response) => {
+        return res;
+      }));
+  }
 
+  obtenerComponentesEvaluacion(id): Observable<any> {
+    return this.httpClient.get(this.ruta + 'esfoder/obtenerComponentesEvaluacion/' + id)
+      .pipe(map((res: Response) => {
+        return res;
+      }));
+  }
+
+  obtenerSubComponentesEvaluacion(id): Observable<any> {
+    return this.httpClient.get(this.ruta + 'esfoder/obtenerSubComponentesEvaluacion/' + id)
+      .pipe(map((res: Response) => {
+        return res;
+      }));
+  }
+
+  obtenerEscalaValorativa(id): Observable<any> {
+    return this.httpClient.get(this.ruta + 'esfoder/obtenerEscalaValorativa/' + id)
+      .pipe(map((res: Response) => {
+        return res;
+      }));
+  }
 }

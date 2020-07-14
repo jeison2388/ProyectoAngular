@@ -17,7 +17,7 @@
 
               <div class="row">
 
-                <div class="formGroup col-12 col-md-6 col-lg-4">
+                <div class="formGroup col-12 col-md-6 col-lg-6">
                   <i class="fa fa-exclamation-circle uncheck"
                     *ngIf="(fieldsForm.controls.codigo.errors?.maxlength || fieldsForm.controls.codigo.errors?.minlength) && fieldsForm.controls.codigo.touched">
                     Mínimo caracteres 3 máximo 50 </i> <i class="fa fa-exclamation-circle uncheck"
@@ -29,11 +29,11 @@
                         <h6 class="colorAsterisco">*</h6> <small>&nbsp;Código</small>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Código" formControlName="codigo">
+                    <input type="text" class="form-control mayusculas" formControlName="codigo">
                   </div>
                 </div>
 
-                <div class="formGroup col-12 col-md-6 col-lg-4">
+                <div class="formGroup col-12 col-md-6 col-lg-6">
                   <i class="fa fa-exclamation-circle uncheck"
                     *ngIf="(fieldsForm.controls.descripcion.errors?.maxlength || fieldsForm.controls.descripcion.errors?.minlength) && fieldsForm.controls.descripcion.touched">
                     Mínimo caracteres 3 máximo 50 </i> <i class="fa fa-exclamation-circle uncheck"
@@ -45,32 +45,44 @@
                         <h6 class="colorAsterisco">*</h6> <small>&nbsp;Descripción</small>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Descripción" formControlName="descripcion">
+                    <input type="text" class="form-control" formControlName="descripcion">
                   </div>
                 </div>
 
-                <div class="formGroup col-12 col-md-6 col-lg-4">
+                <div class="formGroup col-12 col-md-6 col-lg-6">
+                  <i class="fa fa-exclamation-circle uncheck"
+                    *ngIf="(fieldsForm.controls.programa.invalid && fieldsForm.controls.programa.touched)">
+                    Este campo es requerido </i>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-id-card-o"></i>
                         <h6 class="colorAsterisco">*</h6> <small>&nbsp;Programa</small>
                       </span>
                     </div>
-                    <select type="text" class="form-control" #programas>
-                      <option [ngValue]="prg" *ngFor="let prg of programas">{{prg.programa}}</option>
+                    <select class="form-control placeholder" required
+                      [ngClass]="{ 'is-invalid': submitted && fieldsForm.controls.programa.errors }"
+                      formControlName="programa" id="programa" (ngModelChange)="onChangePrograma($event)">
+                      <option *ngIf="pk===0" value="">.::Seleccione::.</option>
+                      <option *ngFor="let item of programas" value="{{item.id}}">{{item.descripcion}}</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="formGroup col-12 col-md-6 col-lg-4">
+                <div class="formGroup col-12 col-md-6 col-lg-6">
+                  <i class="fa fa-exclamation-circle uncheck"
+                    *ngIf="(fieldsForm.controls.nivel.invalid && fieldsForm.controls.nivel.touched)">
+                    Este campo es requerido </i>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-list-ol"></i>
                         <h6 class="colorAsterisco">*</h6> <small>&nbsp;Nivel</small>
                       </span>
                     </div>
-                    <select type="text" class="form-control" #niveles>
-                      <option [ngValue]="nvl" *ngFor="let nvl of niveles">{{nvl.nivel}}</option>
+                    <select type="text" class="form-control placeholder" required
+                      [ngClass]="{ 'is-invalid': submitted && fieldsForm.controls.nivel.errors }"
+                      formControlName="nivel" id="nivel">
+                      <option *ngIf="pk===0" value="">.::Seleccione::.</option>
+                      <option *ngFor="let item of niveles" [ngValue]="item.id">{{item.descripcion}}</option>
                     </select>
                   </div>
                 </div>
@@ -78,7 +90,7 @@
 
 
 
-              <div class="row">
+              <div class="row" *ngIf="!(fieldsForm.controls.programa.value == '')">
                 <div class="formGroup col-12 col-md-12 col-lg-12">
                   <div class="card">
                     <div class="card-header">
@@ -115,11 +127,11 @@
                                   <td class="text-center align-middle">
                                     {{item.descripcion}}</td>
                                   <td class="text-center">
-                                    <kendo-numerictextbox class="itemInputTable80"  id="txtComponent{{item.id}}"
+                                    <kendo-numerictextbox class="itemInputTable80 input-sm" id="txtComponent{{item.id}}"
                                       (valueChange)="onChangePorcentajeComponentes(item.id, $event)"
                                       [rangeValidation]="rangeValidation" [format]="format" [autoCorrect]="autoCorrect"
                                       [spinners]="false" [decimals]="decimals" [disabled]="isDisabled(item.selected)"
-                                      [value]=" item.porcentaje" [min]="min" [max]="max" [autoCorrect]="autoCorrect">
+                                      [value]=" item.porcentaje" [min]="min" [max]="max">
                                     </kendo-numerictextbox>
                                   </td>
                                 </tr>
@@ -176,10 +188,9 @@
                                         [autoCorrect]="autoCorrect">
                                       </kendo-numerictextbox>
                                       %
-                                      <i *ngIf="validarTraslape(item.id)"
-                                          style="line-height: inherit;"
-                                          class="text-warning fa fa-exclamation-triangle fa-lg" placement="top"
-                                          ngbTooltip="{{errorPorcentajeTraslape}}" aria-hidden="true"></i>
+                                      <i *ngIf="validarTraslape(item.id)" style="line-height: inherit;"
+                                        class="text-warning fa fa-exclamation-triangle fa-lg" placement="top"
+                                        ngbTooltip="{{errorPorcentajeTraslape}}" aria-hidden="true"></i>
                                     </div>
                                   </td>
                                 </tr>
@@ -192,9 +203,11 @@
                                       <span class="colorAsterisco">*</span></span>
                                   </th>
                                   <th scope="col" class=" th-lg text-center align-middle">
-                                    <div style="display: inline-block"><input type="text"
+                                    <div style="display: inline-block"><input type="text" required
                                         class="form-control input-sm itemInputTable80" formControlName="porcMinimo">
-                                    </div>
+                                    </div><i class="fa fa-exclamation-circle uncheck"
+                                      *ngIf="fieldsForm.controls.porcMinimo.errors?.required && fieldsForm.controls.porcMinimo.touched">
+                                      Este campo no puede estar vacio </i>
                                   </th>
                                 </tr>
                               </tfoot>
@@ -255,7 +268,7 @@
                                     </li>
                                   </mat-nested-tree-node>
                                 </mat-tree>
-                                <button class="btn-primary mt-5" mat-button (click)="submit()">submit</button>
+
                               </div>
 
                               <!--END TREE ****************************************-->
@@ -279,7 +292,7 @@
 
               <div class="row text-right">
                 <div class="form-group col-sm-12 mt-4">
-                  <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light" (click)="clearForm()">
+                  <button type="button" *ngIf="pk===0" class="btn btn-lg btn-light" (click)="clearForm()">
                     <i class="fa fa-eraser"></i> Limpiar
                   </button>
                   <button type="submit" class="btn btn-lg btn-success" [disabled]="fieldsForm.invalid">
@@ -299,6 +312,5 @@
       </div>
     </div>
   </div>
-
 </form>
 <notifier-container></notifier-container>

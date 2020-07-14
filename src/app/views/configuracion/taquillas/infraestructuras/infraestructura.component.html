@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary">
                         <strong>Infraestructura</strong>
                     </div>
                     <div class="card-body">
@@ -11,28 +11,45 @@
                             <div class="col-sm-{{conU}}">
                                 <!--INICIO DEL FORMULARIO-->
                                 <div class="row">
-                                    <div class="form-group col-sm-3">
-                                        <label for="codigo">Código<span class="text-danger">*</span></label>
-                                        <input appUpper formControlName="codigo" type="text"
-                                            class="form-control border-info" id="codigo" placeholder="Código"
-                                            [ngClass]="{ 'is-invalid': submitted && f.codigo.errors }"
-                                            autocomplete="nop" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="(f.codigo.errors?.maxlength || f.codigo.errors?.minlength) && f.codigo.touched">
+                                          Mínimo caracteres 3 máximo 20
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.codigo.errors?.required && f.codigo.touched">
+                                          Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-barcode"></i> <h6 class="colorAsterisco">*</h6><small>&nbsp;Código</small></span>
+                                          </div>
+                                          <input type="text" class="form-control" placeholder="* Código de infraestructura" formControlName="codigo">
+                                        </div>
+                                      </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.descripcion.errors?.maxlength || f.descripcion.errors?.minlength) && f.descripcion.touched">
+                                            Mínimo caracteres 3 máximo 100
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.descripcion.errors?.required && f.descripcion.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-font"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Descripción</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Descripción de infraestructura"
+                                                formControlName="descripcion">
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-9">
-                                        <label for="descripcion">Descripción<span class="text-danger">*</span></label>
-                                        <input appUpper formControlName="descripcion" type="text"
-                                            class="form-control border-info" id="descripcion" placeholder="Descripción"
-                                            [ngClass]="{ 'is-invalid': submitted && f.descripcion.errors }"
-                                            autocomplete="nop">
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 256 caracteres
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="estado">Estado<span class="text-danger">*</span></label>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-crosshairs"></i><small>&nbsp;Estado</small></span>
+                                            </div>
                                         <select class="form-control placeholder" formControlName="estado" id="estado"
                                             (ngModelChange)="cargarCiudades($event)" class="form-control border-info"
                                             [ngClass]="{ 'is-invalid': submitted && f.estado.errors }">
@@ -41,67 +58,104 @@
                                                 {{estado.descripcion}}
                                             </option>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Campo requerido
-                                        </div>
+                                        </div>                                        
                                     </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="ciudad">Ciudad<span class="text-danger">*</span></label>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-institution"></i><small>&nbsp;Ciudad</small></span>
+                                            </div>
                                         <select class="form-control placeholder" formControlName="ciudad" id="ciudad"
-                                            class="form-control border-info"
-                                            [ngClass]="{ 'is-invalid': submitted && f.ciudad.errors }">
+                                            (ngModelChange)="cargarCiudades($event)" class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.estado.errors }">
                                             <option value="">.::Seleccione::.</option>
                                             <option *ngFor="let ciudad of ciudades" value={{ciudad.id}}>
                                                 {{ciudad.descripcion}}
                                             </option>
                                         </select>
-                                        <div class="invalid-feedback">
-                                            Campo requerido
+                                        </div>                                        
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.direccion.errors?.maxlength || f.direccion.errors?.minlength) && f.direccion.touched">
+                                            Mínimo caracteres 4 máximo 100
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.direccion.errors?.required && f.direccion.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-address-card"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Dirección</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Dirección"
+                                                formControlName="direccion">
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-sm-6">
-                                        <label for="direccion">Dirección<span class="text-danger">*</span></label>
-                                        <input appUpper formControlName="direccion" type="text"
-                                            class="form-control border-info" id="direccion" placeholder="direccion"
-                                            [ngClass]="{ 'is-invalid': submitted && f.direccion.errors }" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="telefono">Teléfono<span class="text-danger">*</span></label>
-                                        <input appUpper formControlName="telefono" type="text"
-                                            class="form-control border-info" id="telefono" placeholder="telefono"
-                                            [ngClass]="{ 'is-invalid': submitted && f.telefono
-                                                                    .errors }" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.telefono.errors?.maxlength || f.telefono.errors?.minlength) && f.telefono.touched">
+                                            Mínimo caracteres 7 máximo 16
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.telefono.errors?.required && f.telefono.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-phone"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Teléfono</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Teléfono"
+                                                formControlName="telefono">
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-sm-6">
-                                        <label for="latitud">Latitud<span class="text-danger">*</span></label>
-                                        <input formControlName="latitud" type="text" class="form-control border-info"
-                                            id="latitud" placeholder="latitud"
-                                            [ngClass]="{ 'is-invalid': submitted && f.latitud.errors }" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.latitud.errors?.maxlength || f.latitud.errors?.minlength) && f.latitud.touched">
+                                            Mínimo caracteres 4 máximo 16
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.latitud.errors?.required && f.latitud.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-ellipsis-h"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Latitud</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Latitud"
+                                                formControlName="latitud">
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-6">
-                                        <label for="longitud">Longitud<span class="text-danger">*</span></label>
-                                        <input formControlName="longitud" type="text" class="form-control border-info"
-                                            id="longitud" placeholder="longitud"
-                                            [ngClass]="{ 'is-invalid': submitted && f.longitud.errors }" />
-                                        <div class="invalid-feedback">
-                                            Campo requerido Min 4 y Max 16 caracteres
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.longitud.errors?.maxlength || f.longitud.errors?.minlength) && f.longitud.touched">
+                                            Mínimo caracteres 4 máximo 16
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.longitud.errors?.required && f.longitud.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-ellipsis-v"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Longitud</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Longitud"
+                                                formControlName="longitud">
                                         </div>
                                     </div>
 
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="card">
                                             <div class="card-header">
                                                 Horario habilitado
@@ -133,10 +187,20 @@
                                 </div>
                             </div>
                             <!--FIN DEL FORMULARIO-->
+                            <div class="row text-right col-sm-12">
+                                <div class="form-group col-sm-12">
+                                    <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                        (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                    <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                        Guardar</button>
+                                    <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                            class="fa fa-ban"></i> Cancelar</button>
+                                </div>
+                            </div>
 
-                            <div class="col-sm-6" *ngIf="pk>0">
+                            <div class="col-sm-12" *ngIf="pk>0">
                                 <div class="card">
-                                    <div class="card-header">
+                                    <div class="card-header bg-primary">
                                         Unidades
                                     </div>
                                     <div class="card-body">
@@ -152,6 +216,7 @@
                                                     Campo requerido Min 4 y Max 16 caracteres
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-group col-sm-6">
                                                 <label for="descripcionu">Descripción<span
                                                         class="text-danger">*</span></label>
@@ -223,7 +288,7 @@
                                                                 <td>{{item.codigo}}</td>
                                                                 <td>{{item.descripcion}}</td>
                                                                 <td>{{item.cantidadPersonas}}</td>
-                                                                <td>{{item.atencionDesde}} - {{item.atencionHasta}}</td>
+                                                                <td>{{item.horaApertura}} - {{item.horaCierre}}</td>
                                                                 <td>
                                                                     <button type="button" (click)=editar(item.id)
                                                                         class="btn btn-sm btn-primary">Editar</button>&nbsp;
@@ -241,16 +306,7 @@
                         </div>
 
 
-                        <div class="row text-right">
-                            <div class="form-group col-sm-12">
-                                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
-                                    (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
-                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
-                                    Guardar</button>
-                                <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
-                                        class="fa fa-ban"></i> Cancelar</button>
-                            </div>
-                        </div>
+                        
 
                     </div>
                 </div>

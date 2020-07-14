@@ -1,1 +1,574 @@
-<p>tarifa works!</p>
+<style>
+    fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        color: #1a76ec;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
+</style>
+
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <strong>Tarifa</strong>
+                    </div>
+                    <div class="card-body">
+                        
+
+                            <!--INICIO DEL FORMULARIO-->
+
+
+                            <fieldset class="scheduler-border" style="width: 100%;">
+                                <legend class="scheduler-border">1. Datos generales</legend>                            
+                                <div class="row">
+                            
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.codigo.errors?.maxlength || f.codigo.errors?.minlength) && f.codigo.touched">
+                                            Mínimo caracteres 4 máximo 16
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.codigo.errors?.required && f.codigo.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-barcode"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Código</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Código" formControlName="codigo">
+                                        </div>
+                                    </div>
+                            
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.descripcion.errors?.maxlength || f.descripcion.errors?.minlength) && f.descripcion.touched">
+                                            Mínimo caracteres 4 máximo 256
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.descripcion.errors?.required && f.descripcion.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-font"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Descripción</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Descripción" formControlName="descripcion">
+                                        </div>
+                                    </div>
+                            
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.fechaLimite.errors?.maxlength || f.fechaLimite.errors?.minlength) && f.fechaLimite.touched">
+                                            Mínimo caracteres 4 máximo 256
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.fechaLimite.errors?.required && f.fechaLimite.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha limite inscripción</small>
+                                                </span>
+                                            </div>
+                                            <input type="date" class="form-control" placeholder="* Fecha limite inscripción"
+                                                formControlName="fechaLimite">
+                                        </div>
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.numeroDiasPago.errors?.maxlength || f.numeroDiasPago.errors?.minlength) && f.numeroDiasPago.touched">
+                                            Mínimo caracteres 1 máximo 256
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.numeroDiasPago.errors?.required && f.numeroDiasPago.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.numeroDiasPago.errors?.pattern && f.numeroDiasPago.touched">
+                                            Este campo debe ser numérico
+                                        </i>
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-slack"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Número días para pago</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Número días para pago" formControlName="numeroDiasPago">
+                                        </div>
+                                    </div>
+                            
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.vigenciaDesde.errors?.maxlength || f.vigenciaDesde.errors?.minlength) && f.vigenciaDesde.touched">
+                                            Mínimo caracteres 4 máximo 256
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="f.vigenciaDesde.errors?.required && f.vigenciaDesde.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha vigencia desde</small>
+                                                </span>
+                                            </div>
+                                            <input type="date" class="form-control" placeholder="* Fecha vigencia desde"
+                                                formControlName="vigenciaDesde">
+                                        </div>
+                                    </div>
+                            
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.vigenciaHasta.errors?.maxlength || f.vigenciaHasta.errors?.minlength) && f.vigenciaHasta.touched">
+                                            Mínimo caracteres 4 máximo 256
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="f.vigenciaHasta.errors?.required && f.vigenciaHasta.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha vigencia hasta</small>
+                                                </span>
+                                            </div>
+                                            <input type="date" class="form-control" placeholder="* Fecha vigencia hasta"
+                                                formControlName="vigenciaHasta">
+                                        </div>
+                                    </div>
+                            
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.inicio.errors?.maxlength || f.inicio.errors?.minlength) && f.inicio.touched">
+                                            Mínimo caracteres 4 máximo 256
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.inicio.errors?.required && f.inicio.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha inicio</small>
+                                                </span>
+                                            </div>
+                                            <input type="date" class="form-control" placeholder="* Fecha inicio" formControlName="inicio">
+                                        </div>
+                                    </div>
+                            
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.fin.errors?.maxlength || f.fin.errors?.minlength) && f.fin.touched">
+                                            Mínimo caracteres 4 máximo 256
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.fin.errors?.required && f.fin.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha finalización</small>
+                                                </span>
+                                            </div>
+                                            <input type="date" class="form-control" placeholder="* Fecha finalización" formControlName="fin">
+                                        </div>
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-1">     
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input" formControlName="aplicaCeroCategorias">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="formGroup col-12 col-md-12 col-lg-3"> 
+                                        Valor cero todas categorias
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-1">     
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input" formControlName="permiteVentasFuturo">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="formGroup col-12 col-md-12 col-lg-3"> 
+                                        Permite ventas futuro
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-1">     
+                                        <div class="text-center">
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input" formControlName="pagoUnico">                                                
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="formGroup col-12 col-md-12 col-lg-3"> 
+                                        Forma de pago único
+                                    </div>                                   
+                                </div>
+                            </fieldset>                            
+                            <fieldset class="scheduler-border" style="width: 100%;">
+                                <legend class="scheduler-border">2. Apertura</legend>                            
+                                <div class="row">
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.apertura.errors?.required && f.apertura.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-search"></i><h6 class="colorAsterisco">*</h6><small>&nbsp;Código apertura</small></span>
+                                            </div>                                            
+                                        <ng-select
+                                            [items]="aperCod" 
+                                            [closeOnSelect]="true"
+                                            id="codAper"                                                                                
+                                            placeholder="Seleccione codigo escenario"   
+                                            (search)="buscarAperturasCodigo($event)"
+                               
+                                            [searchable]="true"
+                                            [addTag]="false"
+                                            bindLabel="label"       
+                                            class="form-control border-info"                                                                                       
+                                            (change)="seleccionarApertura($event)"
+
+                                            formControlName="apertura"                                                           
+                                        ></ng-select>
+                                       
+                                        </div>
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-search"></i><small>&nbsp;Descripción apertura</small></span>
+                                            </div>
+                                        <ng-select                                                        
+                                            [items]="aperDes" 
+                                            [closeOnSelect]="true"
+                                            [(ngModel)]="desAper"
+                                            id="desAper"                                                             
+                                            class="form-control border-info" 
+                                            placeholder="Descripción"
+                                            (change)="seleccionarApertura($event)"
+                                            (search)="buscarAperturas($event)"    
+                                            [ngModelOptions]="{standalone: true}"                                                      
+                                        ></ng-select>
+                                        </div>
+                                    </div>  
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">
+                                        <i class="fa fa-exclamation-circle uncheck"
+                                            *ngIf="(f.grupo.errors?.maxlength || f.grupo.errors?.minlength) && f.grupo.touched">
+                                            Mínimo caracteres 4 máximo 16
+                                        </i>
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.grupo.errors?.required && f.grupo.touched">
+                                            Este campo no puede estar vacio
+                                        </i>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-cubes"></i>
+                                                    <small>&nbsp;Grupo servicio</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="* Grupo servicio" formControlName="grupo">
+                                        </div>
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-cog"></i>
+                                                    <small>&nbsp;Codigo servicio</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control"  formControlName="codServicio">
+                                        </div>
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-cog"></i>
+                                                    <small>&nbsp;Descripcion Servicio</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control"  formControlName="desServicio">
+                                        </div>
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-cog"></i>
+                                                    <small>&nbsp;Centro de costo</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control"  formControlName="ccosto">
+                                        </div>
+                                    </div>
+
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                       
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-dollar"></i>
+                                                    <small>&nbsp;Valor</small>
+                                                </span>
+                                            </div>
+                                            <input type="text" class="form-control"  formControlName="vcosto">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-12 col-md-12 col-lg-8">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-street-view"></i><small>&nbsp;Puntos de venta</small></span>
+                                            </div>
+                                            <ng-select 
+                                                [items]="puntos" 
+                                                [multiple]="true" 
+                                                [closeOnSelect]="false" 
+                                                [searchable]="true"
+                                                bindLabel="label" 
+                                                (remove)='remove($event)'
+                                                 placeholder="Select people" 
+                                                 class="form-control border-info"
+                                                 formControlName="punto_venta">
+                                            </ng-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-12 col-lg-12" *ngIf="servicios_agregados.length>0">
+                                        <fieldset class="scheduler-border" style="width: 100%;">
+                                            <legend class="scheduler-border">2.1 Paquete de servicios</legend>                            
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table class="table table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Código</th>
+                                                                <th>Descripción</th>
+                                                                <th>Tipo servicio</th>
+                                                                <th>Valor Costo</th>
+                                                                <th>Cantidad</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of servicios_agregados ">
+                                                                <td>{{item.idServicioAgregado.codigo}}</td>
+                                                                <td>{{item.idServicioAgregado.descripcion}}</td>                                                                
+                                                                <td>{{item.idServicioAgregado.tipoServicio.descripcion}}</td>
+                                                                <td>{{item.costo | currency}}</td>
+                                                                <td><input class="form-control" type="text" /></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+
+                                </div>
+                            </fieldset>
+
+                            <fieldset class="scheduler-border" style="width: 100%;">
+                                <legend class="scheduler-border">3. Aplicación de tarifa</legend>       
+                                <i class="fa fa-exclamation-circle uncheck" *ngIf="f.tipoAplicacion.errors?.required && f.tipoAplicacion.touched">
+                                    Este campo no puede estar vacio
+                                </i>                     
+                                <div class="row">
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">                                        
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-gavel"></i><h6 class="colorAsterisco">*</h6><small>&nbsp;Tipo de aplicación para la tarifa</small></span>
+                                            </div>
+                                        <select class="form-control placeholder" formControlName="tipoAplicacion" id="tipoAplicacion"
+                                            class="form-control border-info"
+                                            [ngClass]="{ 'is-invalid': submitted && f.iva.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let tipoAplicacion of tipoAplicaciones" value={{tipoAplicacion.id}}>
+                                                {{tipoAplicacion.descripcion}}
+                                            </option>
+                                        </select>
+                                        </div>                                        
+                                    </div>
+                                </div>
+
+                                <style>
+                                    .col-md-x{
+                                        width: 150px;
+                                        height: 50px;
+                                    }
+                                </style>
+
+                                <div class="row col-lg-12"  *ngIf="form.get('tipoAplicacion').value=='1'">                             
+                                    <div class="col-md-x" *ngFor="let item of dias">                                        
+                                            <label class="switch switch-label switch-pill switch-primary">{{item.descripcion}}
+                                                <input type="checkbox" class="switch-input" id="dia_{{item.id}}">                                            
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>    
+                                            </label>    
+                                    </div>                                                                       
+                                </div>
+
+                                <div class="row col-lg-12"  *ngIf="form.get('tipoAplicacion').value=='2'">                             
+                                    <div class="col-md-2">                                        
+                                            <label class="switch switch-label switch-pill switch-primary">
+                                                <input type="checkbox" class="switch-input" formControlName="temporada">Temporada alta?                                         
+                                                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>    
+                                            </label>    
+                                    </div>   
+                                    <div class="col-md-8" >
+                                        <table class="table table-sm"  *ngIf="form.get('temporada').value">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Fecha desde</th>
+                                                    <th>Fecha hasta</th>                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of temporadas ">
+                                                    <td>{{item.id}}</td>
+                                                    <td>{{item.desde}}</td>                                                                
+                                                    <td>{{item.hasta}}</td>                                              
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>                                                        
+                                </div>
+
+                                <div class="row col-lg-12"  *ngIf="form.get('tipoAplicacion').value=='3'">
+                                    <div class="card">                                        
+                                        <div class="card-body ">
+                                            <div class="row">
+                                                <div class="form-group col-sm-6">
+                                                    <label for="horario_desde">Horario Desde<span
+                                                            class="text-danger">*</span></label>
+                                                    <ngb-timepicker id="horario_desde"
+                                                        formControlName="horario_desde">
+                                                    </ngb-timepicker>                                                    
+                                                </div>
+                                                <div class="form-group col-sm-6">
+                                                    <label for="horario_hasta">Horario Hasta<span
+                                                            class="text-danger">*</span></label>
+                                                    <ngb-timepicker id="horario_hasta"
+                                                        formControlName="horario_hasta">
+                                                    </ngb-timepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+
+                            <fieldset class="scheduler-border" style="width: 100%;">
+                                <legend class="scheduler-border">4. Valores categoria</legend>                            
+                                <div class="row">
+                                    <div class="formGroup col-12 col-md-12 col-lg-4">     
+                                        <i class="fa fa-exclamation-circle uncheck" *ngIf="f.empresa.errors?.required && f.empresa.touched">
+                                            Este campo no puede estar vacio
+                                        </i>                                    
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                              <span class="input-group-text"><i class="fa fa-industry"></i><h6 class="colorAsterisco">*</h6><small>&nbsp;Empresa</small></span>
+                                            </div>
+                                        <select class="form-control placeholder" formControlName="empresa" id="empresa"
+                                            class="form-control border-info"
+                                            (focus) = "armarPlantilla($event)"
+                                            (change) = "armarPlantilla($event)"
+                                            [ngClass]="{ 'is-invalid': submitted && f.iva.errors }">
+                                            <option value="">.::Seleccione::.</option>
+                                            <option *ngFor="let empresa of empresas" value={{empresa.id}}>
+                                                {{empresa.descripcion}}
+                                            </option>
+                                        </select>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-md-12"  >
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Categoria</th>
+                                                    <th *ngFor="let item of tipos_usuario">{{item.descripcion}}</th>      
+                                                    <!--<td>Acciones</td>-->                                                                                               
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of categorias">
+                                                    <td>{{item.descripcion}}</td>
+                                                    <td *ngFor="let item1 of tipos_usuario">
+                                                        <div class="row">
+                                                        <div class="col-md-1">
+                                                            <input type="checkbox" checked (click)="desactivar($event, item.id, item1.id)">
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <input type="text" id="{{item.id}}-{{item1.id}}" class="form-control" />
+                                                        </div>
+                                                    </div>
+
+                                                    </td>     
+                                                    <!--<td>
+                                                        <a class="btn btn-md btn-primary"><i class="fa fa-plus"></i></a>
+                                                        <a class="btn btn-md btn-success"><i class="fa fa-pencil"></i></a>
+                                                        <a class="btn btn-md btn-danger"><i class="fa fa-trash"></i></a>
+                                                    </td>-->                                       
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div> 
+                                </div>
+                            </fieldset>
+                            <!-- {{form.get('aplica_escenario').value}}
+                                  <pre>
+                                        {{form.value|json}}
+                                  </pre>                                  
+                                  <pre>
+                                    {{form.valid}}
+                                  </pre>-->
+                      
+
+
+                        <div class="row text-right">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                    (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                <button  [disabled]="form.invalid || showErrorDateFinish || showErrorDateStart" type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                    Guardar</button>
+                                <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                        class="fa fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </form>
+</div>
+<notifier-container></notifier-container>

@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8080'
+  baseUrl: 'http://pruebasweb.comfacauca.com:8080/',
+  accesoUrl: 'http://pruebasweb.comfacauca.com:8081/'
 };

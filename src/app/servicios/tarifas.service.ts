@@ -7,7 +7,8 @@ import { environment } from '../../environments/environment';
 
 
 
-const url = environment.baseUrl+'/common/';
+const url = environment.baseUrl + '/common/';
+const urlCfg = environment.baseUrl + '/configuracion/';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,6 +23,14 @@ const httpOptions = {
 export class TarifasService {
 
   constructor(private http: HttpClient) { }
+
+  validarPunto(apertura, punto): Observable<Object> {
+    return this.http.post(urlCfg + 'validarPunto/',
+      JSON.stringify({ apertura: apertura.id, punto: punto.id }),
+      httpOptions)
+      .pipe(map(response => response as Object));
+
+  }
 
   guardar(form): Observable<Object[]> {
     let obj = {
@@ -56,6 +65,11 @@ export class TarifasService {
     return this.http
       .put(url + 'editar/', JSON.stringify(obj), httpOptions)
       .pipe(map(response => response as Object[]));
+  }
+
+
+  guardarTarifa(obj): Observable<any> {
+    return this.http.post(urlCfg + 'guardarTarifa/', JSON.stringify(obj), httpOptions);
   }
 
 }

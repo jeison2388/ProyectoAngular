@@ -1,0 +1,108 @@
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()" (keydown.enter)="$event.preventDefault()">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <strong>Usuario</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <!--INICIO DEL FORMULARIO-->
+                                <div class="row">
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="id_empresa">Empresa</label>                                        
+                                        <input [readonly]="true" appUpper formControlName="id_empresa" type="text"
+                                            class="form-control border-info UP" id="login" placeholder="Empresa"                                            
+                                            autocomplete="nop" />               
+                                    </div>     
+
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="login">Login</label>
+                                        <input [readonly]="true" appUpper formControlName="login" type="text"
+                                            class="form-control border-info UP" id="login" placeholder="Login"                                           
+                                            autocomplete="nop" />                                       
+                                    </div>
+                             
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="nombres">Nombres<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="nombres" type="text"
+                                            class="form-control border-info UP" id="nombres" placeholder="Nombres"
+                                            [ngClass]="{ 'is-invalid': submitted && f.nombres.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="apellidos">Apellidos<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="apellidos" type="text"
+                                            class="form-control border-info UP" id="apellidos" placeholder="Apellidos"
+                                            [ngClass]="{ 'is-invalid': submitted && f.apellidos.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+                                   
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="clave">Clave<span class="text-danger">*</span></label>
+                                        <input #foco appUpper formControlName="clave" type="password"
+                                            class="form-control border-info UP" id="clave" placeholder="Clave"
+                                            [ngClass]="{ 'is-invalid': submitted && f.clave.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm-4">
+                                        <label for="claveCF">Confirmar clave<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="claveCF" type="password"
+                                            class="form-control border-info UP" id="claveCF" placeholder="Clave"
+                                            [ngClass]="{ 'is-invalid': submitted && f.claveCF.errors }"
+                                            autocomplete="nop" />
+                                        <div class="invalid-feedback">
+                                            Campo requerido Min 4 y Max 32 caracteres
+                                        </div>
+                                    </div>         
+                                    
+                                    <div class="form-group col-sm-4">
+                                        <label for="claveAnt">Clave anterior<span class="text-danger">*</span></label>
+                                        <input appUpper formControlName="claveAnt" type="password"
+                                            class="form-control border-info" id="claveAnt" placeholder="Clave anterior"
+                                            autocomplete="nop" />                                        
+                                    </div> 
+
+                                </div>                               
+                            </div>
+                            <!--FIN DEL FORMULARIO-->
+                        </div>
+
+
+                        <div class="row text-right">
+                            <div class="form-group col-sm-12">
+                                <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                    (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                <button type="submit" class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                    Guardar</button>
+                                <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                        class="fa fa-ban"></i> Cancelar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+        <!--/.row-->
+    </form>
+</div>
+<notifier-container></notifier-container>

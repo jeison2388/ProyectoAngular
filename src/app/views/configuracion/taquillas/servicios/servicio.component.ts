@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -8,13 +8,14 @@ import * as moment from 'moment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UtilService } from '../../../../servicios/util.service';
 import { IOption } from 'ng-select';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-servicio',
   templateUrl: './servicio.component.html',
 })
 export class ServicioComponent implements OnInit {
-
+  @ViewChild('myModal', {static: false}) public myModal: ModalDirective;
   /**************************************
    * VARIABLES DEL FORMULARIO PRINCIPAL *
    **************************************/
@@ -38,7 +39,7 @@ export class ServicioComponent implements OnInit {
   servicios: any[];
   serviciosCod: any[];
   escenarios: any[];
-  escenariosCod: any[];
+  escenariosCod$: any[];
   codigoEsc = '';
   codigoPaq = '';
   servicioPaq = '';
@@ -92,8 +93,8 @@ export class ServicioComponent implements OnInit {
       .subscribe(params => {
         console.log(params)
         if (params['id']) {
-          this.traerObjeto(params['id'])         
-          this.cargarPaquetes(params['id']);
+          this.traerObjeto(params['id']);
+          
          // this.conU = 6;
         } else {
           console.log('Nuevo')
@@ -101,7 +102,14 @@ export class ServicioComponent implements OnInit {
       })
 
       this.onChanges();
-      
+
+      /*
+      buscarEscenariosCodigo(term) {
+        this.dataService.catalogoEntidadBasicaComboCodigo('Escenario', ['codigo'], [term], 1, 5)
+         .subscribe((data: any) => { this.escenariosCod$ = data; },
+         error => {console.log('There was an error while retrieving data !!!' + error); });
+      }*/
+
   }
 
 
@@ -178,7 +186,7 @@ export class ServicioComponent implements OnInit {
         error => {
           console.log('There was an error while retrieving data !!!' + error);
         });
-    this.dataService.catalogoEntidadBasica('Grupo', [], [])
+    this.dataService.catalogoEntidadBasica('GrupoServicio', [], [])
       .subscribe((data: any) => { this.grupos = data; },
         error => {
           console.log('There was an error while retrieving data !!!' + error);
@@ -197,7 +205,7 @@ export class ServicioComponent implements OnInit {
       .subscribe((data: any) => { this.estados_servicio = data; },
         error => {
           console.log('There was an error while retrieving data !!!' + error);
-        });     
+        });
         this.dataService.catalogoEntidadBasica('Servicio', [], [])
       .subscribe((data: any) => { this.servicios = data; },
         error => {
@@ -215,6 +223,7 @@ export class ServicioComponent implements OnInit {
    * CARGA EL LISTADO DE PAQUETES DEL FORMULARIO SECUNDARIO *
    **********************************************************/
   cargarPaquetes(id) {
+    console.log('paquetes')
     this.dataService.catalogoEntidadBasica('PaqueteServicio', ['serv'], [id])
       .subscribe((data: any) => { this.servicios_agregados = data; },
         error => {
@@ -235,27 +244,27 @@ export class ServicioComponent implements OnInit {
     }
 
     let esc = this.idE;
-    if(this.idE===0){
+    if (this.idE === 0) {
       esc = this.form.value.escenario;
     }
 
     /* Arma el objeto según la entidad del backend, incluye el campo de validación */
-    let obj = {
+    const obj = {
       campoValidacion: 'codigo',
       valor: this.form.value.codigo,
       entidad: {
         id: this.pk,
         codigo: this.form.value.codigo,
         descripcion: this.form.value.descripcion,
-        idTipoServicio: { id: this.form.value.tipo_servicio },
-        idPrograma: { id: this.form.value.programa },
-        idGrupo: { id: this.form.value.grupo },
-        idCuentaContable: { id: this.form.value.cuenta_contable },
-        idEstadoServicio: { id: this.form.value.estado },
-        idEscenario: { id: esc },
-        idIva: { id: this.form.value.iva },
+        tipoServicio: { id: this.form.value.tipo_servicio },
+        programa: { id: this.form.value.programa },
+        grupo: { id: this.form.value.grupo },
+        cuentaContable: { id: this.form.value.cuenta_contable },
+        estado: { id: this.form.value.estado },
+        escenario: { id: esc },
+        iva: { id: this.form.value.iva },
         controlUsos: this.form.value.control_usos,
-        valorCosto: this.form.value.valor_costo,
+        costo: this.form.value.valor_costo,
         aplicaCeroEmpleados: this.form.value.aplica_cero_empleados,
         requiereDefinirPersonas: this.form.value.requiere_definir_personas,
         requiereDefinirHoras: this.form.value.requiere_definir_horas,
@@ -264,7 +273,7 @@ export class ServicioComponent implements OnInit {
         aplicaRestriccionMeta: this.form.value.aplica_restriccion_meta,
         meta: this.form.value.meta,
         aplicaEscenario: this.form.value.aplica_escenario,
-        aplicaPaquete: this.form.value.aplica_paquete,
+        paquete: this.form.value.aplica_paquete,
       }
     }
 
@@ -308,15 +317,15 @@ export class ServicioComponent implements OnInit {
       this.pk = id;
       this.form.controls['codigo'].setValue(data.codigo);
       this.form.controls['descripcion'].setValue(data.descripcion);
-      this.form.controls['tipo_servicio'].setValue(data.idTipoServicio.id);
-      this.form.controls['programa'].setValue(data.idPrograma.id);
-      this.form.controls['grupo'].setValue(data.idGrupo.id);
-      this.form.controls['cuenta_contable'].setValue(data.idCuentaContable.id);
-      this.form.controls['estado'].setValue(data.idEstadoServicio.id);
-      this.form.controls['escenario'].setValue(data.idEscenario.id);
-      this.form.controls['iva'].setValue(data.idIva.id);
+      this.form.controls['tipo_servicio'].setValue(data.tipoServicio.id);
+      this.form.controls['programa'].setValue(data.programa.id);
+      this.form.controls['grupo'].setValue(data.grupo.id);
+      this.form.controls['cuenta_contable'].setValue(data.cuentaContable.id);
+      this.form.controls['estado'].setValue(data.estado.id);
+      this.form.controls['escenario'].setValue(data.escenario.id);
+      this.form.controls['iva'].setValue(data.iva.id);
       this.form.controls['control_usos'].setValue(data.controlUsos);
-      this.form.controls['valor_costo'].setValue(data.valorCosto);
+      this.form.controls['valor_costo'].setValue(data.costo);
       this.form.controls['aplica_cero_empleados'].setValue(data.aplicaCeroEmpleados);
       this.form.controls['requiere_definir_personas'].setValue(data.requiereDefinirPersonas);
       this.form.controls['requiere_definir_horas'].setValue(data.requiereDefinirHoras);
@@ -325,12 +334,13 @@ export class ServicioComponent implements OnInit {
       this.form.controls['aplica_restriccion_meta'].setValue(data.aplicaRestriccionMeta);
       this.form.controls['meta'].setValue(data.meta);
       this.form.controls['aplica_escenario'].setValue(data.aplicaEscenario);
-      this.form.controls['aplica_paquete'].setValue(data.aplicaPaquete);
-      this.codigoE = [data.idEscenario.id];
-      this.descripcionE = [data.idEscenario.id];
-      this.infraestructuraE = data.idEscenario.idUnidad.idInfraestructura.descripcion;
-      this.unidadE = data.idEscenario.idUnidad.descripcion;
+      this.form.controls['aplica_paquete'].setValue(data.paquete);
+      this.codigoE = data.escenario.codigo;
+      this.descripcionE = data.escenario.descripcion;
+      this.infraestructuraE = data.escenario.unidad.infraestructura.descripcion;
+      this.unidadE = data.escenario.unidad.descripcion;
     });
+    this.cargarPaquetes(id);
   }
 
   /**************************************************************************************
@@ -346,7 +356,8 @@ export class ServicioComponent implements OnInit {
         id: this.pkU,                
         idServicio: { id: this.pk },
         idServicioAgregado: {id: this.servicioPaq},
-        codigo: String(this.pk)+String(this.servicioPaq)
+        codigo: String(this.pk)+String(this.servicioPaq),
+        costo: this.valor_costoS
       }
     }
 
@@ -373,6 +384,7 @@ export class ServicioComponent implements OnInit {
         this.notifier.notify('error', 'El código ingresado ya existe, por favor corrija y guarde nuevamente');
       });
     }
+    
   }
 
  
@@ -397,46 +409,49 @@ export class ServicioComponent implements OnInit {
 
 
   buscarServicios(term){
-    this.dataService.catalogoEntidadBasicaComboDescripcion('Servicio', ['descripcion'], [term], 1, 100)
+    this.dataService.catalogoEntidadBasicaComboDescripcion('Servicio', ['descripcion'], [term.term], 1, 100)
      .subscribe((data: any) => { this.servicios = data; },
      error => {console.log('There was an error while retrieving data !!!' + error); });
  }
 
  buscarServiciosCodigo(term){
-  this.dataService.catalogoEntidadBasicaComboCodigo('Servicio', ['codigo'], [term], 1, 100)
+  this.dataService.catalogoEntidadBasicaComboCodigo('Servicio', ['codigo'], [term.term], 1, 100)
    .subscribe((data: any) => { this.serviciosCod = data; },
    error => {console.log('There was an error while retrieving data !!!' + error); });
 }
 
 
- buscarEscenarios(term){
-  this.dataService.catalogoEntidadBasicaComboDescripcion('Escenario', ['descripcion'], [term], 1, 100)
+ buscarEscenarios(term) {
+  this.dataService.catalogoEntidadBasicaComboDescripcion('Escenario', ['descripcion'], [term.term], 1, 5)
    .subscribe((data: any) => { this.escenarios = data; },
    error => {console.log('There was an error while retrieving data !!!' + error); });
 }
 
-buscarEscenariosCodigo(term){
-  this.dataService.catalogoEntidadBasicaComboCodigo('Escenario', ['codigo'], [term], 1, 100)
-   .subscribe((data: any) => { this.escenariosCod = data; },
+buscarEscenariosCodigo(term) {
+  console.log('Buscar->', term.term)
+  this.dataService.catalogoEntidadBasicaComboCodigo('Escenario', ['codigo'], [term.term], 1, 5)
+   .subscribe((data: any) => { this.escenariosCod$ = data; },
    error => {console.log('There was an error while retrieving data !!!' + error); });
 }
 
-seleccionarEscenario(option: IOption) {  
+seleccionarEscenario(option: IOption) {
+  if (option !== undefined) {
   this.dataService.traerObjetoId('Escenario', option.value).subscribe((data: any) => {   
-    this.infraestructuraE = data.idUnidad.idInfraestructura.descripcion;
-    this.unidadE = data.idUnidad.descripcion;
-    this.descripcionE = [data.id];   
-    this.codigoE = [data.id]
+    this.infraestructuraE = data.unidad.infraestructura.descripcion;
+    this.unidadE = data.unidad.descripcion;
+    this.descripcionE = data.descripcion;
+    this.codigoE = data.codigo;
     this.idE = data.id;
   });
+}
 }
 
 seleccionarServicio(option: IOption) {  
   this.dataService.traerObjetoId('Servicio', option.value).subscribe((data: any) => {       
     this.descripcionS = data.descripcion;   
     this.codigoS = [data.id];
-    this.tipo_servicioS = data.idTipoServicio.descripcion; 
-    this.valor_costoS = data.valorCosto; 
+    this.tipo_servicioS = data.tipoServicio.descripcion; 
+    this.valor_costoS = data.costo; 
     this.servicioPaq = data.id;
   });
 }
