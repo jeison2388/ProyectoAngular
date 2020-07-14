@@ -60,9 +60,14 @@ export class ListTeamsComponent implements OnInit {
   }
   onTeam(event)
   {
-    console.log("#############IMPRIMIENDO DESDE ONTEAM:  "+event.nombre);
     this.t=event;
     this.cancel=2;  
+    this.teams=[];
+    this.competitionService.cargarEquipos().subscribe(resultado=>{
+      for(let i of resultado)
+        this.teams.push(i);
+    },
+      error=>{ console.log(JSON.stringify(error));});   
     //TODO:   actualizar tabla
   }
   onCancel(n:number)
@@ -77,16 +82,15 @@ export class ListTeamsComponent implements OnInit {
   {
     this.agregado=event;
   }
-onSave(n:number)
-{
-  this.cancel=n;
-}
+  onSave(n:number)
+  {
+    this.cancel=n;
+  }
   sendEventAddTeam() {
     this.showAddTeam.emit({showAddTeam: true});
   }
 
   editTeam(equipo: any) {
-    console.log('entor al editar');
     if (this.editar) {
       this.editar = false;
     }else {

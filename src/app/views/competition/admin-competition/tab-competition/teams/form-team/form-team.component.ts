@@ -28,6 +28,7 @@ export class FormTeamComponent implements OnInit {
   onchangeModal="";
 
 
+
   filePhoto: File;
   srcPhotoView: any;
   thereIsErrorPhoto: boolean;
@@ -77,14 +78,20 @@ onSubmit()
         telefono: this.fieldsForm.get('phoneDelegate').value   
       };
       this.competitionService.addTeam(this.team).subscribe(
-        resultado =>{
-          console.log("EQUIPO GUARDADO CORRECTAMENTE. RESULTADO");
+        async resultado =>{
+          await this.delay(500);
+          this.teamOutput.emit(this.team); 
+          this.valCancel.emit(0);
+          this.edit=true;   
+     
         },
-        error=>{ console.log(JSON.stringify(error));});
+        error=>{ console.log(JSON.stringify(error));
+          this.valCancel.emit(0);
+          this.edit=true;
+        }
+        );
         
-      this.teamOutput.emit(this.team);      
-      this.valCancel.emit(0);
-      console.log("GUARDANDO EQUIPO!!");
+      
 }
 onCancel()
 {
@@ -92,7 +99,9 @@ onCancel()
   this.valCancel.emit(0);
 }
 
-
+ delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
   uploadPhoto(event: any) {
     const tam_file = event.target.files[0].size / 1024;
     if (tam_file > this.TAM_MAX_FILE) {
