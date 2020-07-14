@@ -68,15 +68,20 @@ export class FormTeamComponent implements OnInit {
   }
 onSubmit()
 {
-  console.log("GUARDADO desde form-team");
     this.team= 
       {
         idCompetencia: this.competitionService.idSelected,
         nombreEquipo: this.fieldsForm.get('nameTeam').value,
-        'Nombre delegado':this.fieldsForm.get('nameDelegate').value,
+        nombreDelegado:this.fieldsForm.get('nameDelegate').value,
         identificacionDelegado: this.fieldsForm.get('idDelegate').value,
         telefono: this.fieldsForm.get('phoneDelegate').value   
       };
+      this.competitionService.addTeam(this.team).subscribe(
+        resultado =>{
+          console.log("EQUIPO GUARDADO CORRECTAMENTE. RESULTADO");
+        },
+        error=>{ console.log(JSON.stringify(error));});
+        
       this.teamOutput.emit(this.team);      
       this.valCancel.emit(0);
       console.log("GUARDANDO EQUIPO!!");
