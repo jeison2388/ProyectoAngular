@@ -1,46 +1,35 @@
- 
-    <div class="row">
-      <div class="formGroup  col-12 col-sm-12 col-md-12 col-lg-6"style="font-size: 0.3cm;">    
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fa fa-calendar-check-o"></i> <h6 class="colorAsterisco">*</h6>
-                <small>&nbsp;Fecha Inicio</small></span>
-          </div>
-          <input type="date" value="{{fechaInicio}}" placeholder="* " style="width: 47.5%; height: 1cm;" disabled="true" >
-        </div>
-      </div>
-      <div class="formGroup  col-12 col-sm-12 col-md-12 col-lg-6" style="font-size: 0.3cm;" >    
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"> <h6 class="colorAsterisco">*</h6>
-                <small>&nbsp;Tipo de Competición</small></span>
-          </div>
-          <input type="text" disabled="true" style="width: 37.5%; height: 1cm; font-size: 0.3cm;" value="{{tipoCompeticion}}" placeholder="* " >
-        </div>
-      </div>   
-    </div>
-    <div class="row">      
-      <div class="formGroup col-md-6 col-lg-6" >       
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <h6 class="colorAsterisco">*</h6>
-              <small>&nbsp;Hora Inicio</small></span>
-          </div>
-          <input type="time" [(ngModel)]="horaInicio" name="hora" value="09:00" min="09:00" max="18:00" step="3600" />
-          <span class="validity"></span>
-        </div>
-      </div>
-      <div class="formGroup col-md-6 col-lg-6">       
-        <div class="input-group mb-3" >
-          <div class="input-group-prepend">
-            <span class="input-group-text"><i class="fa fa-clock-o" aria-hidden="true"></i> <h6 class="colorAsterisco">*</h6>
-              <small>&nbsp;Hora Fin</small></span>
-          </div>
-          <input type="time" name="hora" [(ngModel)]="horaFin" value="10:00" min="10:00" max="18:00" step="3600" />
-          <span class="validity"></span>
-        </div>
-      </div>
-    </div>
-  
- 
+<form [formGroup]="form" class="col-12 col-md-12 col-lg-4">
+  <div class="row">
 
+    <div class="formGroup col-12 col-md-12 col-lg-4">
+      <i class="fa fa-exclamation-circle uncheck"
+        *ngIf="(form.get('fInicio').errors?.required) && form.get('fInicio').touched">
+        Verifique conexión
+      </i>
+      <div class="input-group mb-3" >
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-calendar"></i>
+            <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha Inicio</small>
+          </span>           
+         </div>
+         <input type="text" class="form-control" placeholder="* " formControlName="fInicio" value="5/09/1993" />
+      </div>
+    </div>
+    <div class="formGroup col-12 col-md-12 col-lg-4">
+      <i class="fa fa-exclamation-circle uncheck"
+        *ngIf="(form.get('tipoCompeticion').errors?.required) && form.get('tipoCompeticion').touched">
+        Verifique conexión
+      </i>
+      <div class="input-group mb-3" style="position: relative; left: 90%;">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-trophy"></i>
+            <h6 class="colorAsterisco">*</h6><small>&nbsp;Tipo Competicion</small>
+          </span>
+        </div>
+        <select class="form-control" placeholder="* " formControlName="tipoCompeticion">
+          <option value="Infantil" selected="true">Infantil</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</form>
