@@ -76,6 +76,6 @@ import { ListProgrammingComponent } from './admin-competition/tab-competition/pr
                 SelectScenariosComponent,
                 ListProgrammingComponent,
                 ],
-  providers: [CompetitionService,PipeCompetitionPipe]
+  providers: [CompetitionService,PipeCompetitionPipe,FilterPipe]
 })
 export class CompetitionModule {}
