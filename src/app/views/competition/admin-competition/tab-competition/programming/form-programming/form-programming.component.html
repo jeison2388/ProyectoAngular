@@ -1,35 +1,44 @@
 <form [formGroup]="form" class="col-12 col-md-12 col-lg-4">
   <div class="row">
-
-    <div class="formGroup col-12 col-md-12 col-lg-4">
+    <div class="formGroup col-6 col-md-6 col-lg-6">
       <i class="fa fa-exclamation-circle uncheck"
         *ngIf="(form.get('fInicio').errors?.required) && form.get('fInicio').touched">
-        Verifique conexión
+        Verifique Conexión
       </i>
-      <div class="input-group mb-3" >
+      <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="fa fa-calendar"></i>
-            <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha Inicio</small>
-          </span>           
-         </div>
-         <input type="text" class="form-control" placeholder="* " formControlName="fInicio" value="5/09/1993" />
-      </div>
-    </div>
-    <div class="formGroup col-12 col-md-12 col-lg-4">
-      <i class="fa fa-exclamation-circle uncheck"
-        *ngIf="(form.get('tipoCompeticion').errors?.required) && form.get('tipoCompeticion').touched">
-        Verifique conexión
-      </i>
-      <div class="input-group mb-3" style="position: relative; left: 90%;">
-        <div class="input-group-prepend">
-          <span class="input-group-text"><i class="fa fa-trophy"></i>
-            <h6 class="colorAsterisco">*</h6><small>&nbsp;Tipo Competicion</small>
+            <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha</small>
           </span>
         </div>
-        <select class="form-control" placeholder="* " formControlName="tipoCompeticion">
-          <option value="Infantil" selected="true">Infantil</option>
+        <input type="date" class="form-control" placeholder="* Fecha Inicio" formControlName="fInicio">
+      </div>
+    </div>
+
+    <div class="formGroup col-6 col-md-6 col-lg-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-trophy"></i><small>&nbsp;Categoría</small></span>
+        </div>
+        <select type="text" class="form-control">
+          <option value="0" disabled selected>Seleccionar...</option>
         </select>
       </div>
     </div>
+
+   <!--  <div class="formGroup col-12 col-md-12 col-lg-4">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fa fa-id-card-o"></i><small>&nbsp;Categoria</small></span>
+        </div>
+        <select type="text" class="form-control" >
+          <option value="0" disabled selected>Seleccionar...</option>
+          </select>
+        <select type="text" class="form-control" >
+          <option value="0" disabled selected>Categoria</option>
+        </select>
+      </div>
+    </div> -->
   </div>
+
 </form>
