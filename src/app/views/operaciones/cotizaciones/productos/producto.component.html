@@ -1,0 +1,625 @@
+<style>
+    fieldset.scheduler-border {
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        color: #1a76ec;
+        width: auto;
+        padding: 0 10px;
+        border-bottom: none;
+    }  
+</style>
+
+<div class="animated fadeIn">
+
+    <tabset>
+        <tab>
+            <ng-template tabHeading><i class="icon-list"></i> Productos y Servicios</ng-template>
+    
+            <div class="loading-screen-wrapper" *ngIf="loading">
+                <div class="spinner">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header bg-primary">
+                            <strong>Proveedor</strong>
+                        </div>
+                        <div class="card-body">
+    
+    
+                            <!--INICIO DEL FORMULARIO-->
+    
+                            <form [formGroup]="form">
+                                <fieldset class="scheduler-border" style="width: 100%;">
+                                    <legend class="scheduler-border">1. Datos del proveedor</legend>
+                                    <div class="row">
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(f.nit.errors?.maxlength || f.nit.errors?.minlength) && f.nit.touched">
+                                                Mínimo caracteres 6 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="f.nit.errors?.required && f.nit.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-cc"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Nit</small>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* Nit"
+                                                    formControlName="nit">
+                                            </div>
+                                        </div>
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(f.nombreComercia.errors?.maxlength || f.nombreComercia.errors?.minlength) && f.nombreComercia.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="f.nombreComercia.errors?.required && f.nombreComercia.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-drivers-licence-o"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Nombre
+                                                            comercial</small>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* Nombre comercial"
+                                                    formControlName="nombreComercia">
+                                            </div>
+                                        </div>
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(f.direccion.errors?.maxlength || f.direccion.errors?.minlength) && f.direccion.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="f.direccion.errors?.required && f.direccion.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-address-book-o"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Dirección</small>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* Dirección"
+                                                    formControlName="direccion">
+                                            </div>
+                                        </div>
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(f.telefono.errors?.maxlength || f.telefono.errors?.minlength) && f.telefono.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="f.telefono.errors?.required && f.telefono.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="f.telefono.errors?.pattern && f.telefono.touched">
+                                                Este campo debe ser numérico
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-phone"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Teléfono</small>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* Teléfono"
+                                                    formControlName="telefono">
+                                            </div>
+                                        </div>
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(f.representanteLegal.errors?.maxlength || f.representanteLegal.errors?.minlength) && f.representanteLegal.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="f.representanteLegal.errors?.required && f.representanteLegal.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-user-o"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Representante
+                                                            legal</small>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* Representante legal"
+                                                    formControlName="representanteLegal">
+                                            </div>
+                                        </div>
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(f.mail.errors?.maxlength || f.mail.errors?.minlength) && f.mail.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="f.mail.errors?.required && f.mail.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+    
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="f.mail.errors?.email && f.mail.touched">
+                                                El formato no es válido
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-at"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Correo
+                                                            electrónico</small>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* Correo electrónico"
+                                                    formControlName="mail">
+                                            </div>
+                                        </div>
+    
+    
+                                    </div>
+                                </fieldset>
+                            </form>
+    
+                            <form [formGroup]="formprod" (ngSubmit)="guardar()">
+                                <fieldset class="scheduler-border" style="width: 100%;" *ngIf="pk != null">
+                                    <legend class="scheduler-border">2. Productos</legend>
+                                    <div class="row">
+                                        <button type="button" class="btn btn-sm btn-primary" (click)="nuevoProducto()"><i
+                                                class="fa fa-plus"></i>&nbsp;Nuevo producto</button>
+                                    </div>
+                                    <hr>
+                                    <div class="row" *ngIf="np">
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(fp.codigo.errors?.maxlength || fp.codigo.errors?.minlength) && fp.codigo.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.codigo.errors?.required && fp.codigo.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-barcode"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Código</small>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* Código"
+                                                    formControlName="codigo">
+                                            </div>
+                                        </div>
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(fp.descripcion.errors?.maxlength || fp.descripcion.errors?.minlength) && fp.descripcion.touched">
+                                                Mínimo caracteres 4 máximo 256
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.descripcion.errors?.required && fp.descripcion.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-font"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Descripción</small>
+                                                    </span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="* Descripción"
+                                                    formControlName="descripcion">
+                                            </div>
+                                        </div>
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.tipoProducto.errors?.required && fp.tipoProducto.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="fa fa-sliders"></i><small>&nbsp;Tipo
+                                                            producto</small></span>
+                                                </div>
+                                                <select class="form-control placeholder" formControlName="tipoProducto"
+                                                    id="tipoProducto" class="form-control border-info"
+                                                    [ngClass]="{ 'is-invalid': submitted && fp.tipoProducto.errors }">
+                                                    <option value="">.::Seleccione::.</option>
+                                                    <option *ngFor="let tipoProducto of tiposProducto"
+                                                        value={{tipoProducto.id}}>
+                                                        {{tipoProducto.descripcion}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(fp.precioUnitario.errors?.maxlength || fp.precioUnitario.errors?.minlength) && fp.precioUnitario.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.precioUnitario.errors?.required && fp.precioUnitario.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-dollar"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Precio
+                                                            unitario</small>
+                                                    </span>
+                                                </div>
+                                                <input mask="separator" thousandSeparator="." prefix="$" type="text"
+                                                    class="form-control" placeholder="* Precio unitario"
+                                                    formControlName="precioUnitario">
+                                            </div>
+                                        </div>
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(fp.fechaVigenciaDesde.errors?.maxlength || fp.fechaVigenciaDesde.errors?.minlength) && fp.fechaVigenciaDesde.touched">
+                                                Mínimo caracteres 4 máximo 256
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.fechaVigenciaDesde.errors?.required && fp.fechaVigenciaDesde.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha vigencia
+                                                            desde</small>
+                                                    </span>
+                                                </div>
+                                                <input type="date" class="form-control" placeholder="* Fecha vigencia desde"
+                                                    formControlName="fechaVigenciaDesde">
+                                            </div>
+                                        </div>
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(fp.fechaVigenciaHasta.errors?.maxlength || fp.fechaVigenciaHasta.errors?.minlength) && fp.fechaVigenciaHasta.touched">
+                                                Mínimo caracteres 4 máximo 256
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.fechaVigenciaHasta.errors?.required && fp.fechaVigenciaHasta.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha vigencia
+                                                            hasta</small>
+                                                    </span>
+                                                </div>
+                                                <input type="date" class="form-control" placeholder="* Fecha vigencia hasta"
+                                                    formControlName="fechaVigenciaHasta">
+                                            </div>
+                                        </div>
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(fp.tarifaBaseSub.errors?.maxlength || fp.tarifaBaseSub.errors?.minlength) && fp.tarifaBaseSub.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.tarifaBaseSub.errors?.required && fp.tarifaBaseSub.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-dollar"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Tarifa base
+                                                            subsidiada</small>
+                                                    </span>
+                                                </div>
+                                                <input mask="separator" thousandSeparator="." prefix="$" type="text"
+                                                    class="form-control" placeholder="* Tarifa base subsidiada"
+                                                    formControlName="tarifaBaseSub">
+                                            </div>
+                                        </div>
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-4">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.iva.errors?.required && fp.iva.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i
+                                                            class="fa fa-percent"></i><small>&nbsp;Iva</small></span>
+                                                </div>
+                                                <select class="form-control placeholder" formControlName="iva" id="iva"
+                                                    class="form-control border-info"
+                                                    [ngClass]="{ 'is-invalid': submitted && fp.iva.errors }">
+                                                    <option value="">.::Seleccione::.</option>
+                                                    <option *ngFor="let iva of ivas" value={{iva.id}}>
+                                                        {{iva.valor}}%
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+    
+                                        <div class="form-group col-sm-1">
+                                            <div class="text-center">
+                                                <label class="switch switch-label switch-pill switch-primary">
+                                                    <input type="checkbox" class="switch-input"
+                                                        formControlName="aplicaTarifaSub">
+                                                    <span class="switch-slider" data-checked="&#x2713;"
+                                                        data-unchecked="&#x2715;"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-sm-3">
+                                            Aplica tarifa subsidiada
+                                        </div>
+    
+                                        <div class="formGroup col-12 col-md-12 col-lg-12">
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="(fp.detalle.errors?.maxlength || fp.detalle.errors?.minlength) && fp.detalle.touched">
+                                                Mínimo caracteres 4 máximo 16
+                                            </i>
+                                            <i class="fa fa-exclamation-circle uncheck"
+                                                *ngIf="fp.detalle.errors?.required && fp.detalle.touched">
+                                                Este campo no puede estar vacio
+                                            </i>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-file-text-o"></i>
+                                                        <h6 class="colorAsterisco">*</h6><small>&nbsp;Detalle del
+                                                            producto</small>
+                                                    </span>
+                                                </div>
+                                                <textarea class="form-control" placeholder="* Detalle del producto"
+                                                    formControlName="detalle"></textarea>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <!--TARIFAS USUARIO CATEGORIA-->
+    
+                                        <div class="row" *ngIf="formprod.get('aplicaTarifaSub').value">
+                                            <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-industry"></i>
+                                                            <h6 class="colorAsterisco">*</h6><small>&nbsp;Empresa</small>
+                                                        </span>
+                                                    </div>
+                                                    <select class="form-control placeholder" formControlName="empresa"
+                                                        id="empresa" class="form-control border-info"
+                                                        (focus)="armarPlantilla($event)" (change)="armarPlantilla($event)">
+                                                        <option value="">.::Seleccione::.</option>
+                                                        <option *ngFor="let empresa of empresas" value={{empresa.id}}>
+                                                            {{empresa.descripcion}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+    
+                                            <div class="col-md-12">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Categoria</th>
+                                                            <th *ngFor="let item of tipos_usuario">{{item.descripcion}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of categorias">
+                                                            <td style="width: 150px;">{{item.descripcion}}</td>
+                                                            <td *ngFor="let item1 of tipos_usuario">
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-percent"></i>
+                                                                            </span>
+                                                                            <input #ref (click)="ref.value=''"
+                                                                                placeholder="%"
+                                                                                [disabled]="formprod.get('empresa').value==''"
+                                                                                (blur)="calcularTarifaSubsidiada1($event)"
+                                                                                mask="percent" type="text"
+                                                                                id="{{item.id}}-{{item1.id}}"
+                                                                                class="form-control" />
+                                                                        </div>
+                                                                    </div>
+                                                                    &nbsp;&nbsp;&nbsp;
+                                                                    <div class="col-md-6">
+                                                                        <input placeholder="$" disabled mask="separator"
+                                                                            prefix="$" thousandSeparator="." type="text"
+                                                                            id="{{item.id}}-{{item1.id}}-x"
+                                                                            class="form-control" />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+    
+                                        <!--FIN TARIFA USUARIO CATEGORIA-->
+                                        <div class="formGroup col-12 col-md-12 col-lg-12">
+                                            <button type="button" class="btn btn-sm btn-primary"
+                                                [disabled]="formprod.invalid" (click)="guardarProducto()"><i
+                                                    class="fa fa-arrow-circle-o-down"></i>Agregar producto</button>
+                                            <button type="button" class="btn btn-sm btn-secondary"
+                                                (click)="cancelarProd()"><i class="fa fa-trash"></i>Cancelar</button>
+                                        </div>
+    
+                                    </div>
+    
+                                    <hr>
+    
+                                    <div class="row">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descripción</th>
+                                                    <th>Tipo producto</th>
+                                                    <th>Vigencia</th>
+                                                    <th>Tarifa sub</th>
+                                                    <th>Precio Unit</th>
+                                                    <th>Iva</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of productos">
+                                                    <td>{{item.codigo}}</td>
+                                                    <td>{{item.descripcion}}</td>
+                                                    <td>{{item.tipoProducto.descripcion}}</td>
+                                                    <td>{{item.fechaVigenciaDesde}} al {{item.fechaVigenciaHasta}}</td>
+                                                    <td>{{item.tarifaBaseSub}}</td>
+                                                    <td>{{item.precioUnitario | currency}}</td>
+                                                    <td>{{item.iva.valor}}%</td>
+                                                    <td>
+                                                        <button type="button" (click)=editarProd(item.id)
+                                                            class="btn btn-sm btn-primary"><i
+                                                                class="fa fa-pencil"></i></button>&nbsp;
+                                                        <button type="button" (click)=eliminarProd(item.id)
+                                                            class="btn btn-sm btn-danger"><i
+                                                                class="fa fa-eraser"></i></button>&nbsp;
+                                                    </td>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </fieldset>
+                            </form>
+                            <!-- {{form.get('aplica_escenario').value}}
+                                      <pre>
+                                            {{form.value|json}}
+                                      </pre>                                  
+                                      <pre>
+                                        {{form.valid}}
+                                      </pre>-->
+                            <div class="row float-right">
+                                <div class="form-group col-sm-12">
+                                    <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light"
+                                        (click)="clearForm()"><i class="fa fa-eraser"></i> Limpiar</button>
+                                    <button [disabled]="form.invalid || formprod.get('codigo').value!=''"
+                                        (click)="guardar()" type="submit" class="btn btn-lg btn-success"><i
+                                            class="fa fa-save"></i>
+                                        Guardar</button>
+                                    <button type="button" class="btn btn-lg btn-secondary" (click)="cancelar()"><i
+                                            class="fa fa-ban"></i> Cancelar</button>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+        </tab>
+        <tab>
+            <ng-template tabHeading><i class="icon-bell"></i> Notas y Alertas</ng-template>
+            
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header bg-primary">
+                            <strong>Proveedor</strong>
+                        </div>
+                        <div class="card-body">
+    
+    
+                            <!--INICIO DEL FORMULARIO NOTAS Y ALERTAS-->    
+                            <form [formGroup]="formnota">
+                                <fieldset class="scheduler-border" style="width: 100%;">
+                                    <legend class="scheduler-border">1. Alertas de seguimiento</legend>
+                                    
+                                </fieldset>
+
+                                <fieldset class="scheduler-border" style="width: 100%;">
+                                    <legend class="scheduler-border">2. Notas internas</legend>
+                                    <div class="row">                                        
+                                            <div class="formGroup col-12 col-md-12 col-lg-6">
+                                                <i class="fa fa-exclamation-circle uncheck"
+                                                    *ngIf="fni.tipoEvento.errors?.required && fni.tipoEvento.touched">
+                                                    Este campo no puede estar vacio
+                                                </i>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i
+                                                                class="fa fa-bullseye"></i><small>&nbsp;Tipo evento</small></span>
+                                                    </div>
+                                                    <select class="form-control placeholder" formControlName="tipoEvento" id="tipoEvento"
+                                                        class="form-control border-info"
+                                                        [ngClass]="{ 'is-invalid': submitted && fni.tipoEvento.errors }">
+                                                        <option value="">.::Seleccione::.</option>
+                                                        <option *ngFor="let tipoEvento of tiposEvento" value={{tipoEvento.id}}>
+                                                            {{tipoEvento.descripcion}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="formGroup col-12 col-md-12 col-lg-12">
+                                                <i class="fa fa-exclamation-circle uncheck"
+                                                    *ngIf="(fni.nota.errors?.maxlength || fni.nota.errors?.minlength) && fni.nota.touched">
+                                                    Mínimo caracteres 4 máximo 16
+                                                </i>
+                                                <i class="fa fa-exclamation-circle uncheck"
+                                                    *ngIf="fni.nota.errors?.required && fni.nota.touched">
+                                                    Este campo no puede estar vacio
+                                                </i>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-file-text-o"></i>
+                                                            <h6 class="colorAsterisco">*</h6><small>&nbsp;Nota</small>
+                                                        </span>
+                                                    </div>
+                                                    <textarea class="form-control" placeholder="* Nota interna"
+                                                        formControlName="nota"></textarea>
+                                                </div>
+                                            </div>                                         
+                                    </div>
+                                </fieldset>
+
+                            </form>
+
+                            <div class="row float-right">
+                                <div class="form-group col-sm-12">
+                                    <button type="submit" *ngIf="pk===0" class="btn btn-lg btn-light" (click)="clearForm()"><i
+                                            class="fa fa-eraser"></i> Limpiar</button>
+                                    <button (click)="guardarNota()" type="submit"
+                                        class="btn btn-lg btn-success"><i class="fa fa-save"></i>
+                                        Guardar</button>
+                                    <button type="button" class="btn btn-lg btn-secondary" (click)="cancelarNota()"><i class="fa fa-ban"></i>
+                                        Cancelar</button>                            
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+
+
+        </tab>
+    </tabset>
+
+        
+</div>
+<notifier-container></notifier-container>
+

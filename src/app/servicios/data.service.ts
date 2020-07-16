@@ -153,7 +153,32 @@ export class DataService {
 
   public listaEntidadRelacion(entidad, entidadesRelacionadas, camposBusqueda, infoCampos, ) {
     return this.http.post(url + 'buscar_rel/',
-      JSON.stringify({ nombreEntidad: entidad, entidadesRelacionadas: entidadesRelacionadas, camposBusqueda: camposBusqueda, infoCampos: infoCampos }), httpOptions)
+      JSON.stringify(
+        {
+          nombreEntidad: entidad,
+          entidadesRelacionadas: entidadesRelacionadas,
+          camposBusqueda: camposBusqueda,
+          infoCampos: infoCampos
+        }
+        ), httpOptions)
+      .pipe(map((res: Response) => {
+        return res;
+      }));
+  }
+
+  public listaEntidadRelacionOrden(entidad, entidadesRelacionadas, camposBusqueda, infoCampos, ) {
+    return this.http.post(url + 'buscar_rel/',
+      JSON.stringify(
+        {
+          nombreEntidad: entidad,
+          entidadesRelacionadas: entidadesRelacionadas,
+          camposBusqueda: camposBusqueda,
+          infoCampos: infoCampos,
+          aplicaOrdenamiento: false,
+          campoOrdenamiento: 'id',
+          soloActivos: true
+        }
+        ), httpOptions)
       .pipe(map((res: Response) => {
         return res;
       }));
@@ -182,6 +207,11 @@ export class DataService {
   eliminarObjeto(entidad, id) {
     return this.http
       .delete(url + entidad + '/eliminar/' + id, httpOptions);
+  }
+
+  inactivarObjeto(entidad, id) {
+    return this.http
+      .put(url + entidad + '/inactivar/' + id, httpOptions);
   }
 
 
@@ -235,6 +265,8 @@ public validar(obj, entidad): Observable<any> {
     return this.http.post(url + entidad + '/validarPorCampo', JSON.stringify(obj), httpOptions)
     .pipe(map(response => response as any));
   }
+
+
 
 }
 

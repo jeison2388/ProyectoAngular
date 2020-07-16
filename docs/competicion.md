@@ -238,7 +238,6 @@ Si no se encuentran items Desempate que devolver.
 ### GET /competicion/obtenerEquipos/{idCompeticion}
 Esta solicitud consulta los equipos asociados a una competicion.Se debe pasar el id de la competicion como parametro url  
 El sistema debe responder con un array de objetos JSON de la siguiente manera
-Los archivos de imagen presentes en el arreglo de equipos, se enviarán en un String, representando la imagen en BASE64.
 ```Javascript
 [
    {
@@ -249,7 +248,7 @@ Los archivos de imagen presentes en el arreglo de equipos, se enviarán en un St
     "tel_delegado": 3153245789,
     "estado_equipo": "pendiente de pago"
     "id_estado_equipo" : 3
-    "imagen_Equipo":"data:image/png;base64,ANSUhEUgAAAfQAAAH0CAYAAAD.."
+
     } ...
 ]
 ```
@@ -328,7 +327,6 @@ Esta solicitud registra un jugador en un equipo , usted debe enviar estos datos 
 ```Javascript
 {
     "idCompetencia": 55678,
-    "idEquipo": 223,/*  Queda haciendo falta este campo */
     "cedula": 123456789,
     "nombres": "juanito",
     "apellido": "nuñz",
@@ -352,16 +350,14 @@ En caso de error, el servicio devolverá una respuesta como sigue.
 
 ### POST /competicion/agregarEquipo
 Esta solicitud registra un equipo en una competencia, usted debe enviar estos datos en el body de la peticion:  
-El archivo de imagen correspondiente al equipo, se enviará en un String, representando la imagen en BASE64.
 
 ```Javascript
 {
     "idCompetencia": 25487,
     "nombreEquipo": "BAYER",
-    "nombreDelegado": "brayan",
+    "Nombre delegado": "brayan",
     "identificacionDelegado": 1065477894,
     "telefono": 3152654789,   
-    "imagen_Equipo":"data:image/png;base64,ANSUhEUgAAAfQAAAH0CAYAAAD.."
 }
 ```
 

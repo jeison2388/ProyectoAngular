@@ -21,13 +21,20 @@ import { DataService } from '../../../servicios/data.service';
 import { UtilService } from '../../../servicios/util.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
+/*
 const maskConfigFunction: () => Partial<IConfig> = () => {
   return {
-    validation: false,
+    validation: false
   };
 };
+*/
+/*
+export const options: Partial<IConfig> = {
+  thousandSeparator: ','
+};
+*/
 
 /**
  * Custom angular notifier options
@@ -69,7 +76,7 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     NgbModule,
     NgSelectModule,
     ModalModule.forRoot(),
-    NgxMaskModule.forRoot(maskConfigFunction),
+    NgxMaskModule.forRoot(),
     NotifierModule.withConfig(customNotifierOptions)
   ],
   providers:[

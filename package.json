@@ -20,7 +20,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --aot --buildOptimizer --commonChunk --vendorChunk --optimization --progress",
+    "build": "ng build --prod ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -85,6 +85,7 @@
     "mutationobserver-shim": "^0.3.3",
     "ng-select": "^1.0.2",
     "ng2-charts": "^2.3.0",
+    "ng2-file-upload": "^1.4.0",
     "ngx-bootstrap": "^5.0.0",
     "ngx-mask": "^8.0.0",
     "ngx-pagination": "^5.0.0",

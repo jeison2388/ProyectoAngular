@@ -114,6 +114,10 @@ export const routes: Routes = [
       {
         path: 'seguridad',
         loadChildren: () => import('./views/configuracion/seguridad/seguridad.module').then(m => m.SeguridadModule)
+      },
+      {
+        path: 'cotizaciones',
+        loadChildren: () => import('./views/operaciones/cotizaciones/cotizaciones.module').then(m => m.CotizacionesModule)
       }
     ]
   },

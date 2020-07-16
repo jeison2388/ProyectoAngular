@@ -513,8 +513,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Categoria</th>
-                                                    <th *ngFor="let item of tipos_usuario">{{item.descripcion}}</th>      
-                                                    <!--<td>Acciones</td>-->                                                                                               
+                                                    <th *ngFor="let item of tipos_usuario">{{item.descripcion}}</th>                                                                                              
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -529,13 +528,7 @@
                                                             <input type="text" id="{{item.id}}-{{item1.id}}" class="form-control" />
                                                         </div>
                                                     </div>
-
-                                                    </td>     
-                                                    <!--<td>
-                                                        <a class="btn btn-md btn-primary"><i class="fa fa-plus"></i></a>
-                                                        <a class="btn btn-md btn-success"><i class="fa fa-pencil"></i></a>
-                                                        <a class="btn btn-md btn-danger"><i class="fa fa-trash"></i></a>
-                                                    </td>-->                                       
+                                                    </td>                                      
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -5,7 +5,6 @@ import { ServiciosComponent } from './servicios.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataService } from '../../servicios/data.service';
 import { DataTablesModule } from 'angular-datatables';
-import { UpperDirective } from '../../shared/upper-case-directive';
 import { NotifierModule, NotifierOptions } from 'angular-notifier';
 //import { NgSelectModule } from '@ng-select/ng-select';
 
@@ -38,7 +37,6 @@ const customNotifierOptions: NotifierOptions = {
   declarations: [
     ServiciosComponent,
     AperturaComponent,
-    UpperDirective,
     ServicioComponent,
   ],
   imports: [

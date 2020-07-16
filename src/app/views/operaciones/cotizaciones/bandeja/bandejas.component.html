@@ -1,0 +1,150 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <i class="fa fa-align-justify"></i>Cotizaciones
+                </div>
+                <div class="card-body">
+                    <div class="row text-right">
+                        <div class="form-group col-sm-12">
+                            <a [routerLink]="['/cotizaciones/cotizacion']" class="btn btn-sm btn-success"><i
+                                    class="fa fa-plus"></i>
+                                Nueva cotización</a>
+                        </div>
+                    </div>
+                    <table style="width: 100%; font-size: small;" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                        class="table table-striped row-border hover">
+                        <thead>
+                            <tr>
+                                <th>Semáforo</th>
+                                <th>Número</th>
+                                <th>Estado</th>
+                                <th>Cliente</th>
+                                <th>Fecha de recepción</th>   
+                                <th>Usuario asignado</th>
+                                <th>Valor</th>
+                                <th>Tiempo asignación</th>
+                                <th>Asignar</th>
+                                <th>Fecha pago</th>
+                                <th>Soporte</th>     
+                                <th>Acciones</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">
+                                    <img src="assets/img/semaforo_s.png" alt="Rojo" width="90px" height="30px"/> 
+                                </th>
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input size="" class="form-control" type="text" placeholder="Numero"
+                                            [(ngModel)]="numero" />
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input size="" class="form-control" type="text" placeholder="Estado"
+                                            [(ngModel)]="estado" />
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="Cliente"
+                                            [(ngModel)]="cliente" />
+                                    </div>
+                                </th>
+
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="Fecha recepción"
+                                            [(ngModel)]="fechaRecepcion" />
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                        </div>
+                                        <input class="form-control" type="text" placeholder="Usuario asignado"
+                                            [(ngModel)]="usuarioAsignado" />
+                                    </div>
+                                </th>
+                                <th>&nbsp;<!--Valor--></th>
+                                <th>&nbsp;<!--Tiempo asignación--></th>
+                                <th>&nbsp;<!--Asignar--></th>
+                                <th>&nbsp;<!--Fecha pago--></th>
+                                <th>&nbsp;</th>                                
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="lista?.length != 0">
+                            <tr *ngFor="let item of lista ">
+                                <td style="text-align: center;">
+                                    <img *ngIf="item.horas > rojo" src="assets/img/rojo_s.png" alt="Rojo" width="24px" height="24px"/> 
+                                    <img *ngIf="(item.horas > amarillo) && (item.horas < rojo)" src="assets/img/amarillo_s.png" alt="Rojo" width="24px" height="24px"/> 
+                                    <img *ngIf="(item.horas < verde)" src="assets/img/verde_s.png" alt="Rojo" width="24px" height="24px"/> 
+                                </td>
+                                <td>{{item.numero}}</td>
+                                <td>{{item.estado}}</td>
+                                <td>{{item.cliente}}</td>
+                                <td>{{item.fechaRecepcion}}</td>
+                                <td>{{item.usuarioAsignado}}</td>
+                                <td>{{item.valorFacturar | currency}}</td>
+                                <td style="width: 150px;">{{item.tiempo}}</td>
+                                <td style="text-align: center; cursor: pointer">
+                                    <img *ngIf="tipo_usuario === 'ADM'" src="assets/img/asignar.png" alt="Asignar"  (click)="myModal.show();traerCotizacion(item.id)" width="24px" height="24px"/> 
+                                </td>
+                                <td>{{item.fechaPago}}</td>
+
+                                <td style="cursor: pointer; text-align: center;">
+                                    <img *ngIf="!item.pagada" src="assets/img/clip_rojo.png" alt="Clip Rojo" width="24px" height="24px"/> 
+                                    <img *ngIf="item.pagada" src="assets/img/clip_verde.png" alt="Clip verde" width="24px" height="24px"/> 
+                                </td>
+                                <td style="width: 250px;">
+                                    <button (click)="gestionar(item.id)" type="button" class="btn btn-primary btn-sm"><i
+                                            class="fa fa-pencil"></i>&nbsp;Gestionar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--VENTANA DE REASIGNACIÓN-->
+    <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-primary">
+              <h6 class="modal-title">Asignar cotización</h6>
+              <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">            
+                <app-usuariosasig (objetoUsuario)="onNotifyBuscador($event)"></app-usuariosasig>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="myModal.hide(); reasignarUsuario();">Aceptar</button>
+              <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+</div>
+<notifier-container></notifier-container>

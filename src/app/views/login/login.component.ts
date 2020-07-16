@@ -62,7 +62,8 @@ export class LoginComponent implements OnInit {
                   establecimiento: 'Recreación',
                   empresa_cod: 'CCF014',
                   empresa_id: '1',
-                  id_perfil: data.idRol.id
+                  id_perfil: data.idRol.id,
+                  tipo_usuario: data.idRol.codigo
                };
                ok = true;
             }
@@ -77,6 +78,7 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('empresa', 'Comfacauca');
                   localStorage.setItem('id_perfil', this.usuario.id_perfil);
                   localStorage.setItem('perfil', this.usuario.perfil);
+                  localStorage.setItem('tipo_usuario', this.usuario.tipo_usuario);
                   localStorage.setItem('establecimiento', this.usuario.establecimiento);
                   localStorage.setItem('nombre', this.usuario.nombres + ' ' + this.usuario.apellidos);
                   localStorage.setItem('empresa_cod', this.usuario.empresa_cod);

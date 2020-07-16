@@ -1,0 +1,527 @@
+<style>
+    fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+            box-shadow:  0px 0px 0px 0px #000;
+    }
+
+    legend.scheduler-border {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        color: #1a76ec;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
+
+    /*
+    input[type="file"] {
+    display: none;
+    }
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+    }
+    */
+</style>
+
+<div class="animated fadeIn">
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+        <div class="loading-screen-wrapper" *ngIf="loadingCarga">
+            <div class="spinner">
+            </div>
+        </div>  
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <strong>Registrar cotización</strong>
+                    </div>
+                    <div class="card-body">
+                        <!--body principal-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="bg-secondary">
+                                        <strong>&nbsp;1. INFORMACION GENERAL</strong>
+                                        <strong class="text-align float-right">Cotización No. 
+                                            <select>
+                                                <option>202000052-0</option>
+                                                <option>202000052-1</option>
+                                                <option>202000052-2</option>
+                                                <option>202000052-3</option>
+                                                <option>202000052-4</option>
+                                            </select>
+                                        </strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <!--body información general-->
+                                        <fieldset class="scheduler-border" style="width: 100%;">
+                                            <legend class="scheduler-border">1.1 Solicitud</legend>                            
+                                            <div class="row">  
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.solicitante.errors?.maxlength || fc.solicitante.errors?.minlength) && fc.solicitante.touched">
+                                                        Mínimo caracteres 4 máximo 16
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="fc.solicitante.errors?.required && fc.solicitante.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-drivers-licence-o"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Solicitante</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="* Solicitando"
+                                                            formControlName="solicitante">
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.nit.errors?.maxlength || fc.nit.errors?.minlength) && fc.nit.touched">
+                                                        Mínimo caracteres 6 máximo 16
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="fc.nit.errors?.required && fc.nit.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-cc"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Nit</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="* Nit"
+                                                            formControlName="nit">
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.fechaCreacion.errors?.maxlength || fc.fechaCreacion.errors?.minlength) && fc.fechaCreacion.touched">
+                                                        Mínimo caracteres 4 máximo 256
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="fc.fechaCreacion.errors?.required && fc.fechaCreacion.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha creación</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="date" class="form-control" placeholder="* Fecha creación"
+                                                            formControlName="fechaCreacion">
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="fc.tipoEvento.errors?.required && fc.tipoEvento.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa fa-bullseye"></i><small>&nbsp;Tipo
+                                                                    evento</small></span>
+                                                        </div>
+                                                        <select class="form-control placeholder" formControlName="tipoEvento"
+                                                            id="tipoEvento" class="form-control border-info"
+                                                            [ngClass]="{ 'is-invalid': submitted && fc.tipoEvento.errors }">
+                                                            <option value="">.::Seleccione::.</option>
+                                                            <option *ngFor="let tipoEvento of tiposEvento"
+                                                                value={{tipoEvento.id}}>
+                                                                {{tipoEvento.descripcion}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="fc.categoria.errors?.required && fc.categoria.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa fa-ticket"></i><small>&nbsp;Categoria</small></span>
+                                                        </div>
+                                                        <select class="form-control placeholder" formControlName="categoria"
+                                                            id="categoria" class="form-control border-info"
+                                                            [ngClass]="{ 'is-invalid': submitted && fc.categoria.errors }">
+                                                            <option value="">.::Seleccione::.</option>
+                                                            <option *ngFor="let categoria of categorias"
+                                                                value={{categoria.id}}>
+                                                                {{categoria.descripcion}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.direccion.errors?.maxlength || fc.direccion.errors?.minlength) && fc.direccion.touched">
+                                                        Mínimo caracteres 4 máximo 100
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck" *ngIf="fc.direccion.errors?.required && fc.direccion.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-address-card"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Dirección</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="* Dirección"
+                                                            formControlName="direccion">
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.nombreContacto.errors?.maxlength || fc.nombreContacto.errors?.minlength) && fc.nombreContacto.touched">
+                                                        Mínimo caracteres 4 máximo 100
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck" *ngIf="fc.nombreContacto.errors?.required && fc.nombreContacto.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-address-user"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Nombre contacto</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="* Nombre contacto"
+                                                            formControlName="nombreContacto">
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.movil.errors?.maxlength || fc.movil.errors?.minlength) && fc.movil.touched">
+                                                        Mínimo caracteres 7 máximo 16
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck" *ngIf="fc.movil.errors?.required && fc.movil.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-phone"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Teléfono movil</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="* Teléfono movil"
+                                                            formControlName="movil">
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.email.errors?.maxlength || fc.email.errors?.minlength) && fc.email.touched">
+                                                        Mínimo caracteres 7 máximo 16
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck" *ngIf="fc.email.errors?.required && fc.email.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-phone"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Correo electrónico</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="* Correo electrónico"
+                                                            formControlName="email">
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.participantes.errors?.maxlength || fc.participantes.errors?.minlength) && fc.participantes.touched">
+                                                        Mínimo caracteres 4 máximo 100
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck" *ngIf="fc.participantes.errors?.required && fc.participantes.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-gg"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Número participantes</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="text" class="form-control" placeholder="* Número participantes"
+                                                            formControlName="participantes">
+                                                    </div>
+                                                </div>
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="(fc.fechaCierreContable.errors?.maxlength || fc.fechaCierreContable.errors?.minlength) && fc.fechaCierreContable.touched">
+                                                        Mínimo caracteres 4 máximo 256
+                                                    </i>
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="fc.fechaCierreContable.errors?.required && fc.fechaCierreContable.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-calendar"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Fecha cierre contable</small>
+                                                            </span>
+                                                        </div>
+                                                        <input type="date" class="form-control" placeholder="* Fecha cierre contable"
+                                                            formControlName="fechaCierreContable">
+                                                    </div>
+                                                </div>
+
+                                               
+
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <i class="fa fa-exclamation-circle uncheck"
+                                                        *ngIf="fc.asesor.errors?.required && fc.asesor.touched">
+                                                        Este campo no puede estar vacio
+                                                    </i>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="fa fa-ticket"></i><small>&nbsp;Asesor comercial</small></span>
+                                                        </div>
+                                                        <select class="form-control placeholder" formControlName="asesor"
+                                                            id="asesor" class="form-control border-info"
+                                                            [ngClass]="{ 'is-invalid': submitted && fc.asesor.errors }">
+                                                            <option value="">.::Seleccione::.</option>
+                                                            <option *ngFor="let asesor of asesores"
+                                                                value={{asesor.id}}>
+                                                                {{asesor.descripcion}}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-sm-1">     
+                                                    <div class="text-center">
+                                                        <label class="switch switch-label switch-pill switch-primary">
+                                                            <input type="checkbox" class="switch-input" formControlName="exentaIva">                                                
+                                                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-sm-2"> 
+                                                    Excenta iva
+                                                </div>
+
+                                                <div class="form-group col-sm-1">     
+                                                    <div class="text-center">
+                                                        <label class="switch switch-label switch-pill switch-primary">
+                                                            <input type="checkbox" class="switch-input" formControlName="tarifaSubsidiada">                                                
+                                                            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>                                               
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-sm-2"> 
+                                                    Tarifa subsidiada
+                                                </div>
+
+                                            </div>
+                                        </fieldset>
+
+                                        
+
+                                        <fieldset class="scheduler-border" style="width: 100%;" *ngIf="form.get('tarifaSubsidiada').value">
+                                            <legend class="scheduler-border">1.2 Asistentes por categoria</legend>      
+                                                                
+                                            <div class="row">  
+                                                <div class="formGroup col-12 col-md-12 col-lg-6">                                                    
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fa fa-upload"></i>
+                                                                <h6 class="colorAsterisco">*</h6><small>&nbsp;Cargar archivo de afiliados</small>
+                                                            </span>
+                                                        </div>
+                                                            <input [ngModelOptions]="{standalone: true}" class="form-control" type="file" name="uploadedFile2" [(ngModel)]="archivo" ng2FileSelect [uploader]="uploader" />
+                                                    </div>
+                                                </div>
+                                                <div class="formGroup col-12 col-md-12 col-lg-4">
+                                                    <button (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length" type="button" class="btn btn-outline-success"><i
+                                                        class="fa fa-filter"></i>&nbsp;Validar</button>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <table class="table table-bordered table-sm">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Categoria</th>
+                                                                <th class="text-center" *ngFor="let item of tipos_usuario">{{item.descripcion}}</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let item of categorias">
+                                                                <td style="width: 150px;">{{item.descripcion}}</td>
+                                                                <td *ngFor="let item1 of tipos_usuario">
+                                                                    <div class="row">                                                                        
+                                                                        <div class="col-md-12">
+                                                                            <input placeholder="$" disabled mask="separator"
+                                                                                prefix="$" thousandSeparator="." type="text"
+                                                                                id="{{item.id}}-{{item1.id}}"
+                                                                                class="form-control  text-center" />
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                                                                                                  
+                                            </div>
+                                        </fieldset> 
+
+                                        <fieldset class="scheduler-border" style="width: 100%;">
+                                            <legend class="scheduler-border">1.3 Reserva de escenario</legend>                            
+                                            <div class="row">  
+                                               
+                                                                                                                                  
+                                            </div>
+                                        </fieldset> 
+
+                                        <div class="row">
+                                            <div class="formGroup col-12 col-md-12 col-lg-12">
+                                                <i class="fa fa-exclamation-circle uncheck"
+                                                    *ngIf="(fc.propuesta.errors?.maxlength || fc.propuesta.errors?.minlength) && fc.propuesta.touched">
+                                                    Mínimo caracteres 4 máximo 16
+                                                </i>
+                                                <i class="fa fa-exclamation-circle uncheck"
+                                                    *ngIf="fc.propuesta.errors?.required && fc.propuesta.touched">
+                                                    Este campo no puede estar vacio
+                                                </i>
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-file-text-o"></i>
+                                                            <h6 class="colorAsterisco">*</h6><small>&nbsp;Propuesta servicio</small>
+                                                        </span>
+                                                    </div>
+                                                    <textarea class="form-control" placeholder="* Propuesta servicio"
+                                                        formControlName="propuesta"></textarea>
+                                                </div>
+                                            </div>   
+                                        </div>
+
+                                        <!--fin body información general-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="bg-secondary">
+                                        <strong>&nbsp;2. SERVICIOS REQUERIDOS</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <!--body servicios requeridos-->
+                                        <div class="row">
+                                            &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-sm btn-primary" (click)="nuevoServicio()"><i
+                                                    class="fa fa-plus"></i>&nbsp;Agregar servicio/producto</button>
+                                        </div>
+                                        <hr>
+
+                                        <!--fin body servicios requeridos-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="bg-secondary">
+                                        <strong>&nbsp;3. DETALLE DE COSTOS</strong>
+                                    </div>
+                                    <div class="card-body">
+                                        <!--body detalle costos-->
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <fieldset class="scheduler-border" style="width: 100%;">
+                                                    <legend class="scheduler-border">3.1 Desglose de costos</legend>
+                                                    <div class="row">
+                                                        <table style="width: 100%;" class="table">
+                                                            <tr>
+                                                                <td>Base ingresos propios</td>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Base otros ingresos</td>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>IVA</td>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Ingresos no gravados</td>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Utilidad otros ingresos</td>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Total utilidad</td>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Subsidio</td>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Porcentje utilidad</td>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Valor a facturar</th>
+                                                                <td>$&nbsp;</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        
+                                            <div class="col-sm-6">
+                                                <fieldset class="scheduler-border" style="width: 100%;">
+                                                    <legend class="scheduler-border">3.2 Notas internas</legend>
+                                                    <div class="row">
+                                        
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+
+
+                                        <!--fin body detalle costos-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                       <!--fin body principal--> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<notifier-container></notifier-container>

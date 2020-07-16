@@ -17,11 +17,12 @@ export class DefaultLayoutComponent implements OnDestroy, OnInit {
   public item: NavData;
   public navItemsLocal: NavData[] = [];
   public navItemsHijos;
-  id: string;  
+  id: string;
   nombre: string;
   empresa: string;
   usuario: string;
   perfil: string;
+  tipo_usuario_descripcion: string;
 
   public sidebarMinimized = true;
   private changes: MutationObserver;
@@ -55,13 +56,12 @@ export class DefaultLayoutComponent implements OnDestroy, OnInit {
     this.empresa = localStorage.getItem('empresa');
     this.usuario = localStorage.getItem('id_usuario');
     this.perfil = localStorage.getItem('id_perfil');
+    this.tipo_usuario_descripcion = localStorage.getItem('perfil');
 
-    this.seguridadService.traerHijos1(this.perfil,this.usuario)
+    this.seguridadService.traerHijos1(this.perfil, this.usuario)
       .subscribe((data: any) => {
-        //this.navItemsLocal = data;
         this.navItemsLocal = navItems;
         localStorage.setItem('recursos', data);
-        console.log('Resp:', this.recursos)
       },
         error => {
           console.log('There was an error while retrieving data !!!' + error);
