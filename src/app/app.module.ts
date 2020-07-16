@@ -47,7 +47,7 @@ import { DummyComponent } from './shared/dummy.component';
 import { ModalWindowsModule } from './views/modal-windows/modal-windows.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './views/login/Auth.guard';
-import { FilterPipe } from './views/competition/pipes/filter.pipe';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -73,8 +73,7 @@ import { FilterPipe } from './views/competition/pipes/filter.pipe';
     P404Component,
     P500Component,
     LoginComponent,
-    DummyComponent,
-    
+    DummyComponent
 
   ],
   providers: [{
