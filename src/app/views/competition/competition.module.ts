@@ -26,7 +26,7 @@ import { ClasificationComponent } from './admin-competition/tab-competition/clas
 import { EquipmentDistributionComponent } from './admin-competition/tab-competition/clasification/equipment-distribution/equipment-distribution.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { CompetitionTypeChampioshipComponent } from './admin-competition/tab-competition/clasification/competition-type-champioship/competition-type-champioship.component';
-import { FilterPipe } from './admin-competition/pipes/filter.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 import { ListPlayersComponent } from './admin-competition/tab-competition/teams/list-players/list-players.component';
 import { ListCompetitionComponent } from './admin-competition/list-competition/list-competition.component';
 import { EditTeamComponent } from './admin-competition/tab-competition/teams/edit-team/edit-team.component';
