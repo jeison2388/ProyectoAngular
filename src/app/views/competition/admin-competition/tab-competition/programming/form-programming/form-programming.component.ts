@@ -44,7 +44,6 @@ ngDoCheck(): void {
   //Add 'implements DoCheck' to the class.
   if(this.competitionService.idSelected!=0)
   {
-    console.log("PROGRAMING. COMPETENCIA SELECCIONADA",this.competitionService);
    this.competition=this.competitionService.competenciaSeleccionada();
    this.idSelected=this.competition.id;
    this.form.controls['fechaInicio'].setValue(this.competition.fechaInicio);

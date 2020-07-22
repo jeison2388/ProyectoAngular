@@ -118,8 +118,6 @@ export class CompetitionService {
               "id":competition.reglas.id
             }
           }
-            
-          console.log("SERVICE: la competencia seleccionada y armada es: ",comp);
           return comp;
         
         }
