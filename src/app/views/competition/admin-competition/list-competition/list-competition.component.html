@@ -1,10 +1,57 @@
-<head>
 
-</head>
-<body onload="cargarGrafico()">
-    <div id="sample">
-    <!-- The DIV for the Diagram needs an explicit size or else we won't see anything.
-        Also add a border to help see the edges. -->
-      <div id="myDiagramDiv" style="border: solid 1px black; background: #4D4D4D; width:700px; height:600px"></div>
-    </div>
-</body>
+              
+  <app-form-competition *ngIf="change" [titleForm]="titleAddCompetition" [subtitleForm]="subtitleAddCompetition" [buttonAction]="nameBtnAddCompetition"></app-form-competition>
+  <div class="animated-fadeIn" *ngIf="!change">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-header bg-primary">
+                    <strong>Competencias</strong>
+                  </div>
+                  <div class="card-body">
+                    <h3 class="title" style="color: cadetblue;">
+                        <strong>CONFIGURACIÓN DE COMPETICIONES</strong>
+                    </h3>
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <input class="form-control col-8 col-md-9 col-lg-9" type="search"  name="filterPost" placeholder="Buscar" [(ngModel)]="filterPost" aria-label="Buscar">
+                        <button class="btn btn-block btn-ghost-primary active col-3 col-md-3 col-lg-3" type="submit" ><i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="button" class="btn btn-primary" style="position: relative; left: 80%;" (click)="cambiar()"> Agregar Competicion</button>    
+                    </div>
+                    <table class="table table-bordered round_table ">
+                        <thead class="table-primary">
+                          <tr>
+                            <th scope="col">Nombre de Competicion</th>
+                            <th scope="col">Deporte</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col">Modalidad</th>
+                            <th scope="col">Género</th>
+                          </tr>
+                        </thead>
+                        <tbody>                          
+                        <!--   <button (click)=asignarIdSeleccionado(competencia.id) class="nav-link "  [className]="'nav-link active '" *ngFor="let competencia of competencias | pipeCompetition: filterPost | paginate: { itemsPerPage: 15, currentPage: pageActual } "> 
+                            <img src="../../../../../assets/img/competicion/{{competencia.subPrograma.descripcion|lowercase}}.png" id="imagen" width="24" height="24" class="d-inline-block align-top" alt="">
+                            <strong>{{competencia.nombre}}</strong> 
+                          </button> -->
+                       
+                          <tr *ngFor="let competition of competitions | pipeCompetition: filterPost | paginate: { itemsPerPage: 15, currentPage: pageActual } ">
+                            <td>{{competition.nombre}}</td>
+                            <td>{{competition.subPrograma.descripcion}}</td>
+                            <td>{{competition.tipoCompeticion.descripcion}}</td>
+                            <td>{{competition.modalidad.descripcion}}</td>
+                            <td>{{competition.genero.descripcion}}</td>        
+                          </tr>
+                        </tbody>
+                      </table>
+                      <pagination-controls previousLabel="Anterior"
+                      nextLabel="Siguiente" (pageChange)="pageActual = $event"></pagination-controls>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

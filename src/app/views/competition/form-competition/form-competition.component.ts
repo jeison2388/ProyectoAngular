@@ -143,9 +143,9 @@ export class FormCompetitionComponent implements OnInit, DoCheck {
      this.competition=this.competitionService.competenciaSeleccionada();
      this.idSelected=this.competition.id;
      this.fieldsForm.controls['nameCompetition'].setValue(this.competition.nombre);
-     this.fieldsForm.controls['dateStartCompetition'].setValue(this.competition.fechaFinaliza);
+     this.fieldsForm.controls['dateStartCompetition'].setValue(this.competition.fechaFin);
      this.fieldsForm.controls['dateEndCompetition'].setValue(this.competition.fechaInicio);
-     this.fieldsForm.controls['minnumberOfParticipants'].setValue(this.competition.numeroMinimo);/* 
+     this.fieldsForm.controls['minnumberOfParticipants'].setValue(this.competition.minimoInscritos);/* 
      newCompetition['deporte'] = this.idSports(this.cbx_deport.nativeElement.value);
      newCompetition['categoria'] = this.idCategorias(this.cbx_category.nativeElement.value);
      newCompetition['modalidad'] = this.idModalidad(this.cbx_modality.nativeElement.value);

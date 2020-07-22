@@ -1,0 +1,34 @@
+
+<form [formGroup]="form">
+    <div class="row">
+        <div class="col-md-4">
+            <p>
+                Fecha Inicio: <br />
+                <input type="date" formControlName="fechaInicio" disabled>
+            </p>
+        </div>
+        <div class="col-md-4"></div>
+        <p>
+            Tipo : <br />
+            <select disabled formControlName="tipoCompeticion" type="text" *ngIf="idSelected==0" ><option selected="true">-NINGUNO-</option></select>
+            <select  disabled formControlName="tipoCompeticion" type="text" *ngIf="idSelected!=0">
+                <option selected="true" >{{competition.tipoCompeticion}}</option>
+            </select>
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                Hora Inicio: <br />
+                <input type="datetime" formControlName="horaInicio">
+            </p>
+        </div>
+        <div class="col-md-6">
+            <p>
+                Hora Fin: <br />
+                <input type="datetime" formControlName="horaFin">
+            </p>
+        </div>
+    </div>
+
+</form>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import * as go from 'gojs';
+import { CompetitionService } from '../../competition.service';
 
 @Component({
   selector: 'app-list-competition',
@@ -9,20 +7,31 @@ import * as go from 'gojs';
   styleUrls: ['./list-competition.component.scss']
 })
 export class ListCompetitionComponent implements OnInit {
-  public myDiagram: go.Diagram = null;
- 
-  constructor() 
+
+  competitions: any;
+  change=false;
+  titleAddCompetition: string;
+  subtitleAddCompetition: string;
+  nameBtnAddCompetition: string;
+  filterPost='';  
+  pageActual:number=1;
+  constructor(private competitionService:CompetitionService) 
   {
-   
+    this.titleAddCompetition = 'Competencias';
+    this.subtitleAddCompetition = 'En este formulario se ingresan los datos para crear una competencia, recuerde los campos con * son obligatorios';
+    this.nameBtnAddCompetition = 'Guardar';
   }
 
   ngOnInit() {
-  
+    this.competitionService.cargarCompeticion().subscribe(resultado=>{this.competitions=resultado; this.competitionService.competitions=resultado},
+      error=>{ console.log(JSON.stringify(error));});
   }
-  cargarGrafico()
+  cambiar()
   {
-    var $=go.GraphObject.make;
-    //myDiagram=$(go.Diagram,"myDiagramDiv");
+    if(this.change)
+      this.change=false;
+    else
+    this.change=true;
   }
- 
+
 }

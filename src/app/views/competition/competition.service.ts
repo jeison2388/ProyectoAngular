@@ -94,7 +94,35 @@ export class CompetitionService {
   {
     for(let competition of this.competitions ){
         if(competition.id==this.idSelected)
-          return competition;
+        { 
+          
+          let comp={
+            "id":competition.id,
+            "nombre":competition.nombre,
+            "deporte":competition.subPrograma.descripcion,
+            "categoria":competition.categoriaDep.descripcion,
+            "modalidad":competition.modalidad.descripcion,
+            "fechaInicio":competition.fechaInicio,
+            "fechaFin":competition.fechaFinaliza,
+            "duracion":competition.duracion.descripcion,
+            "tipoCompeticion":competition.tipoCompeticion.descripcion,
+            "eliminatoria":competition.eliminatoria.descripcion,
+            "genero":competition.genero.descripcion,
+            "minimoEquipos":competition.numeroEquipo.descripcion,
+            "minimoInscritos":competition.numeroMinimo,
+            "tercerCuarto":competition.tercerCuarto,
+            "reglas":{
+              "activo":competition.reglas.activo,
+              "prioridad":competition.reglas.prioridad,
+              "descripcion":competition.reglas.descripcion,
+              "id":competition.reglas.id
+            }
+          }
+            
+          console.log("SERVICE: la competencia seleccionada y armada es: ",comp);
+          return comp;
+        
+        }
     }
   }
    cargarCompeticion():Observable<any>

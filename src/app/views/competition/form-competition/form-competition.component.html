@@ -36,7 +36,7 @@
                     <option [ngValue]="deporte" *ngFor="let deporte of sports">{{deporte.descripcion}}</option>
                   </select>
                   <select type="text" class="form-control" *ngIf="idSelected!=0" #deport>
-                    <option value="0" disabled selected >{{competition.subPrograma.descripcion}}</option>
+                    <option value="0" disabled selected >{{competition.deporte}}</option>
                     </select>
                 </div>
               </div>
@@ -51,7 +51,7 @@
                     <option [ngValue]="categoria" *ngFor="let categoria of categories">{{  categoria.descripcion}}</option>
                   </select>
                   <select type="text" class="form-control" *ngIf="idSelected!=0"#category>
-                    <option value="0" disabled selected >{{competition.categoriaDep.descripcion}}</option>
+                    <option value="0" disabled selected >{{competition.categoria}}</option>
                      </select>
                 </div>
               </div>
@@ -68,7 +68,7 @@
                     <option [ngValue]="modality" *ngFor="let modality of modalities">{{modality.descripcion}}</option>
                   </select>
                   <select type="text" class="form-control" *ngIf="idSelected!=0" #modality>
-                    <option value="0" disabled selected >{{competition.modalidad.descripcion}}</option>
+                    <option value="0" disabled selected >{{competition.modalidad}}</option>
                      </select>
                 </div>
               </div>
@@ -119,7 +119,7 @@
                     <option [ngValue]="duration" *ngFor="let duration of match_duration">{{duration.descripcion}}</option>
                   </select>
                   <select type="text" class="form-control" *ngIf="idSelected!=0"#duration>
-                    <option value="0" disabled selected >{{competition.duracion.descripcion}}</option>
+                    <option value="0" disabled selected >{{competition.duracion}}</option>
                    </select>
                 </div>
               </div>
@@ -132,11 +132,11 @@
                   </div>
                   <select type="text" class="form-control" *ngIf="idSelected==0" #typeCompetition>
                     <option value="0" disabled selected >Seleccionar...</option>
-                    <option [ngValue]="competition" *ngFor="let competition of type_competition">{{competition.descripcion}}
+                    <option [ngValue]="competition" *ngFor="let competition of type_competition">
                     </option>
                   </select>
                   <select type="text" class="form-control" *ngIf="idSelected!=0" #typeCompetition>
-                    <option value="0" disabled selected >{{competition.tipoCompeticion.descripcion}}</option>                    
+                    <option value="0" disabled selected >{{competition.tipoCompeticion}}</option>                    
                   </select>
                 </div>
               </div>
@@ -152,7 +152,7 @@
                     <option [ngValue]="quealifier" *ngFor="let quealifier of number_qualifiers">{{quealifier.descripcion}}</option>
                   </select>
                   <select type="text" class="form-control" *ngIf="idSelected!=0" #numberQualifiers>                    
-                    <option disabled selected >{{competition.eliminatoria.descripcion}}</option>
+                    <option disabled selected >{{competition.eliminatoria}}</option>
                   </select>
                 </div>
               </div>
@@ -170,7 +170,7 @@
                     <option [ngValue]="gende" *ngFor="let gende of gender">{{gende.descripcion}}</option>
                   </select>
                   <select type="text" class="form-control" *ngIf="idSelected!=0"#genderC>
-                    <option  disabled selected >{{competition.genero.descripcion}}</option>
+                    <option  disabled selected >{{competition.genero}}</option>
                     </select>
                 </div>
               </div>
@@ -186,7 +186,7 @@
                     <option [ngValue]="number_t" *ngFor="let number_t of number_of_teams">{{number_t.descripcion}}</option>
                   </select>
                   <select type="text" class="form-control" *ngIf="idSelected!=0" #numberTeams>                    
-                    <option disabled selected >{{competition.numeroEquipo.descripcion}}</option>
+                    <option disabled selected >{{competition.minimoEquipos}}</option>
                   </select>
                 </div>
               </div>
@@ -213,7 +213,9 @@
             <div class="row">
               <div class="formGroup col-12 col-md-12 col-lg-4">
                 <div class="custom-control custom-checkbox mr-sm-2">
-                  <input type="checkbox" class="custom-control-input" id="customControlAutosizing" (change)="handleOptionThirdAndFourth($event)">
+                  <input *ngIf="idSelected==0" type="checkbox" class="custom-control-input" id="customControlAutosizing" (change)="handleOptionThirdAndFourth($event)">
+                  <input *ngIf="idSelected!=0 && competition.tercerCuarto" type="checkbox" class="custom-control-input" id="customControlAutosizing" checked>
+                  
                   <label class="custom-control-label" for="customControlAutosizing">Tercero y Cuarto Puesto</label>
                 </div>
               </div>
@@ -243,6 +245,7 @@
                         </div>
                       </li>
                     </ul>
+                    
                   </div>
                 </div>
               </div>
